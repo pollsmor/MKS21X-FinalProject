@@ -1,3 +1,3 @@
 # MKS21X-Final
 
-Group: Kevin Li, Rachel Leong - Period 5
+Group 38: Kevin Li, Rachel Leong - Period 5
