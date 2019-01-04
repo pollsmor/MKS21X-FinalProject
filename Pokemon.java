@@ -2,8 +2,8 @@ public class Pokemon {
   private String name;
   private int level;
   //private Type type; for later
-  private double maxHP;
-  private double currentHP;
+  private int maxHP;
+  private int currentHP;
   private int attack;
   private int defense;
   private int stepsTaken; //for healPassive
@@ -32,7 +32,13 @@ public class Pokemon {
     }
   }
 
-  public double getHP() {
+  public int getHP() {
     return currentHP;
+  }
+
+  public int setHP(int change) {
+    int temp = currentHP; //return this for other purposes
+    currentHP += change;
+    return temp;
   }
 }
