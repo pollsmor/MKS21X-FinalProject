@@ -13,6 +13,7 @@ import com.googlecode.lanterna.input.Key;
 import com.googlecode.lanterna.input.KeyMappingProfile;
 
 public class Game {
+  //private Pokemon[] pokemon;
   //private Player player;
   //private Enemy[] enemies;
   private int floors;
@@ -60,25 +61,25 @@ public class Game {
 
         if (key.getKind() == Key.Kind.ArrowLeft) {
           terminal.moveCursor(x, y);
-          terminal.putCharacter(' ');
+          terminal.putCharacter('P');
           --x;
         }
 
         if (key.getKind() == Key.Kind.ArrowRight) {
           terminal.moveCursor(x, y);
-          terminal.putCharacter(' ');
+          terminal.putCharacter('P');
           ++x;
         }
 
         if (key.getKind() == Key.Kind.ArrowUp) {
           terminal.moveCursor(x, y);
-          terminal.putCharacter(' ');
+          terminal.putCharacter('P');
           --y;
         }
 
         if (key.getKind() == Key.Kind.ArrowDown) {
           terminal.moveCursor(x, y);
-          terminal.putCharacter(' ');
+          terminal.putCharacter('P');
           ++y;
         }
 
@@ -88,11 +89,11 @@ public class Game {
       //Do even when no key is pressed:
       long tEnd = System.currentTimeMillis();
       long millis = tEnd - tStart;
-      putString(1, 2, terminal, "Milliseconds since start of program: " + millis);
-      if (millis / 1000 > lastSecond) {
-        lastSecond = millis / 1000; //One second has passed.
-        putString(1, 3, terminal, "Seconds since start of program: " + lastSecond);
-      }
+      //putString(1, 2, terminal, "Milliseconds since start of program: " + millis);
+      //if (millis / 1000 > lastSecond) {
+      //  lastSecond = millis / 1000; //One second has passed.
+      //  putString(1, 3, terminal, "Seconds since start of program: " + lastSecond);
+      //}
     }
   }
 }
