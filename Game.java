@@ -60,28 +60,24 @@ public class Game {
         }
 
         if (key.getKind() == Key.Kind.ArrowLeft) {
-          terminal.putCharacter(' ');
           terminal.moveCursor(x, y);
           terminal.putCharacter('P');
           --x;
         }
 
         if (key.getKind() == Key.Kind.ArrowRight) {
-          terminal.putCharacter(' ');
           terminal.moveCursor(x, y);
           terminal.putCharacter('P');
           ++x;
         }
 
         if (key.getKind() == Key.Kind.ArrowUp) {
-          terminal.putCharacter(' ');
           terminal.moveCursor(x, y);
           terminal.putCharacter('P');
           --y;
         }
 
         if (key.getKind() == Key.Kind.ArrowDown) {
-          terminal.putCharacter(' ');
           terminal.moveCursor(x, y);
           terminal.putCharacter('P');
           ++y;

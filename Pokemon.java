@@ -16,7 +16,7 @@ public class Pokemon {
 
   public Pokemon(String name) {
     name = this.name;
-    level = 1;
+    level = 5;
     maxHP = 20;
     currentHP = 20;
     attack = 10;
@@ -25,11 +25,14 @@ public class Pokemon {
   }
 
   public void healPassive() {
-    if (stepsTaken == 6){
+    if (stepsTaken == 15) {
       stepsTaken = 0;
-      if (currentHP < maxHP){
+      if (currentHP < maxHP)
         currentHP++;
-      }
     }
+  }
+
+  public double getHP() {
+    return currentHP;
   }
 }
