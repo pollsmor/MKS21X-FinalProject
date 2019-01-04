@@ -9,7 +9,7 @@ public class Block {
   private String color;
   private char data; //what's printed in the block
 
-  public Block(x,y){ //Constructor given coordinates
+  public Block(int x, int y){ //Constructor given coordinates
     isVisible = false;
     objectiveHere = false;
     xcor = x;

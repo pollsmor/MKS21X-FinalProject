@@ -14,8 +14,8 @@ public class Pokemon {
   //private Move move3; for later
   //private Move move4; for later
 
-  public Pokemon(String){
-    name = String;
+  public Pokemon(String name) {
+    name = this.name;
     level = 1;
     maxHP = 20;
     currentHP = 20;
