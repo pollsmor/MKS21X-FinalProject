@@ -2,8 +2,8 @@ public class Pokemon {
   private String name;
   private int level;
   //private Type type; for later
-  private int maxHP;
-  private int currentHP;
+  private double maxHP;
+  private double currentHP;
   private int attack;
   private int defense;
   //private Item[] toolbox; for later
@@ -13,5 +13,7 @@ public class Pokemon {
   //private Move move3; for later
   //private Move move4; for later
 
-  
+  public void healPassive() {
+
+  }
 }
