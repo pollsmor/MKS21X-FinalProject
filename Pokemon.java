@@ -7,6 +7,7 @@ public class Pokemon {
   private int attack;
   private int defense;
   private int stepsTaken; //for healPassive
+  private boolean isAlive;
   //private Item[] toolbox; for later
   //private Status[] status; for later
   //private Move move1; for later
@@ -19,9 +20,10 @@ public class Pokemon {
     level = 5;
     maxHP = 20;
     currentHP = 20;
-    attack = 10;
+    attack = 4;
     defense = 10;
     stepsTaken = 0;
+    isAlive = true;
   }
 
   public void healPassive() {
@@ -38,7 +40,17 @@ public class Pokemon {
 
   public int setHP(int change) {
     int temp = currentHP; //return this for other purposes
-    currentHP += change;
+    currentHP += change; //can be positive or negative depending on case
     return temp;
+  }
+
+  public void basicAttack(Enemy enemy) {
+
+  }
+
+  public void faint() {
+
+
+    System.exit(0);
   }
 }
