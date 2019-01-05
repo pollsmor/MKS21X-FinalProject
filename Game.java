@@ -92,7 +92,11 @@ public class Game {
           ++y;
         }
 
+<<<<<<< HEAD
         if (key.getKind() == Key.Kind.Backspace) {
+=======
+        if (key.getKind() == Key.Kind.n) {
+>>>>>>> 2332db6593b6d15a24aaa14e4abc8e0d7f742f5e
           alive = false;
         }
 
