@@ -49,8 +49,6 @@ public class Pokemon {
   }
 
   public void faint() {
-
-
-    System.exit(0);
+    Game.endGame();
   }
 }

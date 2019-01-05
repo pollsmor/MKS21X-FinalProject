@@ -20,6 +20,15 @@ public class Game {
   //private Items[] items;
   //private Mission[] missions;
   private int seed;
+  private static boolean alive;
+
+  public Game() {
+    alive = true;
+  }
+
+  public static void endGame() {
+    alive = false;
+  }
 
   public static void putString(int r, int c, Terminal t, String s) {
     t.moveCursor(r, c);
@@ -38,10 +47,10 @@ public class Game {
     TerminalSize terminalSize = terminal.getTerminalSize();
     terminal.setCursorVisible(false);
 
-    boolean running = true;
-
     long tStart = System.currentTimeMillis();
     long lastSecond = 0;
+
+    boolean running = true;
 
     while (running) {
       terminal.moveCursor(x, y);
@@ -83,7 +92,16 @@ public class Game {
           ++y;
         }
 
+        if (key.getKind() == Key.Kind.n) {
+          alive = false;
+        }
+
         putString(1, 1, terminal, key + "        "); //to clear leftover letters pad withspaces
+      }
+
+      if (!alive) {
+        putString(x, y, terminal, "You have died.");
+        System.exit(0);
       }
 
       //Do even when no key is pressed:
