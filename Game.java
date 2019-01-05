@@ -20,11 +20,7 @@ public class Game {
   //private Items[] items;
   //private Mission[] missions;
   private int seed;
-  private static boolean alive;
-
-  public Game() {
-    alive = true;
-  }
+  private static boolean alive = true;
 
   public static void endGame() {
     alive = false;
@@ -62,6 +58,10 @@ public class Game {
 
       Key key = terminal.readInput();
 
+      if (!alive) {
+        running = false;
+      }
+
       if (key != null) {
         if (key.getKind() == Key.Kind.Escape) {
           terminal.exitPrivateMode();
@@ -92,23 +92,15 @@ public class Game {
           ++y;
         }
 
-<<<<<<< HEAD
         if (key.getKind() == Key.Kind.Backspace) {
-=======
-        if (key.getKind() == Key.Kind.n) {
->>>>>>> 2332db6593b6d15a24aaa14e4abc8e0d7f742f5e
           alive = false;
+          System.out.println(alive);
         }
 
         putString(1, 1, terminal, key + "        "); //to clear leftover letters pad withspaces
       }
 
-      if (!alive) {
-        putString(x, y, terminal, "You have died.");
-        System.exit(0);
-      }
-
-      //Do even when no key is pressed:
+      //Do even when no key is pressed:ßß
       long tEnd = System.currentTimeMillis();
       long millis = tEnd - tStart;
       putString(1, 2, terminal, "Milliseconds since start of program: " + millis);
@@ -117,5 +109,9 @@ public class Game {
         putString(1, 3, terminal, "Seconds since start of program: " + lastSecond);
       }
     }
+
+    terminal.exitPrivateMode();
+    System.out.println("Thank you for playing Pokemon Terminal Dungeon.");
+    System.exit(0);
   }
 }
