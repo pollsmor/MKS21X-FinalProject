@@ -25,9 +25,13 @@ public class Block implements Explorable{
     return isVisible;
   }
 
-  public boolean setVisibility(){
-    isVisible = !isVisible;
-    return isVisible;
+  public void setVisibility(){
+    if (!isVisible){
+      isVisible = true;
+    }
+    else{
+      isVisible = false;
+    }
   }
 
   //----------Objectives---------//
