@@ -31,13 +31,14 @@ public class Game {
   public static void main(String[] args) {
     int x = 10;
     int y = 10;
+    floors = 1; //Starting off on the first floor
 
     Terminal terminal = TerminalFacade.createTerminal();
     terminal.enterPrivateMode();
 
     TerminalSize terminalSize = terminal.getTerminalSize();
     terminal.setCursorVisible(false);
-
+    
     boolean running = true;
 
     long tStart = System.currentTimeMillis();
