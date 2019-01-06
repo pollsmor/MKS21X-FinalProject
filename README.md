@@ -4,7 +4,8 @@ Group 38: Kevin Li, Rachel Leong - Period 5
 
 Development Log
 
---------------------Stage 1--------------------
+***--------------------Stage 1--------------------***
+
 **Thursday 1/3/19**
 Rachel:
   - Added constructors and some fields in Pokemon class
@@ -21,7 +22,7 @@ Kevin:
 Rachel:
 -Added class headers to Block, Floor, and Game
 
-**Saturday1/5/19**
+**Saturday 1/5/19**
 Rachel:
 - Removed devlog.txt from the branch
 - Worked on Block.java
@@ -55,5 +56,5 @@ Rachel:
 - Game.java
   - Began floor counting code
 
---------------------Stage 2--------------------
+***--------------------Stage 2--------------------***
 >>>>>>> makeMap
