@@ -1,26 +1,27 @@
-public class Block {
+public class Block implements Explorable{
   private boolean isVisible;
   //private item itemHere; for later
   //private Pokemon pokemonHere; for later
   private boolean objectiveHere;
-  //private String type; for later
+  private String type;
   private int xcor;
   private int ycor;
   private String color;
   private char data; //what's printed in the block
 
-  public Block(int x, int y){ //Constructor given coordinates
+  public Block(int x, int y, String newType){ //Constructor given coordinates
     isVisible = false;
     objectiveHere = false;
     xcor = x;
     ycor = y;
     color = "black";
     data = ' ';
+    type = newType;
   }
 //----------Getters and Setters----------//
 
   //----------Visibility----------//
-  public boolean getVisibility(){
+  public boolean isExplored(){
     return isVisible;
   }
 
@@ -47,7 +48,7 @@ public class Block {
   public int getY(){
     return ycor;
   }
-  
+
 /* Spawns
   public void spawnObjective() {
     objectiveHere = true;
