@@ -12,3 +12,7 @@ Rachel:
 Kevin:
   - Incorporated lanterna features into program
   - Added fields to various classes like Block, Pokemon, and Game
+
+1/4/19 
+Kevin:
+  - Added a mechanism to end games (as of now pressing backspace will simulate a Pokemon dying, prompting you to respawn or end the game)
