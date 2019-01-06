@@ -14,7 +14,7 @@ public class Wall{
   /**Creates a Wall at (xcor, ycor)
     *@param Block: the Block to be made a new Wall
   */
-  public Wall(Block){
-    blockHere = new Block(Block.getX(), Block.getY(), "Wall");
+  public Wall(Block newBlock){
+    blockHere = new Block(newBlock.getX(), newBlock.getY(), "Wall");
   }
 }
