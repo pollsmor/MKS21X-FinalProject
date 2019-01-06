@@ -14,6 +14,7 @@ Group 38: Kevin Li, Rachel Leong - Period 5
 1/6/19: Rachel
 -Created interface Explorable.java
   -Added methods isExplored() and setVisibility()
+-All files now compile
 -Block.java
   -Organized code with comments
   -Added getters and setters
