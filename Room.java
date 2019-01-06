@@ -2,7 +2,6 @@
 public class Room implements Explorable{
   private boolean isExplored;
   private Block[][] blocksHere;
-  private int seed;
   private int width;
   private int length;
 
