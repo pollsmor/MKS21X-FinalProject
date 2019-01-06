@@ -1,6 +1,8 @@
 public class Tunnel implements Explorable{
   private boolean isExplored;
-  private Block[][]  blocksHere;
+  private Block[] blocksHere;
+  private Block startBlock;
+  private Block endBlock;
 
   //public Tunnel(Block start, Block end)
   /**Creates a Tunnel given two blocks (start, end) beginning with the start block and ending at the end block
@@ -10,9 +12,33 @@ public class Tunnel implements Explorable{
   */
   public Tunnel(Block start, Block end){
     isExplored = false;
+    //Setting start coors
+    int xcor = start.getX();
+    int ycor = start.getY();
+    //Setting start and end blocks
+    startBlock = start;
+    endBlock = end;
+    //Getting the length of the tunnel
+    if (start.getX() == end.getX()){
+      length = ycor-end.getY();
+    }
+    else{
+      length = xcor-end.getX();
+    }
+    blocksHere = new Block[length];
+    //Creating blocksHere with a loop
+    for (int i = 0; i < length; i++){
+      blocksHere[i] = new Block(xcor, ycor+i, "Tunnel");
+    }
   }
 
   public boolean isExplored(){
     return isExplored;
+  }
+
+  public void setVisibility(){
+    for (int i = 0; i < blocksHere.length; i ++){
+      
+    }
   }
 }
