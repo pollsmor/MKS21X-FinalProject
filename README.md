@@ -2,6 +2,7 @@
 
 Group 38: Kevin Li, Rachel Leong - Period 5
 
+-----------Stage 1-----------
 1/4/19: Rachel
 -Added class headers to Block, Floor, and Game
 
@@ -36,3 +37,5 @@ Group 38: Kevin Li, Rachel Leong - Period 5
   -Added constructor given current floors, terminal width, and terminal length
 -Game.java
   -Began floor counting code
+
+----------Stage 2-----------
