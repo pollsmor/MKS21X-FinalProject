@@ -32,10 +32,18 @@ public class Tunnel implements Explorable{
     }
   }
 
+  //public boolean isExplored()
+  /** Checks to see if this segment of Tunnel has been explored by a Player
+    *@return true when: segment has been explored
+    *        false when: segment has not been explored
+  */
   public boolean isExplored(){
     return isExplored;
   }
 
+  //public void setVisibility()
+  /** Sets isExplored of all Blocks in this segment of Tunnel to true
+  */
   public void setVisibility(){
     for (int i = 0; i < blocksHere.length; i ++){
       blocksHere[i].setVisibility();
