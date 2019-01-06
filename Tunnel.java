@@ -38,7 +38,7 @@ public class Tunnel implements Explorable{
 
   public void setVisibility(){
     for (int i = 0; i < blocksHere.length; i ++){
-      
+      blocksHere[i].setVisibility();
     }
   }
 }
