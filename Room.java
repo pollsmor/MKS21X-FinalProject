@@ -26,7 +26,7 @@ public class Room implements Explorable{
   }
 
   public boolean isExplored(){
-
+    return isExplored;
   }
 
   //public void setVisibility()
@@ -37,6 +37,12 @@ public class Room implements Explorable{
       for (int y = 0; y < length; y++){
         blocks.setVisibility();
       }
+    }
+    if (!isExplored){
+      isExplored = true;
+    }
+    else{
+      isExplored = false;
     }
   }
 }
