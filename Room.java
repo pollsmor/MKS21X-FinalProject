@@ -1,4 +1,3 @@
-
 public class Room implements Explorable{
   private boolean isExplored;
   private Block[][] blocksHere;
@@ -12,8 +11,10 @@ public class Room implements Explorable{
     *@param end is the Block representing the bottom right Block of the Room to be made
   */
   public Room(Block start, Block end){
+    //Storing starting coordinates
     int xcor = start.getX();
     int ycor = start.getY();
+    //Storing length and width
     width = xcor - end.getX();
     length = ycor - end.getY();
     blocksHere = new Block[width][length];
