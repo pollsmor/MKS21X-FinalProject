@@ -14,9 +14,7 @@ import com.googlecode.lanterna.input.Key;
 import com.googlecode.lanterna.input.KeyMappingProfile;
 
 public class Game {
-  private Pokemon[] pokemon;
-  private Pokemon player;
-  //private Player player;
+  private Player player;
   //private Enemy[] enemies;
   private int floors;
   //private Items[] items;
@@ -36,7 +34,7 @@ public class Game {
   }
 
   public static void main(String[] args) {
-    Pokemon squirtle = new Pokemon("Squirtle");
+    Player squirtle = new Player("yoloswag");
 
     int x = 10;
     int y = 10;
@@ -117,7 +115,7 @@ public class Game {
         }
 
         if (key.getKind() == Key.Kind.Backspace) {
-          squirtle.faint();
+          squirtle.faintPlayer();
         }
 
         putString(1, 1, terminal, key + "        "); //to clear leftover letters pad withspaces

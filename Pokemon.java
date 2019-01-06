@@ -23,7 +23,6 @@ public class Pokemon {
     attack = 4;
     defense = 10;
     stepsTaken = 0;
-    isAlive = true;
   }
 
   public void healPassive() {
@@ -46,9 +45,5 @@ public class Pokemon {
 
   public void basicAttack(Enemy enemy) {
 
-  }
-
-  public void faint() {
-    Game.endGame();
   }
 }
