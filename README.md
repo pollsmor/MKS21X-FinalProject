@@ -61,6 +61,6 @@ Rachel:
     - Added constructor given current floors, terminal width, and terminal length
   - Game.java
     - Began floor counting code
-
+    
 ***--------------------Stage 2--------------------***
 >>>>>>> makeMap
