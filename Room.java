@@ -24,6 +24,11 @@ public class Room implements Explorable{
     }
   }
 
+  //public boolean isExplored()
+  /**Returns whether or not the Room has been explored
+    *@return true when: the Player has entered the Room before
+    *        false when: the Player has not entered the Room before
+  */
   public boolean isExplored(){
     return isExplored;
   }
