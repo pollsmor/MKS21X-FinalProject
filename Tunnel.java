@@ -19,6 +19,7 @@ public class Tunnel implements Explorable{
     startBlock = start;
     endBlock = end;
     //Getting the length of the tunnel
+    int length;
     if (start.getX() == end.getX()){
       length = ycor-end.getY();
     }
