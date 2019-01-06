@@ -37,10 +37,10 @@ public class Room implements Explorable{
   //public void setVisibility()
   /**Sets isExplored of all Blocks in the Room to true
   */
-  public boolean setVisibility(){
+  public void setVisibility(){
     for (int x = 0; x < width; x++){
       for (int y = 0; y < length; y++){
-        blocks.setVisibility();
+        blocksHere[x][y].setVisibility();
       }
     }
     if (!isExplored){
