@@ -1,41 +1,82 @@
-public class Block {
+public class Block implements Explorable{
   private boolean isVisible;
   //private item itemHere; for later
   //private Pokemon pokemonHere; for later
   private boolean objectiveHere;
-  //private String type; for later
+  private String type;
   private int xcor;
   private int ycor;
   private String color;
   private char data; //what's printed in the block
 
+<<<<<<< HEAD
   public Block(int x, int y){ //Constructor given coordinates
+=======
+  public Block(int x, int y, String newType){ //Constructor given coordinates
+>>>>>>> makeMap
     isVisible = false;
     objectiveHere = false;
     xcor = x;
     ycor = y;
     color = "black";
     data = ' ';
+    type = newType;
+  }
+//----------Getters and Setters----------//
+
+  //----------Visibility----------//
+  public boolean isExplored(){
+    return isVisible;
   }
 
+  public void setVisibility(){
+    if (!isVisible){
+      isVisible = true;
+    }
+    else{
+      isVisible = false;
+    }
+  }
+
+  //----------Objectives---------//
   public boolean isObjective() {
     return objectiveHere;
   }
 
-  public void spawnItem(){
-
+  //----------Type of Block----------//
+  public String getType(){
+    return null;
   }
 
-  public void spawnEnemy() {
-
+  //----------Coodinate stuffs----------//
+  public int getX(){
+    return xcor;
   }
 
+  public int getY(){
+    return ycor;
+  }
+
+/* Spawns
   public void spawnObjective() {
     objectiveHere = true;
     data = '%';
   }
+  public void spawnItem(){
+    Item newItem = new Item();
+    data = 'I';
+    itemHere = newItem;
+  }
+
+  public void spawnEnemy() {
+    Enemy newEnemy = new Enemy();
+    data = 'E';
+    pokemonHere = newEnemy;
+  }
 
   public void spawnPlayer() {
-
-  }
+    Player newPlayer = new Player();
+    data = 'P';
+    pokemonHere = newPlayer;
+  }*/
 }

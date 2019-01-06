@@ -38,12 +38,18 @@ public class Game {
 
     int x = 10;
     int y = 10;
+    floors = 1; //Starting off on the first floor
 
     Terminal terminal = TerminalFacade.createTextTerminal();
     terminal.enterPrivateMode();
 
     TerminalSize terminalSize = terminal.getTerminalSize();
     terminal.setCursorVisible(false);
+<<<<<<< HEAD
+=======
+    
+    boolean running = true;
+>>>>>>> makeMap
 
     long tStart = System.currentTimeMillis();
     long lastSecond = 0;
