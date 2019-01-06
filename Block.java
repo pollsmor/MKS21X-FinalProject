@@ -18,6 +18,15 @@ public class Block {
     data = ' ';
   }
 
+  public boolean getVisibility(){
+    return isVisible;
+  }
+
+  public boolean setVisibility(){
+    isVisible = !isVisible;
+    return isVisible;
+  }
+
   public boolean isObjective() {
     return objectiveHere;
   }
@@ -27,7 +36,9 @@ public class Block {
   }
 
   public void spawnEnemy() {
-
+    Enemy newEnemy = new Enemy();
+    data = 'E';
+    pokemonHere = newEnemy;
   }
 
   public void spawnObjective() {
@@ -36,6 +47,8 @@ public class Block {
   }
 
   public void spawnPlayer() {
-
+    Player newPlayer = new Player();
+    data = 'P';
+    pokemonHere = newPlayer;
   }
 }
