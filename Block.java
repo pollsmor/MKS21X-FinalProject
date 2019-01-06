@@ -9,7 +9,7 @@ public class Block {
   private String color;
   private char data; //what's printed in the block
 
-  public Block(x,y){ //Constructor given coordinates
+  public Block(int x, int y){ //Constructor given coordinates
     isVisible = false;
     objectiveHere = false;
     xcor = x;
@@ -17,7 +17,9 @@ public class Block {
     color = "black";
     data = ' ';
   }
+//----------Getters and Setters----------//
 
+  //----------Visibility----------//
   public boolean getVisibility(){
     return isVisible;
   }
@@ -27,12 +29,34 @@ public class Block {
     return isVisible;
   }
 
+  //----------Objectives---------//
   public boolean isObjective() {
     return objectiveHere;
   }
 
-  public void spawnItem(){
+  //----------Type of Block----------//
+  public String getType(){
+    return null;
+  }
 
+  //----------Coodinate stuffs----------//
+  public int getX(){
+    return xcor;
+  }
+
+  public int getY(){
+    return ycor;
+  }
+  
+/* Spawns
+  public void spawnObjective() {
+    objectiveHere = true;
+    data = '%';
+  }
+  public void spawnItem(){
+    Item newItem = new Item();
+    data = 'I';
+    itemHere = newItem;
   }
 
   public void spawnEnemy() {
@@ -41,14 +65,9 @@ public class Block {
     pokemonHere = newEnemy;
   }
 
-  public void spawnObjective() {
-    objectiveHere = true;
-    data = '%';
-  }
-
   public void spawnPlayer() {
     Player newPlayer = new Player();
     data = 'P';
     pokemonHere = newPlayer;
-  }
+  }*/
 }
