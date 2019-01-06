@@ -46,8 +46,6 @@ public class Game {
     TerminalSize terminalSize = terminal.getTerminalSize();
     terminal.setCursorVisible(false);
 <<<<<<< HEAD
-=======
-    
     boolean running = true;
 >>>>>>> makeMap
 
