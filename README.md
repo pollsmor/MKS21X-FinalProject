@@ -3,15 +3,30 @@
 Group 38: Kevin Li, Rachel Leong - Period 5
 
 -----------Stage 1-----------
-1/4/19: Rachel
+~~Thursday 1/3/19~~
+Rachel:
+  - Added constructors and some fields in Pokemon class
+  - Added files for the map layout
+
+Kevin:
+  - Incorporated lanterna features into program
+    - Added fields to various classes like Block, Pokemon, and Game
+
+~~Friday 1/4/19~~
+Kevin:
+  - Added a mechanism to end games (as of now pressing backspace will simulate a Pokemon dying, prompting you to respawn or end the game)
+
+Rachel:
 -Added class headers to Block, Floor, and Game
 
-1/5/19: Rachel
+~~Sunday 1/5/19~~
+Rachel:
 -Removed devlog.txt from the branch
 -Worked on Block.java
   -Added get/setVisibility and spawnEnemy/Player pseudocode
 
-1/6/19: Rachel
+~~Saturday 1/6/19~~
+Rachel:
 -Created interface Explorable.java
   -Added methods isExplored() and setVisibility()
 -All files now compile
