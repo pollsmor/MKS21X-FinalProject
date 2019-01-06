@@ -9,6 +9,7 @@ Development Log**
 ***--------------------Stage 1--------------------***
 
 **Thursday 1/3/19**
+
 Rachel:
   - Added constructors and some fields in Pokemon class
   - Added files for the map layout
@@ -18,6 +19,7 @@ Kevin:
     - Added fields to various classes like Block, Pokemon, and Game
 
 **Friday 1/4/19**
+
 Kevin:
   - Added a mechanism to end games (as of now pressing backspace will simulate a Pokemon dying, prompting you to respawn or end the game)
 
@@ -25,12 +27,14 @@ Rachel:
   - Added class headers to Block, Floor, and Game
 
 **Saturday 1/5/19**
+
 Rachel:
   - Removed devlog.txt from the branch
   - Worked on Block.java
-  -Added get/setVisibility and spawnEnemy/Player pseudocode
+  - Added get/setVisibility and spawnEnemy/Player pseudocode
 
 **Sunday 1/6/19**
+
 Rachel:
   - Created interface Explorable.java
     - Added methods isExplored() and setVisibility()
