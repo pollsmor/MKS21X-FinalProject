@@ -8,4 +8,8 @@ public class Enemy extends Pokemon {
   public int getKillXP() {
     return killXP;
   }
+
+  public void atkPlayer() {
+    
+  }
 }

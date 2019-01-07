@@ -14,4 +14,8 @@ public class Player extends Pokemon {
   public void faintPlayer() {
     Game.endGame();
   }
+
+  public void basicAttack(Enemy enemy) {
+    
+  }
 }
