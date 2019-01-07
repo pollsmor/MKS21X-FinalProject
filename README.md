@@ -1,10 +1,10 @@
 # MKS21X-Final
 
-**Group 38: Kevin Li, Rachel Leong
+**Group 38: Kevin Li, Rachel Leong**
 
-Period 5
+**Period 5**
 
-Development Log**
+**Development Log**
 
 ***--------------------Stage 1--------------------***
 
@@ -61,6 +61,21 @@ Rachel:
     - Added constructor given current floors, terminal width, and terminal length
   - Game.java
     - Began floor counting code
-    
+
+**Monday 1/7/19**
+Rachel:
+  - FloorDriver.java
+    - Created file to test constructors for Room, Floor, and Block. Haven't started with Tunnels
+  Block.java
+    - Removed excess Block constructor
+    - Added toString and getData
+  Floor.java
+    - Added width and length getters
+    - Added createRoom and began createRooms
+    - Started toString (for testing purposes)
+  Room.java
+    - Did some testing--> fixed constructor
+    - Added toString (for testing purposes)
+
 ***--------------------Stage 2--------------------***
 >>>>>>> makeMap
