@@ -14,13 +14,13 @@ public abstract class Pokemon {
   //private Move move3; for later
   //private Move move4; for later
 
-  public Pokemon(String name) {
+  public Pokemon(String name, int level, int maxHP, int attack, int defense) {
     name = this.name;
-    level = 5;
-    maxHP = 20;
-    currentHP = 20;
-    attack = 4;
-    defense = 10;
+    level = this.level;
+    maxHP = this.maxHP;
+    currentHP = maxHP;
+    attack = this.attack;
+    defense = this.defense;
     stepsTaken = 0;
   }
 

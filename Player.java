@@ -2,10 +2,9 @@ public class Player extends Pokemon {
   private int maxHunger;
   private int currentHunger;
   private int xp;
-  private String name;
 
   public Player(String name) {
-    super(name);
+    super(name, 5, 20, 5, 5);
   }
 
   public int getHunger() {
