@@ -1,6 +1,7 @@
 public class Room implements Explorable{
   private boolean isExplored;
   private Block[][] blocksHere;
+  private int startXcor, startYcor, endXcor, endYcor;
   private int width;
   private int length;
 
@@ -17,6 +18,10 @@ public class Room implements Explorable{
     //Storing length and width
     width = xcor - end.getX();
     length = ycor - end.getY();
+    startXcor = xcor;
+    startYcor = ycor;
+    endXcor = end.getX();
+    endYcor = end.getY();
     blocksHere = new Block[width][length];
     for (int x = 0; x < length; x++){
       for (int y = 0; y < width; y++){
@@ -33,7 +38,11 @@ public class Room implements Explorable{
     *@param startYcor is the xcor of the Block representing the top left Block of the Room to be made
     *@param endYcor is the xcor of the Block representing the bottom right Block of the Room to be made
   */
-  public Room(int startXcor, int startYcor, int endXcor, int endYcor){
+  public Room(int newStartXcor, int newStartYcor, int newEndXcor, int newEndYcor){
+    startXcor = newStartXcor;
+    startYcor = newStartYcor;
+    endXcor = newEndXcor;
+    endYcor = newEndYcor;
     width = endXcor - startXcor;
     length = endYcor - startYcor;
     blocksHere = new Block[width][length];
@@ -44,6 +53,24 @@ public class Room implements Explorable{
     }
   }
 
+  //public boolean tooClose(int startXcor, int startYcor, int endXcor, int endYcor)
+  /**Tests if rooms overlap with each other or border each other
+    *@param startXcor is the xcor of the Block representing the top left Block of the Room to be made
+    *@param endXcor is the xcor of the Block representing the bottom right Block of the Room to be made
+    *@param startYcor is the xcor of the Block representing the top left Block of the Room to be made
+    *@param endYcor is the xcor of the Block representing the bottom right Block of the Room to be made
+    *@return whether or not the rooms will overlap or border
+  */
+  public boolean tooClose(int startXcor, int startYcor, int endXcor, int endYcor){
+    //Make sure that rooms don't overlap with each other
+    //Rooms overlap when...
+    //Case 1: beginning xcor of room to be created is more than the beginning xcor of a room that already exists
+    //AND beginning ycor of the room to be created is more than the beginning ycor of of a room that already exists
+    //Case 2: ending xcor of room to be created is less than the ending xcor of a room that already exists
+    //AND ending ycor of the room to be created is less than the ending ycor of a room that already exists
+    boolean case1 = startXcor > this.startXcor;
+    return (this.xcor)
+  }
   public String toString(){
     String output = "";
     for (int x = 0; x < width; x++){

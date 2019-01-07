@@ -54,6 +54,9 @@ public class Floor{
       endXcor = startXcor + rnd.nextInt(6) + 4;
       startYcor = Math.abs(rnd.nextInt(length - 6));
       endYcor = startYcor + rnd.nextInt(6) + 4;
+      //Make sure that rooms don't overlap with each other
+      //Rooms overlap when beginning xcor of room to be created is less than the beginnng xcor of a room that already exists
+      //AND beginning ycor of the room to be created is less than the beginning ycor of of a room that already exists
       System.out.println("startXcor: "+ startXcor +", startYcor: "+startYcor+", endXcor: "+endXcor+", endYcor: "+endYcor);
       createRoom(startXcor, startYcor, endXcor, endYcor);
       roomsHere[successfulRooms]= createRoom(startXcor, startYcor, endXcor, endYcor);
