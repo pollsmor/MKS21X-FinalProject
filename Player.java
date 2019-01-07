@@ -11,4 +11,8 @@ public class Player extends Pokemon {
   public int getHunger() {
     return currentHunger;
   }
+
+  public void faintPlayer() {
+    Game.endGame();
+  }
 }

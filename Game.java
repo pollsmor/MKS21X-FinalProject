@@ -16,7 +16,7 @@ import com.googlecode.lanterna.input.KeyMappingProfile;
 public class Game {
   private Player player;
   //private Enemy[] enemies;
-  private int floors;
+  private int floor = 1; //Starting off on the first floor
   //private Items[] items;
   //private Mission[] missions;
   private int seed;
@@ -38,7 +38,6 @@ public class Game {
 
     int x = 10;
     int y = 10;
-    floors = 1; //Starting off on the first floor
 
     Terminal terminal = TerminalFacade.createTextTerminal();
     terminal.enterPrivateMode();
