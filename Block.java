@@ -9,11 +9,11 @@ public class Block implements Explorable{
   private String color;
   private char data; //what's printed in the block
 
-<<<<<<< HEAD
-  public Block(int x, int y){ //Constructor given coordinates
-=======
-  public Block(int x, int y, String newType){ //Constructor given coordinates
->>>>>>> makeMap
+  public Block(int x, int y) { //Constructor given coordinates
+    
+  }
+
+  public Block(int x, int y, String newType) { //Constructor given coordinates
     isVisible = false;
     objectiveHere = false;
     xcor = x;

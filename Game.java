@@ -45,14 +45,11 @@ public class Game {
 
     TerminalSize terminalSize = terminal.getTerminalSize();
     terminal.setCursorVisible(false);
-<<<<<<< HEAD
+
     boolean running = true;
->>>>>>> makeMap
 
     long tStart = System.currentTimeMillis();
     long lastSecond = 0;
-
-    boolean running = true;
 
     while (running) {
       //if (!alive) {

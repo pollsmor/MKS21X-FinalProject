@@ -7,7 +7,6 @@ public class Pokemon {
   private int attack;
   private int defense;
   private int stepsTaken; //for healPassive
-  private boolean isAlive;
   //private Item[] toolbox; for later
   //private Status[] status; for later
   //private Move move1; for later
