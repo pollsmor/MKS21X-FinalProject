@@ -34,14 +34,25 @@ public class Room implements Explorable{
     *@param endYcor is the xcor of the Block representing the bottom right Block of the Room to be made
   */
   public Room(int startXcor, int startYcor, int endXcor, int endYcor){
-    width = startXcor - endXcor;
-    length = startYcor - endYcor;
+    width = endXcor - startXcor;
+    length = endYcor - startYcor;
     blocksHere = new Block[width][length];
-    for (int x = 0; x < length; x++){
-      for (int y = 0; y < width; y++){
+    for (int x = 0; x < width; x++){
+      for (int y = 0; y < length; y++){
         blocksHere[x][y] = new Block(startXcor+x,startYcor+y,"Room");
       }
     }
+  }
+
+  public String toString(){
+    String output = "";
+    for (int x = 0; x < width; x++){
+      for (int y = 0; y < length; y++){
+        output+= blocksHere[x][y].getData();
+      }
+      output+= "\n";
+    }
+    return output;
   }
   //public boolean isExplored()
   /**Returns whether or not the Room has been explored
