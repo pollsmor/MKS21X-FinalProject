@@ -42,7 +42,5 @@ public abstract class Pokemon {
     return temp;
   }
 
-  public void basicAttack(Enemy enemy) {
-
-  }
+  public abstract void basicAttack(Pokemon target);
 }
