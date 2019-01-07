@@ -15,7 +15,7 @@ public class Player extends Pokemon {
     Game.endGame();
   }
 
-  public void basicAttack(Enemy enemy) {
-    
+  public void basicAttack(Enemy enemy, int damage) {
+    enemy.setHP(-1 * damage);
   }
 }

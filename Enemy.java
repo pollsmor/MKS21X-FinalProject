@@ -9,7 +9,7 @@ public class Enemy extends Pokemon {
     return killXP;
   }
 
-  public void atkPlayer() {
-    
+  public void atkPlayer(Player player, int damage) {
+    player.setHP(-1 * damage);
   }
 }
