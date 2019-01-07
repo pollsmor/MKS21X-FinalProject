@@ -9,10 +9,6 @@ public class Block implements Explorable{
   private String color;
   private char data; //what's printed in the block
 
-  public Block(int x, int y) { //Constructor given coordinates
-    
-  }
-
   public Block(int x, int y, String newType) { //Constructor given coordinates
     isVisible = false;
     objectiveHere = false;
@@ -20,7 +16,15 @@ public class Block implements Explorable{
     ycor = y;
     color = "black";
     data = ' ';
+    //For testing purposes
+    if (newType.equals("Room")){
+      data = 'R';
+    }
     type = newType;
+  }
+
+  public String toString(){
+    return data + "";
   }
 //----------Getters and Setters----------//
 
@@ -57,6 +61,9 @@ public class Block implements Explorable{
     return ycor;
   }
 
+  public char getData(){
+    return data;
+  }
 /* Spawns
   public void spawnObjective() {
     objectiveHere = true;
