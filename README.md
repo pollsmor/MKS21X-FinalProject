@@ -76,6 +76,7 @@ Rachel:
   Room.java
     - Did some testing--> fixed constructor
     - Added toString (for testing purposes)
+    - tooClose: Began code to check if rooms to be created are too close or overlap
 
 ***--------------------Stage 2--------------------***
 >>>>>>> makeMap
