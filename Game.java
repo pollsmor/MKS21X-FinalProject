@@ -13,6 +13,8 @@ import com.googlecode.lanterna.input.InputProvider;
 import com.googlecode.lanterna.input.Key;
 import com.googlecode.lanterna.input.KeyMappingProfile;
 
+import java.util.Random;
+
 public class Game {
   private Player player;
   private Enemy[] enemies;
@@ -21,6 +23,14 @@ public class Game {
   private int seed;
   private static boolean alive = true; //toggle this on or off to respawn or end the game, controls while loop
 
+  public Game() {
+    player = new Player("Bulbasaur");
+    enemies = new Enemy[12];
+    //missions = new Mission(); //ArrayList to allow easy adding/removing
+    Random randgen = new Random();
+    seed = randgen.nextInt() % 10000;
+  }
+
   public Game(int seed) {
     player = new Player("Bulbasaur");
     enemies = new Enemy[12];
@@ -28,7 +38,8 @@ public class Game {
     seed = this.seed % 10000;
   }
 
-  public static void endGame() { //Just so the alive variable can be changed by other classes
+  //Simply controls the inner while loop
+  public static void faintPlayer() {
     alive = false;
   }
 
@@ -42,8 +53,6 @@ public class Game {
   public static void main(String[] args) {
     if (args.length < 1)
       throw new IllegalArgumentException("Please provide a seed as a command line argument.");
-
-    Player squirtle = new Player("yoloswag");
 
     //Start in the bottom center
     int x = 40;
@@ -123,7 +132,7 @@ public class Game {
         }
 
         if (key.getKind() == Key.Kind.Backspace) {
-          squirtle.faintPlayer();
+          faintPlayer();
         }
 
         putString(1, 1, terminal, key + "        "); //to clear leftover letters pad withspaces

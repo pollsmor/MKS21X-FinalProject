@@ -19,11 +19,6 @@ public class Player extends Pokemon {
     return currentHunger;
   }
 
-  //Calls static fn. in Game to end inner while loop in Game
-  public void faintPlayer() {
-    Game.endGame();
-  }
-
   public void basicAttack(Enemy enemy, int damage) {
     enemy.setHP(-1 * damage);
   }
