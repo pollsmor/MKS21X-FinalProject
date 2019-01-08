@@ -40,6 +40,9 @@ public class Game {
   }
 
   public static void main(String[] args) {
+    if (args.length < 1)
+      throw new IllegalArgumentException("Please provide a seed as a command line argument.");
+
     Player squirtle = new Player("yoloswag");
 
     //Start in the bottom center
