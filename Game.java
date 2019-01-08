@@ -17,9 +17,16 @@ public class Game {
   private Player player;
   private Enemy[] enemies;
   private int floor = 1; //Starting off on the first floor
-  //private Mission[] missions;
+  private Mission[] missions;
   private int seed;
   private static boolean alive = true; //toggle this on or off to respawn or end the game, controls while loop
+
+  public Game(int seed) {
+    player = new Player("Bulbasaur");
+    enemies = new Enemy[12];
+    //missions = new Mission(); //ArrayList to allow easy adding/removing
+    seed = this.seed % 10000;
+  }
 
   public static void endGame() { //Just so the alive variable can be changed by other classes
     alive = false;
@@ -49,6 +56,7 @@ public class Game {
     long lastSecond = 0;
 
     boolean running = true;
+
 
     while (running) {
       terminal.moveCursor(x, y);
