@@ -23,16 +23,16 @@ public class Game {
   private int seed;
   private static boolean alive = true; //toggle this on or off to respawn or end the game, controls while loop
 
-  public Game() {
-    player = new Player("Bulbasaur");
+  public Game(String name) {
+    player = new Player(name);
     enemies = new Enemy[12];
     //missions = new Mission(); //ArrayList to allow easy adding/removing
     Random randgen = new Random();
     seed = randgen.nextInt() % 10000;
   }
 
-  public Game(int seed) {
-    player = new Player("Bulbasaur");
+  public Game(String name, int seed) {
+    player = new Player(name);
     enemies = new Enemy[12];
     //missions = new Mission(); //ArrayList to allow easy adding/removing
     seed = this.seed % 10000;
@@ -51,7 +51,7 @@ public class Game {
   }
 
   public static void main(String[] args) {
-    if (args.length < 1)
+    if (args.length < 2)
       throw new IllegalArgumentException("Please provide a seed as a command line argument.");
 
     //Start in the bottom center
