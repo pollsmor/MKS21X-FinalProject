@@ -91,9 +91,11 @@ public class Room implements Explorable{
     4                    + - - - - - +
     */
 
-    boolean case1 = (startXcor >= this.startXcor && startYcor >= this.startYcor);
-    boolean case2 = (endXcor <= this.endXcor && endYcor <= this.endYcor);
-    return (case1&&case2);
+    boolean case1 = (startXcor >= this.startXcor && startXcor<=endXcor + 1 && startYcor >= this.startYcor && startYcor<this.endYcor + 1);
+    boolean case2 = (endXcor <= this.endXcor && endXcor >= this.startXcor + 1 && endYcor <= this.endYcor && endYcor >= this.startYcor + 1);
+    System.out.println("Case 1: "+case1);
+    System.out.println("Case 2: "+case2);
+    return (case1||case2);
   }
   public String toString(){
     String output = "";
