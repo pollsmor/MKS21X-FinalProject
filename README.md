@@ -64,3 +64,10 @@ Rachel:
     
 ***--------------------Stage 2--------------------***
 >>>>>>> makeMap
+
+**Monday 1/7/19**
+
+Kevin:
+- Created necessary functions and instance variables for Enemy
+- Created necessary functions and instance variables for Player
+- Changed up the looks of the Game, different symbol for the character and colors
