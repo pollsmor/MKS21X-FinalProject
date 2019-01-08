@@ -64,12 +64,36 @@ public class Room implements Explorable{
   public boolean tooClose(int startXcor, int startYcor, int endXcor, int endYcor){
     //Make sure that rooms don't overlap with each other
     //Rooms overlap when...
-    //Case 1: beginning xcor of room to be created is more than the beginning xcor of a room that already exists
-    //AND beginning ycor of the room to be created is more than the beginning ycor of of a room that already exists
-    //Case 2: ending xcor of room to be created is less than the ending xcor of a room that already exists
-    //AND ending ycor of the room to be created is less than the ending ycor of a room that already exists
-    boolean case1 = startXcor > this.startXcor;
-    return (this.xcor)
+    //Case 1:
+    //    startXcor of Room to be created is more than or equal to startXcor of a Room that already exists
+    //AND startXcor of Room to be created is less than or equal to endXcor + 1 of a Room that already exists
+    //AND startYcor of Room to be created is more than or equal to startYcor of a Room that already exists
+    //AND startYcor of Room to be created is less than or equal to endYcor + 1 of a Room that already exists
+    /*
+      0 1 2 3 4 5 6 7 8 9 10
+    0 + - - - - - - - - - - +
+    1 |    Original         |
+    2 |             + - - - - - +
+    3 + - - - - - - |    New    |
+    4               + - - - - - +
+    */
+    //Case 2:
+    //    endXcor of Room to be created is less than or equal to endXcor of a Room that already exists
+    //AND endXcor of Room to be created is more than or equal to startXcor - 1 of a Room that already exists
+    //AND endYcor of Room to be created is less than or equal to endYcor of a Room that already exists
+    //AND endYcor of Room to be created is more than or equal to startYcor - 1 of a Room that already exists
+    /*
+      0 1 2 3 4 5 6 7 8 9 10
+    0 + - - - - - - - - - - +
+    1 |                    |
+    2 |       New          + - - - - - +
+    3 + - - - - - - - - - |  Original |
+    4                    + - - - - - +
+    */
+
+    boolean case1 = (startXcor >= this.startXcor && startYcor >= this.startYcor);
+    boolean case2 = (endXcor <= this.endXcor && endYcor <= this.endYcor);
+    return (case1&&case2);
   }
   public String toString(){
     String output = "";
