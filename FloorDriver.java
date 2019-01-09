@@ -44,9 +44,13 @@ public class FloorDriver{
     System.out.println("Should trigger Case 4\n");
     System.out.println("\tResult: "+roomOriginal.tooClose(4, 8, 4, 10)); //Should print true
     System.out.println("Should trigger Case 4\n");
+    System.out.println("\tResult: "+roomOriginal.tooClose(5, 5, 6, 6)); //Should print true
+    System.out.println("Should trigger all Cases\n");
     System.out.println("\tResult: "+roomOriginal.tooClose(4, 4, 7, 7)); //Should print true
     System.out.println("Should trigger all Cases\n");
     System.out.println("\tResult: "+roomOriginal.tooClose(0,0,10,10)); //Should print true
     System.out.println("Should trigger all Cases\n");
+    System.out.println("\tResult: "+roomOriginal.tooClose(0,0,2,2)); //Should print false
+    System.out.println("Should trigger no Cases\n");
   }
 }
