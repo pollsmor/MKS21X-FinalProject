@@ -3,7 +3,14 @@ public class Item {
   private String name;
   private String description;
   private int value;
-  private int quantity;
+
+  public Item(String name) {
+    if (this.name == "potion") {
+      name = "Potion"; //description: taken from Bulbapedia
+      description = "A spray-type medicine for treating wounds. It can be used to restore 20 HP to an injured Pokémon.";
+      value = 20;
+    }
+  }
 
   public String getName() {
     return name;
@@ -15,9 +22,5 @@ public class Item {
 
   public int getValue() {
     return value;
-  }
-
-  public int getQuantity() {
-    return quantity;
   }
 }
