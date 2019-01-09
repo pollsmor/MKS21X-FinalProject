@@ -51,9 +51,20 @@ public class Game {
   }
 
   public static void main(String[] args) {
+    String name;
+    int seed;
+
     try {
-      String name = args[0];
-      int seed = Integer.parseInt(args[1]);
+      if (args.length == 0) {
+        name = args[0];
+        Game game = new Game(name);
+      }
+
+      else {
+        name = args[0];
+        seed = Integer.parseInt(args[1]);
+        Game game = new Game(name, seed);
+      }
     }
 
     catch (NumberFormatException e) {
