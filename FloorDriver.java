@@ -1,13 +1,24 @@
 import java.util.Random;
 public class FloorDriver{
   public static void main(String[] args){
-    Floor a = new Floor(1, 40, 40);
     Random rnd = new Random();
     int seed = Math.abs(rnd.nextInt()) % 10000;
+    int width = rnd.nextInt(40)+20;
+    int length = rnd.nextInt(40)+20;
+    if (args.length > 0){
+      seed = Integer.parseInt(args[0]);
+    }
+    if (args.length > 2){
+      width = Integer.parseInt(args[1]);
+      length = Integer.parseInt(args[2]);
+    }
+    Floor a = new Floor(1, width, length);
     //System.out.println(a.toString());
-    a.createRooms(1);
-    System.out.println(a.toString());
+    a.createRooms(seed);
+    System.out.println("Width: "+ width);
+    System.out.println("Length: "+ length);
     System.out.println("Seed: "+seed);
+    System.out.println(a.toString());
     //a.createRoom(0, 0, 2, 2);
     //System.out.println(a.toString());
     //a.createRoom(3, 4, 10, 10);
