@@ -1,11 +1,12 @@
 public class Room implements Explorable{
   private boolean isExplored;
   private Block[][] blocksHere;
+  private int startXcor, startYcor, endXcor, endYcor;
   private int width;
   private int length;
 
-  //public Tunnel(Block start, Block end)
-  /**Creates a Tunnel given two blocks (start, end) beginning with the start block and ending at the end block
+  //public Room(Block start, Block end)
+  /**Creates a Room given two blocks (start, end) with the start block being at the top left and the end block being at the bottom right
     *Precondition: start is to the top and left of end block
     *@param start is the Block representing the top left Block of the Room to be made
     *@param end is the Block representing the bottom right Block of the Room to be made
@@ -17,6 +18,10 @@ public class Room implements Explorable{
     //Storing length and width
     width = xcor - end.getX();
     length = ycor - end.getY();
+    startXcor = xcor;
+    startYcor = ycor;
+    endXcor = end.getX();
+    endYcor = end.getY();
     blocksHere = new Block[width][length];
     for (int x = 0; x < length; x++){
       for (int y = 0; y < width; y++){
@@ -25,6 +30,121 @@ public class Room implements Explorable{
     }
   }
 
+  //public Room(int startXcor, int startYcor, int endXcor, int endYcor
+  /**Creates a Room given the coordinates of two blocks (start, end) with the start block being at the top left and the end block being at the bottom right
+    *Precondition: start is to the top and left of end block
+    *@param startXcor is the xcor of the Block representing the top left Block of the Room to be made
+    *@param endXcor is the xcor of the Block representing the bottom right Block of the Room to be made
+    *@param startYcor is the xcor of the Block representing the top left Block of the Room to be made
+    *@param endYcor is the xcor of the Block representing the bottom right Block of the Room to be made
+  */
+  public Room(int newStartXcor, int newStartYcor, int newEndXcor, int newEndYcor){
+    startXcor = newStartXcor;
+    startYcor = newStartYcor;
+    endXcor = newEndXcor;
+    endYcor = newEndYcor;
+    width = endXcor - startXcor;
+    length = endYcor - startYcor;
+    blocksHere = new Block[width][length];
+    for (int x = 0; x < width; x++){
+      for (int y = 0; y < length; y++){
+        blocksHere[x][y] = new Block(startXcor+x,startYcor+y,"Room");
+      }
+    }
+  }
+
+  //public boolean tooClose(int startXcor, int startYcor, int endXcor, int endYcor)
+  /**Tests if rooms overlap with each other or border each other
+    *@param startXcor is the xcor of the Block representing the top left Block of the Room to be made
+    *@param endXcor is the xcor of the Block representing the bottom right Block of the Room to be made
+    *@param startYcor is the xcor of the Block representing the top left Block of the Room to be made
+    *@param endYcor is the xcor of the Block representing the bottom right Block of the Room to be made
+    *@return whether or not the rooms will overlap or border
+  */
+  public boolean tooClose(int startXcor, int startYcor, int endXcor, int endYcor){
+    //Make sure that rooms don't overlap with each other
+    //Rooms overlap when...
+    //Case 1: OVERLAP LEFT ORIGINAL
+    //    endtXcor of Room to be created >= startXcor - 1 of a Room that already exists
+    //AND startXcor of Room to be created <= endXcor of a Room that already exists
+    //AND endYcor of Room to be created >= startYcor of a Room that already exists
+    //AND startYcor of Room to be created <= endYcor of a Room that already exists
+
+    /*
+      0 1 2 3 4 5 6 7 8 9 10
+    0 + - - - - - - - - - - +
+    1 |                     |
+    2 |       New          + - - - - - +
+    3 |                    |  Original |
+    4 + - - - - - - - - - + - - - - - +
+    */
+
+    //Case 2: OVERLAP TOP ORIGINAL
+    //    startXcor of Room to be created <= endXcor of a Room that already exists
+    //AND endXcor of Room to be created >= startXcor of a Room that already exists
+    //AND startYcor of Room to be created <= endYcor of a Room that already exists
+    //AND endYcor of Room to be created >= startYcor - 1 of a Room that already exists
+    /*
+      0 1 2 3 4 5 6 7 8 9 10
+    0 + - - - - - - - - - - +
+    1 |          New        |
+    2 + - - - - - - + - - - + - +
+    3               | Original  |
+    4               + - - - - - +
+    */
+
+    //Case 3: OVERLAP RIGHT ORIGINAL
+    //    endtXcor of Room to be created >= startXcor of a Room that already exists
+    //AND startXcor of Room to be created <= endXcor + 1 of a Room that already exists
+    //AND endYcor of Room to be created >= startYcor of a Room that already exists
+    //AND startYcor of Room to be created <= endYcor of a Room that already exists
+    /*
+      0 1 2 3 4 5 6 7 8 9 10
+    0 + - - - - - - - - - - +
+    1 |                     |
+    2 |       Original      + - - - - - +
+    3 |                     |  New      |
+    4 + - - - - - - - - - - + - - - - - +
+    */
+    //Case 4: OVERLAP BOTTOM ORIGINAL
+    //    startXcor of Room to be created <= endXcor of a Room that already exists
+    //AND endXcor of Room to be created >= startXcor of a Room that already exists
+    //AND startYcor of Room to be created <= endYcor + 1 of a Room that already exists
+    //AND endYcor of Room to be created >= startYcor of a Room that already exists
+    /*
+      0 1 2 3 4 5 6 7 8 9 10
+    0 + - - - - - - - - - - +
+    1 |      Original       |
+    2 + - - - - - - + - - - +
+    3               |  New  |
+    4               + - - - +
+    */
+
+    boolean case1 = (endXcor >= this.startXcor - 1) && (startXcor<= this.endXcor) && (startYcor<=this.endYcor) && (endYcor >= this.startYcor);
+    //tests to see if it crosses the left of original
+    boolean case2 = (endYcor >= this.startYcor - 1) && (startYcor<= this.endYcor) && (startXcor<=this.endXcor) && (endXcor >= this.startXcor);
+    //tests to see if it crosses the top of original
+    boolean case3 = (startXcor <= this.endXcor + 1) && (endXcor>= this.startXcor) && (startYcor<=this.endYcor) && (endYcor >= this.startYcor);
+    //tests to see if it crosses the right of original
+    boolean case4 = (startYcor <= this.endYcor + 1) && (endYcor>= this.startYcor) && (startXcor<=this.endXcor) && (endXcor >= this.startXcor);
+    //tests to see if it crosses the bottom of original
+    /*System.out.println("Case 1| Overlap left original: "+case1);
+    System.out.println("Case 2| Overlap top original: "+case2);
+    System.out.println("Case 3| Overlap right original: "+case3);
+    System.out.println("Case 4| Overlap bottom original: "+case4);*/
+
+    return (case1||case2||case3||case4);
+  }
+  public String toString(){
+    String output = "";
+    for (int x = 0; x < width; x++){
+      for (int y = 0; y < length; y++){
+        output+= blocksHere[x][y].getData();
+      }
+      output+= "\n";
+    }
+    return output;
+  }
   //public boolean isExplored()
   /**Returns whether or not the Room has been explored
     *@return true when: the Player has entered the Room before
