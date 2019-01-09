@@ -12,4 +12,8 @@ public class Item {
   public String getDescription() {
     return description;
   }
+
+  public int getValue() {
+    return value;
+  }
 }
