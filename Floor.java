@@ -51,27 +51,40 @@ public class Floor{
     int startXcor, startYcor, endXcor, endYcor;
     int successfulRooms = 0; //Keep track of how many Rooms were successfully made
     boolean wasOverlap; //Keep track of whether or Room to be created overlaps with any other Room
-    while (successfulRooms < rooms){
-      startXcor = Math.abs(rnd.nextInt(width - 6));
+    while (successfulRooms < rooms && attempts > 0){
+      startXcor = Math.abs(rnd.nextInt(width - 10));
       endXcor = startXcor + rnd.nextInt(6) + 4;
-      startYcor = Math.abs(rnd.nextInt(length - 6));
+      startYcor = Math.abs(rnd.nextInt(length - 10));
       endYcor = startYcor + rnd.nextInt(6) + 4;
-      //In case either the endXcor or endYcor are >= width or length respectively, mod them by the appropriate dimension
-      if (endXcor >= width){
-        startXcor = startXcor%width;
-        endXcor = endXcor%width;
+      //System.out.println("startXcor: "+ startXcor +", startYcor: "+startYcor+", endXcor: "+endXcor+", endYcor: "+endYcor);
+      //In case either the endXcor or endYcor are >= width or length respectively, reduce them by the dimension as many times as it takes
+      int holder;
+      while (endXcor >= width){
+        endXcor = endXcor-width;
+        //In case the above makes starts > than ends, switch their values
+        if (startXcor>endXcor){
+          holder = startXcor;
+          startXcor = endXcor;
+          endXcor = holder;
+        }
       }
-      if (endYcor >= length){
-        startYcor = startYcor%length;
-        endYcor = endYcor%length;
+      while (endYcor >= length){
+        endYcor = endYcor-length;
+        //In case the above makes starts > than ends, switch their values
+        if (startYcor > endYcor){
+          holder = startYcor;
+          startYcor = endYcor;
+          endYcor = holder;
+        }
       }
       wasOverlap = false;
       //Make sure that rooms don't overlap with each other
-      System.out.println("startXcor: "+ startXcor +", startYcor: "+startYcor+", endXcor: "+endXcor+", endYcor: "+endYcor);
+      //System.out.println("startXcor: "+ startXcor +", startYcor: "+startYcor+", endXcor: "+endXcor+", endYcor: "+endYcor);
       for (int i = 0; i < successfulRooms; i++){
         if (roomsHere[i].tooClose(startXcor, startYcor, endXcor, endYcor)){
           wasOverlap = true;
           i = roomsHere.length; //Stop loop once it has been discovered that a Room will overlap the new one
+          attempts--; //Reduce attempts by 1
         }
       }
       if (!wasOverlap){ //If there were no overlapping Rooms, create the Room
@@ -94,13 +107,23 @@ public class Floor{
   }
 
   public String toString(){
-    String output = "";
-    for (int x = 0; x < length; x++){
-      for (int y = 0; y < width; y++){
+    String output = "|";
+    for (int y = 0; y < length; y++){
+      output += "-";
+    }
+    output += "|\n";
+    for (int x = 0; x < width; x++){
+      output+="|";
+      for (int y = 0; y < length; y++){
         output+= blocksHere[x][y].getData();
       }
-      output+="\n";
+      output+="|\n";
     }
-    return output+"\nEnd of Floor";
+    output +="|";
+    for (int y = 0; y < length; y++){
+      output += "-";
+    }
+    output += "|\n";
+    return output+"End of Floor";
   }
 }
