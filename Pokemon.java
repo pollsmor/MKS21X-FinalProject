@@ -1,18 +1,18 @@
 public abstract class Pokemon {
   private String name;
   private int level;
-  //private Type type; for later
+  private Type type;
   private int maxHP;
   private int currentHP;
   private int attack;
   private int defense;
   private int stepsTaken; //for healPassive
-  private Item[] toolbox;
-  //private Status[] status; for later
-  //private Move move1; for later
-  //private Move move2; for later
-  //private Move move3; for later
-  //private Move move4; for later
+  private Item[] bag;
+  private Status[] statuses;
+  private Move move1;
+  private Move move2;
+  private Move move3;
+  private Move move4;
 
   public Pokemon(String name, int level, int maxHP, int attack, int defense) {
     name = this.name;
