@@ -16,6 +16,18 @@ public class Item {
       description = "A spray-type medicine for treating wounds. It can be used to restore 60 HP to an injured Pokémon.";
       value = 60;
     }
+
+    if (this.name == "hyperpotion") {
+      name = "Hyper Potion"; //description: taken from Bulbapedia
+      description = "A spray-type medicine for treating wounds. It can be used to restore 120 HP to an injured Pokémon.";
+      value = 120;
+    }
+
+    if (this.name == "maxpotion") {
+      name = "Hyper Potion"; //description: taken from Bulbapedia
+      description = "A spray-type medicine for treating wounds. It can be used to restore 120 HP to an injured Pokémon.";
+      value = 9999; //since it heals you fully and chances are no Pokemon will reach above 1000 HP let alone 9999
+    }
   }
 
   public String getName() {
