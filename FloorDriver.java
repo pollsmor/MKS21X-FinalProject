@@ -1,9 +1,13 @@
+import java.util.Random;
 public class FloorDriver{
   public static void main(String[] args){
-    Floor a = new Floor(1, 15, 15);
+    Floor a = new Floor(1, 40, 40);
+    Random rnd = new Random();
+    int seed = Math.abs(rnd.nextInt()) % 10000;
     //System.out.println(a.toString());
-    //a.createRooms(1);
-    //System.out.println(a.toString());
+    a.createRooms(1);
+    System.out.println(a.toString());
+    System.out.println("Seed: "+seed);
     //a.createRoom(0, 0, 2, 2);
     //System.out.println(a.toString());
     //a.createRoom(3, 4, 10, 10);
@@ -27,7 +31,7 @@ public class FloorDriver{
     System.out.println("\tResult: "+roomOriginal.tooClose(8, 7, 10, 10)); //Should print true
 */
     //Testing bordering
-
+/*
     System.out.println("\tResult: "+roomOriginal.tooClose(0, 0, 3, 4)); //Should print true
     System.out.println("Should trigger Case 1\n");
     System.out.println("\tResult: "+roomOriginal.tooClose(0, 0, 3, 7)); //Should print true
@@ -52,5 +56,6 @@ public class FloorDriver{
     System.out.println("Should trigger all Cases\n");
     System.out.println("\tResult: "+roomOriginal.tooClose(0,0,2,2)); //Should print false
     System.out.println("Should trigger no Cases\n");
+    */
   }
 }
