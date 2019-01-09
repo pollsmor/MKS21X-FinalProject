@@ -46,21 +46,18 @@ public class Game {
     TerminalSize terminalSize = terminal.getTerminalSize();
     terminal.setCursorVisible(false);
 
-    boolean running = true;
-
     long tStart = System.currentTimeMillis();
     long lastSecond = 0;
 
-    while (running) {
-      //if (!alive) {
-        //running = false;
-      //}
+    boolean running = true;
 
+    while (running) {
       terminal.moveCursor(x, y);
-      terminal.applyBackgroundColor(Terminal.Color.WHITE);
-      terminal.applyForegroundColor(Terminal.Color.BLACK);
+      //Applying background makes it look bad, can't see the symbol as easily
+      //terminal.applyBackgroundColor(Terminal.Color.WHITE);
+      terminal.applyForegroundColor(Terminal.Color.GREEN); //Green is nice, right?
       terminal.applySGR(Terminal.SGR.ENTER_UNDERLINE);
-      terminal.putCharacter('P'); //was '\u00a4', P for player instead
+      terminal.putCharacter('\u04dd'); //was '\u00a4'
       terminal.applyBackgroundColor(Terminal.Color.DEFAULT);
       terminal.applyForegroundColor(Terminal.Color.DEFAULT);
       terminal.applySGR(Terminal.SGR.RESET_ALL);
