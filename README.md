@@ -72,3 +72,9 @@ Kevin:
 - Created necessary functions and instance variables for Player
 - Item class
 - Changed up the looks of the Game, different symbol for the character and colors
+
+**Tuesday 1/8/19**
+
+Kevin: 
+- Worked on stuff in the game class such as adding constructors that utilize command line arguments, catching the proper exceptions, and moving functions around to make them easier to use (e.g. faintPlayer has been moved to Game)
+- Unfortunately all of the computers in the lab just shut off at the end bell before I could commit and push the latest commits and SSHing in is giving me some kind of TLS error. Whoever reads this will just have to take my word for it :)
