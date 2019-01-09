@@ -15,14 +15,14 @@ import com.googlecode.lanterna.input.KeyMappingProfile;
 
 public class Game {
   private Player player;
-  //private Enemy[] enemies;
+  private Enemy[] enemies;
   private int floor = 1; //Starting off on the first floor
-  //private Items[] items;
+  //private Items[] items; Kevin: is this for the map? Should this be in another class?
   //private Mission[] missions;
   private int seed;
-  private static boolean alive = true;
+  private static boolean alive = true; //toggle this on or off to respawn or end the game, controls while loop
 
-  public static void endGame() { //Just so I can change this in other classes, mutator method
+  public static void endGame() { //Just so the alive variable can be changed by other classes
     alive = false;
   }
 
@@ -36,8 +36,9 @@ public class Game {
   public static void main(String[] args) {
     Player squirtle = new Player("yoloswag");
 
-    int x = 10;
-    int y = 10;
+    //Start in the bottom center
+    int x = 40;
+    int y = 20;
 
     Terminal terminal = TerminalFacade.createTextTerminal();
     terminal.enterPrivateMode();

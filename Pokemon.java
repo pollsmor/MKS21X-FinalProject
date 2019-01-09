@@ -28,7 +28,7 @@ public abstract class Pokemon {
     if (stepsTaken == 15) {
       stepsTaken = 0;
       if (currentHP < maxHP)
-        currentHP++;
+        ++currentHP;
     }
   }
 
