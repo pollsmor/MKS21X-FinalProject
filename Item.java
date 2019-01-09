@@ -10,6 +10,12 @@ public class Item {
       description = "A spray-type medicine for treating wounds. It can be used to restore 20 HP to an injured Pokémon.";
       value = 20;
     }
+
+    if (this.name == "superpotion") {
+      name = "Super Potion"; //description: taken from Bulbapedia
+      description = "A spray-type medicine for treating wounds. It can be used to restore 60 HP to an injured Pokémon.";
+      value = 60;
+    }
   }
 
   public String getName() {
