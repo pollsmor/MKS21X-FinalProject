@@ -17,7 +17,6 @@ public class Game {
   private Player player;
   private Enemy[] enemies;
   private int floor = 1; //Starting off on the first floor
-  //private Items[] items; Kevin: is this for the map? Should this be in another class?
   //private Mission[] missions;
   private int seed;
   private static boolean alive = true; //toggle this on or off to respawn or end the game, controls while loop
@@ -67,7 +66,7 @@ public class Game {
       if (!alive) {
         putString(0, terminalSize.getRows(), terminal,"You died. Would you like to respawn? (y/n)");
         while (!alive) {
-          Key key2 = terminal.readInput();
+          Key key2 = terminal.readInput(); //if I'm in the if I can't read the first readInput, so I need a second one
           if (key2 != null) {
             if (key2.getCharacter() == 'y') {
               alive = true;                                     //Below is so I can replace the you died text:

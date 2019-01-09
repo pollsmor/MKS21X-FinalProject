@@ -1,7 +1,7 @@
 public class Block implements Explorable{
   private boolean isVisible;
-  //private item itemHere; for later
-  //private Pokemon pokemonHere; for later
+  private Item itemHere;
+  private Pokemon pokemonHere;
   private boolean objectiveHere;
   private String type;
   private int xcor;
@@ -10,7 +10,7 @@ public class Block implements Explorable{
   private char data; //what's printed in the block
 
   public Block(int x, int y) { //Constructor given coordinates
-    
+
   }
 
   public Block(int x, int y, String newType) { //Constructor given coordinates
