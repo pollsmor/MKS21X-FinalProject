@@ -14,6 +14,7 @@ import com.googlecode.lanterna.input.Key;
 import com.googlecode.lanterna.input.KeyMappingProfile;
 
 import java.util.Random;
+import java.util.Arrays;
 
 public class Game {
   private Player player;
@@ -73,17 +74,18 @@ public class Game {
 
     String name;
     int seed;
+    Game game;
 
     try {
       if (args.length == 1) {
         name = args[0];
-        Game game = new Game(name, width, length);
+        game = new Game(name, width, length);
       }
 
       else {
         name = args[0];
         seed = Integer.parseInt(args[1]);
-        Game game = new Game(name, seed, width, length);
+        game = new Game(name, seed, width, length);
       }
     }
 
@@ -98,6 +100,8 @@ public class Game {
       System.out.println("You need to provide the name of a Pokemon and a seed, in that order.");
       System.exit(0);
     }
+
+    //System.out.println(Arrays.deepToString(game.floor.getFloor()));
 
     while (running) {
       terminal.moveCursor(x, y);
