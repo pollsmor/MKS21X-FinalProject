@@ -62,7 +62,17 @@ Rachel:
   - Game.java
     - Began floor counting code
 
+
+***--------------------Stage 2--------------------***
+
 **Monday 1/7/19**
+
+Kevin:
+- Created necessary functions and instance variables for Enemy
+- Created necessary functions and instance variables for Player
+- Item class
+- Changed up the looks of the Game, different symbol for the character and colors
+
 Rachel:
   - FloorDriver.java
     - Created file to test constructors for Room, Floor, and Block. Haven't started with Tunnels
@@ -78,7 +88,13 @@ Rachel:
     - Added toString (for testing purposes)
     - tooClose: Began code to check if rooms to be created are too close or overlap
 
+
 **Tuesday 1/8/19**
+
+Kevin: 
+- Worked on stuff in the game class such as adding constructors that utilize command line arguments, catching the proper exceptions, and moving functions around to make them easier to use (e.g. faintPlayer has been moved to Game)
+- Unfortunately all of the computers in the lab just shut off at the end bell before I could commit and push the latest commits and SSHing in is giving me some kind of TLS error. Whoever reads this will just have to take my word for it :)
+
 Rachel:
   - FloorDriver.java
     - Added test cases for createRooms and createRoom
@@ -89,21 +105,4 @@ Rachel:
     - Fixed toString
   - Room.java
     - Success! tooClose functions properly!
-    - Added comments to better show how tooClose works
-
-***--------------------Stage 2--------------------***
->>>>>>> makeMap
-
-**Monday 1/7/19**
-
-Kevin:
-- Created necessary functions and instance variables for Enemy
-- Created necessary functions and instance variables for Player
-- Item class
-- Changed up the looks of the Game, different symbol for the character and colors
-
-**Tuesday 1/8/19**
-
-Kevin: 
-- Worked on stuff in the game class such as adding constructors that utilize command line arguments, catching the proper exceptions, and moving functions around to make them easier to use (e.g. faintPlayer has been moved to Game)
-- Unfortunately all of the computers in the lab just shut off at the end bell before I could commit and push the latest commits and SSHing in is giving me some kind of TLS error. Whoever reads this will just have to take my word for it :)
+    - Added comments to better show how tooClose() works
