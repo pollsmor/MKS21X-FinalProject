@@ -78,5 +78,18 @@ Rachel:
     - Added toString (for testing purposes)
     - tooClose: Began code to check if rooms to be created are too close or overlap
 
+**Tuesday 1/8/19**
+Rachel:
+  - FloorDriver.java
+    - Added test cases for createRooms and createRoom
+    - Now takes 0 args, 1 arg (seed), or 3 args (Seed, width, length)
+    - Uses random to generate a random floor
+  - Floor.java
+    - Success! createRooms now completely works
+    - Fixed toString
+  - Room.java
+    - Success! tooClose functions properly!
+    - Added comments to better show how tooClose works
+
 ***--------------------Stage 2--------------------***
 >>>>>>> makeMap
