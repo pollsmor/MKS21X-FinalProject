@@ -27,14 +27,26 @@ public class FloorDriver{
     System.out.println("\tResult: "+roomOriginal.tooClose(8, 7, 10, 10)); //Should print true
 */
     //Testing bordering
-    System.out.println("\tResult: "+roomOriginal.tooClose(0, 0, 4, 3)); //Should print true
-    System.out.println("\tResult: "+roomOriginal.tooClose(0, 0, 3, 4)); //Should print true
-    System.out.println("\tResult: "+roomOriginal.tooClose(0, 0, 7, 3)); //Should print true
-    System.out.println("\tResult: "+roomOriginal.tooClose(8, 4, 10, 10)); //Should print true
-    System.out.println("\tResult: "+roomOriginal.tooClose(8, 7, 10, 10)); //Should print true
-    System.out.println("\tResult: "+roomOriginal.tooClose(7, 8, 10, 10)); //Should print true
-    System.out.println("\tResult: "+roomOriginal.tooClose(0, 0, 3, 7)); //Should print true
-    System.out.println("\tResult: "+roomOriginal.tooClose(0, 0, 4, 10)); //Should print true
 
+    System.out.println("\tResult: "+roomOriginal.tooClose(0, 0, 3, 4)); //Should print true
+    System.out.println("Should trigger Case 1\n");
+    System.out.println("\tResult: "+roomOriginal.tooClose(0, 0, 3, 7)); //Should print true
+    System.out.println("Should trigger Case 1\n");
+    System.out.println("\tResult: "+roomOriginal.tooClose(0, 0, 4, 3)); //Should print true
+    System.out.println("Should trigger Case 2\n");
+    System.out.println("\tResult: "+roomOriginal.tooClose(0, 0, 7, 3)); //Should print true
+    System.out.println("Should trigger Case 2\n");
+    System.out.println("\tResult: "+roomOriginal.tooClose(8, 4, 10, 10)); //Should print true
+    System.out.println("Should trigger Case 3\n");
+    System.out.println("\tResult: "+roomOriginal.tooClose(8, 7, 10, 10)); //Should print true
+    System.out.println("Should trigger Case 3\n");
+    System.out.println("\tResult: "+roomOriginal.tooClose(7, 8, 10, 10)); //Should print true
+    System.out.println("Should trigger Case 4\n");
+    System.out.println("\tResult: "+roomOriginal.tooClose(4, 8, 4, 10)); //Should print true
+    System.out.println("Should trigger Case 4\n");
+    System.out.println("\tResult: "+roomOriginal.tooClose(4, 4, 7, 7)); //Should print true
+    System.out.println("Should trigger all Cases\n");
+    System.out.println("\tResult: "+roomOriginal.tooClose(0,0,10,10)); //Should print true
+    System.out.println("Should trigger all Cases\n");
   }
 }

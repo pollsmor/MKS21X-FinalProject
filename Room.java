@@ -91,11 +91,18 @@ public class Room implements Explorable{
     4                    + - - - - - +
     */
 
-    boolean case1 = (startXcor >= this.startXcor && startXcor<=endXcor + 1 && startYcor >= this.startYcor && startYcor<this.endYcor + 1);
-    boolean case2 = (endXcor <= this.endXcor && endXcor >= this.startXcor + 1 && endYcor <= this.endYcor && endYcor >= this.startYcor + 1);
-    System.out.println("Case 1: "+case1);
-    System.out.println("Case 2: "+case2);
-    return (case1||case2);
+    boolean case1 = (endXcor >= this.startXcor - 1) && (startXcor<= this.endXcor) && (startYcor<=this.endYcor) && (endYcor >= this.startYcor);
+    //tests to see if it crosses the left of original
+    boolean case2 = (endYcor >= this.startYcor - 1) && (startYcor<= this.endYcor) && (startXcor<=this.endXcor) && (endXcor >= this.startXcor);
+    //tests to see if it crosses the top of original
+    boolean case3 = (startXcor <= this.endXcor + 1) && (endXcor>= this.startXcor) && (startYcor<=this.endYcor) && (endYcor >= this.startYcor);
+    boolean case4 = (startYcor <= this.endYcor + 1) && (endYcor>= this.startYcor) && (startXcor<=this.endXcor) && (endXcor >= this.startXcor);
+    System.out.println("Case 1| Overlap left original: "+case1);
+    System.out.println("Case 2| Overlap top original: "+case2);
+    System.out.println("Case 3| Overlap right original: "+case3);
+    System.out.println("Case 4| Overlap bottom original: "+case4);
+
+    return (case1||case2||case3||case4);
   }
   public String toString(){
     String output = "";
