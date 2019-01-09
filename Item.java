@@ -1,9 +1,9 @@
 public class Item {
   //private Status status //for later
-  private int value;
-  private int quantity;
   private String name;
   private String description;
+  private int value;
+  private int quantity;
 
   public String getName() {
     return name;
@@ -15,5 +15,9 @@ public class Item {
 
   public int getValue() {
     return value;
+  }
+
+  public int getQuantity() {
+    return quantity;
   }
 }
