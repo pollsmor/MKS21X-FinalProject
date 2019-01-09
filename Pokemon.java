@@ -7,7 +7,7 @@ public abstract class Pokemon {
   private int attack;
   private int defense;
   private int stepsTaken; //for healPassive
-  //private Item[] toolbox; for later
+  private Item[] toolbox;
   //private Status[] status; for later
   //private Move move1; for later
   //private Move move2; for later
