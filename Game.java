@@ -55,7 +55,7 @@ public class Game {
     int seed;
 
     try {
-      if (args.length == 0) {
+      if (args.length == 1) {
         name = args[0];
         Game game = new Game(name);
       }
@@ -69,10 +69,12 @@ public class Game {
 
     catch (NumberFormatException e) {
       System.out.println("Seeds can only be integers.");
+      System.exit(0);
     }
 
     catch (ArrayIndexOutOfBoundsException e) {
       System.out.println("You need to provide the name of a Pokemon and a seed, in that order.");
+      System.exit(0);
     }
 
     //Start in the bottom center
