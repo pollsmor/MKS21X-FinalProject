@@ -24,20 +24,21 @@ public class Game {
   private int seed;
   private static boolean alive = true; //toggle this on or off to respawn or end the game, controls while loop
 
-  public Game(String name) {
+  public Game(String name, int terminalWidth, int terminalLength) {
     player = new Player(name);
     enemies = new Enemy[12];
     //missions = new Mission(); //ArrayList to allow easy adding/removing
     Random randgen = new Random();
     seed = randgen.nextInt() % 10000;
-    //floor = new Floor(level, )
+    floor = new Floor(1, terminalWidth, terminalLength);
   }
 
-  public Game(String name, int seed) {
+  public Game(String name, int seed, int terminalWidth, int terminalLength) {
     player = new Player(name);
     enemies = new Enemy[12];
     //missions = new Mission(); //ArrayList to allow easy adding/removing
     seed = this.seed % 10000;
+    floor = new Floor(1, terminalWidth, terminalLength);
   }
 
   //Simply controls the inner while loop
@@ -57,6 +58,8 @@ public class Game {
     terminal.enterPrivateMode();
 
     TerminalSize terminalSize = terminal.getTerminalSize();
+    int width = terminalSize.getRows();
+    int length = terminalSize.getColumns();
     terminal.setCursorVisible(false);
 
     //Start in the bottom center
@@ -74,13 +77,13 @@ public class Game {
     try {
       if (args.length == 1) {
         name = args[0];
-        Game game = new Game(name);
+        Game game = new Game(name, width, length);
       }
 
       else {
         name = args[0];
         seed = Integer.parseInt(args[1]);
-        Game game = new Game(name, seed);
+        Game game = new Game(name, seed, width, length);
       }
     }
 
