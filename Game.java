@@ -51,8 +51,18 @@ public class Game {
   }
 
   public static void main(String[] args) {
-    if (args.length < 2)
-      throw new IllegalArgumentException("Please provide a seed as a command line argument.");
+    try {
+      String name = args[0];
+      int seed = Integer.parseInt(args[1]);
+    }
+
+    catch (NumberFormatException e) {
+      System.out.println("Seeds can only be integers.");
+    }
+
+    catch (ArrayIndexOutOfBoundsException e) {
+      System.out.println("You need to provide the name of a Pokemon and a seed, in that order.");
+    }
 
     //Start in the bottom center
     int x = 40;
