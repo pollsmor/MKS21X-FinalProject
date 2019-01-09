@@ -18,7 +18,8 @@ import java.util.Random;
 public class Game {
   private Player player;
   private Enemy[] enemies;
-  private int floor = 1; //Starting off on the first floor
+  private int level = 1; //Starting off on the first floor
+  private Floor floor;
   private Mission[] missions;
   private int seed;
   private static boolean alive = true; //toggle this on or off to respawn or end the game, controls while loop
@@ -29,6 +30,7 @@ public class Game {
     //missions = new Mission(); //ArrayList to allow easy adding/removing
     Random randgen = new Random();
     seed = randgen.nextInt() % 10000;
+    //floor = new Floor(level, )
   }
 
   public Game(String name, int seed) {
@@ -51,6 +53,21 @@ public class Game {
   }
 
   public static void main(String[] args) {
+    Terminal terminal = TerminalFacade.createTextTerminal();
+    terminal.enterPrivateMode();
+
+    TerminalSize terminalSize = terminal.getTerminalSize();
+    terminal.setCursorVisible(false);
+
+    //Start in the bottom center
+    int x = terminalSize.getColumns() / 2;
+    int y = terminalSize.getRows() - 2;
+
+    long tStart = System.currentTimeMillis();
+    long lastSecond = 0;
+
+    boolean running = true;
+
     String name;
     int seed;
 
@@ -68,30 +85,16 @@ public class Game {
     }
 
     catch (NumberFormatException e) {
+      terminal.exitPrivateMode();
       System.out.println("Seeds can only be integers.");
       System.exit(0);
     }
 
     catch (ArrayIndexOutOfBoundsException e) {
+      terminal.exitPrivateMode();
       System.out.println("You need to provide the name of a Pokemon and a seed, in that order.");
       System.exit(0);
     }
-
-    //Start in the bottom center
-    int x = 40;
-    int y = 20;
-
-    Terminal terminal = TerminalFacade.createTextTerminal();
-    terminal.enterPrivateMode();
-
-    TerminalSize terminalSize = terminal.getTerminalSize();
-    terminal.setCursorVisible(false);
-
-    long tStart = System.currentTimeMillis();
-    long lastSecond = 0;
-
-    boolean running = true;
-
 
     while (running) {
       terminal.moveCursor(x, y);
