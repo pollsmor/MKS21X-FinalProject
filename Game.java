@@ -59,7 +59,7 @@ public class Game {
       terminal.applyBackgroundColor(Terminal.Color.WHITE);
       terminal.applyForegroundColor(Terminal.Color.BLACK);
       terminal.applySGR(Terminal.SGR.ENTER_UNDERLINE);
-      terminal.putCharacter('\u00a4');
+      terminal.putCharacter('P'); //was '\u00a4', P for player instead
       terminal.applyBackgroundColor(Terminal.Color.DEFAULT);
       terminal.applyForegroundColor(Terminal.Color.DEFAULT);
       terminal.applySGR(Terminal.SGR.RESET_ALL);
