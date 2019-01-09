@@ -73,7 +73,10 @@ public class Tunnel implements Explorable{
     }
     if (Math.abs(this.startBlock.getXcor()-t.startBlock.getXcor()) == 1||
         Math.abs(this.startBlock.getYcor()-t.startBlock.getYcor()) == 1||
-
+        Math.abs(this.endBlock.getXcor()-t.endBlock.getXcor()) == 1||
+        Math.abs(this.endBlock.getYcor()-t.endBlock.getYcor()) == 1
+        //Above checks for it Tunnel would border a Room
+        //Check for if Tunnel passes through a Room
         )
     return true;
   }
