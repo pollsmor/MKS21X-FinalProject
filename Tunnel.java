@@ -1,8 +1,10 @@
 public class Tunnel implements Explorable{
   private boolean isExplored;
   private Block[] blocksHere;
-  private Block startBlock;
-  private Block endBlock;
+  private Block startBlock; //Note: coors will be less than or equal to endBlock
+  private Block endBlock; //Note: coors will be larger than or equal to startBlock
+  private int length; //How many blocks long is the Tunnel
+  private int direction; //Orientation of Tunnel: 0 is left=right, 1 is up-down
 
   //public Tunnel(Block start, Block end)
   /**Creates a Tunnel given two blocks (start, end) beginning with the start block and ending at the end block
@@ -19,7 +21,6 @@ public class Tunnel implements Explorable{
     startBlock = start;
     endBlock = end;
     //Getting the length of the tunnel
-    int length;
     if (start.getX() == end.getX()){
       length = ycor-end.getY();
     }
@@ -31,6 +32,7 @@ public class Tunnel implements Explorable{
     for (int i = 0; i < length; i++){
       blocksHere[i] = new Block(xcor, ycor+i, "Tunnel");
     }
+    length += 1; //Length is one more than difference
   }
 
   //public boolean isExplored()
@@ -51,5 +53,28 @@ public class Tunnel implements Explorable{
     }
     //To be edited later such that only the next block will be visible, not the whole tunnel
     //Requires input from the Player
+  }
+
+  public boolean nextToTunnel(Tunnel t){
+    //Can't have parallel tunnels that have length longer than 2
+    // one block away from each other.
+    // That would essentially be like creating a Room
+    if (length == 1 || (t.direction + this.direction) == 1)
+      return false;
+    }
+    if (Math.abs(this.startBlock.getXcor()-t.startBlock.getXcor()) == 1||
+        Math.abs(this.startBlock.getYcor()-t.startBlock.getYcor()) == 1)
+    return true;
+  }
+
+  public boolean nextToRoom(Room){
+    if (length == 1)
+      return false;
+    }
+    if (Math.abs(this.startBlock.getXcor()-t.startBlock.getXcor()) == 1||
+        Math.abs(this.startBlock.getYcor()-t.startBlock.getYcor()) == 1||
+
+        )
+    return true;
   }
 }
