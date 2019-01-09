@@ -64,31 +64,60 @@ public class Room implements Explorable{
   public boolean tooClose(int startXcor, int startYcor, int endXcor, int endYcor){
     //Make sure that rooms don't overlap with each other
     //Rooms overlap when...
-    //Case 1:
-    //    startXcor of Room to be created is more than or equal to startXcor of a Room that already exists
-    //AND startXcor of Room to be created is less than or equal to endXcor + 1 of a Room that already exists
-    //AND startYcor of Room to be created is more than or equal to startYcor of a Room that already exists
-    //AND startYcor of Room to be created is less than or equal to endYcor + 1 of a Room that already exists
+    //Case 1: OVERLAP LEFT ORIGINAL
+    //    endtXcor of Room to be created >= startXcor - 1 of a Room that already exists
+    //AND startXcor of Room to be created <= endXcor of a Room that already exists
+    //AND endYcor of Room to be created >= startYcor of a Room that already exists
+    //AND startYcor of Room to be created <= endYcor of a Room that already exists
+
     /*
       0 1 2 3 4 5 6 7 8 9 10
     0 + - - - - - - - - - - +
-    1 |    Original         |
-    2 |             + - - - - - +
-    3 + - - - - - - |    New    |
+    1 |                     |
+    2 |       New          + - - - - - +
+    3 |                    |  Original |
+    4 + - - - - - - - - - + - - - - - +
+    */
+
+    //Case 2: OVERLAP TOP ORIGINAL
+    //    startXcor of Room to be created <= endXcor of a Room that already exists
+    //AND endXcor of Room to be created >= startXcor of a Room that already exists
+    //AND startYcor of Room to be created <= endYcor of a Room that already exists
+    //AND endYcor of Room to be created >= startYcor - 1 of a Room that already exists
+    /*
+      0 1 2 3 4 5 6 7 8 9 10
+    0 + - - - - - - - - - - +
+    1 |          New        |
+    2 + - - - - - - + - - - + - +
+    3               | Original  |
     4               + - - - - - +
     */
-    //Case 2:
-    //    endXcor of Room to be created is less than or equal to endXcor of a Room that already exists
-    //AND endXcor of Room to be created is more than or equal to startXcor - 1 of a Room that already exists
-    //AND endYcor of Room to be created is less than or equal to endYcor of a Room that already exists
-    //AND endYcor of Room to be created is more than or equal to startYcor - 1 of a Room that already exists
+
+    //Case 3: OVERLAP RIGHT ORIGINAL
+    //    endtXcor of Room to be created >= startXcor of a Room that already exists
+    //AND startXcor of Room to be created <= endXcor + 1 of a Room that already exists
+    //AND endYcor of Room to be created >= startYcor of a Room that already exists
+    //AND startYcor of Room to be created <= endYcor of a Room that already exists
     /*
       0 1 2 3 4 5 6 7 8 9 10
     0 + - - - - - - - - - - +
-    1 |                    |
-    2 |       New          + - - - - - +
-    3 + - - - - - - - - - |  Original |
-    4                    + - - - - - +
+    1 |                     |
+    2 |       Original      + - - - - - +
+    3 |                     |  New      |
+    4 + - - - - - - - - - - + - - - - - +
+    */
+    //Case 4: OVERLAP BOTTOM ORIGINAL
+    //    startXcor of Room to be created <= endXcor of a Room that already exists
+    //AND endXcor of Room to be created >= startXcor of a Room that already exists
+    //AND startYcor of Room to be created <= endYcor + 1 of a Room that already exists
+    //AND endYcor of Room to be created >= startYcor of a Room that already exists
+    /*
+      0 1 2 3 4 5 6 7 8 9 10
+    0 + - - - - - - - - - - +
+    1 |      Original       |
+    2 + - - - - - - + - - - +
+    3               |  New  |
+    4               + - - - +
     */
 
     boolean case1 = (endXcor >= this.startXcor - 1) && (startXcor<= this.endXcor) && (startYcor<=this.endYcor) && (endYcor >= this.startYcor);
