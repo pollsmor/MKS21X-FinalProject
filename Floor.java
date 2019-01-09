@@ -5,6 +5,8 @@ public class Floor{
   private int width;
   private int length;
   private Room[] roomsHere; //List of Rooms
+  private int numRooms; //Number of successful Rooms
+  private Tunnels[] tunnelsHere; //List of total tunnels created
   //private Mission[] missions; to be added later if we get to it
 
   //public Floor(int num, int terminal Width, int terminalLength)
@@ -43,7 +45,7 @@ public class Floor{
     //First decide number of Rooms to create
     int rooms = rnd.nextInt(3) + (width * length)/20;
     roomsHere = new Room[rooms];
-    System.out.println("Rooms: "+rooms);
+    //System.out.println("Rooms: "+rooms);
     int attempts = 100; //In case it's impossible to create all the rooms, have a set number of failed attempts possible
     //Using random, generate the xcors and ycors of top right Blocks and bottom left Blocks of the Rooms
     //Minimum width of room: 4 | Max: 10
@@ -94,6 +96,7 @@ public class Floor{
         successfulRooms++;
       }
     }
+    numRooms = successfulRooms;
   }
 
   public Room createRoom(int startXcor, int startYcor, int endXcor, int endYcor){
