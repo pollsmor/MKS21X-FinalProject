@@ -5,10 +5,15 @@ public class FloorDriver{
     int seed = Math.abs(rnd.nextInt()) % 10000;
     int width = rnd.nextInt(40)+20;
     int length = rnd.nextInt(40)+20;
-    if (args.length > 0){
+    if (args.length == 1){
       seed = Integer.parseInt(args[0]);
     }
-    if (args.length > 2){
+    if (args.length == 2){
+      width = Integer.parseInt(args[0]);
+      length = Integer.parseInt(args[1]);
+    }
+    if (args.length == 3){
+      seed = Integer.parseInt(args[0]);
       width = Integer.parseInt(args[1]);
       length = Integer.parseInt(args[2]);
     }
