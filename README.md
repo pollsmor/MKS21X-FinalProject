@@ -98,7 +98,7 @@ Kevin:
 Rachel:
   - FloorDriver.java
     - Added test cases for createRooms and createRoom
-    - Now takes 0 args, 1 arg (seed), or 3 args (Seed, width, length)
+    - Now takes 0 args, 1 arg (seed), 2 args (width, length) or 3 args (Seed, width, length)
     - Uses random to generate a random floor
   - Floor.java
     - Success! createRooms now completely works
