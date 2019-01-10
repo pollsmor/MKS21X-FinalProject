@@ -94,7 +94,7 @@ public class Tunnel implements Explorable{
   /**Checks if Tunnel to be made will be parallel and next to another Tunnel
     *@param startBlock the topmost or leftmost Block of the Tunnel to be made
     *@param endBlock the bottommost or rightmost Block of the Tunnel to be made
-
+    *@param r is the Room the function is basing the test off of
     *@return true if the difference between the xcors and ycors is not 1 and the direction is different or Tunnel intrsects with a Rooms
     *        false if the Tunnel to be made is length 1 or doesn't intersect  or borderthe Room
   */
