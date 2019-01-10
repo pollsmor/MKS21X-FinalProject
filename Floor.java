@@ -110,6 +110,18 @@ public class Floor{
     return a;
   }
 
+  public void createTunnels(Room[] rooms){
+    //cqll createTunnel repeatedly
+  }
+
+  public Tunnel createTunnel(Room r1, Room r2){
+    //Some function to get a border block from room 1 and room 2
+    //Tunnel a = new Tunnel(Block, Block);
+    //Construct the Tunnel
+    //return a;
+    //return Tunnel made
+  }
+
   public String toString(){
     String output = "|";
     for (int y = 0; y < length; y++){
