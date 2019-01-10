@@ -95,6 +95,7 @@ public class Game {
       System.exit(0);
     }
 
+    //Instantiate game outside of try since it wouldn't work inside it
     if (args.length == 1)
       game = new Game(args[0], width, length);
 
