@@ -55,6 +55,13 @@ public class Game {
   }
 
   public static void main(String[] args) {
+    //The game definitely needs at least 1 input to run, so this runs first.
+    if (args.length == 0) {
+      System.out.println("Please provide the name of a Pokemon, and optionally a seed.");
+      System.exit(0);
+    }
+
+    //Moved terminal creation code to the front b/c floor constructor used in Game constructor requires the terminal size.
     Terminal terminal = TerminalFacade.createTextTerminal();
     terminal.enterPrivateMode();
 
@@ -77,16 +84,9 @@ public class Game {
     Game game;
 
     try {
-      if (args.length == 1) {
-        name = args[0];
-        game = new Game(name, width, length);
-      }
-
-      else {
-        name = args[0];
+      //I don't want this to be try-ed in case the user only provides 1 input (which is valid)
+      if (args.length >= 2)
         seed = Integer.parseInt(args[1]);
-        game = new Game(name, seed, width, length);
-      }
     }
 
     catch (NumberFormatException e) {
@@ -95,11 +95,12 @@ public class Game {
       System.exit(0);
     }
 
-    catch (ArrayIndexOutOfBoundsException e) {
-      terminal.exitPrivateMode();
-      System.out.println("You need to provide the name of a Pokemon and a seed, in that order.");
-      System.exit(0);
-    }
+    //Instantiate game outside of try since it wouldn't work inside it
+    if (args.length == 1)
+      game = new Game(args[0], width, length);
+
+    else
+      game = new Game(args[0], Integer.parseInt(args[1]), width, length);
 
     //System.out.println(Arrays.deepToString(game.floor.getFloor()));
 
