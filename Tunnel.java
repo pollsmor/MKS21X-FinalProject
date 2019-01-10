@@ -59,7 +59,7 @@ public class Tunnel implements Explorable{
     //Can't have parallel tunnels that have length longer than 2
     // one block away from each other.
     // That would essentially be like creating a Room
-    if (length == 1 || (t.direction + this.direction) == 1)
+    if (length == 1 || (t.direction + this.direction) == 1){
       return false;
     }
     if (Math.abs(this.startBlock.getXcor()-t.startBlock.getXcor()) == 1||
@@ -67,17 +67,17 @@ public class Tunnel implements Explorable{
     return true;
   }
 
-  public boolean nextToRoom(Room){
-    if (length == 1)
+  public boolean nextToRoom(Block startBlock, Block endBlock, Room r){
+    if (length == 1){
       return false;
     }
-    if (Math.abs(this.startBlock.getXcor()-t.startBlock.getXcor()) == 1||
-        Math.abs(this.startBlock.getYcor()-t.startBlock.getYcor()) == 1||
-        Math.abs(this.endBlock.getXcor()-t.endBlock.getXcor()) == 1||
-        Math.abs(this.endBlock.getYcor()-t.endBlock.getYcor()) == 1
+    if (Math.abs(startBlock.getXcor()-startBlock.getXcor()) == 1||
+        Math.abs(startBlock.getYcor()-startBlock.getYcor()) == 1||
+        Math.abs(endBlock.getXcor()-endBlock.getXcor()) == 1||
+        Math.abs(endBlock.getYcor()-endBlock.getYcor()) == 1){
         //Above checks for it Tunnel would border a Room
-        //Check for if Tunnel passes through a Room
-        )
+      return false;
+    }
     return true;
   }
 }
