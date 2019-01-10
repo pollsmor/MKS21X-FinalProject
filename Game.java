@@ -102,8 +102,6 @@ public class Game {
     else
       game = new Game(args[0], Integer.parseInt(args[1]), width, length);
 
-    //System.out.println(Arrays.deepToString(game.floor.getFloor()));
-
     while (running) {
       terminal.moveCursor(x, y);
       //Applying background makes it look bad, can't see the symbol as easily
