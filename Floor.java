@@ -34,10 +34,6 @@ public class Floor{
     return floorNumber;
   }
 
-  public Floor getFloor() {
-    return
-  }
-
   public int getWidth(){
     return width;
   }

@@ -44,4 +44,8 @@ public class Game {
     //missions = new Mission(); //ArrayList to allow easy adding/removing
     seed = this.seed % 10000;
   }
+
+  public int getLevel() {
+    return level;
+  }
 }
