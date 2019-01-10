@@ -6,7 +6,7 @@ public class Floor{
   private int length;
   private Room[] roomsHere; //List of Rooms
   private int numRooms; //Number of successful Rooms
-  private Tunnels[] tunnelsHere; //List of total tunnels created
+  //private Tunnels[] tunnelsHere; //List of total tunnels created
   //private Mission[] missions; to be added later if we get to it
 
   //public Floor(int num, int terminal Width, int terminalLength)
@@ -46,40 +46,19 @@ public class Floor{
     int rooms = rnd.nextInt(3) + (width * length)/20;
     roomsHere = new Room[rooms];
     //System.out.println("Rooms: "+rooms);
-    int attempts = 100; //In case it's impossible to create all the rooms, have a set number of failed attempts possible
+    int attempts = 5000; //In case it's impossible to create all the rooms, have a set number of failed attempts possible
     //Using random, generate the xcors and ycors of top right Blocks and bottom left Blocks of the Rooms
-    //Minimum width of room: 4 | Max: 10
-    //Minimum length of room: 4 | Max: 10
+    //Minimum width of room: 4 | Max: 15
+    //Minimum length of room: 4 | Max: 15
     int startXcor, startYcor, endXcor, endYcor;
     int successfulRooms = 0; //Keep track of how many Rooms were successfully made
     boolean wasOverlap; //Keep track of whether or Room to be created overlaps with any other Room
     while (successfulRooms < rooms && attempts > 0){
-      startXcor = Math.abs(rnd.nextInt(width - 10));
-      endXcor = startXcor + rnd.nextInt(6) + 4;
-      startYcor = Math.abs(rnd.nextInt(length - 10));
-      endYcor = startYcor + rnd.nextInt(6) + 4;
+      startXcor = Math.abs(rnd.nextInt(width - 14));
+      endXcor = startXcor + rnd.nextInt(12) + 4;
+      startYcor = Math.abs(rnd.nextInt(length - 14));
+      endYcor = startYcor + rnd.nextInt(12) + 4;
       //System.out.println("startXcor: "+ startXcor +", startYcor: "+startYcor+", endXcor: "+endXcor+", endYcor: "+endYcor);
-      //In case either the endXcor or endYcor are >= width or length respectively, reduce them by the dimension as many times as it takes
-      /*int holder;
-      while (endXcor >= width){
-        endXcor = endXcor-width;
-        //In case the above makes starts > than ends, switch their values
-        if (startXcor>endXcor){
-          holder = startXcor;
-          startXcor = endXcor;
-          endXcor = holder;
-        }
-      }
-      while (endYcor >= length){
-        endYcor = endYcor-length;
-        //In case the above makes starts > than ends, switch their values
-        if (startYcor > endYcor){
-          holder = startYcor;
-          startYcor = endYcor;
-          endYcor = holder;
-        }
-      }
-      */
       wasOverlap = false;
       //Make sure that rooms don't overlap with each other
       //System.out.println("startXcor: "+ startXcor +", startYcor: "+startYcor+", endXcor: "+endXcor+", endYcor: "+endYcor);
@@ -114,30 +93,39 @@ public class Floor{
     //cqll createTunnel repeatedly
   }
 
-  public Tunnel createTunnel(Room r1, Room r2){
+  //public Tunnel createTunnel(Room r1, Room r2){
     //Some function to get a border block from room 1 and room 2
     //Tunnel a = new Tunnel(Block, Block);
     //Construct the Tunnel
     //return a;
     //return Tunnel made
-  }
+  //}
 
   public String toString(){
     String output = "|";
     for (int y = 0; y < length; y++){
       output += "-";
+      if (y != length - 1){
+        output += " ";
+      }
     }
     output += "|\n";
     for (int x = 0; x < width; x++){
       output+="|";
       for (int y = 0; y < length; y++){
         output+= blocksHere[x][y].getData();
+        if (y != length - 1){
+          output += " ";
+        }
       }
       output+="|\n";
     }
     output +="|";
     for (int y = 0; y < length; y++){
       output += "-";
+      if (y != length - 1){
+        output += " ";
+      }
     }
     output += "|\n";
     return output+"End of Floor";
