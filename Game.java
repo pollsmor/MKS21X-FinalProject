@@ -52,4 +52,8 @@ public class Game {
   public Floor getFloor() {
     return floor;
   }
+
+  public Mission getMission(int number) {
+    return missions[number];
+  }
 }
