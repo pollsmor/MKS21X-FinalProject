@@ -70,9 +70,11 @@ public class Floor{
         }
       }
       if (!wasOverlap){ //If there were no overlapping Rooms, create the Room
-        createRoom(startXcor, startYcor, endXcor, endYcor);
         roomsHere[successfulRooms]= createRoom(startXcor, startYcor, endXcor, endYcor);
         successfulRooms++;
+        //Connect to a room
+        //Create a tunnel
+        //Allow tunnels to pass through each other
       }
     }
     numRooms = successfulRooms;
@@ -90,10 +92,14 @@ public class Floor{
   }
 
   public void createTunnels(Room[] rooms){
-    //cqll createTunnel repeatedly
+    //call createTunnel repeatedly
   }
 
   //public Tunnel createTunnel(Room r1, Room r2){
+  /*
+  *Each tunnel is only in one direction and as such is assigned one direction: 0 is left-right, 1 is up-down
+  *Tunnels may intersect with other Tunnels
+  */
     //Some function to get a border block from room 1 and room 2
     //Tunnel a = new Tunnel(Block, Block);
     //Construct the Tunnel
