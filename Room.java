@@ -1,6 +1,7 @@
 public class Room implements Explorable{
   private boolean isExplored;
   private Block[][] blocksHere;
+  private Block[][] borderBlocks;
   private int startXcor, startYcor, endXcor, endYcor;
   private int width;
   private int length;
