@@ -55,6 +55,11 @@ public class Game {
   }
 
   public static void main(String[] args) {
+    if (args.length == 0) {
+      System.out.println("Please provide the name of a Pokemon, and optionally a seed.");
+      System.exit(0);
+    }
+
     Terminal terminal = TerminalFacade.createTextTerminal();
     terminal.enterPrivateMode();
 
@@ -77,16 +82,8 @@ public class Game {
     Game game;
 
     try {
-      if (args.length == 1) {
-        name = args[0];
-        game = new Game(name, width, length);
-      }
-
-      else {
-        name = args[0];
+      if (args.length >= 2)
         seed = Integer.parseInt(args[1]);
-        game = new Game(name, seed, width, length);
-      }
     }
 
     catch (NumberFormatException e) {
@@ -97,9 +94,15 @@ public class Game {
 
     catch (ArrayIndexOutOfBoundsException e) {
       terminal.exitPrivateMode();
-      System.out.println("You need to provide the name of a Pokemon and a seed, in that order.");
+      System.out.println("You need to provide the name of a Pokemon and optionally a seed, in that order.");
       System.exit(0);
     }
+
+    if (args.length == 1)
+      game = new Game(args[0], width, length);
+
+    else
+      game = new Game(args[0], Integer.parseInt(args[1]), width, length);
 
     //System.out.println(Arrays.deepToString(game.floor.getFloor()));
 
