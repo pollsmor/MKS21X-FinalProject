@@ -120,6 +120,6 @@ public class Floor{
       output += "-";
     }
     output += "|\n";
-    return output+"End of Floor";
+    return output; //no need for End of Floor?
   }
 }

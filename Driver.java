@@ -42,8 +42,8 @@ public class Driver {
 
     long tStart = System.currentTimeMillis();
     long lastSecond = 0;
-    int lastMinute = 0;
-    int lastHour = 0;
+    long lastMinute = 0;
+    long lastHour = 0;
 
     //I don't want this to be try-ed in case the user only provides 1 input (which is valid)
     if (args.length >= 2) {
@@ -90,14 +90,14 @@ public class Driver {
       Key key = terminal.readInput();
 
       if (!alive) {
-        putString(2, width, terminal,"You died. Would you like to respawn? (y/n)");
+        putString(0, width, terminal,"You died. Would you like to respawn? (y/n)");
         while (!alive) {
           Key key2 = terminal.readInput(); //if I'm in the if I can't read the first readInput, so I need a second one
           if (key2 != null) {
             //Do you want to respawn?
             if (key2.getCharacter() == 'y') {
               alive = true;                //Below is so I can replace the you died text:
-              putString(2, width, terminal, "                                          ");
+              putString(0, width, terminal, "                                          ");
             }
 
             //No, I don't want to respawn.
@@ -149,10 +149,10 @@ public class Driver {
       //Do even when no key is pressed:ßß
       long tEnd = System.currentTimeMillis();
       long millis = tEnd - tStart;
-      //putString(length - 40, width - 5, terminal, millis + "ms");
+      //putString(length - 16, width, terminal, millis + "ms");
       if (millis / 1000 > lastSecond) {
         lastSecond = millis / 1000; //One second has passed.
-        putString(length - 4, width, terminal, lastSecond + "s");
+        putString(length - 5, width, terminal, lastSecond + "s");
       }
     }
 
