@@ -48,4 +48,8 @@ public class Game {
   public int getLevel() {
     return level;
   }
+
+  public Floor getFloor() {
+    return floor;
+  }
 }
