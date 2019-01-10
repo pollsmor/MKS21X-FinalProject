@@ -53,7 +53,13 @@ public class Game {
     return floor;
   }
 
+  //Allows getting a single mission from the array
   public Mission getMission(int number) {
     return missions[number];
+  }
+
+  //Why a getSeed? Because the one provided for main isn't the final seed - it gets run through the constructor.
+  public int getSeed() {
+    return seed;
   }
 }
