@@ -28,10 +28,10 @@ public class Tunnel implements Explorable{
       length = xcor-end.getX();
     }
     //Getting the Orientation
-    if (start.getXcor() == end.getXcor()){
+    if (start.getX() == end.getX()){
       direction = 0;
     }
-    if (start.getYcor() == end.getYcor()){
+    if (start.getY() == end.getY()){
       direction = 1;
     }
     blocksHere = new Block[length];
@@ -73,19 +73,21 @@ public class Tunnel implements Explorable{
     //Can't have parallel tunnels that have length longer than 2
     // one block away from each other.
     // That would essentially be like creating a Room
-    int direction;
-    if (startBlock.getXcor() == endBlock.getXcor()){
+    int direction = 0;
+    if (startBlock.getX() == endBlock.getX()){
       direction = 0;
     }
-    if (startBlock.getYcor() == endBlock.getYcor()){
+    if (startBlock.getY() == endBlock.getY()){
       direction = 1;
     }
-    if (length == 1 || (t.direction + this.direction) == 1){
+    if (length == 1 || (direction + this.direction) == 1){
       return false;
     }
-    if (Math.abs(this.startBlock.getXcor()-startBlock.getXcor()) == 1||
-        Math.abs(this.startBlock.getYcor()-startBlock.getYcor()) == 1)
+    if (Math.abs(this.startBlock.getX()-startBlock.getX()) == 1||
+        Math.abs(this.startBlock.getY()-startBlock.getY()) == 1){
     return true;
+    }
+    return false;
   }
 
   //public boolean nextToRoom(Block startBlock, Block endBlock)
@@ -97,26 +99,26 @@ public class Tunnel implements Explorable{
     *        false if the Tunnel to be made is length 1 or doesn't intersect  or borderthe Room
   */
   public static boolean nextToRoom(Block startBlock, Block endBlock, Room r){
-    if (length == 1){
+    if (startBlock.equals(endBlock)){
       return false;
     }
-    int direction;
-    if (startBlock.getXcor() == endBlock.getXcor()){
+    int direction = 0;
+    if (startBlock.getX() == endBlock.getX()){
       direction = 0;
     }
-    if (startBlock.getYcor() == endBlock.getYcor()){
+    if (startBlock.getY() == endBlock.getY()){
       direction = 1;
     }
-    if ((Math.abs(startBlock.getXcor()-r.getStartXcor()) == 1 && direction == 0)||
-        (Math.abs(startBlock.getYcor()-r.getStartYcor()) == 1 && direction == 1)||
-        (Math.abs(endBlock.getXcor()-r.getEndXcor() == 1) && direction == 0)||
-        (Math.abs(endBlock.getYcor()-r.getEndYcor() == 1) && direction == 1)||
+    if ((Math.abs(startBlock.getX()-r.getStartXcor()) == 1 && direction == 0)||
+        (Math.abs(startBlock.getY()-r.getStartYcor()) == 1 && direction == 1)||
+        (Math.abs(endBlock.getX()-r.getEndXcor()) == 1 && direction == 0)||
+        (Math.abs(endBlock.getY()-r.getEndYcor()) == 1 && direction == 1)||
         //Above checks for if Tunnel would border a Room
         //Below checks for if Tunnel intersects with a Room
-        (r.getEndXcor() >= startBlock.getXcor())
-        && (r.getStartXcor() <= endBlock.getXcor())
-        && (r.getStartYcor()<=endBlock.getYcor())
-        && (r.getEndYcor >= startBlock.getYcor())){
+        (r.getEndXcor() >= startBlock.getX())
+        && (r.getStartXcor() <= endBlock.getX())
+        && (r.getStartYcor()<=endBlock.getY())
+        && (r.getEndYcor() >= startBlock.getY())){
       return true;
     }
     return false;
