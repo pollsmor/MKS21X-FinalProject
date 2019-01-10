@@ -106,3 +106,20 @@ Rachel:
   - Room.java
     - Success! tooClose functions properly!
     - Added comments to better show how tooClose() works
+    
+**Wednesday 1/9/19**
+
+Rachel:
+  - Floor.java
+    - Added fields to keep track of tunnels and successful rooms
+    - Added method headers for createTunnel and createTunnels (not sure about params yet tho)
+  - Tunnel.java
+    - Started nextToTunnel and nextToRoom functions... but have yet to be tested T-T
+    - Added documentation
+    - Added direction field to keep track of orientation
+    - eyyyyy it compiles but maybe doesn't work? :/
+  - Room.java
+    - Added getters for startXcor, startYcor, endXcor, endYcor
+    - Added documentation for toString()
+    - Added field Blocks[] borderBlocks in preparation for creating Tunnels
+      - Will chose a random borderBlock from one Room and try to make a series of Tunnels to connect with another Room's random borderBlock... but how is the question...
