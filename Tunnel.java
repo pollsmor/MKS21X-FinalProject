@@ -27,6 +27,13 @@ public class Tunnel implements Explorable{
     else{
       length = xcor-end.getX();
     }
+    //Getting the Orientation
+    if (start.getXcor() == end.getXcor()){
+      direction = 0;
+    }
+    if (start.getYcor() == end.getYcor()){
+      direction = 1;
+    }
     blocksHere = new Block[length];
     //Creating blocksHere with a loop
     for (int i = 0; i < length; i++){
@@ -55,29 +62,63 @@ public class Tunnel implements Explorable{
     //Requires input from the Player
   }
 
-  public boolean nextToTunnel(Tunnel t){
+  //public boolean nextToTunnel(Block startBlock, Block endBlock)
+  /**Checks if Tunnel to be made will be parallel and next to another Tunnel
+    *@param startBlock the topmost or leftmost Block of the Tunnel to be made
+    *@param endBlock the bottommost or rightmost Block of the Tunnel to be made
+    *@return true if the Tunnel to be made is 1 away and parallel to another Tunnel and longer than 1
+    *        false if the Tunnel to be made is length 1 or the directions of each Tunnel is differnt
+  */
+  public boolean nextToTunnel(Block startBlock, Block endBlock){
     //Can't have parallel tunnels that have length longer than 2
     // one block away from each other.
     // That would essentially be like creating a Room
+    int direction;
+    if (startBlock.getXcor() == endBlock.getXcor()){
+      direction = 0;
+    }
+    if (startBlock.getYcor() == endBlock.getYcor()){
+      direction = 1;
+    }
     if (length == 1 || (t.direction + this.direction) == 1){
       return false;
     }
-    if (Math.abs(this.startBlock.getXcor()-t.startBlock.getXcor()) == 1||
-        Math.abs(this.startBlock.getYcor()-t.startBlock.getYcor()) == 1)
+    if (Math.abs(this.startBlock.getXcor()-startBlock.getXcor()) == 1||
+        Math.abs(this.startBlock.getYcor()-startBlock.getYcor()) == 1)
     return true;
   }
 
-  public boolean nextToRoom(Block startBlock, Block endBlock, Room r){
+  //public boolean nextToRoom(Block startBlock, Block endBlock)
+  /**Checks if Tunnel to be made will be parallel and next to another Tunnel
+    *@param startBlock the topmost or leftmost Block of the Tunnel to be made
+    *@param endBlock the bottommost or rightmost Block of the Tunnel to be made
+
+    *@return true if the difference between the xcors and ycors is not 1 and the direction is different or Tunnel intrsects with a Rooms
+    *        false if the Tunnel to be made is length 1 or doesn't intersect  or borderthe Room
+  */
+  public static boolean nextToRoom(Block startBlock, Block endBlock, Room r){
     if (length == 1){
       return false;
     }
-    if (Math.abs(startBlock.getXcor()-startBlock.getXcor()) == 1||
-        Math.abs(startBlock.getYcor()-startBlock.getYcor()) == 1||
-        Math.abs(endBlock.getXcor()-endBlock.getXcor()) == 1||
-        Math.abs(endBlock.getYcor()-endBlock.getYcor()) == 1){
-        //Above checks for it Tunnel would border a Room
-      return false;
+    int direction;
+    if (startBlock.getXcor() == endBlock.getXcor()){
+      direction = 0;
     }
-    return true;
+    if (startBlock.getYcor() == endBlock.getYcor()){
+      direction = 1;
+    }
+    if ((Math.abs(startBlock.getXcor()-r.getStartXcor()) == 1 && direction == 0)||
+        (Math.abs(startBlock.getYcor()-r.getStartYcor()) == 1 && direction == 1)||
+        (Math.abs(endBlock.getXcor()-r.getEndXcor() == 1) && direction == 0)||
+        (Math.abs(endBlock.getYcor()-r.getEndYcor() == 1) && direction == 1)||
+        //Above checks for if Tunnel would border a Room
+        //Below checks for if Tunnel intersects with a Room
+        (r.getEndXcor() >= startBlock.getXcor())
+        && (r.getStartXcor() <= endBlock.getXcor())
+        && (r.getStartYcor()<=endBlock.getYcor())
+        && (r.getEndYcor >= startBlock.getYcor())){
+      return true;
+    }
+    return false;
   }
 }
