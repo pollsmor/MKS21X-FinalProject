@@ -135,6 +135,11 @@ public class Room implements Explorable{
 
     return (case1||case2||case3||case4);
   }
+
+  //public String isExplored()
+  /**Creates a String of the data of the Blocks in the Room
+    *@return a String of the data of the Blocks in the Room
+  */
   public String toString(){
     String output = "";
     for (int x = 0; x < width; x++){
@@ -169,5 +174,19 @@ public class Room implements Explorable{
     else{
       isExplored = false;
     }
+  }
+
+  //Getters
+  public int getStartXcor(){
+    return startXcor;
+  }
+  public int getStartYcor(){
+    return startYcor;
+  }
+  public int getEndXcor(){
+    return endXcor;
+  }
+  public int getEndYcor(){
+    return endYcor;
   }
 }
