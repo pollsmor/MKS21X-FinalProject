@@ -42,6 +42,8 @@ public class Driver {
 
     long tStart = System.currentTimeMillis();
     long lastSecond = 0;
+    int lastMinute = 0;
+    int lastHour = 0;
 
     //I don't want this to be try-ed in case the user only provides 1 input (which is valid)
     if (args.length >= 2) {
@@ -57,18 +59,22 @@ public class Driver {
     }
 
     String name = args[0];
-    int seed = Integer.parseInt(args[1]);
+    int seed;
     Game game;
-    boolean running = true;
-    boolean alive = true; //controls the inner while loop
 
     //Instantiate game outside of try since it wouldn't work inside it
     if (args.length == 1)
       game = new Game(name, width, length);
 
     else {
+      seed = Integer.parseInt(args[1]);
       game = new Game(name, seed, width, length);
     }
+
+    putString(0, 0, terminal, game.getFloor().toString());
+
+    boolean running = true;
+    boolean alive = true; //controls the inner while loop
 
     while (running) {
       terminal.moveCursor(x, y);
@@ -143,10 +149,10 @@ public class Driver {
       //Do even when no key is pressed:ßß
       long tEnd = System.currentTimeMillis();
       long millis = tEnd - tStart;
-      putString(1, 2, terminal, "Milliseconds since start of program: " + millis);
+      //putString(length - 40, width - 5, terminal, millis + "ms");
       if (millis / 1000 > lastSecond) {
         lastSecond = millis / 1000; //One second has passed.
-        putString(1, 3, terminal, "Seconds since start of program: " + lastSecond);
+        putString(length - 4, width, terminal, lastSecond + "s");
       }
     }
 

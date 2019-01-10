@@ -29,10 +29,12 @@ public class Game {
     player = new Player(name);
     enemies = new Enemy[12]; //random number
     level = 1;
-    floor = new Floor(1, terminalWidth, terminalLength);
+    floor = new Floor(1, terminalWidth/ 2, terminalLength / 2);
     //missions = new Mission(); //ArrayList to allow easy adding/removing
     Random randgen = new Random();
     seed = randgen.nextInt() % 10000; //arbitrary number, limit seeds to less than 10000
+
+    floor.createRooms(seed);
   }
 
   //Takes a seed
@@ -40,9 +42,11 @@ public class Game {
     player = new Player(name);
     enemies = new Enemy[12];
     level = 1;
-    floor = new Floor(1, terminalWidth, terminalLength);
+    floor = new Floor(1, terminalWidth / 2, terminalLength / 2);
     //missions = new Mission(); //ArrayList to allow easy adding/removing
     seed = this.seed % 10000;
+
+    floor.createRooms(seed);
   }
 
   public int getLevel() {
