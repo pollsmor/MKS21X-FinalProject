@@ -6,6 +6,7 @@ public class Floor{
   private int width;
   private int length;
   private Room[] roomsHere; //List of Rooms
+  //private int spawnX
 
   //public Floor(int num, int terminal Width, int terminalLength)
   /** Constructs a Floor based on the terminal width and length and assigns the floor a number

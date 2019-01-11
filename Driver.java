@@ -36,14 +36,9 @@ public class Driver {
     int width = terminalSize.getRows();
     int length = terminalSize.getColumns();
 
-    //Start in the bottom center
-    int x = length / 2;
-    int y = width - 2;
-
+    //Timer commands
     long tStart = System.currentTimeMillis();
     long lastSecond = 0;
-    long lastMinute = 0;
-    long lastHour = 0;
 
     //I don't want this to be try-ed in case the user only provides 1 input (which is valid)
     if (args.length >= 2) {
@@ -75,6 +70,9 @@ public class Driver {
 
     boolean running = true;
     boolean alive = true; //controls the inner while loop
+
+    int x = length / 2;
+    int y = width - 2;
 
     while (running) {
       terminal.moveCursor(x, y);
@@ -143,7 +141,7 @@ public class Driver {
           alive = false;
         }
 
-        putString(1, 1, terminal, key + "        "); //to clear leftover letters pad withspaces
+        //putString(1, 1, terminal, key + "        "); //to clear leftover letters pad withspaces
       }
 
       //Do even when no key is pressed:ßß
