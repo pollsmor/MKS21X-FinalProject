@@ -123,3 +123,9 @@ Rachel:
     - Added documentation for toString()
     - Added field Blocks[] borderBlocks in preparation for creating Tunnels
       - Will chose a random borderBlock from one Room and try to make a series of Tunnels to connect with another Room's random borderBlock... but how is the question...
+      
+Kevin: 
+- Instantiating the floor required moving the terminal creation commands to the front of main as the floor constructor requires the terminal width/length.
+- Turns out game wasn't even being insantiated properly. Can't do it in a try catch, so I moved the code outside of them. 
+- Worked out the logic allowing the aforementioned to work, such as tossing out the game if the args.length is less than 0, only trying the instantiation of seed if the length of args is >= 2 so it doesn't interfere with the case where the user only provides a name, and instantiating game after the try catch block since I am now 100% sure that the arguments work. 
+- Tomorrow I'll try and get the floor on screen, since I've gotten the instantiation of it down. 
