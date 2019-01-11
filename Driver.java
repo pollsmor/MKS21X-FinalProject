@@ -89,6 +89,7 @@ public class Driver {
       ++row;
     }
 
+    //Move one to the right and one below because toString adds a - and a | but the array doesn't know that
     ++row;
     ++col;
 
