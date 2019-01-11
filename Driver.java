@@ -71,7 +71,7 @@ public class Driver {
     boolean running = true;
     boolean alive = true; //controls the inner while loop
 
-    int x = length / 2;
+    int x = game.getFloor().getMap().length;
     int y = width - 2;
 
     while (running) {

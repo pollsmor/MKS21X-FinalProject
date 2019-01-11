@@ -26,6 +26,10 @@ public class Floor{
     }
   }
 
+  public Block[][] getMap() {
+    return blocksHere;
+  }
+
   //public int getFloorNumber()
   /**Returns the number of floors the Player has successfully passed
     *@return floorNumber: an int which represents the number of Floors played in the current Game
