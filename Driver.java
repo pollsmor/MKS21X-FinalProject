@@ -58,14 +58,21 @@ public class Driver {
     String name = args[0];
     int seed;
     Game game;
+    //This should really be in the random spawn generation section, but
+    //I need to define this outside the following if statements.
+    //The if statements distinguish between whether a seed is provided or not.
+    Random randgenCol;
 
     //Instantiate game outside of try since it wouldn't work inside it
-    if (args.length == 1)
+    if (args.length == 1) {
       game = new Game(name, width, length);
+      randgenCol = new Random();
+    }
 
     else {
       seed = Integer.parseInt(args[1]);
       game = new Game(name, seed, width, length);
+      randgenCol = new Random(seed); //always spawn in the same spot
     }
 
     //Print the game
@@ -77,7 +84,6 @@ public class Driver {
     //Random spawn generation
     int row = 0;
     int col = 0;
-    Random randgenCol = new Random();
     boolean spawnFound = false;
     while (!spawnFound) {
       col = Math.abs(randgenCol.nextInt() % (width * 3/4));
