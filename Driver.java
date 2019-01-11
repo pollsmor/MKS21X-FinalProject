@@ -68,17 +68,19 @@ public class Driver {
       game = new Game(name, seed, width, length);
     }
 
+    //Print the game
     putString(0, 0, terminal, game.getFloor().toString());
 
     boolean running = true;
     boolean alive = true; //controls the inner while loop
 
+    //Random spawn generation
     int row = 0;
     int col = 0;
     Random randgenCol = new Random();
     boolean spawnFound = false;
     while (!spawnFound) {
-      col = Math.abs(randgenCol.nextInt() % (width * 3/4 - 2));
+      col = Math.abs(randgenCol.nextInt() % (width * 3/4));
       if (game.getFloor().getBlock(row, col).getData() == 'R') {
         spawnFound = true;
         --row;
@@ -86,6 +88,9 @@ public class Driver {
 
       ++row;
     }
+
+    ++row;
+    ++col;
 
     while (running) {
       terminal.moveCursor(col, row);
