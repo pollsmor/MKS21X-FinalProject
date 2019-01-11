@@ -1,6 +1,7 @@
 public class Tunnel implements Explorable{
   private boolean isExplored;
   private Block[] blocksHere;
+  private Tunnels[] tunnelsHere; //A completed Tunnel will be made up of at least one smaller Tunnel, since a segment can only go in one direction
   private Block startBlock; //Note: coors will be less than or equal to endBlock
   private Block endBlock; //Note: coors will be larger than or equal to startBlock
   private int length; //How many blocks long is the Tunnel
