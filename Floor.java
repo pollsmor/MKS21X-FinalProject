@@ -30,6 +30,10 @@ public class Floor{
     return blocksHere;
   }
 
+  public Block getBlock(int row, int col) {
+    return blocksHere[row][col];
+  }
+
   //public int getFloorNumber()
   /**Returns the number of floors the Player has successfully passed
     *@return floorNumber: an int which represents the number of Floors played in the current Game

@@ -13,6 +13,8 @@ import com.googlecode.lanterna.input.InputProvider;
 import com.googlecode.lanterna.input.Key;
 import com.googlecode.lanterna.input.KeyMappingProfile;
 
+import java.util.Random;
+
 public class Driver {
   public static void putString(int r, int c, Terminal t, String s) {
     t.moveCursor(r, c);
@@ -71,11 +73,22 @@ public class Driver {
     boolean running = true;
     boolean alive = true; //controls the inner while loop
 
-    int x = game.getFloor().getMap().length;
-    int y = width - 2;
+    int row = 0;
+    int col = 0;
+    Random randgenCol = new Random();
+    boolean spawnFound = false;
+    while (!spawnFound) {
+      col = Math.abs(randgenCol.nextInt() % (width * 3/4 - 2));
+      if (game.getFloor().getBlock(row, col).getData() == 'R') {
+        spawnFound = true;
+        --row;
+      }
+
+      ++row;
+    }
 
     while (running) {
-      terminal.moveCursor(x, y);
+      terminal.moveCursor(col, row);
       //Applying background makes it look bad, can't see the symbol as easily
       //terminal.applyBackgroundColor(Terminal.Color.WHITE);
       terminal.applyForegroundColor(Terminal.Color.GREEN); //Green is nice, right?
@@ -114,27 +127,27 @@ public class Driver {
         }
 
         if (key.getKind() == Key.Kind.ArrowLeft) {
-          terminal.moveCursor(x, y);
+          terminal.moveCursor(col, row);
           terminal.putCharacter(' ');
-          --x;
+          --col;
         }
 
         if (key.getKind() == Key.Kind.ArrowRight) {
-          terminal.moveCursor(x, y);
+          terminal.moveCursor(col, row);
           terminal.putCharacter(' ');
-          ++x;
+          ++col;
         }
 
         if (key.getKind() == Key.Kind.ArrowUp) {
-          terminal.moveCursor(x, y);
+          terminal.moveCursor(col, row);
           terminal.putCharacter(' ');
-          --y;
+          --row;
         }
 
         if (key.getKind() == Key.Kind.ArrowDown) {
-          terminal.moveCursor(x, y);
+          terminal.moveCursor(col, row);
           terminal.putCharacter(' ');
-          ++y;
+          ++row;
         }
 
         if (key.getKind() == Key.Kind.Backspace) {
