@@ -140,3 +140,13 @@ Kevin:
 - Random spawning mechanism - spawns the character into a room, not blank space or anywhere inappropriate. 
 - Spawning can be set as well, if a seed is provided via a command-line argument.
 - Changed the xy coordinate system to a col-row coordinate system to conform overall with the rest of the program.
+
+Rachel:
+- Asked Mr. K about how to approach making Tunnels
+- Plan goes as follows (for now)
+  - Within createRooms in Floor.java right after a successful Room has been created, immediately connect a Room to another Room that already exists, if it is not the first Room to be constructed
+  - Tunnels may pass through Rooms, allowing for possibly, multiple Tunnels to pass through a single Room
+    - Ideas for more stages???
+    - Mode where each room only has one Tunnel to connect to a Room?
+    - Mode where visibility of Rooms and Tunnels depends on whether or not a Player is in that Room at the moment
+- In terms of coding, I haven't done anything major yet, but jotted down ideas on how to make Tunnels
