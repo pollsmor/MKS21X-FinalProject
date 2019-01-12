@@ -74,23 +74,34 @@ public class FloorDriver{
     System.out.println("Should trigger no Cases\n");
     */
 
-    //Testing nextToRoom
     //Testing constructor Tunnel(int startXcor, int startYcor, int newLength, boolean isHorizontal)
-    Tunnel tuna = new Tunnel(5, 5, 2, true);
-    System.out.println(tuna.toString());
-    System.out.println(tuna.getLength());
+    Tunnel tuna = new Tunnel(5, 5, 2, true, true);
+    System.out.println(tuna.toString()+"\n");
+    /*System.out.println(tuna.getLength());
     System.out.println(tuna.getStartBlock().toString());
-    System.out.println(tuna.getEndBlock().toString());
-    //Tunnel salmon = new Tunnel(9, 9, 5, false);
-    //System.out.println(salmon.toString());
+    System.out.println(tuna.getEndBlock().toString());*/
+    Tunnel salmon = new Tunnel(9, 9, 5, false, false);
+    System.out.println(salmon.toString()+"\n");
+
+    Tunnel tilapia = new Tunnel(10, 7, 4, true, false);
+    System.out.println(tilapia.toString() +"\n");
+
+    Tunnel cod = new Tunnel( 8, 2, 3, false, true);
+    System.out.println(cod.toString() +"\n");
+
+    Tunnel clownfish = new Tunnel (1, 1, 1, false, true);
+    System.out.println(clownfish.toString()+"\n");
+
     //Testing constructor Tunnel(Block start, Block end)
     Block starter = new Block(0,0,"Tunnel");
     Block ender = new Block(1,0,"Tunnel");
-    System.out.println(starter.getData());
+    //System.out.println(starter.getData());
     Tunnel fish = new Tunnel(starter, ender);
     System.out.println(fish.toString());
-    System.out.println(fish.getLength());
-    System.out.println(fish.getStartBlock().toString());
-    System.out.println(fish.getEndBlock().toString());
+    //System.out.println(fish.getLength());
+    //System.out.println(fish.getStartBlock().toString());
+    //System.out.println(fish.getEndBlock().toString());
+    //Testing nextToRoom
+
   }
 }
