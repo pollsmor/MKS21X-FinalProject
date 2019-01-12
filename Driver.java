@@ -100,12 +100,6 @@ public class Driver {
     ++col;
 
     while (running) {
-      if (col < 0)
-        col = 1;
-
-      if (row < 0)
-        row = 1;
-
       terminal.moveCursor(col, row);
       //Applying background makes it look bad, can't see the symbol as easily
       //terminal.applyBackgroundColor(Terminal.Color.WHITE);
@@ -139,8 +133,6 @@ public class Driver {
       }
 
       if (key != null) {
-        String lastDirection = "";
-
         if (key.getKind() == Key.Kind.Escape) {
           terminal.exitPrivateMode();
           System.exit(0);
@@ -148,7 +140,6 @@ public class Driver {
 
         if (key.getKind() == Key.Kind.ArrowLeft) {
           if (game.blockExists(col, row)) {
-            lastDirection = "left";
             terminal.moveCursor(col, row);
             terminal.putCharacter('R');
             --col;
@@ -157,7 +148,6 @@ public class Driver {
 
         if (key.getKind() == Key.Kind.ArrowRight) {
           if (game.blockExists(col, row)) {
-            lastDirection = "right";
             terminal.moveCursor(col, row);
             terminal.putCharacter('R');
             ++col;
@@ -166,7 +156,6 @@ public class Driver {
 
         if (key.getKind() == Key.Kind.ArrowUp) {
           if (game.blockExists(col, row)) {
-            lastDirection = "up";
             terminal.moveCursor(col, row);
             terminal.putCharacter('R');
             --row;
