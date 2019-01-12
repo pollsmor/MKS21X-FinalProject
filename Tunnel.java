@@ -7,26 +7,43 @@ public class Tunnel implements Explorable{
   private int length; //How many blocks long is the Tunnel
   private int direction; //Orientation of Tunnel: 0 is left=right, 1 is up-down
 
-  //public Tunnel(int startXcor, int startYcor, int length, boolean isHorizontal)
+  //public Tunnel(int startXcor, int startYcor, int length, boolean isHorizontal, boolean isStart)
   /**Creates a Tunnel given the coordinates of the Block representing the beginning of the Tunnel, the length of the Tunnel, and a boolean whether or not the Tunnel is horizontal or vertical
     *Precondition: start acoordinates are the coordinates of the topleftmost Block of the Tunnel to be made
     *@param startXcor is the int representing the start x-coordinate of the Tunnel to be made
     *@param endXcor is the int representing the start y-coordinate of the Tunnel to be made
     *@param newLength is the int representing the length of the Tunnel to be made
     *@param isHorizontal is a boolean representing whether or not the Tunnel to be made is left-right or top-bottom
+    *@param isStart is a boolean representing whether or not the coordinates given represent a startBlock or endBlock
   */
-  public Tunnel(int startXcor, int startYcor, int newLength, boolean isHorizontal){
-    Block start = new Block(startXcor, startYcor, "Tunnel");
-    Block end;
+  public Tunnel(int startXcor, int startYcor, int newLength, boolean isHorizontal, boolean isStart){
     length = newLength;
-    if (isHorizontal){ //same ycor
-      end = new Block(startXcor + length, startYcor, "Tunnel");
-      direction = 0; //Setting orientation to left-right
+    isExplored = false;
+    //Setting start and end blocks
+    Block start, end;
+    if (isStart){ //Coordinates given are of the startBlock
+      start = new Block(startXcor, startYcor, "Tunnel");
+      if (isHorizontal){ //same ycor
+        end = new Block(startXcor + length, startYcor, "Tunnel");
+        direction = 0; //Setting orientation to left-right
+      }
+      else{ //same xcor
+        end = new Block(startXcor, startYcor + length, "Tunnel");
+        direction = 1; //Setting orientation to top-bottom
+      }
     }
-    else{ //same xcor
-      end = new Block(startXcor, startYcor + length, "Tunnel");
-      direction = 1; //Setting orientation to top-bottom
+    else{ //Coordinates given are of the endBlock
+      end = new Block(startXcor,startYcor, "Tunnel");
+      if (isHorizontal){ //same ycor
+        start = new Block(startXcor - length, startYcor, "Tunnel");
+        direction = 0; //Setting orientation to left-right
+      }
+      else{ //same xcor
+        start = new Block(startXcor, startYcor - length, "Tunnel");
+        direction = 1; //Setting orientation to top-bottom
+      }
     }
+
     isExplored = false;
     //Setting start and end blocks
     startBlock = start;
