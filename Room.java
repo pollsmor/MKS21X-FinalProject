@@ -1,7 +1,7 @@
 public class Room implements Explorable{
   private boolean isExplored;
   private Block[][] blocksHere;
-  private Block[][] borderBlocks;
+  private Block[] borderBlocks; //List of Blocks on the outer perimeter of the Room
   private int startXcor, startYcor, endXcor, endYcor;
   private int width;
   private int length;
@@ -24,9 +24,17 @@ public class Room implements Explorable{
     endXcor = end.getX();
     endYcor = end.getY();
     blocksHere = new Block[width][length];
+    borderBlocks = new Block[2*width + 2* length - 2];
+    int indexBorderBlocks = 0;
     for (int x = 0; x < length; x++){
       for (int y = 0; y < width; y++){
         blocksHere[x][y] = new Block(xcor+x,ycor+y,"Room");
+        //If the xcors equal startXcor or endXcor or the ycors equal startYcor or endYcor, add it to borderBlocks list
+        if(blocksHere[x][y].getX()==startXcor || blocksHere[x][y].getY()==startYcor
+        || blocksHere[x][y].getX()==endXcor || blocksHere[x][y].getY()==endYcor){
+          borderBlocks[indexBorderBlocks] = blocksHere[x][y];
+          indexBorderBlocks++;
+        }
       }
     }
   }
@@ -47,9 +55,16 @@ public class Room implements Explorable{
     width = endXcor - startXcor;
     length = endYcor - startYcor;
     blocksHere = new Block[width][length];
+    int indexBorderBlocks = 0;
     for (int x = 0; x < width; x++){
       for (int y = 0; y < length; y++){
         blocksHere[x][y] = new Block(startXcor+x,startYcor+y,"Room");
+        //If the xcors equal startXcor or endXcor or the ycors equal startYcor or endYcor, add it to borderBlocks list
+        if(blocksHere[x][y].getX()==startXcor || blocksHere[x][y].getY()==startYcor
+        || blocksHere[x][y].getX()==endXcor || blocksHere[x][y].getY()==endYcor){
+          borderBlocks[indexBorderBlocks] = blocksHere[x][y];
+          indexBorderBlocks++;
+        }
       }
     }
   }
