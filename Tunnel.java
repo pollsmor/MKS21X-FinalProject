@@ -18,16 +18,16 @@ public class Tunnel implements Explorable{
   public Tunnel(int startXcor, int startYcor, int newLength, boolean isHorizontal){
     Block start = new Block(startXcor, startYcor, "Tunnel");
     Block end;
+    length = newLength;
     if (isHorizontal){ //same ycor
       end = new Block(startXcor + length, startYcor, "Tunnel");
       direction = 0; //Setting orientation to left-right
     }
     else{ //same xcor
-      end = new Block(startXcor, startYcor, "Tunnel");
+      end = new Block(startXcor, startYcor + length, "Tunnel");
       direction = 1; //Setting orientation to top-bottom
     }
     isExplored = false;
-    length = newLength;
     //Setting start and end blocks
     startBlock = start;
     endBlock = end;
@@ -36,7 +36,7 @@ public class Tunnel implements Explorable{
     if (direction == 0){
       blocksHere = new Block[1][length];
       for (int i = 0; i < length; i++){
-        blocksHere[0][i] = new Block(startXcor+1, startYcor, "Tunnel");
+        blocksHere[0][i] = new Block(startXcor+i, startYcor, "Tunnel");
       }
     }
     //If top-bottom, ycor changes
@@ -64,13 +64,13 @@ public class Tunnel implements Explorable{
     startBlock = start;
     endBlock = end;
     //Getting the length of the tunnel
-    //Length is one more than difference
     if (start.getX() == end.getX()){
-      length = ycor-end.getY() + 1;
+      length = end.getY()-ycor;
     }
     else{
-      length = xcor-end.getX() + 1;
+      length = end.getX()-xcor;
     }
+    length++;  //Length is one more than difference
     //Getting the Orientation
     if (start.getX() == end.getX()){
       direction = 0;
@@ -80,14 +80,18 @@ public class Tunnel implements Explorable{
     }
     //Creating blocksHere with a loop
     //If left-right, xcor changes
-    for (int i = 0; i < length; i++){
+    if (direction == 0){
       blocksHere = new Block[1][length];
-      blocksHere[0][i] = new Block(xcor+1, ycor, "Tunnel");
+      for (int i = 0; i < length; i++){
+        blocksHere[0][i] = new Block(xcor+i, ycor, "Tunnel");
+      }
     }
     //If top-bottom, ycor changes
-    for (int i = 0; i < length; i++){
+    else{
       blocksHere = new Block[length][1];
-      blocksHere[i][0] = new Block(xcor, ycor+i, "Tunnel");
+      for (int j = 0; j < length; j++){
+        blocksHere[j][0] = new Block(xcor, ycor+j, "Tunnel");
+      }
     }
   }
 
@@ -176,14 +180,44 @@ public class Tunnel implements Explorable{
   }
 
   //public String toString()
-  /*
-  String output = "";
-  for (int x = 0; x < width; x++){
-    for (int y = 0; y < length; y++){
-      output+= blocksHere[x][y].getData();
-    }
-    output+= "\n";
-  }
-  return output;
+  /**Creates a String of the data of the Blocks in the Tunnel
+    *@return a String of the data of the Blocks in the Tunnel
   */
+  public String toString(){
+    String output = "";
+    if (direction == 0){ //horizontal, so x changes
+      for (int i = 0; i < length; i++){
+        output+=blocksHere[0][i].getData();
+      }
+    }
+    //If top-bottom, ycor changes
+    else{ //vertical, so y changes
+      for (int i = 0; i < length; i++){
+        output+= blocksHere[i][0].getData();
+        if (i!= length-1){
+          output += "\n";
+        }
+      }
+    }
+    return output;
+  }
+
+  //Getters
+  public int getLength(){
+    return length;
+  }
+  public Block getStartBlock(){
+    return startBlock;
+  }
+  public Block getEndBlock(){
+    return endBlock;
+  }
+  public String getDirection(){
+    if (direction == 0){
+      return "Left-Right";
+    }
+    else{
+      return "Top-Bottom";
+    }
+  }
 }
