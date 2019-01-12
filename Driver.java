@@ -100,6 +100,12 @@ public class Driver {
     ++col;
 
     while (running) {
+      if (col < 0)
+        col = 1;
+
+      if (row < 0)
+        row = 1;
+
       terminal.moveCursor(col, row);
       //Applying background makes it look bad, can't see the symbol as easily
       //terminal.applyBackgroundColor(Terminal.Color.WHITE);
@@ -133,33 +139,46 @@ public class Driver {
       }
 
       if (key != null) {
+        String lastDirection = "";
+
         if (key.getKind() == Key.Kind.Escape) {
           terminal.exitPrivateMode();
           System.exit(0);
         }
 
         if (key.getKind() == Key.Kind.ArrowLeft) {
-          terminal.moveCursor(col, row);
-          terminal.putCharacter(' ');
-          --col;
+          if (game.blockExists(col, row)) {
+            lastDirection = "left";
+            terminal.moveCursor(col, row);
+            terminal.putCharacter('R');
+            --col;
+          }
         }
 
         if (key.getKind() == Key.Kind.ArrowRight) {
-          terminal.moveCursor(col, row);
-          terminal.putCharacter(' ');
-          ++col;
+          if (game.blockExists(col, row)) {
+            lastDirection = "right";
+            terminal.moveCursor(col, row);
+            terminal.putCharacter('R');
+            ++col;
+          }
         }
 
         if (key.getKind() == Key.Kind.ArrowUp) {
-          terminal.moveCursor(col, row);
-          terminal.putCharacter(' ');
-          --row;
+          if (game.blockExists(col, row)) {
+            lastDirection = "up";
+            terminal.moveCursor(col, row);
+            terminal.putCharacter('R');
+            --row;
+          }
         }
 
         if (key.getKind() == Key.Kind.ArrowDown) {
-          terminal.moveCursor(col, row);
-          terminal.putCharacter(' ');
-          ++row;
+          if (game.blockExists(col, row)) {
+            terminal.moveCursor(col, row);
+            terminal.putCharacter('R');
+            ++row;
+          }
         }
 
         if (key.getKind() == Key.Kind.Backspace) {
