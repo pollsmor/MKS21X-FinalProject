@@ -1,11 +1,46 @@
 public class Tunnel implements Explorable{
   private boolean isExplored;
   private Block[] blocksHere;
-  private Tunnels[] tunnelsHere; //A completed Tunnel will be made up of at least one smaller Tunnel, since a segment can only go in one direction
+  //private Tunnels[] tunnelsHere; //A completed Tunnel will be made up of at least one smaller Tunnel, since a segment can only go in one direction
   private Block startBlock; //Note: coors will be less than or equal to endBlock
   private Block endBlock; //Note: coors will be larger than or equal to startBlock
   private int length; //How many blocks long is the Tunnel
   private int direction; //Orientation of Tunnel: 0 is left=right, 1 is up-down
+
+  //public Tunnel(int startXcor, int startYcor, int length, boolean isHorizontal)
+  /**Creates a Tunnel given the coordinates of the Block representing the beginning of the Tunnel, the length of the Tunnel, and a boolean whether or not the Tunnel is horizontal or vertical
+    *Precondition: start acoordinates are the coordinates of the topleftmost Block of the Tunnel to be made
+    *@param startXcor is the int representing the start x-coordinate of the Tunnel to be made
+    *@param endXcor is the int representing the start y-coordinate of the Tunnel to be made
+    *@param newLength is the int representing the length of the Tunnel to be made
+    *@param isHorizontal is a boolean representing whether or not the Tunnel to be made is left-right or top-bottom
+  */
+  public Tunnel(int startXcor, int startYcor, int newLength, boolean isHorizontal){
+    Block start = new Block(startXcor, startYcor, "Tunnel");
+    Block end;
+    if (isHorizontal){ //same ycor
+      end = new Block(startXcor + length, startYcor, "Tunnel");
+      direction = 0; //Setting orientation to left-right
+    }
+    else{ //same xcor
+      end = new Block(startXcor, startYcor, "Tunnel");
+      direction = 1; //Setting orientation to top-bottom
+    }
+    isExplored = false;
+    length = newLength;
+    //Setting start and end blocks
+    startBlock = start;
+    endBlock = end;
+    blocksHere = new Block[length];
+    //If left-right, xcor changes
+    for (int i = 0; i < length; i++){
+      blocksHere[i] = new Block(startXcor+1, startYcor, "Tunnel");
+    }
+    //If top-bottom, ycor changes
+    for (int i = 0; i < length; i++){
+      blocksHere[i] = new Block(startXcor, startYcor+i, "Tunnel");
+    }
+  }
 
   //public Tunnel(Block start, Block end)
   /**Creates a Tunnel given two blocks (start, end) beginning with the start block and ending at the end block
@@ -22,11 +57,12 @@ public class Tunnel implements Explorable{
     startBlock = start;
     endBlock = end;
     //Getting the length of the tunnel
+    //Length is one more than difference
     if (start.getX() == end.getX()){
-      length = ycor-end.getY();
+      length = ycor-end.getY() + 1;
     }
     else{
-      length = xcor-end.getX();
+      length = xcor-end.getX() + 1;
     }
     //Getting the Orientation
     if (start.getX() == end.getX()){
@@ -37,10 +73,14 @@ public class Tunnel implements Explorable{
     }
     blocksHere = new Block[length];
     //Creating blocksHere with a loop
+    //If left-right, xcor changes
+    for (int i = 0; i < length; i++){
+      blocksHere[i] = new Block(xcor+1, ycor, "Tunnel");
+    }
+    //If top-bottom, ycor changes
     for (int i = 0; i < length; i++){
       blocksHere[i] = new Block(xcor, ycor+i, "Tunnel");
     }
-    length += 1; //Length is one more than difference
   }
 
   //public boolean isExplored()
