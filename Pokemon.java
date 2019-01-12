@@ -43,7 +43,7 @@ public abstract class Pokemon {
   }
 
   public boolean moveUp {
-
+    
   }
 
   public boolean moveDown {

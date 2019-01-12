@@ -86,8 +86,8 @@ public class Driver {
     int col = 0;
     boolean spawnFound = false;
     while (!spawnFound) {
-      col = Math.abs(randgenCol.nextInt() % (width * 3/4));
-      if (game.getFloor().getBlock(row, col).getData() == 'R') {
+      col = Math.abs(randgenCol.nextInt() % (width * 5/8));
+      if (game.blockExists(row, col)) {
         spawnFound = true;
         --row;
       }
