@@ -42,19 +42,19 @@ public abstract class Pokemon {
     return temp;
   }
 
-  public void moveUp {
-    
-  }
-
-  public void moveDown {
+  public boolean moveUp {
 
   }
 
-  public void moveLeft {
+  public boolean moveDown {
 
   }
 
-  public void moveRight {
+  public boolean moveLeft {
+
+  }
+
+  public boolean moveRight {
 
   }
 }
