@@ -15,10 +15,14 @@ public class Block implements Explorable{
     xcor = x;
     ycor = y;
     color = "black";
+    //Default data ' ' is for Wall
     data = ' ';
     //For testing purposes
     if (newType.equals("Room")){
       data = 'R';
+    }
+    if (newType.equals("Tunnel")){
+      data = 'T';
     }
     type = newType;
   }
