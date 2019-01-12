@@ -30,7 +30,7 @@ public class Floor{
     return blocksHere;
   }
 
-  public Block getBlock(int row, int col) {
+  public Block getBlock(int col, int row) {
     return blocksHere[row][col];
   }
 
