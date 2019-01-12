@@ -73,5 +73,24 @@ public class FloorDriver{
     System.out.println("\tResult: "+roomOriginal.tooClose(0,0,2,2)); //Should print false
     System.out.println("Should trigger no Cases\n");
     */
+
+    //Testing nextToRoom
+    //Testing constructor Tunnel(int startXcor, int startYcor, int newLength, boolean isHorizontal)
+    Tunnel tuna = new Tunnel(5, 5, 2, true);
+    System.out.println(tuna.toString());
+    System.out.println(tuna.getLength());
+    System.out.println(tuna.getStartBlock().toString());
+    System.out.println(tuna.getEndBlock().toString());
+    //Tunnel salmon = new Tunnel(9, 9, 5, false);
+    //System.out.println(salmon.toString());
+    //Testing constructor Tunnel(Block start, Block end)
+    Block starter = new Block(0,0,"Tunnel");
+    Block ender = new Block(1,0,"Tunnel");
+    System.out.println(starter.getData());
+    Tunnel fish = new Tunnel(starter, ender);
+    System.out.println(fish.toString());
+    System.out.println(fish.getLength());
+    System.out.println(fish.getStartBlock().toString());
+    System.out.println(fish.getEndBlock().toString());
   }
 }
