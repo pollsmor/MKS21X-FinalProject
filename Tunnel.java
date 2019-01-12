@@ -1,6 +1,6 @@
 public class Tunnel implements Explorable{
   private boolean isExplored;
-  private Block[] blocksHere;
+  private Block[][] blocksHere;
   //private Tunnels[] tunnelsHere; //A completed Tunnel will be made up of at least one smaller Tunnel, since a segment can only go in one direction
   private Block startBlock; //Note: coors will be less than or equal to endBlock
   private Block endBlock; //Note: coors will be larger than or equal to startBlock
@@ -31,14 +31,21 @@ public class Tunnel implements Explorable{
     //Setting start and end blocks
     startBlock = start;
     endBlock = end;
-    blocksHere = new Block[length];
     //If left-right, xcor changes
-    for (int i = 0; i < length; i++){
-      blocksHere[i] = new Block(startXcor+1, startYcor, "Tunnel");
+    //blocksHere is a horizontal array
+    if (direction == 0){
+      blocksHere = new Block[1][length];
+      for (int i = 0; i < length; i++){
+        blocksHere[0][i] = new Block(startXcor+1, startYcor, "Tunnel");
+      }
     }
     //If top-bottom, ycor changes
-    for (int i = 0; i < length; i++){
-      blocksHere[i] = new Block(startXcor, startYcor+i, "Tunnel");
+    //blocksHere is a vertical array
+    if (direction == 1){
+      blocksHere = new Block[length][1];
+      for (int i = 0; i < length; i++){
+        blocksHere[i][0] = new Block(startXcor, startYcor+i, "Tunnel");
+      }
     }
   }
 
@@ -71,15 +78,16 @@ public class Tunnel implements Explorable{
     if (start.getY() == end.getY()){
       direction = 1;
     }
-    blocksHere = new Block[length];
     //Creating blocksHere with a loop
     //If left-right, xcor changes
     for (int i = 0; i < length; i++){
-      blocksHere[i] = new Block(xcor+1, ycor, "Tunnel");
+      blocksHere = new Block[1][length];
+      blocksHere[0][i] = new Block(xcor+1, ycor, "Tunnel");
     }
     //If top-bottom, ycor changes
     for (int i = 0; i < length; i++){
-      blocksHere[i] = new Block(xcor, ycor+i, "Tunnel");
+      blocksHere = new Block[length][1];
+      blocksHere[i][0] = new Block(xcor, ycor+i, "Tunnel");
     }
   }
 
@@ -96,8 +104,10 @@ public class Tunnel implements Explorable{
   /** Sets isExplored of all Blocks in this segment of Tunnel to true
   */
   public void setVisibility(){
-    for (int i = 0; i < blocksHere.length; i ++){
-      blocksHere[i].setVisibility();
+    for (int x = 0; x < blocksHere.length; x++){
+      for (int y = 0; x < blocksHere[x].length; y++){
+        blocksHere[x][y].setVisibility();
+      }
     }
     //To be edited later such that only the next block will be visible, not the whole tunnel
     //Requires input from the Player
@@ -164,4 +174,16 @@ public class Tunnel implements Explorable{
     }
     return false;
   }
+
+  //public String toString()
+  /*
+  String output = "";
+  for (int x = 0; x < width; x++){
+    for (int y = 0; y < length; y++){
+      output+= blocksHere[x][y].getData();
+    }
+    output+= "\n";
+  }
+  return output;
+  */
 }
