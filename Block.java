@@ -71,6 +71,15 @@ public class Block implements Explorable{
   public char getData(){
     return data;
   }
+
+  public String setType(String newType){
+    String oldType = type;
+    type = newType;
+    if (type == "Opening"){
+      data = '0';
+    }
+    return oldType;
+  }
 /* Spawns
   public void spawnObjective() {
     objectiveHere = true;
