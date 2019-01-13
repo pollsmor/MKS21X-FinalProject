@@ -137,27 +137,27 @@ public class Floor{
     String output = "|";
     for (int y = 0; y < length; y++){
       output += "-";
-      if (y != length - 1){
-        output += " ";
-      }
+      //if (y != length - 1){
+        //output += " ";
+      //}
     }
     output += "|\n";
     for (int x = 0; x < width; x++){
       output+="|";
       for (int y = 0; y < length; y++){
         output+= blocksHere[x][y].getData();
-        if (y != length - 1){
-          output += " ";
-        }
+        //if (y != length - 1){
+        //  output += " ";
+        //}
       }
       output+="|\n";
     }
     output +="|";
     for (int y = 0; y < length; y++){
       output += "-";
-      if (y != length - 1){
-        output += " ";
-      }
+      //if (y != length - 1){
+      //  output += " ";
+      //}
     }
     output += "|\n";
     return output; //no need for End of Floor?
