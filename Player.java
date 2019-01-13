@@ -26,4 +26,8 @@ public class Player extends Pokemon {
   public int getXP() {
     return xp;
   }
+
+  public int getMoney() {
+    return money;
+  }
 }
