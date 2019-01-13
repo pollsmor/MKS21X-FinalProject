@@ -82,10 +82,13 @@ public class Driver {
       randgenRow = new Random(seed + 2);
     }
 
-    //Print the game
+    String green = "\u001B[32m";
+    String resetColor = "\u001B[0m";
+
+    //Print the game's UI elements
     putString(0, 0, terminal, game.getFloor().toStringClean());
     putString(length - 17, 0, terminal, "Area: ");
-    putString(length - 17, 1, terminal, game.getPlayer().getName());
+    putString(length - 17, 1, terminal, "" + green + game.getPlayer().getName() + resetColor);
     putString(length - 17, 2, terminal, "----------");
     putString(length - 17, 3, terminal, "HP: ");
     putString(length - 17, width - 1, terminal, "Time: ");
