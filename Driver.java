@@ -99,6 +99,8 @@ public class Driver {
     ++row;
     ++col;
 
+    String lastKey = "";
+
     while (running) {
       terminal.moveCursor(col, row);
       //Applying background makes it look bad, can't see the symbol as easily
@@ -139,7 +141,7 @@ public class Driver {
         }
 
         if (key.getKind() == Key.Kind.ArrowLeft) {
-          if (game.blockExists(col, row)) {
+          if (game.blockExists(col - 1, row)) {
             terminal.moveCursor(col, row);
             terminal.putCharacter('R');
             --col;
@@ -147,7 +149,7 @@ public class Driver {
         }
 
         if (key.getKind() == Key.Kind.ArrowRight) {
-          if (game.blockExists(col, row)) {
+          if (game.blockExists(col + 1, row)) {
             terminal.moveCursor(col, row);
             terminal.putCharacter('R');
             ++col;
@@ -155,7 +157,7 @@ public class Driver {
         }
 
         if (key.getKind() == Key.Kind.ArrowUp) {
-          if (game.blockExists(col, row)) {
+          if (game.blockExists(col, row - 1)) {
             terminal.moveCursor(col, row);
             terminal.putCharacter('R');
             --row;
@@ -163,11 +165,13 @@ public class Driver {
         }
 
         if (key.getKind() == Key.Kind.ArrowDown) {
-          if (game.blockExists(col, row)) {
+          if (game.blockExists(col, row + 1)) {
             terminal.moveCursor(col, row);
             terminal.putCharacter('R');
             ++row;
           }
+
+          lastKey = "down";
         }
 
         if (key.getKind() == Key.Kind.Backspace) {
