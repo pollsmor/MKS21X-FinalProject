@@ -32,6 +32,10 @@ public abstract class Pokemon {
     }
   }
 
+  public int getLevel() {
+    return level;
+  }
+
   public int getHP() {
     return currentHP;
   }
