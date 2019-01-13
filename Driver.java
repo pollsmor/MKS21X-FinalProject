@@ -135,47 +135,56 @@ public class Driver {
         }
 
         if (key.getKind() == Key.Kind.ArrowLeft) {
-          if (game.canMoveHere(col, row)) {
+          if (game.canMoveHere(col - 1, row)) {
             terminal.moveCursor(col, row);
             terminal.putCharacter('R');
             --col;
           }
 
-          if (col == -1)
+          else {
+            putString(col, row, terminal, " ");
             ++col;
+          }
         }
 
         if (key.getKind() == Key.Kind.ArrowRight) {
-          if (game.canMoveHere(col, row)) {
+          if (game.canMoveHere(col + 1, row)) {
             terminal.moveCursor(col, row);
             terminal.putCharacter('R');
             ++col;
           }
 
-          if (col == length)
+          else {
+            putString(col, row, terminal, " ");
             --col;
+          }
         }
 
         if (key.getKind() == Key.Kind.ArrowUp) {
-          if (game.canMoveHere(col, row)) {
-            terminal.moveCursor(col, row);
-            terminal.putCharacter('R');
-            --row;
-          }
+          if (row != 0)
+            if (game.canMoveHere(col, row - 1)) {
+              terminal.moveCursor(col, row);
+              terminal.putCharacter('R');
+              --row;
+            }
 
-          if (row == -1)
+          else {
+            putString(col, row, terminal, " ");
             ++row;
+          }
         }
 
         if (key.getKind() == Key.Kind.ArrowDown) {
-          if (game.canMoveHere(col, row)) {
+          if (game.canMoveHere(col, row + 1)) {
             terminal.moveCursor(col, row);
             terminal.putCharacter('R');
             ++row;
           }
 
-          if (row == width)
+          else {
+            putString(col, row, terminal, " ");
             --row;
+          }
         }
       }
 
