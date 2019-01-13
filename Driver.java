@@ -81,6 +81,7 @@ public class Driver {
 
     boolean running = true;
     boolean alive = true; //controls the inner while loop
+    String lastKey = "";
 
     //Random spawn generation
     int col = 0;
@@ -134,27 +135,47 @@ public class Driver {
         }
 
         if (key.getKind() == Key.Kind.ArrowLeft) {
-          terminal.moveCursor(col, row);
-          terminal.putCharacter('R');
-          --col;
+          if (game.canMoveHere(col, row)) {
+            terminal.moveCursor(col, row);
+            terminal.putCharacter('R');
+            --col;
+          }
+
+          if (col == -1)
+            ++col;
         }
 
         if (key.getKind() == Key.Kind.ArrowRight) {
-          terminal.moveCursor(col, row);
-          terminal.putCharacter('R');
-          ++col;
+          if (game.canMoveHere(col, row)) {
+            terminal.moveCursor(col, row);
+            terminal.putCharacter('R');
+            ++col;
+          }
+
+          if (col == length)
+            --col;
         }
 
         if (key.getKind() == Key.Kind.ArrowUp) {
-          terminal.moveCursor(col, row);
-          terminal.putCharacter('R');
-          --row;
+          if (game.canMoveHere(col, row)) {
+            terminal.moveCursor(col, row);
+            terminal.putCharacter('R');
+            --row;
+          }
+
+          if (row == -1)
+            ++row;
         }
 
         if (key.getKind() == Key.Kind.ArrowDown) {
-          terminal.moveCursor(col, row);
-          terminal.putCharacter('R');
-          ++row;
+          if (game.canMoveHere(col, row)) {
+            terminal.moveCursor(col, row);
+            terminal.putCharacter('R');
+            ++row;
+          }
+
+          if (row == width)
+            --row;
         }
       }
 
