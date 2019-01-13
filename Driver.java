@@ -30,10 +30,10 @@ public class Driver {
       System.exit(0);
     }
 
+    //Terminal creation commands
     Terminal terminal = TerminalFacade.createTextTerminal();
     terminal.enterPrivateMode();
     terminal.setCursorVisible(false);
-
     TerminalSize terminalSize = terminal.getTerminalSize();
     int width = terminalSize.getRows();
     int length = terminalSize.getColumns();
@@ -95,14 +95,8 @@ public class Driver {
       ++row;
     }
 
-    //Move one to the right and one below because toString adds a - and a | but the array doesn't know that
-    ++row;
-    ++col;
-
     while (running) {
       terminal.moveCursor(col, row);
-      //Applying background makes it look bad, can't see the symbol as easily
-      //terminal.applyBackgroundColor(Terminal.Color.WHITE);
       terminal.applyForegroundColor(Terminal.Color.GREEN); //Green is nice, right?
       terminal.applySGR(Terminal.SGR.ENTER_UNDERLINE);
       terminal.putCharacter('\u04dd'); //was '\u00a4'
@@ -140,39 +134,32 @@ public class Driver {
 
         if (key.getKind() == Key.Kind.ArrowLeft) {
           terminal.moveCursor(col, row);
-          terminal.putCharacter(' ');
+          terminal.putCharacter('R');
           --col;
         }
 
         if (key.getKind() == Key.Kind.ArrowRight) {
           terminal.moveCursor(col, row);
-          terminal.putCharacter(' ');
+          terminal.putCharacter('R');
           ++col;
         }
 
         if (key.getKind() == Key.Kind.ArrowUp) {
           terminal.moveCursor(col, row);
-          terminal.putCharacter(' ');
+          terminal.putCharacter('R');
           --row;
         }
 
         if (key.getKind() == Key.Kind.ArrowDown) {
           terminal.moveCursor(col, row);
-          terminal.putCharacter(' ');
+          terminal.putCharacter('R');
           ++row;
         }
-
-        if (key.getKind() == Key.Kind.Backspace) {
-          alive = false;
-        }
-
-        //putString(1, 1, terminal, key + "        "); //to clear leftover letters pad withspaces
       }
 
       //Do even when no key is pressed:ßß
       long tEnd = System.currentTimeMillis();
       long millis = tEnd - tStart;
-      //putString(length - 16, width, terminal, millis + "ms");
       if (millis / 1000 > lastSecond) {
         lastSecond = millis / 1000; //One second has passed.
         putString(length - 5, width, terminal, lastSecond + "s");
