@@ -166,4 +166,20 @@ public class Floor{
   public Block[][] getBlocksHere(){
     return blocksHere;
   }
+
+  public static String toStringBlocks(Block[][] b){
+    String output = "";
+    for (int i = 0; i < b.length; i++){
+      for (int j = 0; j < b[i].length; j++){
+        output += b[i][j].getData();
+        if (i!=b[i].length - 1){
+          output += ", ";
+        }
+      }
+      if (i!=b.length - 1){
+        output += "\n";
+      }
+    }
+    return output;
+  }
 }
