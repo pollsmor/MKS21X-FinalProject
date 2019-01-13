@@ -30,4 +30,8 @@ public class Player extends Pokemon {
   public int getMoney() {
     return money;
   }
+
+  public int getScore() {
+    return score;
+  }
 }
