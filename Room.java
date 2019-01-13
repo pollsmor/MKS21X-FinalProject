@@ -225,6 +225,8 @@ public class Room implements Explorable{
     }
     Block thisBlock = pThis.get(rnd.nextInt(pThis.size()));
     thisBlock.setType("Opening");
+    //Changing the Block in floor to Opening
+
     floor.getBlocksHere()[thisBlock.getX()][thisBlock.getY()] = thisBlock;
     //Getting a random borderBlock of theChosenOne
     //Note: sometimes its impossible to choose a certain Block
@@ -248,6 +250,8 @@ public class Room implements Explorable{
     }
     Block TCO = pThis.get(rnd.nextInt(pThis.size()));
     TCO.setType("Opening");
+    //Changing the Block in floor to Opening
+    
     floor.getBlocksHere()[thisBlock.getX()][thisBlock.getY()] = TCO;
     //Now create a Tunnel from Block thisBlock to Block TCO
     //Finding distances between thisBlock and TCO
@@ -446,10 +450,6 @@ public class Room implements Explorable{
         }
       }
     }
-
-    //Now select Blocks in between them, only changing one coordinate at a time
-
-    //Run createTunnel multiple times
     return true;
   }
 
