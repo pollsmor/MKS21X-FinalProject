@@ -85,6 +85,7 @@ public class Driver {
     //Print the game
     putString(0, 0, terminal, game.getFloor().toStringClean());
     putString(length - 10, 0, terminal, "HP: ");
+    putString(length - 12, 1, terminal, "Seed: " + game.getSeed());
 
     boolean running = true;
     boolean alive = true; //controls the inner while loop
