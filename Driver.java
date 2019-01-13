@@ -30,18 +30,6 @@ public class Driver {
       System.exit(0);
     }
 
-    Terminal terminal = TerminalFacade.createTextTerminal();
-    terminal.enterPrivateMode();
-    terminal.setCursorVisible(false);
-
-    TerminalSize terminalSize = terminal.getTerminalSize();
-    int width = terminalSize.getRows();
-    int length = terminalSize.getColumns();
-
-    //Timer commands
-    long tStart = System.currentTimeMillis();
-    long lastSecond = 0;
-
     //I don't want this to be try-ed in case the user only provides 1 input (which is valid)
     if (args.length >= 2) {
       try {
@@ -49,30 +37,41 @@ public class Driver {
       }
 
       catch (NumberFormatException e) {
-        terminal.exitPrivateMode();
         System.out.println("Seeds can only be integers.");
         System.exit(0);
       }
     }
 
+    //Timer commands
+    long tStart = System.currentTimeMillis();
+    long lastSecond = 0;
+
+    //Terminal creation commands
+    Terminal terminal = TerminalFacade.createTextTerminal();
+    terminal.enterPrivateMode();
+    terminal.setCursorVisible(false);
+    TerminalSize terminalSize = terminal.getTerminalSize();
+    int width = terminalSize.getRows();
+    int length = terminalSize.getColumns();
+
     String name = args[0];
     int seed;
     Game game;
-    //This should really be in the random spawn generation section, but
-    //I need to define this outside the following if statements.
-    //The if statements distinguish between whether a seed is provided or not.
     Random randgenCol;
+    Random randgenRow;
 
     //Instantiate game outside of try since it wouldn't work inside it
     if (args.length == 1) {
       game = new Game(name, width, length);
       randgenCol = new Random();
+      randgenRow = new Random();
     }
 
     else {
       seed = Integer.parseInt(args[1]);
       game = new Game(name, seed, width, length);
       randgenCol = new Random(seed); //always spawn in the same spot
+      randgenRow = new Random(seed);
     }
 
     //Print the game
@@ -82,29 +81,19 @@ public class Driver {
     boolean alive = true; //controls the inner while loop
 
     //Random spawn generation
-    int row = 0;
     int col = 0;
+    int row = 0;
     boolean spawnFound = false;
     while (!spawnFound) {
-      col = Math.abs(randgenCol.nextInt() % (width * 3/4));
-      if (game.blockExists(col, row)) {
+      col = Math.abs(randgenCol.nextInt() % (length * 3/4));
+      row = Math.abs(randgenRow.nextInt() % (width * 3/4));
+      if (game.getFloor().getBlock(col, row).getData() == 'R') {
         spawnFound = true;
-        --row;
       }
-
-      ++row;
     }
-
-    //Move one to the right and one below because toString adds a - and a | but the array doesn't know that
-    ++row;
-    ++col;
-
-    String lastKey = "";
 
     while (running) {
       terminal.moveCursor(col, row);
-      //Applying background makes it look bad, can't see the symbol as easily
-      //terminal.applyBackgroundColor(Terminal.Color.WHITE);
       terminal.applyForegroundColor(Terminal.Color.GREEN); //Green is nice, right?
       terminal.applySGR(Terminal.SGR.ENTER_UNDERLINE);
       terminal.putCharacter('\u04dd'); //was '\u00a4'
@@ -141,50 +130,33 @@ public class Driver {
         }
 
         if (key.getKind() == Key.Kind.ArrowLeft) {
-          if (game.blockExists(col - 1, row) && col != 0) {
-            terminal.moveCursor(col, row);
-            terminal.putCharacter('R');
-            --col;
-          }
+          terminal.moveCursor(col, row);
+          terminal.putCharacter('R');
+          --col;
         }
 
         if (key.getKind() == Key.Kind.ArrowRight) {
-          if (game.blockExists(col + 1, row) && col != length) {
-            terminal.moveCursor(col, row);
-            terminal.putCharacter('R');
-            ++col;
-          }
+          terminal.moveCursor(col, row);
+          terminal.putCharacter('R');
+          ++col;
         }
 
         if (key.getKind() == Key.Kind.ArrowUp) {
-          if (game.blockExists(col, row - 1) && row != 0) {
-            terminal.moveCursor(col, row);
-            terminal.putCharacter('R');
-            --row;
-          }
+          terminal.moveCursor(col, row);
+          terminal.putCharacter('R');
+          --row;
         }
 
         if (key.getKind() == Key.Kind.ArrowDown) {
-          if (game.blockExists(col, row + 1) && row != width) {
-            terminal.moveCursor(col, row);
-            terminal.putCharacter('R');
-            ++row;
-          }
-
-          lastKey = "down";
+          terminal.moveCursor(col, row);
+          terminal.putCharacter('R');
+          ++row;
         }
-
-        if (key.getKind() == Key.Kind.Backspace) {
-          alive = false;
-        }
-
-        //putString(1, 1, terminal, key + "        "); //to clear leftover letters pad withspaces
       }
 
       //Do even when no key is pressed:ßß
       long tEnd = System.currentTimeMillis();
       long millis = tEnd - tStart;
-      //putString(length - 16, width, terminal, millis + "ms");
       if (millis / 1000 > lastSecond) {
         lastSecond = millis / 1000; //One second has passed.
         putString(length - 5, width, terminal, lastSecond + "s");

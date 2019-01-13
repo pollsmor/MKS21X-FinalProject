@@ -111,24 +111,16 @@ public class Floor{
     return a;
   }
 
-  public String toString(){
-    String output = "|";
-    for (int y = 0; y < length; y++){
-      output += "-";
+  public String toString() {
+    String output = "";
+
+    for (int i = 0; i < width; ++i) {
+      for (int j = 0; j < length; ++j)
+        output += blocksHere[i][j].getData();
+
+      output += '\n';
     }
-    output += "|\n";
-    for (int x = 0; x < width; x++){
-      output+="|";
-      for (int y = 0; y < length; y++){
-        output+= blocksHere[x][y].getData();
-      }
-      output+="|\n";
-    }
-    output +="|";
-    for (int y = 0; y < length; y++){
-      output += "-";
-    }
-    output += "|\n";
-    return output; //no need for End of Floor?
+
+    return output;
   }
 }
