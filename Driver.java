@@ -92,6 +92,14 @@ public class Driver {
     putString(length - 17, 1, terminal, green + game.getPlayer().getName() + resetColor);
     putString(length - 17, 2, terminal, "----------");
     putString(length - 17, 3, terminal, red + "HP: " + resetColor);
+    putString(length - 17, 4, terminal, "LVL: ");
+    putString(length - 17, 5, terminal, "ATK: ");
+    putString(length - 17, 6, terminal, "DEF: ");
+    putString(length - 17, 7, terminal, "----------");
+    putString(length - 17, 4, terminal, "HNGR: ");
+    putString(length - 17, 4, terminal, "Money: ");
+    putString(length - 17, 4, terminal, "XP: ");
+    putString(length - 17, 4, terminal, "Score: ");
     putString(length - 17, width - 1, terminal, "Time: ");
     putString(length - 17, width - 2, terminal, "Seed: " + game.getSeed());
 
@@ -193,6 +201,9 @@ public class Driver {
       //Do even when no key is pressed:ßß
       putString(length - 10, 0, terminal, "" + game.getLevel());
       putString(length - 10, 3, terminal, red + game.getPlayer().getHP() + resetColor);
+      putString(length - 10, 4, terminal, "" + game.getPlayer().getLevel());
+      putString(length - 10, 5, terminal, "" + game.getPlayer().getAttack());
+      putString(length - 10, 6, terminal, "" + game.getPlayer().getDefense());
 
       long tEnd = System.currentTimeMillis();
       long millis = tEnd - tStart;
