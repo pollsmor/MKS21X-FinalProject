@@ -1,7 +1,9 @@
+import java.util.ArrayList;
+import java.util.Random;
 public class Room implements Explorable{
   private boolean isExplored;
   private Block[][] blocksHere;
-  private Block[][] borderBlocks;
+  private Block[] borderBlocks; //List of Blocks on the outer perimeter of the Room
   private int startXcor, startYcor, endXcor, endYcor;
   private int width;
   private int length;
@@ -24,9 +26,17 @@ public class Room implements Explorable{
     endXcor = end.getX();
     endYcor = end.getY();
     blocksHere = new Block[width][length];
+    borderBlocks = new Block[2*width + 2* length - 2];
+    int indexBorderBlocks = 0;
     for (int x = 0; x < length; x++){
       for (int y = 0; y < width; y++){
         blocksHere[x][y] = new Block(xcor+x,ycor+y,"Room");
+        //If the xcors equal startXcor or endXcor or the ycors equal startYcor or endYcor, add it to borderBlocks list
+        if(blocksHere[x][y].getX()==startXcor || blocksHere[x][y].getY()==startYcor
+        || blocksHere[x][y].getX()==endXcor || blocksHere[x][y].getY()==endYcor){
+          borderBlocks[indexBorderBlocks] = blocksHere[x][y];
+          indexBorderBlocks++;
+        }
       }
     }
   }
@@ -47,9 +57,16 @@ public class Room implements Explorable{
     width = endXcor - startXcor;
     length = endYcor - startYcor;
     blocksHere = new Block[width][length];
+    borderBlocks = new Block[2*width + 2* length - 2];
+    int indexBorderBlocks = 0;
     for (int x = 0; x < width; x++){
       for (int y = 0; y < length; y++){
         blocksHere[x][y] = new Block(startXcor+x,startYcor+y,"Room");
+        //If the xcors equal startXcor or endXcor or the ycors equal startYcor or endYcor, add it to borderBlocks list
+        if (x == 0 || y== 0 || x == width-1 || y==length-1){
+          borderBlocks[indexBorderBlocks] = blocksHere[x][y];
+          indexBorderBlocks++;
+        }
       }
     }
   }
@@ -137,6 +154,117 @@ public class Room implements Explorable{
     return (case1||case2||case3||case4);
   }
 
+  //public boolean connectRooms(Room theChosenOne)
+  /**Given two Rooms, will connect them with a Tunnel
+    *@param theChosenOne is a Room from Floor's roomsHere to connect to
+    *@return whether or not the connection was successful
+  */
+  public boolean connectRooms(Room theChosenOne, int seed){
+    boolean above = false;
+    boolean left = false;
+    boolean below = false;
+    boolean right = false;
+    //Note it's possible for a Room to be above, left, and right at the same time compared to another Room
+    //Ex:
+    /* 0 1 2 3 4 5 6 7 8 9
+    0
+    1    theChosenOne
+    2    R R R R R R R R R R     <-- NOT BELOW b/c theChosenOneendYcor is NOT > thisEndYcor
+    3    R R R R R R R R R R     <-- above, b/c theChosenOneStartYcor < thisStartYcor
+    4    R R R R R R R R R R     <-- left, b/c theChosenOneStartXcor < thisStartXcor
+    5    R R R R R R R R R R     <-- right, b/c theChosenOneEndXcor > thisEndXcor
+    6        this
+    7        R R R R
+    8        R R R R
+    9        R R R R
+    10       R R R R
+    */
+    //Note: NO CHANCE OF OVERLAP: AT LEAST ONE AND AT MOST 3 OF THESE BOOLEANS WILL BE TRUE AT ALL TIMES
+
+    //If the theChosenOne is above this, then its startYcor is less than this's startYcor
+    if (theChosenOne.getStartYcor()<this.getStartYcor()){
+      above = true;
+    }
+    //If the theChosenOne is left of this, then its startXcor is less than this's startXcor
+    if (theChosenOne.getStartXcor()<this.getStartXcor()){
+      left = true;
+    }
+    //If the theChosenOne is below this, then its endXcor is greater than this's endYcor
+    if (theChosenOne.getEndXcor()>this.getEndYcor()){
+      below = true;
+    }
+    //If the theChosenOne is right of this, then its xcor is greater than the Room
+    if (theChosenOne.getEndXcor()>this.getEndXcor()){
+      right = true;
+    }
+
+    //Randomly selecting a borderBlock based on location of Rooms relative to each other
+    Random rnd = new Random(seed);
+    ArrayList<Block> pThis = new ArrayList<Block>(this.borderBlocks.length); //ArrayList of possible borderBlocks to choose one end of the Tunnel
+    ArrayList<Block> pTCO = new ArrayList<Block>(theChosenOne.borderBlocks.length); //ArrayList of possible borderBlocks to choose the other end of the Tunnel
+    //Getting a random borderBlock of this
+    for (Block b: this.borderBlocks){
+      //If is below, all border blocks on the bottom have a chance of being picked
+      if (below && (b.getY() == theChosenOne.getEndYcor())){
+        pThis.add(b);
+      }
+      //If the block is left, all border blocks on the left have a chance of being picked
+      if (left && (b.getX() == theChosenOne.getStartXcor())){
+        pThis.add(b);
+      }
+      //if the block is above, all border blocks on top have a chance to be picked
+      if (above && (b.getY() == theChosenOne.getStartYcor())){
+        pThis.add(b);
+      }
+      //If the block is on the right, all border blocks have a chance to be picked
+      if (right && (b.getX() == theChosenOne.getEndXcor())){
+        pThis.add(b);
+      }
+    }
+    Block chosenBlock = pThis.get(rnd.nextInt(pThis.size()));
+    //Getting a random borderBlock of theChosenOne
+    for (Block b: this.borderBlocks){
+      //If the block is below, all border blocks on the bottom have a chance of being picked
+      if (below && (b.getY() == theChosenOne.getStartYcor())){
+        pTCO.add(b);
+      }
+      //If the block is left, all border blocks on the left have a chance of being picked
+      if (left && (b.getX() == theChosenOne.getEndXcor())){
+        pTCO.add(b);
+      }
+      //if the block is above, all border blocks on top have a chance to be picked
+      if (above && (b.getY() == theChosenOne.getEndYcor())){
+        pTCO.add(b);
+      }
+      //If the block is on the right, all border blocks have a chance to be picked
+      if (right && (b.getX() == theChosenOne.getStartXcor())){
+        pTCO.add(b);
+      }
+    }
+    Block TCO = pThis.get(rnd.nextInt(pThis.size()));
+    //Now create a Tunnel from this block thisBlock to block TCO
+    //Run createTunnel multiple times
+    return true;
+  }
+
+  //public static ArrayList<Block> removeDupes(ArrayList ary)
+  /**Removes duplicates from a given ArrayList
+    *@param ary is an ArrayList of Blocks to have its duplicates removed
+    *@return ary after duplicates have been removed
+  */
+  public static ArrayList<Block> removeDupes(ArrayList<Block> ary){
+    ArrayList<Block> alreadyThere = new ArrayList<Block>(ary.size());
+    for (Block e: ary){
+      if (alreadyThere.contains(e)){
+        ary.remove(e);
+      }
+      else{
+        alreadyThere.add(e);
+      }
+    }
+    return ary;
+  }
+
   //public String isExplored()
   /**Creates a String of the data of the Blocks in the Room
     *@return a String of the data of the Blocks in the Room
@@ -189,5 +317,8 @@ public class Room implements Explorable{
   }
   public int getEndYcor(){
     return endYcor;
+  }
+  public Block[] getBorderBlocks(){
+    return borderBlocks;
   }
 }
