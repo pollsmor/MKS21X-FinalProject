@@ -33,6 +33,7 @@ Rachel:
   - Worked on Block.java
   - Added get/setVisibility and spawnEnemy/Player pseudocode
 
+
 **Sunday 1/6/19**
 
 Rachel:
@@ -150,3 +151,15 @@ Rachel:
     - Mode where each room only has one Tunnel to connect to a Room?
     - Mode where visibility of Rooms and Tunnels depends on whether or not a Player is in that Room at the moment
 - In terms of coding, I haven't done anything major yet, but jotted down ideas on how to make Tunnels
+
+**Friday 1/11/19**
+
+Rachel:
+  - Block.java
+    - Added default data for a Wall Block and default data for a Tunnel Block
+  - Tunnel.java
+    - Worked on constructors 
+    - Added toString
+  - FloorDriver.java
+    - Added test cases for constructors and toString()
+  - Everything compiles!!!
