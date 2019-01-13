@@ -70,16 +70,16 @@ public class Floor{
     //System.out.println("Rooms: "+rooms);
     int attempts = 5000; //In case it's impossible to create all the rooms, have a set number of failed attempts possible
     //Using random, generate the xcors and ycors of top right Blocks and bottom left Blocks of the Rooms
-    //Minimum width of room: 4 | Max: 13
+    //Minimum width of room: 4| Max: 13
     //Minimum length of room: 4 | Max: 13
     int startXcor, startYcor, endXcor, endYcor;
     int successfulRooms = 0; //Keep track of how many Rooms were successfully made
     boolean wasOverlap; //Keep track of whether or Room to be created overlaps with any other Room
     while (successfulRooms < rooms && attempts > 0){
       startXcor = Math.abs(rnd.nextInt(width - 13)) + 1;
-      endXcor = startXcor + rnd.nextInt(11) + 4;
+      endXcor = startXcor + rnd.nextInt(10) + 5;
       startYcor = Math.abs(rnd.nextInt(length - 13)) + 1;
-      endYcor = startYcor + rnd.nextInt(11) + 4;
+      endYcor = startYcor + rnd.nextInt(10) + 5;
       //System.out.println("startXcor: "+ startXcor +", startYcor: "+startYcor+", endXcor: "+endXcor+", endYcor: "+endYcor);
       wasOverlap = false;
       //Make sure that rooms don't overlap with each other
