@@ -55,13 +55,13 @@ public class Room implements Explorable{
     width = endXcor - startXcor;
     length = endYcor - startYcor;
     blocksHere = new Block[width][length];
+    borderBlocks = new Block[2*width + 2* length - 2];
     int indexBorderBlocks = 0;
     for (int x = 0; x < width; x++){
       for (int y = 0; y < length; y++){
         blocksHere[x][y] = new Block(startXcor+x,startYcor+y,"Room");
         //If the xcors equal startXcor or endXcor or the ycors equal startYcor or endYcor, add it to borderBlocks list
-        if(blocksHere[x][y].getX()==startXcor || blocksHere[x][y].getY()==startYcor
-        || blocksHere[x][y].getX()==endXcor || blocksHere[x][y].getY()==endYcor){
+        if (x == 0 || y== 0 || x == width-1 || y==length-1){
           borderBlocks[indexBorderBlocks] = blocksHere[x][y];
           indexBorderBlocks++;
         }
