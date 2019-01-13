@@ -187,12 +187,20 @@ public class Floor{
     String output = "";
 
     for (int i = 0; i < width; ++i) {
-      for (int j = 0; j < length; ++j)
-        output += blocksHere[i][j].getData();
+      for (int j = 0; j < length; ++j) {
+        if (j == length - 1)
+          output += "|";
+
+        else
+          output += blocksHere[i][j].getData();
+      }
 
       output += '\n';
     }
 
+    for (int i = 0; i < length; ++i)
+      output += '-';
+      
     return output;
   }
 }
