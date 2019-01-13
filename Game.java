@@ -70,20 +70,4 @@ public class Game {
   public boolean isWall(int col, int row) {
     return floor.getBlock(col, row).getType() == "Wall";
   }
-
-  //public boolean moveUp() {
-
-  //}
-
-  //public boolean moveDown() {
-
-  //}
-
-  //public boolean moveLeft() {
-
-  //}
-
-  //public boolean moveRight() {
-
-  //}
 }

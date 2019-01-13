@@ -113,7 +113,7 @@ public class Floor{
   public Room createRoom(int startXcor, int startYcor, int endXcor, int endYcor){
     Room a = new Room(startXcor, startYcor, endXcor, endYcor);
     //Must also update blocksHere
-    for (int x = startXcor; x < endXcor - 1; x++){
+    for (int x = startXcor; x < endXcor - 1; x++){ // - 1 to avoid index exceptions
       for (int y = startYcor; y < endYcor - 1; y++){
         this.blocksHere[x][y] = new Block(startXcor+x,startYcor+y,"Room");
       }
@@ -183,6 +183,7 @@ public class Floor{
     return output;
   }
 
+  //toString makes a coordinate system that is offset from the one the blocksHere array uses.
   public String toStringClean() {
     String output = "";
 
@@ -200,7 +201,7 @@ public class Floor{
 
     for (int i = 0; i < length; ++i)
       output += '-';
-      
+
     return output;
   }
 }
