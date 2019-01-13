@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Random;
 public class Room implements Explorable{
   private boolean isExplored;
   private Block[][] blocksHere;
@@ -158,7 +159,7 @@ public class Room implements Explorable{
     *@param theChosenOne is a Room from Floor's roomsHere to connect to
     *@return whether or not the connection was successful
   */
-  public boolean connectRooms(Room theChosenOne){
+  public boolean connectRooms(Room theChosenOne, int seed){
     boolean above = false;
     boolean left = false;
     boolean below = false;
@@ -198,6 +199,7 @@ public class Room implements Explorable{
     }
 
     //Randomly selecting a borderBlock based on location of Rooms relative to each other
+    Random rnd = new Random(seed);
     ArrayList<Block> pThis = new ArrayList<Block>(this.borderBlocks.length); //ArrayList of possible borderBlocks to choose one end of the Tunnel
     ArrayList<Block> pTCO = new ArrayList<Block>(theChosenOne.borderBlocks.length); //ArrayList of possible borderBlocks to choose the other end of the Tunnel
     //Getting a random borderBlock of this
@@ -219,6 +221,7 @@ public class Room implements Explorable{
         pThis.add(b);
       }
     }
+    Block chosenBlock = pThis.get(rnd.nextInt(pThis.size()));
     //Getting a random borderBlock of theChosenOne
     for (Block b: this.borderBlocks){
       //If the block is below, all border blocks on the bottom have a chance of being picked
@@ -238,6 +241,9 @@ public class Room implements Explorable{
         pTCO.add(b);
       }
     }
+    Block TCO = pThis.get(rnd.nextInt(pThis.size()));
+    //Now create a Tunnel from this block thisBlock to block TCO
+    //Run createTunnel multiple times
     return true;
   }
 
@@ -258,6 +264,7 @@ public class Room implements Explorable{
     }
     return ary;
   }
+
   //public String isExplored()
   /**Creates a String of the data of the Blocks in the Room
     *@return a String of the data of the Blocks in the Room
