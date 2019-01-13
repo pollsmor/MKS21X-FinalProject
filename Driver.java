@@ -55,6 +55,12 @@ public class Driver {
     TerminalSize terminalSize = terminal.getTerminalSize();
     int width = terminalSize.getRows();
     int length = terminalSize.getColumns();
+    //Minimum terminal size requirement - prevents index exceptions and having too small of a map
+    if (length < 50 || width < 20) {
+      terminal.exitPrivateMode();
+      System.out.println("This game can only be played on a terminal at least 50px in length, and 20px in width.");
+      System.exit(0);
+    }
 
     String name = args[0];
     int seed;
