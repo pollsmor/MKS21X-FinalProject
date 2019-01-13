@@ -82,7 +82,7 @@ public class Tunnel implements Explorable{
 
   //public Tunnel(Block start, Block end, Floor floor)
   /**Creates a Tunnel given two blocks (start, end) beginning with the start block and ending at the end block
-    *Precondition: start and end block have either the same xcor or the same ycor
+    *Precondition: start and end block have either the same xcor or the same ycor and start is above or left of end
     *@param start is the Block representing the start of the Tunnel to be made
     *@param end is the Block representing the end of the Tunnel to be made
     *@param floor is the floor provided so that we know what Blocks there are currently
