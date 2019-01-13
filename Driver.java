@@ -84,6 +84,7 @@ public class Driver {
 
     //Print the game
     putString(0, 0, terminal, game.getFloor().toStringClean());
+    putString(length - 10, 0, terminal, "HP: ");
 
     boolean running = true;
     boolean alive = true; //controls the inner while loop
@@ -181,6 +182,8 @@ public class Driver {
     //----------------------------------------------------------------------------------------------------------------
 
       //Do even when no key is pressed:ßß
+      putString(length - 6, 0, terminal, "" + game.getPlayer().getHP());
+
       long tEnd = System.currentTimeMillis();
       long millis = tEnd - tStart;
       if (millis / 1000 > lastSecond) {
