@@ -79,14 +79,14 @@ public class Driver {
       seed = Integer.parseInt(args[1]);
       game = new Game(name, seed, width, length);
       randgenCol = new Random(seed); //always spawn in the same spot
-      randgenRow = new Random(seed);
+      randgenRow = new Random(seed + 2);
     }
 
     //Print the game
     putString(0, 0, terminal, game.getFloor().toStringClean());
     putString(length - 7, 0, terminal, "HP: ");
-    putString(length - 11, width - 1, terminal, "Time: ");
-    putString(length - 11, width - 2, terminal, "Seed: " + game.getSeed());
+    putString(length - 17, width - 1, terminal, "Time: ");
+    putString(length - 17, width - 2, terminal, "Seed: " + game.getSeed());
 
     boolean running = true;
     boolean alive = true; //controls the inner while loop
@@ -190,7 +190,7 @@ public class Driver {
       long millis = tEnd - tStart;
       if (millis / 1000 > lastSecond) {
         lastSecond = millis / 1000; //One second has passed.
-        putString(length - 5, width, terminal, lastSecond + "s");
+        putString(length - 8, width, terminal, lastSecond + "s");
       }
     }
 

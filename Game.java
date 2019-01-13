@@ -32,19 +32,19 @@ public class Game {
     floor = new Floor(1, terminalWidth * 3/4, terminalLength * 3/4);
     //missions = new Mission(); //ArrayList to allow easy adding/removing
     Random randgen = new Random();
-    seed = randgen.nextInt() % 10000; //arbitrary number, limit seeds to less than 10000
+    seed = randgen.nextInt();
 
     floor.createRooms(seed);
   }
 
   //Takes a seed
-  public Game(String name, int seed, int terminalWidth, int terminalLength) {
+  public Game(String name, int inputSeed, int terminalWidth, int terminalLength) {
     player = new Player(name);
     enemies = new Enemy[12];
     level = 1;
     floor = new Floor(1, terminalWidth * 7/8, terminalLength * 7/8);
     //missions = new Mission(); //ArrayList to allow easy adding/removing
-    seed = this.seed % 10000;
+    seed = inputSeed;
 
     floor.createRooms(seed);
   }
