@@ -285,10 +285,9 @@ public class Room implements Explorable{
       //Getting Xcors and Ycors of first 2 corners
       int randomXcor = rnd.nextInt(Math.abs(deltaX+1));
       int randomYcor = rnd.nextInt(Math.abs(deltaY+1));
-
-
-      //Starting with horizontal Tunnel first
       Tunnel section1, section2, section3, section4;
+
+      //-----------------------------------Starting with horizontal Tunnel first---------------------------------//
       if (dir == 0){//start with horizontal
         if(deltaX < 0){ //if deltaX is negative, thisBlock is to the left of TCO
           if(deltaY > 0){//if deltaY is positive, thisBlock is below TCO
@@ -302,11 +301,11 @@ public class Room implements Explorable{
                         path horizontal first
             */
             corner1 = new Block(randomXcor+thisBlock.getX(),thisBlock.getY(),"Tunnel");
-            section1 = new Tunnel(thisBlock, corner1, floor);
+            section1 = new Tunnel(corner1, thisBlock, floor);
             corner2 = new Block(randomXcor+thisBlock.getX(), randomYcor+TCO.getY(), "Tunnel");
             section2 = new Tunnel(corner1, corner2, floor);
             corner3 = new Block(TCO.getX(),randomYcor+TCO.getY(), "Tunnel");
-            section3 = new Tunnel(corner2, corner3, floor);
+            section3 = new Tunnel(corner3, corner2, floor);
             section4 = new Tunnel(corner3, TCO, floor);
           }
           //Case 2
@@ -358,11 +357,90 @@ public class Room implements Explorable{
           else{//if deltaY is negative, thisBlock is above TCO
             //Case 4
             corner1 = new Block(randomXcor+TCO.getX(),TCO.getY(),"Tunnel");
-            section1= new Tunnel(thisBlock, corner1, floor);
+            section1= new Tunnel(TCO, corner1, floor);
             corner2 = new Block(randomXcor+TCO.getX(), randomYcor+thisBlock.getY(), "Tunnel");
-            section2= new Tunnel(corner1, corner2, floor);
+            section2= new Tunnel(corner2, corner1, floor);
             corner3 = new Block(thisBlock.getX(),randomYcor+thisBlock.getY(), "Tunnel");
             section3= new Tunnel(corner2, corner3, floor);
+            section4= new Tunnel(thisBlock,corner3, floor);
+          }
+        }
+      }
+      //--------------------Start with Vertical------------------//
+      else{
+        if(deltaX < 0){ //if deltaX is negative, thisBlock is to the left of TCO
+          if(deltaY > 0){//if deltaY is positive, thisBlock is below TCO
+            //Case 1
+            /*
+                                      corner3=====TCO
+                                         |
+                corner1===============corner2      ^Note to self, perhaps we should make a "Door" Block to show where the Tunnels are
+    vertical first |
+                thisBlock
+
+            */
+            corner1 = new Block(thisBlock.getX(),randomYcor+TCO.getY(),"Tunnel");
+            section1 = new Tunnel(corner1, thisBlock, floor);
+            corner2 = new Block(randomXcor+thisBlock.getX(), randomYcor+TCO.getY(), "Tunnel");
+            section2 = new Tunnel(corner1, corner2, floor);
+            corner3 = new Block(randomXcor+thisBlock.getX(),TCO.getY(), "Tunnel");
+            section3 = new Tunnel(corner3, corner2, floor);
+            section4 = new Tunnel(corner3, TCO, floor);
+          }
+          //Case 2
+          /*
+              thisBlock
+                  |
+              corner1========corner2     ^Note to self, perhaps we should make a "Door" Block to show where the Tunnels are
+                              |
+                            corner3====TCO
+          */
+          else{//if deltaY is negative, thisBlock is above TCO
+            corner1 = new Block(thisBlock.getX(),randomYcor+thisBlock.getY(),"Tunnel");
+            section1= new Tunnel(thisBlock, corner1, floor);
+            corner2 = new Block(randomXcor+thisBlock.getX(), randomYcor+thisBlock.getY(), "Tunnel");
+            section2= new Tunnel(corner1, corner2, floor);
+            corner3 = new Block(randomXcor+thisBlock.getX(),TCO.getY(), "Tunnel");
+            section3= new Tunnel(corner2, corner3, floor);
+            section4= new Tunnel(corner3, TCO, floor);
+          }
+        }
+
+
+        else{//if deltaX is positive, thisBlock is to the right of TCO
+          if(deltaY > 0){//if deltaY is positive, thisBlock is below TCO
+            //Case 3
+            /*
+                TCO
+                |
+              corner1========corner2    ^Note to self, perhaps we should make a "Door" Block to show where the Tunnels are
+                                |
+                            corner3====thisBlock
+                        path horizontal first
+            */
+            corner1 = new Block(TCO.getX(),randomYcor+TCO.getY(),"Tunnel");
+            section1= new Tunnel(TCO, corner1, floor);
+            corner2 = new Block(randomXcor+TCO.getX(), randomYcor+TCO.getY(), "Tunnel");
+            section2= new Tunnel(corner1, corner2, floor);
+            corner3 = new Block(randomXcor+TCO.getX(),thisBlock.getY(), "Tunnel");
+            section3= new Tunnel(corner2, corner3, floor);
+            section4= new Tunnel(corner3, thisBlock, floor);
+          }
+          /*
+                              corner3=====thisBlock
+                                |
+              corner1========corner2    ^Note to self, perhaps we should make a "Door" Block to show where the Tunnels are
+              |
+            TCO
+          */
+          else{//if deltaY is negative, thisBlock is above TCO
+            //Case 4
+            corner1 = new Block(TCO.getX(),randomYcor+thisBlock.getY(),"Tunnel");
+            section1= new Tunnel(corner1, TCO, floor);
+            corner2 = new Block(randomXcor+TCO.getX(), randomYcor+thisBlock.getY(), "Tunnel");
+            section2= new Tunnel(corner1, corner2, floor);
+            corner3 = new Block(randomXcor+TCO.getX(),thisBlock.getY(), "Tunnel");
+            section3= new Tunnel(corner3, corner2, floor);
             section4= new Tunnel(corner3, TCO, floor);
           }
         }
