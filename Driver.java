@@ -15,6 +15,8 @@ import com.googlecode.lanterna.input.KeyMappingProfile;
 
 import java.util.Random;
 
+//----------------------------------------------------------------------------------------------------------------
+
 public class Driver {
   public static void putString(int r, int c, Terminal t, String s) {
     t.moveCursor(r, c);
@@ -103,6 +105,7 @@ public class Driver {
 
       Key key = terminal.readInput();
 
+    //----------------------------------------------------------------------------------------------------------------
       if (!alive) {
         putString(0, width, terminal,"You died. Would you like to respawn? (y/n)");
         while (!alive) {
@@ -122,6 +125,7 @@ public class Driver {
           }
         }
       }
+    //----------------------------------------------------------------------------------------------------------------
 
       if (key != null) {
         if (key.getKind() == Key.Kind.Escape) {
@@ -153,6 +157,8 @@ public class Driver {
           ++row;
         }
       }
+
+    //----------------------------------------------------------------------------------------------------------------
 
       //Do even when no key is pressed:ßß
       long tEnd = System.currentTimeMillis();

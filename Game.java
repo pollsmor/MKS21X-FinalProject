@@ -67,7 +67,7 @@ public class Game {
     return seed;
   }
 
-  public boolean blockExists(int col, int row) {
+  public boolean canMoveHere(int col, int row) {
     return floor.getBlock(col, row).getData() == 'R';
   }
 
