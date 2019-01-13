@@ -77,7 +77,7 @@ public class Driver {
     }
 
     //Print the game
-    putString(0, 0, terminal, game.getFloor().toString());
+    putString(0, 0, terminal, game.getFloor().toStringClean());
 
     boolean running = true;
     boolean alive = true; //controls the inner while loop
@@ -90,7 +90,7 @@ public class Driver {
     while (!spawnFound) {
       col = Math.abs(randgenCol.nextInt() % (length * 3/4));
       row = Math.abs(randgenRow.nextInt() % (width * 3/4));
-      if (game.getFloor().getBlock(col, row).getData() == 'R') {
+      if (!game.isWall(col, row)) {
         spawnFound = true;
       }
     }
@@ -135,55 +135,35 @@ public class Driver {
         }
 
         if (key.getKind() == Key.Kind.ArrowLeft) {
-          if (game.canMoveHere(col - 1, row)) {
+          if (!game.isWall(col - 1, row)) {
             terminal.moveCursor(col, row);
             terminal.putCharacter('R');
             --col;
-          }
-
-          else {
-            putString(col, row, terminal, " ");
-            ++col;
           }
         }
 
         if (key.getKind() == Key.Kind.ArrowRight) {
-          if (game.canMoveHere(col + 1, row)) {
+          if (!game.isWall(col + 1, row)) {
             terminal.moveCursor(col, row);
             terminal.putCharacter('R');
             ++col;
-          }
-
-          else {
-            putString(col, row, terminal, " ");
-            --col;
           }
         }
 
         if (key.getKind() == Key.Kind.ArrowUp) {
           if (row != 0)
-            if (game.canMoveHere(col, row - 1)) {
+            if (!game.isWall(col, row - 1)) {
               terminal.moveCursor(col, row);
               terminal.putCharacter('R');
               --row;
             }
-
-          else {
-            putString(col, row, terminal, " ");
-            ++row;
-          }
         }
 
         if (key.getKind() == Key.Kind.ArrowDown) {
-          if (game.canMoveHere(col, row + 1)) {
+          if (!game.isWall(col, row + 1)) {
             terminal.moveCursor(col, row);
             terminal.putCharacter('R');
             ++row;
-          }
-
-          else {
-            putString(col, row, terminal, " ");
-            --row;
           }
         }
       }

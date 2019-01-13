@@ -53,7 +53,7 @@ public class Block implements Explorable{
 
   //----------Type of Block----------//
   public String getType(){
-    return null;
+    return type;
   }
 
   //----------Coodinate stuffs----------//

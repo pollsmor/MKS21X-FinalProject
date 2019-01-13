@@ -121,16 +121,6 @@ public class Floor{
     return a;
   }
 
-<<<<<<< HEAD
-  public String toString() {
-    String output = "";
-
-    for (int i = 0; i < width; ++i) {
-      for (int j = 0; j < length; ++j)
-        output += blocksHere[i][j].getData();
-
-      output += '\n';
-=======
   //public Tunnel createTunnel(Room r1, Room r2){
   /*
   *Each tunnel is only in one direction and as such is assigned one direction: 0 is left-right, 1 is up-down
@@ -168,7 +158,6 @@ public class Floor{
       //if (y != length - 1){
       //  output += " ";
       //}
->>>>>>> master
     }
 
     return output;
@@ -191,6 +180,19 @@ public class Floor{
         output += "\n";
       }
     }
+    return output;
+  }
+
+  public String toStringClean() {
+    String output = "";
+
+    for (int i = 0; i < width; ++i) {
+      for (int j = 0; j < length; ++j)
+        output += blocksHere[i][j].getData();
+
+      output += '\n';
+    }
+
     return output;
   }
 }
