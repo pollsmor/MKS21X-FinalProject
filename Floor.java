@@ -98,7 +98,7 @@ public class Floor{
     *@param startXcor is the int representing the x-coordinate of the starting Block
     *@param startYcor is the int representing the y-coordinate of the starting Block
     *@param endXcor is the int representing the x-coordinate of the ending Block
-    *@param endYcor is the int representing the y-coordinate of the ending Block 
+    *@param endYcor is the int representing the y-coordinate of the ending Block
     *@return the new successfully created Room
   */
   public Room createRoom(int startXcor, int startYcor, int endXcor, int endYcor){
@@ -111,44 +111,6 @@ public class Floor{
     }
     return a;
   }
-
-  //public boolean connectRooms(Room theChosenOne)
-  /**Given two Rooms, will connect them with a Tunnel
-    *@param theChosenOne is a Room from Floor's roomsHere to connect to
-    *@return whether or not the connection was successful
-  */
-  public boolean connectRooms(Room theChosenOne){
-    boolean above, left, below, right = false;
-    //Note it's possible for a Room to be above, left, and right at the same time compared to another Room
-    //Ex:
-    /* 0 1 2 3 4 5 6 7 8 9
-    0  theChosenOne
-    1  R R R R R R R R R R     <-- NOT BELOW b/c theChosenOneendYcor is NOT > thisEndYcor
-    2  R R R R R R R R R R     <-- above, b/c theChosenOneStartYcor < thisStartYcor
-    3  R R R R R R R R R R     <-- left, b/c theChosenOneStartXcor < thisStartXcor
-    4  R R R R R R R R R R     <-- right, b/c theChosenOneEndXcor > thisEndXcor
-    5        this
-    6        R R R R
-    7        R R R R
-    8        R R R R 
-    9        R R R R
-    */
-    //If the theChosenOne is right of the Room, then its xcor is less than the Room
-    if (theChosenOne.getStartYcor()<this.getStartYcor){
-      above = true;
-    }//If the theChosenOne is right of the Room, then its xcor is less than the Room
-    if (theChosenOne.getStartXcor()<this.getStartXcor){
-      right = true;
-    }//If the theChosenOne Ycor is below of the Room, then its xcor is less than the Room
-    if (theChosenOne.getStartXcor()<this.getStartYcor){
-      below = true;
-    }
-    //If the theChosenOne is right of the Room, then its xcor is less than the Room
-    if (theChosenOne.getStartXcor()<this.getStartXcor){
-      right = true;
-    }
-  }
-
 
   //public Tunnel createTunnel(Room r1, Room r2){
   /*

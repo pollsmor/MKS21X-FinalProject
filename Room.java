@@ -152,6 +152,48 @@ public class Room implements Explorable{
     return (case1||case2||case3||case4);
   }
 
+  //public boolean connectRooms(Room theChosenOne)
+  /**Given two Rooms, will connect them with a Tunnel
+    *@param theChosenOne is a Room from Floor's roomsHere to connect to
+    *@return whether or not the connection was successful
+  */
+  public boolean connectRooms(Room theChosenOne){
+    boolean above, left, below, right = false;
+    //Note it's possible for a Room to be above, left, and right at the same time compared to another Room
+    //Ex:
+    /* 0 1 2 3 4 5 6 7 8 9
+    0  theChosenOne
+    1  R R R R R R R R R R     <-- NOT BELOW b/c theChosenOneendYcor is NOT > thisEndYcor
+    2  R R R R R R R R R R     <-- above, b/c theChosenOneStartYcor < thisStartYcor
+    3  R R R R R R R R R R     <-- left, b/c theChosenOneStartXcor < thisStartXcor
+    4  R R R R R R R R R R     <-- right, b/c theChosenOneEndXcor > thisEndXcor
+    5        this
+    6        R R R R
+    7        R R R R
+    8        R R R R
+    9        R R R R
+    */
+    //Note: NO CHANCE OF OVERLAP: AT LEAST ONE AND AT MOST 3 OF THESE BOOLEANS WILL BE TRUE AT ALL TIMES
+
+    //If the theChosenOne is above this, then its startYcor is less than this's startYcor
+    if (theChosenOne.getStartYcor()<this.getStartYcor()){
+      above = true;
+    }
+    //If the theChosenOne is left of this, then its startXcor is less than this's startXcor
+    if (theChosenOne.getStartXcor()<this.getStartXcor()){
+      left = true;
+    }
+    //If the theChosenOne is below this, then its endXcor is greater than this's endYcor
+    if (theChosenOne.getEndXcor()>this.getEndYcor()){
+      below = true;
+    }
+    //If the theChosenOne is right of this, then its xcor is greater than the Room
+    if (theChosenOne.getEndXcor()>this.getEndXcor()){
+      right = true;
+    }
+    return true;
+  }
+
   //public String isExplored()
   /**Creates a String of the data of the Blocks in the Room
     *@return a String of the data of the Blocks in the Room
