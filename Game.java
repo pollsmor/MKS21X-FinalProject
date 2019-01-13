@@ -42,7 +42,7 @@ public class Game {
     player = new Player(name);
     enemies = new Enemy[12];
     level = 1;
-    floor = new Floor(1, terminalWidth * 3/4, terminalLength * 3/4);
+    floor = new Floor(1, terminalWidth * 7/8, terminalLength * 7/8);
     //missions = new Mission(); //ArrayList to allow easy adding/removing
     seed = this.seed % 10000;
 

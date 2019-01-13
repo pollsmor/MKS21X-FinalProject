@@ -113,8 +113,8 @@ public class Floor{
   public Room createRoom(int startXcor, int startYcor, int endXcor, int endYcor){
     Room a = new Room(startXcor, startYcor, endXcor, endYcor);
     //Must also update blocksHere
-    for (int x = startXcor; x < endXcor; x++){
-      for (int y = startYcor; y < endYcor; y++){
+    for (int x = startXcor; x < endXcor - 1; x++){
+      for (int y = startYcor; y < endYcor - 1; y++){
         this.blocksHere[x][y] = new Block(startXcor+x,startYcor+y,"Room");
       }
     }
