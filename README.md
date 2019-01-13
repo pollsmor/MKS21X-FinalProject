@@ -163,3 +163,12 @@ Rachel:
   - FloorDriver.java
     - Added test cases for constructors and toString()
   - Everything compiles!!!
+
+**Saturday 1/12/19**
+
+Rachel: 
+  - Block.java
+  - Tunnel.java
+  - Room.java
+  - Floor.java
+  - FloorDriver.java
