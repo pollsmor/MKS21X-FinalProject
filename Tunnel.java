@@ -53,9 +53,14 @@ public class Tunnel implements Explorable{
     if (direction == 0){
       blocksHere = new Block[1][length];
       for (int i = 0; i < length; i++){
+        //Check if Block before was a Room Block, and if not then create a new Tunnel Block
         if (floor.getBlocksHere()[startXcor+i][startYcor].getType()!="Room"){
-        blocksHere[0][i] = new Block(startXcor+i, startYcor, "Tunnel");
-      }
+          blocksHere[0][i] = new Block(startXcor+i, startYcor, "Tunnel");
+        }
+        //Otherwise add the Block already there to blocksHere
+        else{
+          blocksHere[0][i] = floor.getBlocksHere()[startXcor+i][startYcor];
+        }
       }
     }
     //If top-bottom, ycor changes
@@ -63,8 +68,13 @@ public class Tunnel implements Explorable{
     if (direction == 1){
       blocksHere = new Block[length][1];
       for (int i = 0; i < length; i++){
+        //Check if Block before was a Room Block, and if not then create a new Tunnel Block
         if (floor.getBlocksHere()[startXcor][startYcor+i].getType()!="Room"){
           blocksHere[i][0] = new Block(startXcor, startYcor+i, "Tunnel");
+        }
+        //Otherwise add the Block already there to blocksHere
+        else{
+          blocksHere[0][i] = floor.getBlocksHere()[startXcor][startYcor+i];
         }
       }
     }
@@ -104,8 +114,13 @@ public class Tunnel implements Explorable{
     if (direction == 0){
       blocksHere = new Block[1][length];
       for (int i = 0; i < length; i++){
+        //Check if Block before was a Room Block, and if not then create a new Tunnel Block
         if (floor.getBlocksHere()[xcor+i][ycor].getType()!="Room"){
           blocksHere[0][i] = new Block(xcor+i, ycor, "Tunnel");
+        }
+        //Otherwise add the Block already there to blocksHere
+        else{
+          blocksHere[0][i] = floor.getBlocksHere()[xcor+i][ycor];
         }
       }
     }
@@ -113,8 +128,13 @@ public class Tunnel implements Explorable{
     else{
       blocksHere = new Block[length][1];
       for (int j = 0; j < length; j++){
+        //Check if Block before was a Room Block, and if not then create a new Tunnel Block
         if (floor.getBlocksHere()[xcor][ycor+j].getType()!="Room"){
           blocksHere[j][0] = new Block(xcor, ycor+j, "Tunnel");
+        }
+        //Otherwise add the Block already there to blocksHere
+        else{
+          blocksHere[0][j] = floor.getBlocksHere()[xcor][ycor+j];
         }
       }
     }
