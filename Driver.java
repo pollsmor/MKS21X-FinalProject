@@ -92,14 +92,14 @@ public class Driver {
     putString(length - 17, 1, terminal, green + game.getPlayer().getName() + resetColor);
     putString(length - 17, 2, terminal, "----------");
     putString(length - 17, 3, terminal, red + "HP: " + resetColor);
-    putString(length - 17, 4, terminal, "LVL: ");
+    putString(length - 17, 4, terminal, "Level: ");
     putString(length - 17, 5, terminal, "ATK: ");
-    putString(length - 17, 6, terminal, "DEF: ");
+    putString(length - 17, 6, terminal, "DFNSE: ");
     putString(length - 17, 7, terminal, "----------");
-    putString(length - 17, 4, terminal, "HNGR: ");
-    putString(length - 17, 4, terminal, "Money: ");
-    putString(length - 17, 4, terminal, "XP: ");
-    putString(length - 17, 4, terminal, "Score: ");
+    putString(length - 17, 8, terminal, "HNGR: ");
+    putString(length - 17, 9, terminal, "Money: ");
+    putString(length - 17, 10, terminal, "XP: ");
+    putString(length - 17, 11, terminal, "Score: ");
     putString(length - 17, width - 1, terminal, "Time: ");
     putString(length - 17, width - 2, terminal, "Seed: " + game.getSeed());
 
