@@ -49,6 +49,10 @@ public class Game {
     floor.createRooms(seed);
   }
 
+  public Player getPlayer() {
+    return player;
+  }
+
   public int getLevel() {
     return level;
   }

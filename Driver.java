@@ -172,6 +172,10 @@ public class Driver {
             ++row;
           }
         }
+
+        //Just to demo the death function in class
+        if (key.getKind() == Key.Kind.Delete)
+          alive = false;
       }
 
     //----------------------------------------------------------------------------------------------------------------
