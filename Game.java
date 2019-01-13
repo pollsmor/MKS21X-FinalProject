@@ -13,15 +13,33 @@ import com.googlecode.lanterna.input.InputProvider;
 import com.googlecode.lanterna.input.Key;
 import com.googlecode.lanterna.input.KeyMappingProfile;
 
+import java.util.Random;
+
 public class Game {
   private Player player;
   private Enemy[] enemies;
   private int floor = 1; //Starting off on the first floor
-  //private Mission[] missions;
+  private Mission[] missions;
   private int seed;
   private static boolean alive = true; //toggle this on or off to respawn or end the game, controls while loop
 
-  public static void endGame() { //Just so the alive variable can be changed by other classes
+  public Game(String name) {
+    player = new Player(name);
+    enemies = new Enemy[12];
+    //missions = new Mission(); //ArrayList to allow easy adding/removing
+    Random randgen = new Random();
+    seed = randgen.nextInt() % 10000;
+  }
+
+  public Game(String name, int seed) {
+    player = new Player(name);
+    enemies = new Enemy[12];
+    //missions = new Mission(); //ArrayList to allow easy adding/removing
+    seed = this.seed % 10000;
+  }
+
+  //Simply controls the inner while loop
+  public static void faintPlayer() {
     alive = false;
   }
 
@@ -33,7 +51,18 @@ public class Game {
   }
 
   public static void main(String[] args) {
-    Player squirtle = new Player("yoloswag");
+    try {
+      String name = args[0];
+      int seed = Integer.parseInt(args[1]);
+    }
+
+    catch (NumberFormatException e) {
+      System.out.println("Seeds can only be integers.");
+    }
+
+    catch (ArrayIndexOutOfBoundsException e) {
+      System.out.println("You need to provide the name of a Pokemon and a seed, in that order.");
+    }
 
     //Start in the bottom center
     int x = 40;
@@ -49,6 +78,7 @@ public class Game {
     long lastSecond = 0;
 
     boolean running = true;
+
 
     while (running) {
       terminal.moveCursor(x, y);
@@ -112,7 +142,7 @@ public class Game {
         }
 
         if (key.getKind() == Key.Kind.Backspace) {
-          squirtle.faintPlayer();
+          faintPlayer();
         }
 
         putString(1, 1, terminal, key + "        "); //to clear leftover letters pad withspaces
