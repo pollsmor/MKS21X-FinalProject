@@ -36,6 +36,14 @@ public abstract class Pokemon {
     return level;
   }
 
+  public int getAttack() {
+    return attack;
+  }
+
+  public int getDefense() {
+    return defense;
+  }
+
   public int getHP() {
     return currentHP;
   }
