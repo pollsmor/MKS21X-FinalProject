@@ -56,9 +56,9 @@ public class Driver {
     int width = terminalSize.getRows();
     int length = terminalSize.getColumns();
     //Minimum terminal size requirement - prevents index exceptions and having too small of a map
-    if (length < 50 || width < 20) {
+    if (length < 55 || width < 20) {
       terminal.exitPrivateMode();
-      System.out.println("This game can only be played on a terminal at least 50px in length, and 20px in width.");
+      System.out.println("This game can only be played on a terminal at least 55px in length, and 20px in width.");
       System.exit(0);
     }
 
@@ -84,8 +84,9 @@ public class Driver {
 
     //Print the game
     putString(0, 0, terminal, game.getFloor().toStringClean());
-    putString(length - 10, 0, terminal, "HP: ");
-    putString(length - 12, 1, terminal, "Seed: " + game.getSeed());
+    putString(length - 7, 0, terminal, "HP: ");
+    putString(length - 11, width - 1, terminal, "Time: ");
+    putString(length - 11, width - 2, terminal, "Seed: " + game.getSeed());
 
     boolean running = true;
     boolean alive = true; //controls the inner while loop
@@ -183,7 +184,7 @@ public class Driver {
     //----------------------------------------------------------------------------------------------------------------
 
       //Do even when no key is pressed:ßß
-      putString(length - 6, 0, terminal, "" + game.getPlayer().getHP());
+      putString(length - 3, 0, terminal, "" + game.getPlayer().getHP());
 
       long tEnd = System.currentTimeMillis();
       long millis = tEnd - tStart;

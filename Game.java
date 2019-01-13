@@ -45,7 +45,6 @@ public class Game {
     floor = new Floor(1, terminalWidth * 7/8, terminalLength * 7/8);
     //missions = new Mission(); //ArrayList to allow easy adding/removing
     seed = this.seed % 10000;
-    System.out.println(seed);
 
     floor.createRooms(seed);
   }
