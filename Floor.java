@@ -162,4 +162,8 @@ public class Floor{
     output += "|\n";
     return output; //no need for End of Floor?
   }
+
+  public Block[][] getBlocksHere(){
+    return blocksHere;
+  }
 }
