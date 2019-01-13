@@ -30,18 +30,6 @@ public class Driver {
       System.exit(0);
     }
 
-    Terminal terminal = TerminalFacade.createTextTerminal();
-    terminal.enterPrivateMode();
-    terminal.setCursorVisible(false);
-
-    TerminalSize terminalSize = terminal.getTerminalSize();
-    int width = terminalSize.getRows();
-    int length = terminalSize.getColumns();
-
-    //Timer commands
-    long tStart = System.currentTimeMillis();
-    long lastSecond = 0;
-
     //I don't want this to be try-ed in case the user only provides 1 input (which is valid)
     if (args.length >= 2) {
       try {
@@ -54,6 +42,18 @@ public class Driver {
         System.exit(0);
       }
     }
+
+    //Terminal creation commands
+    Terminal terminal = TerminalFacade.createTextTerminal();
+    terminal.enterPrivateMode();
+    terminal.setCursorVisible(false);
+    TerminalSize terminalSize = terminal.getTerminalSize();
+    int width = terminalSize.getRows();
+    int length = terminalSize.getColumns();
+
+    //Timer commands
+    long tStart = System.currentTimeMillis();
+    long lastSecond = 0;
 
     String name = args[0];
     int seed;
