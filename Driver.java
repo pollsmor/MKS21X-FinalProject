@@ -32,6 +32,21 @@ public class Driver {
       System.exit(0);
     }
 
+<<<<<<< HEAD
+=======
+    //Terminal creation commands
+    Terminal terminal = TerminalFacade.createTextTerminal();
+    terminal.enterPrivateMode();
+    terminal.setCursorVisible(false);
+    TerminalSize terminalSize = terminal.getTerminalSize();
+    int width = terminalSize.getRows();
+    int length = terminalSize.getColumns();
+
+    //Timer commands
+    long tStart = System.currentTimeMillis();
+    long lastSecond = 0;
+
+>>>>>>> master
     //I don't want this to be try-ed in case the user only provides 1 input (which is valid)
     if (args.length >= 2) {
       try {
@@ -135,6 +150,7 @@ public class Driver {
         }
 
         if (key.getKind() == Key.Kind.ArrowLeft) {
+<<<<<<< HEAD
           if (game.canMoveHere(col - 1, row)) {
             terminal.moveCursor(col, row);
             terminal.putCharacter('R');
@@ -185,6 +201,29 @@ public class Driver {
             putString(col, row, terminal, " ");
             --row;
           }
+=======
+          terminal.moveCursor(col, row);
+          terminal.putCharacter('R');
+          --col;
+        }
+
+        if (key.getKind() == Key.Kind.ArrowRight) {
+          terminal.moveCursor(col, row);
+          terminal.putCharacter('R');
+          ++col;
+        }
+
+        if (key.getKind() == Key.Kind.ArrowUp) {
+          terminal.moveCursor(col, row);
+          terminal.putCharacter('R');
+          --row;
+        }
+
+        if (key.getKind() == Key.Kind.ArrowDown) {
+          terminal.moveCursor(col, row);
+          terminal.putCharacter('R');
+          ++row;
+>>>>>>> master
         }
       }
 
