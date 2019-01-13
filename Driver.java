@@ -84,7 +84,8 @@ public class Driver {
 
     //Print the game
     putString(0, 0, terminal, game.getFloor().toStringClean());
-    putString(length - 7, 0, terminal, "HP: ");
+    putString(length - 17, 0, terminal, "HP: ");
+    putString(length - 17, 1, terminal, "Area: ");
     putString(length - 17, width - 1, terminal, "Time: ");
     putString(length - 17, width - 2, terminal, "Seed: " + game.getSeed());
 
@@ -184,13 +185,14 @@ public class Driver {
     //----------------------------------------------------------------------------------------------------------------
 
       //Do even when no key is pressed:ßß
-      putString(length - 3, 0, terminal, "" + game.getPlayer().getHP());
+      putString(length - 10, 0, terminal, "" + game.getPlayer().getHP());
+      putString(length - 10, 1, terminal, "" + game.getLevel());
 
       long tEnd = System.currentTimeMillis();
       long millis = tEnd - tStart;
       if (millis / 1000 > lastSecond) {
         lastSecond = millis / 1000; //One second has passed.
-        putString(length - 8, width, terminal, lastSecond + "s");
+        putString(length - 11, width, terminal, lastSecond + "s");
       }
     }
 
