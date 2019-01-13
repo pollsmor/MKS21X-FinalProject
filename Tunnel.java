@@ -74,17 +74,18 @@ public class Tunnel implements Explorable{
         }
         //Otherwise add the Block already there to blocksHere
         else{
-          blocksHere[0][i] = floor.getBlocksHere()[startXcor][startYcor+i];
+          blocksHere[i][0] = floor.getBlocksHere()[startXcor][startYcor+i];
         }
       }
     }
   }
 
-  //public Tunnel(Block start, Block end)
+  //public Tunnel(Block start, Block end, Floor floor)
   /**Creates a Tunnel given two blocks (start, end) beginning with the start block and ending at the end block
     *Precondition: start and end block have either the same xcor or the same ycor
     *@param start is the Block representing the start of the Tunnel to be made
     *@param end is the Block representing the end of the Tunnel to be made
+    *@param floor is the floor provided so that we know what Blocks there are currently
   */
   public Tunnel(Block start, Block end, Floor floor){
     isExplored = false;
@@ -104,10 +105,10 @@ public class Tunnel implements Explorable{
     length++;  //Length is one more than difference
     //Getting the Orientation
     if (start.getX() == end.getX()){
-      direction = 0;
+      direction = 1;
     }
     if (start.getY() == end.getY()){
-      direction = 1;
+      direction = 0;
     }
     //Creating blocksHere with a loop
     //If left-right, xcor changes
@@ -115,6 +116,7 @@ public class Tunnel implements Explorable{
       blocksHere = new Block[1][length];
       for (int i = 0; i < length; i++){
         //Check if Block before was a Room Block, and if not then create a new Tunnel Block
+        //System.out.println(floor.getBlocksHere().toString());
         if (floor.getBlocksHere()[xcor+i][ycor].getType()!="Room"){
           blocksHere[0][i] = new Block(xcor+i, ycor, "Tunnel");
         }
@@ -134,11 +136,10 @@ public class Tunnel implements Explorable{
         }
         //Otherwise add the Block already there to blocksHere
         else{
-          blocksHere[0][j] = floor.getBlocksHere()[xcor][ycor+j];
+          blocksHere[j][0] = floor.getBlocksHere()[xcor][ycor+j];
         }
       }
     }
-    length += 1; //Length is one more than difference
   }
 
   //public boolean isExplored()
@@ -239,6 +240,8 @@ public class Tunnel implements Explorable{
     //If top-bottom, ycor changes
     else{ //vertical, so y changes
       for (int i = 0; i < length; i++){
+        //System.out.println("Length: "+length);
+        //System.out.println(i);
         output+= blocksHere[i][0].getData();
         if (i!= length-1){
           output += "\n";
