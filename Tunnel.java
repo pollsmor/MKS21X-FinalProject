@@ -16,7 +16,7 @@ public class Tunnel implements Explorable{
     *@param isHorizontal is a boolean representing whether or not the Tunnel to be made is left-right or top-bottom
     *@param isStart is a boolean representing whether or not the coordinates given represent a startBlock or endBlock
   */
-  public Tunnel(int startXcor, int startYcor, int newLength, boolean isHorizontal, boolean isStart){
+  public Tunnel(int startXcor, int startYcor, int newLength, boolean isHorizontal, boolean isStart, Floor floor){
     length = newLength;
     isExplored = false;
     //Setting start and end blocks
@@ -53,7 +53,9 @@ public class Tunnel implements Explorable{
     if (direction == 0){
       blocksHere = new Block[1][length];
       for (int i = 0; i < length; i++){
+        if (floor.getBlocksHere()[startXcor+i][startYcor].getType()!="Room"){
         blocksHere[0][i] = new Block(startXcor+i, startYcor, "Tunnel");
+      }
       }
     }
     //If top-bottom, ycor changes
@@ -61,7 +63,9 @@ public class Tunnel implements Explorable{
     if (direction == 1){
       blocksHere = new Block[length][1];
       for (int i = 0; i < length; i++){
-        blocksHere[i][0] = new Block(startXcor, startYcor+i, "Tunnel");
+        if (floor.getBlocksHere()[startXcor][startYcor+i].getType()!="Room"){
+          blocksHere[i][0] = new Block(startXcor, startYcor+i, "Tunnel");
+        }
       }
     }
   }
@@ -72,7 +76,7 @@ public class Tunnel implements Explorable{
     *@param start is the Block representing the start of the Tunnel to be made
     *@param end is the Block representing the end of the Tunnel to be made
   */
-  public Tunnel(Block start, Block end){
+  public Tunnel(Block start, Block end, Floor floor){
     isExplored = false;
     //Setting start coors
     int xcor = start.getX();
@@ -100,14 +104,18 @@ public class Tunnel implements Explorable{
     if (direction == 0){
       blocksHere = new Block[1][length];
       for (int i = 0; i < length; i++){
-        blocksHere[0][i] = new Block(xcor+i, ycor, "Tunnel");
+        if (floor.getBlocksHere()[xcor+i][ycor].getType()!="Room"){
+          blocksHere[0][i] = new Block(xcor+i, ycor, "Tunnel");
+        }
       }
     }
     //If top-bottom, ycor changes
     else{
       blocksHere = new Block[length][1];
       for (int j = 0; j < length; j++){
-        blocksHere[j][0] = new Block(xcor, ycor+j, "Tunnel");
+        if (floor.getBlocksHere()[xcor][ycor+j].getType()!="Room"){
+          blocksHere[j][0] = new Block(xcor, ycor+j, "Tunnel");
+        }
       }
     }
     length += 1; //Length is one more than difference
