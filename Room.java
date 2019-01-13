@@ -191,6 +191,11 @@ public class Room implements Explorable{
     if (theChosenOne.getEndXcor()>this.getEndXcor()){
       right = true;
     }
+
+    //If the block is below, all border blocks on the bottom have a chance of being picked
+    //If the block is left, all border blocks on the left have a chance of being picked
+    //if the block is above, all border blocks on top have a chance to be picked
+    //If the block is on the right, all border blocks have a chance to be picked
     return true;
   }
 

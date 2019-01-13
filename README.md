@@ -91,7 +91,7 @@ Rachel:
 
 **Tuesday 1/8/19**
 
-Kevin: 
+Kevin:
 - Worked on stuff in the game class such as adding constructors that utilize command line arguments, catching the proper exceptions, and moving functions around to make them easier to use (e.g. faintPlayer has been moved to Game)
 - Unfortunately all of the computers in the lab just shut off at the end bell before I could commit and push the latest commits and SSHing in is giving me some kind of TLS error. Whoever reads this will just have to take my word for it :)
 
@@ -106,3 +106,47 @@ Rachel:
   - Room.java
     - Success! tooClose functions properly!
     - Added comments to better show how tooClose() works
+
+**Wednesday 1/9/19**
+
+Rachel:
+  - Floor.java
+    - Added fields to keep track of tunnels and successful rooms
+    - Added method headers for createTunnel and createTunnels (not sure about params yet tho)
+  - Tunnel.java
+    - Started nextToTunnel and nextToRoom functions... but have yet to be tested T-T
+    - Added documentation
+    - Added direction field to keep track of orientation
+    - eyyyyy it compiles but maybe doesn't work? :/
+  - Room.java
+    - Added getters for startXcor, startYcor, endXcor, endYcor
+    - Added documentation for toString()
+    - Added field Blocks[] borderBlocks in preparation for creating Tunnels
+      - Will chose a random borderBlock from one Room and try to make a series of Tunnels to connect with another Room's random borderBlock... but how is the question...
+
+Kevin:
+- Instantiating the floor required moving the terminal creation commands to the front of main as the floor constructor requires the terminal width/length.
+- Turns out game wasn't even being insantiated properly. Can't do it in a try catch, so I moved the code outside of them.
+- Worked out the logic allowing the aforementioned to work, such as tossing out the game if the args.length is less than 0, only trying the instantiation of seed if the length of args is >= 2 so it doesn't interfere with the case where the user only provides a name, and instantiating game after the try catch block since I am now 100% sure that the arguments work.
+- Tomorrow I'll try and get the floor on screen, since I've gotten the instantiation of it down.
+
+**Thursday 1/10/19**
+
+Kevin:
+- As per Mr. K's instructions, I have moved the main from Game.java to Driver.java to avoid confusion while coding.
+- Grouped related code together in main   
+- Simplified the interface by removing the screen showing key presses, and the only timer on screen being a seconds timer.
+- get functions in various classes (especially Game) to interact with main (thanks for suggesting getFloor Mr. K).
+- Random spawning mechanism - spawns the character into a room, not blank space or anywhere inappropriate. 
+- Spawning can be set as well, if a seed is provided via a command-line argument.
+- Changed the xy coordinate system to a col-row coordinate system to conform overall with the rest of the program.
+
+Rachel:
+- Asked Mr. K about how to approach making Tunnels
+- Plan goes as follows (for now)
+  - Within createRooms in Floor.java right after a successful Room has been created, immediately connect a Room to another Room that already exists, if it is not the first Room to be constructed
+  - Tunnels may pass through Rooms, allowing for possibly, multiple Tunnels to pass through a single Room
+    - Ideas for more stages???
+    - Mode where each room only has one Tunnel to connect to a Room?
+    - Mode where visibility of Rooms and Tunnels depends on whether or not a Player is in that Room at the moment
+- In terms of coding, I haven't done anything major yet, but jotted down ideas on how to make Tunnels

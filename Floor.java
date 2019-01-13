@@ -1,4 +1,5 @@
 import java.util.Random;
+
 public class Floor{
   private Block[][] blocksHere; //Array of Blocks (like patches)
   private int floorNumber;
@@ -20,18 +21,26 @@ public class Floor{
     width = terminalWidth;
     length = terminalLength;
     blocksHere = new Block[width][length];
-    for (int x = 0; x < width; x++){
-      for (int y = 0; y < length; y++){
+    for (int x = 0; x < width; x++) {
+      for (int y = 0; y < length; y++) {
         blocksHere[x][y] = new Block(x, y, "Wall");
       }
     }
   }
 
-  //public int getFloor()
+  public Block[][] getMap() {
+    return blocksHere;
+  }
+
+  public Block getBlock(int row, int col) {
+    return blocksHere[row][col];
+  }
+
+  //public int getFloorNumber()
   /**Returns the number of floors the Player has successfully passed
     *@return floorNumber: an int which represents the number of Floors played in the current Game
   */
-  public int getFloor(){
+  public int getFloorNumber(){
     return floorNumber;
   }
   //public int getWidth()
@@ -151,6 +160,6 @@ public class Floor{
       }
     }
     output += "|\n";
-    return output+"End of Floor";
+    return output; //no need for End of Floor?
   }
 }

@@ -110,6 +110,7 @@ public class Tunnel implements Explorable{
         blocksHere[j][0] = new Block(xcor, ycor+j, "Tunnel");
       }
     }
+    length += 1; //Length is one more than difference
   }
 
   //public boolean isExplored()
