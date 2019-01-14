@@ -117,7 +117,7 @@ public class Tunnel implements Explorable{
       for (int i = 0; i < length; i++){
         //Check if Block before was a Room Block, and if not then create a new Tunnel Block
         //System.out.println(floor.getBlocksHere().toString());
-        if (floor.getBlocksHere()[xcor+i][ycor].getType()!="Room"||floor.getBlocksHere()[xcor+i][ycor].getType()!="Opening"){
+        if (floor.getBlocksHere()[xcor+i][ycor].getType()!="Room"&&floor.getBlocksHere()[xcor+i][ycor].getType()!="Opening"){
           blocksHere[0][i] = new Block(xcor+i, ycor, "Tunnel");
         }
         //Otherwise add the Block already there to blocksHere
@@ -131,7 +131,7 @@ public class Tunnel implements Explorable{
       blocksHere = new Block[length][1];
       for (int j = 0; j < length; j++){
         //Check if Block before was a Room Block, and if not then create a new Tunnel Block
-        if (floor.getBlocksHere()[xcor][ycor+j].getType()!="Room"||floor.getBlocksHere()[xcor][ycor+j].getType()!="Opening"){
+        if (floor.getBlocksHere()[xcor][ycor+j].getType()!="Room"&&floor.getBlocksHere()[xcor][ycor+j].getType()!="Opening"){
           blocksHere[j][0] = new Block(xcor, ycor+j, "Tunnel");
         }
         //Otherwise add the Block already there to blocksHere
