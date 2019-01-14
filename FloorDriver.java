@@ -32,10 +32,10 @@ public class FloorDriver{
     //System.out.println(a.toString());
 
     //Testing Room constructors
-    /*Room z = new Room(0, 0, 5, 5);
-    System.out.println(z.toString());
-    Room y = new Room(2, 6, 7, 8);
-    System.out.println(y.toString());*/
+    //Room z = new Room(0, 0, 5, 5);
+    //System.out.println(z.toString());
+    //Room y = new Room(2, 6, 7, 8);
+    //System.out.println(y.toString());
 
     //Testing tooClose
     //Room roomOriginal = new Room(4, 4, 7, 7);
