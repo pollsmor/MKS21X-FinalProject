@@ -19,8 +19,8 @@ public class Room implements Explorable{
     int xcor = start.getX();
     int ycor = start.getY();
     //Storing length and width
-    width = ycor - end.getY();
-    length = xcor - end.getX();
+    width = xcor - end.getX();
+    length = ycor - end.getY();
     width ++;
     length ++;
     startXcor = xcor;
@@ -30,8 +30,8 @@ public class Room implements Explorable{
     blocksHere = new Block[length][width];
     borderBlocks = new ArrayList<Block>(2*width + 2* length - 2);
     //int indexBorderBlocks = 0;
-    for (int x = 0; x < length; x++){
-      for (int y = 0; y < width; y++){
+    for (int x = 0; x < width; x++){
+      for (int y = 0; y < length; y++){
         blocksHere[x][y] = new Block(xcor+x,ycor+y,"Room");
         //If the xcors equal startXcor or endXcor or the ycors equal startYcor or endYcor, add it to borderBlocks list
         if(blocksHere[x][y].getX()==startXcor || blocksHere[x][y].getY()==startYcor
@@ -56,18 +56,18 @@ public class Room implements Explorable{
     startYcor = newStartYcor;
     endXcor = newEndXcor;
     endYcor = newEndYcor;
-    width = endYcor - startYcor;
-    length = endXcor - startXcor;
+    width = endXcor - startXcor;
+    length = endYcor - startYcor;
     width++;
     length++;
     blocksHere = new Block[length][width];
     borderBlocks = new ArrayList<Block>(2*width + 2* length);
     //int indexBorderBlocks = 0;
-    for (int x = 0; x < length; x++){
-      for (int y = 0; y < width; y++){
+    for (int y = 0; y < length; y++){
+      for (int x = 0; x < width; x++){
         blocksHere[x][y] = new Block(startXcor+x,startYcor+y,"Room");
         //If the xcors equal startXcor or endXcor or the ycors equal startYcor or endYcor, add it to borderBlocks list
-        if (x == 0 || y== 0 || x == length || y==width){
+        if (x == 0 || y== 0 || x == width || y==length){
           borderBlocks.add(blocksHere[x][y]);
           //System.out.println("Block here: "+ blocksHere[x][y].toString());
         }
@@ -172,17 +172,17 @@ public class Room implements Explorable{
     boolean below = false;
     boolean right = false;
     //Note it's possible for a Room to be above, left, and right at the same time compared to another Room
-    //Ex:
+    //Ex: width y
     /* 0 1 2 3 4 5 6 7 8 9
-    0
-    1    theChosenOne
-    2    R R R R R R R R R R     <-- NOT BELOW b/c theChosenOneendYcor is NOT > thisEndYcor
-    3    R R R R R R R R R R     <-- above, b/c theChosenOneStartYcor < thisStartYcor
-    4    R R R R R R R R R R     <-- left, b/c theChosenOneStartXcor < thisStartXcor
-    5    R R R R R R R R R R     <-- right, b/c theChosenOneEndXcor > thisEndXcor
+l   0
+e   1    theChosenOne
+n   2    R R R R R R R R R R     <-- NOT BELOW b/c theChosenOneendYcor is NOT > thisEndYcor
+g   3    R R R R R R R R R R     <-- above, b/c theChosenOneStartYcor < thisStartYcor
+t   4    R R R R R R R R R R     <-- left, b/c theChosenOneStartXcor < thisStartXcor
+h   5    R R R R R R R R R R     <-- right, b/c theChosenOneEndXcor > thisEndXcor
     6        this
     7        R R R R
-    8        R R R R
+x   8        R R R R
     9        R R R R
     10       R R R R
     */

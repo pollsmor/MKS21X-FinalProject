@@ -84,9 +84,9 @@ public class Floor{
     boolean wasOverlap; //Keep track of whether or Room to be created overlaps with any other Room
     Room r, chosenRoom;
     while (successfulRooms < rooms && attempts > 0){
-      startXcor = Math.abs(rnd.nextInt(length - 13)) + 1;
+      startXcor = Math.abs(rnd.nextInt(width - 13)) + 1;
       endXcor = startXcor + rnd.nextInt(8) + 5;
-      startYcor = Math.abs(rnd.nextInt(width - 13)) + 1;
+      startYcor = Math.abs(rnd.nextInt(length - 13)) + 1;
       endYcor = startYcor + rnd.nextInt(8) + 5;
       //System.out.println("startXcor: "+ startXcor +", startYcor: "+startYcor+", endXcor: "+endXcor+", endYcor: "+endYcor);
       wasOverlap = false;
