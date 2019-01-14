@@ -269,4 +269,7 @@ public class Tunnel implements Explorable{
       return "Top-Bottom";
     }
   }
+  public Block[][] getBlocksHere(){
+    return blocksHere;
+  }
 }
