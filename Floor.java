@@ -20,7 +20,7 @@ public class Floor{
     floorNumber = num;
     width = terminalWidth;
     length = terminalLength;
-    blocksHere = new Block[width][length];
+    blocksHere = new Block[length][width];
     for (int x = 0; x < length; x++) {
       for (int y = 0; y < width; y++) {
         blocksHere[x][y] = new Block(x, y, "Wall");
@@ -36,11 +36,11 @@ public class Floor{
     return blocksHere[row][col];
   }
   public void setBlock(int row, int col, Block b){
-    System.out.println("Row: "+row);
-    System.out.println("Col:"+col);
-    System.out.println("blockHere.length: "+blocksHere.length);
-    System.out.println("blocksHere[0].length: "+blocksHere[0].length);
-    blocksHere[row - 1][col - 1] = b;
+    //System.out.println("Row: "+row);
+    //System.out.println("Col: "+col);
+    //System.out.println("blockHere.length: "+blocksHere.length);
+    //System.out.println("blocksHere[0].length: "+blocksHere[0].length);
+    blocksHere[row][col] = new Block(row, col, "Tunnel");
   }
 
   //public int getFloorNumber()
@@ -84,10 +84,10 @@ public class Floor{
     boolean wasOverlap; //Keep track of whether or Room to be created overlaps with any other Room
     Room r, chosenRoom;
     while (successfulRooms < rooms && attempts > 0){
-      startXcor = Math.abs(rnd.nextInt(width - 13)) + 1;
-      endXcor = startXcor + rnd.nextInt(10) + 5;
-      startYcor = Math.abs(rnd.nextInt(length - 13)) + 1;
-      endYcor = startYcor + rnd.nextInt(10) + 5;
+      startXcor = Math.abs(rnd.nextInt(length - 13)) + 1;
+      endXcor = startXcor + rnd.nextInt(8) + 5;
+      startYcor = Math.abs(rnd.nextInt(width - 13)) + 1;
+      endYcor = startYcor + rnd.nextInt(8) + 5;
       //System.out.println("startXcor: "+ startXcor +", startYcor: "+startYcor+", endXcor: "+endXcor+", endYcor: "+endYcor);
       wasOverlap = false;
       //Make sure that rooms don't overlap with each other
@@ -104,11 +104,11 @@ public class Floor{
         if (successfulRooms != 0){
         chosenRoom = roomsHere[rnd.nextInt(successfulRooms)];
         System.out.println(successfulRooms);
-        System.out.println(r.toString());
-        System.out.println(chosenRoom.toString());
-
+        //System.out.println(r.toString());
+        //System.out.println(chosenRoom.toString());
+        this.toString();
         r.connectRooms(chosenRoom, seed, this);
-        System.out.println(seed);
+        //System.out.println(seed);
       }
       roomsHere[successfulRooms]= r;
       successfulRooms++;
@@ -133,7 +133,7 @@ public class Floor{
     //Must also update blocksHere
     for (int x = startXcor; x < endXcor - 1; x++){ // - 1 to avoid index exceptions
       for (int y = startYcor; y < endYcor - 1; y++){
-        this.blocksHere[x][y] = new Block(startXcor+x,startYcor+y,"Room");
+        blocksHere[x][y] = new Block(startXcor+x,startYcor+y,"Room");
       }
     }
     return a;
@@ -153,16 +153,16 @@ public class Floor{
 
   public String toString(){
     String output = "|";
-    for (int y = 0; y < length; y++){
+    for (int y = 0; y < width; y++){
       output += "-";
       //if (y != length - 1){
         //output += " ";
       //}
     }
     output += "|\n";
-    for (int x = 0; x < width; x++){
+    for (int x = 0; x < length; x++){
       output+="|";
-      for (int y = 0; y < length; y++){
+      for (int y = 0; y < width; y++){
         output+= blocksHere[x][y].getData();
         //if (y != length - 1){
         //  output += " ";
@@ -171,7 +171,7 @@ public class Floor{
       output+="|\n";
     }
     output +="|";
-    for (int y = 0; y < length; y++){
+    for (int y = 0; y < width; y++){
       output += "-";
       //if (y != length - 1){
       //  output += " ";
@@ -205,9 +205,9 @@ public class Floor{
   public String toStringClean() {
     String output = "";
 
-    for (int i = 0; i < width; ++i) {
-      for (int j = 0; j < length; ++j) {
-        if (j == length - 1)
+    for (int i = 0; i < length; ++i) {
+      for (int j = 0; j < width; ++j) {
+        if (j == width - 1)
           output += "|";
 
         else
@@ -217,7 +217,7 @@ public class Floor{
       output += '\n';
     }
 
-    for (int i = 0; i < length; ++i)
+    for (int i = 0; i < width; ++i)
       output += '-';
 
     return output;
