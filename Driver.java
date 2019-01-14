@@ -85,6 +85,7 @@ public class Driver {
     String red = "\u001B[31m";
     String green = "\u001B[32m";
     String resetColor = "\u001B[0m";
+    String bgWhite = "\u001B[47m";
 
     //Print the game's UI elements
     putString(0, 0, terminal, game.getFloor().toStringClean());
@@ -122,10 +123,9 @@ public class Driver {
     while (running) {
       terminal.moveCursor(col, row);
       terminal.applyForegroundColor(Terminal.Color.GREEN); //Green is nice, right?
-      terminal.applySGR(Terminal.SGR.ENTER_UNDERLINE);
       terminal.putCharacter('\u04dd'); //was '\u00a4'
-      terminal.applyBackgroundColor(Terminal.Color.DEFAULT);
-      terminal.applyForegroundColor(Terminal.Color.DEFAULT);
+      //terminal.applyBackgroundColor(Terminal.Color.DEFAULT);
+      //terminal.applyForegroundColor(Terminal.Color.DEFAULT);
       terminal.applySGR(Terminal.SGR.RESET_ALL);
 
       Key key = terminal.readInput();
