@@ -152,7 +152,13 @@ public class Floor{
   //}
 
   public String toString(){
-    String output = "|";
+    String output = " |";
+    int n = 0;
+    for (int y = 0; y < width; y++){
+      output += n%10;
+      n++;
+    }
+    output += "\n";
     for (int y = 0; y < width; y++){
       output += "-";
       //if (y != length - 1){
@@ -160,8 +166,10 @@ public class Floor{
       //}
     }
     output += "|\n";
+    n = 0;
     for (int x = 0; x < length; x++){
-      output+="|";
+      output+=n%10+"|";
+      n++;
       for (int y = 0; y < width; y++){
         output+= blocksHere[x][y].getData();
         //if (y != length - 1){
