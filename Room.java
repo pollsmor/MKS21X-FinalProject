@@ -343,7 +343,7 @@ public class Room implements Explorable{
                         path horizontal first
             */
             corner1 = new Block(randomXcor+thisBlock.getX(),thisBlock.getY(),"Tunnel");
-            section1 = new Tunnel(corner1, thisBlock, floor);
+            section1 = new Tunnel(thisBlock, corner1, floor);
             corner2 = new Block(randomXcor+thisBlock.getX(), randomYcor+TCO.getY(), "Tunnel");
             section2 = new Tunnel(corner1, corner2, floor);
             corner3 = new Block(TCO.getX(),randomYcor+TCO.getY(), "Tunnel");
