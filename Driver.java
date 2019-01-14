@@ -204,6 +204,10 @@ public class Driver {
       putString(length - 10, 4, terminal, "" + game.getPlayer().getLevel());
       putString(length - 10, 5, terminal, "" + game.getPlayer().getAttack());
       putString(length - 10, 6, terminal, "" + game.getPlayer().getDefense());
+      putString(length - 10, 8, terminal, "" + game.getPlayer().getHunger());
+      putString(length - 10, 9, terminal, "" + game.getPlayer().getMoney());
+      putString(length - 10, 10, terminal, "" + game.getPlayer().getXP());
+      putString(length - 10, 11, terminal, "" + game.getPlayer().getScore());
 
       long tEnd = System.currentTimeMillis();
       long millis = tEnd - tStart;
