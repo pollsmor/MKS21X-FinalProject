@@ -19,10 +19,10 @@ public class FloorDriver{
     }
     Floor a = new Floor(1, width, length);
     //System.out.println(a.toString());
-    a.createRooms(seed);
     System.out.println("Width: "+ width);
     System.out.println("Length: "+ length);
     System.out.println("Seed: "+seed);
+    a.createRooms(seed);
     System.out.println(a.toString());
     //a.createRoom(0, 0, 2, 2);
     //System.out.println(a.toString());
@@ -77,6 +77,7 @@ public class FloorDriver{
     //Testing constructor Tunnel(int startXcor, int startYcor, int newLength, boolean isHorizontal)
     //Tunnel tuna = new Tunnel(5, 5, 2, true, true, a);
     //System.out.println(tuna.toString()+"\n");
+    //System.out.println(a.toString());
     /*System.out.println(tuna.getLength());
     System.out.println(tuna.getStartBlock().toString());
     System.out.println(tuna.getEndBlock().toString());*/
@@ -94,8 +95,10 @@ public class FloorDriver{
 
     //Testing constructor Tunnel(Block start, Block end)
     //Block bleh = new Block(9, 9,"Tunnel");
-    //Block blah = new Block (9, 10, "Tunnel");
+    //Block blah = new Block (9, 13, "Tunnel");
+    //Should be 5 long
     //Tunnel bluh = new Tunnel(bleh, blah, a);
+    //System.out.println(a.toString());
     //System.out.println(bluh.getLength());
     //System.out.println(bluh.toString());
     //System.out.println();
