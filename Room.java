@@ -241,8 +241,9 @@ public class Room implements Explorable{
       }
     }
     //System.out.println("Size:"+pThis.size());
-    Block thisBlock = pThis.get(Math.abs(rnd.nextInt(pThis.size())));
-    thisBlock.setType("Opening");
+    //Block thisBlock = pThis.get(Math.abs(rnd.nextInt(pThis.size())));
+    Block thisBlock = this.blocksHere[rnd.nextInt(this.blocksHere.length)][rnd.nextInt(this.blocksHere[0].length)];
+    //thisBlock.setType("Opening");
     //Changing the Block in floor to Opening
 
     floor.getBlocksHere()[thisBlock.getX()][thisBlock.getY()] = thisBlock;
@@ -278,8 +279,10 @@ public class Room implements Explorable{
       }
     }
     //System.out.println("Size:"+pTCO.size());
-    Block TCO = pTCO.get(rnd.nextInt(pTCO.size()));
-    TCO.setType("Opening");
+    //Block TCO = pTCO.get(rnd.nextInt(pTCO.size()));
+
+    Block TCO = theChosenOne.blocksHere[rnd.nextInt(theChosenOne.blocksHere.length)][rnd.nextInt(theChosenOne.blocksHere[0].length)];
+    //TCO.setType("Opening");
     //Changing the Block in floor to Opening
 
     floor.getBlocksHere()[TCO.getX()][TCO.getY()] = TCO;
@@ -303,14 +306,7 @@ public class Room implements Explorable{
       else{
         connector = new Tunnel(TCO, thisBlock, floor);
       }
-      Block b;
-      for (int i = 0; i < connector.getBlocksHere().length; i++){
-        for(int j = 0; j < connector.getBlocksHere()[i].length;j++){
-          b = connector.getBlocksHere()[i][j];
-          System.out.println("b.getX(),b.getY(): "+ b.getX()+", "+b.getY());
-          floor.getBlocksHere()[b.getX()][b.getY()] = new Block(b.getX(), b.getY(), "Tunnel");
-        }
-      }
+      floor.addTunnel(connector);
     }
     else if (deltaY == 0){
       //mean this is a horizontal Tunnel
@@ -320,14 +316,7 @@ public class Room implements Explorable{
       else{
         connector = new Tunnel(TCO, thisBlock, floor);
       }
-      Block b;
-      for (int i = 0; i < connector.getBlocksHere().length; i++){
-        for(int j = 0; j < connector.getBlocksHere()[i].length;j++){
-          b = connector.getBlocksHere()[i][j];
-          System.out.println("b.getX(),b.getY(): "+ b.getX()+", "+b.getY());
-          floor.getBlocksHere()[b.getX()][b.getY()] = new Block(b.getX(), b.getY(), "Tunnel");
-        }
-      }
+      floor.addTunnel(connector);
     }
 
     //If thisBlock and TCO don't have the same xcor nor ycor...
