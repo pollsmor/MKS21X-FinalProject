@@ -261,13 +261,8 @@ public class Tunnel implements Explorable{
   public Block getEndBlock(){
     return endBlock;
   }
-  public String getDirection(){
-    if (direction == 0){
-      return "Left-Right";
-    }
-    else{
-      return "Top-Bottom";
-    }
+  public int getDirection(){
+    return direction;
   }
   public Block[][] getBlocksHere(){
     return blocksHere;
