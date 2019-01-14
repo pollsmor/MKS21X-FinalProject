@@ -1,4 +1,4 @@
-//API : http://mabe02.github.io/lanterna/apidocs/2.1/
+﻿//API : http://mabe02.github.io/lanterna/apidocs/2.1/
 import com.googlecode.lanterna.terminal.Terminal.SGR;
 import com.googlecode.lanterna.TerminalFacade;
 import com.googlecode.lanterna.input.Key;
@@ -56,7 +56,7 @@ public class Driver {
     int width = terminalSize.getRows();
     int length = terminalSize.getColumns();
     //Minimum terminal size requirement - prevents index exceptions and having too little space to work with
-    if (length < 55 || width < 20) {
+    if (length < 60 || width < 20) {
       terminal.exitPrivateMode();
       System.out.println("This game can only be played on a terminal at least 55px in length, and 20px in width.");
       System.exit(0);
