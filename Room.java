@@ -67,7 +67,7 @@ public class Room implements Explorable{
       for (int y = 0; y < width; y++){
         blocksHere[x][y] = new Block(startXcor+x,startYcor+y,"Room");
         //If the xcors equal startXcor or endXcor or the ycors equal startYcor or endYcor, add it to borderBlocks list
-        if (x == 0 || y== 0 || x == width || y==length){
+        if (x == 0 || y== 0 || x == length || y==width){
           borderBlocks.add(blocksHere[x][y]);
           //System.out.println("Block here: "+ blocksHere[x][y].toString());
         }
@@ -210,74 +210,74 @@ public class Room implements Explorable{
     ArrayList<Block> pThis = new ArrayList<Block>(this.getBlocksHere().length); //ArrayList of possible borderBlocks to choose one end of the Tunnel
     ArrayList<Block> pTCO = new ArrayList<Block>(theChosenOne.getBlocksHere().length); //ArrayList of possible borderBlocks to choose the other end of the Tunnel
     //Getting a random borderBlock of this
-    System.out.println("Above, left, below, right"+above+left+below+right);
+    /*System.out.println("Above, left, below, right"+above+left+below+right);
     System.out.println("This.startYcor: "+this.getStartYcor());
     System.out.println("This.startXcor: "+this.getStartXcor());
     System.out.println("This.endYcor: "+this.getEndYcor());
     System.out.println("This.endXcor: "+this.getEndXcor());
     System.out.println("This.blocksHere.length: "+this.blocksHere.length);
-    System.out.println("This.blocksHere[0].length: "+this.blocksHere[0].length);
+    System.out.println("This.blocksHere[0].length: "+this.blocksHere[0].length);*/
     for (int x = 0; x < this.blocksHere.length; x++){
       for (int y = 0; y < this.blocksHere[0].length; y++){
         //If is below, all border blocks on the bottom have a chance of being picked
-        System.out.println("X,Y: "+x+", "+y);
-        System.out.println("blocksHere[x][y]: "+blocksHere[x][y].getX()+", "+blocksHere[x][y].getY());
-        if (below && (blocksHere[x][y].getY() == this.getEndYcor())){
+        //System.out.println("X,Y: "+x+", "+y);
+        //System.out.println("blocksHere[x][y]: "+blocksHere[x][y].getX()+", "+blocksHere[x][y].getY());
+        if (below && (this.blocksHere[x][y].getY() == this.getEndYcor())){
           pThis.add(this.blocksHere[x][y]);
         }
         //If the block is left, all border blocks on the left have a chance of being picked
-        if (left && (blocksHere[x][y].getX() == this.getStartXcor())){
+        if (left && (this.blocksHere[x][y].getX() == this.getStartXcor())){
           pThis.add(this.blocksHere[x][y]);
         }
         //if the block is above, all border blocks on top have a chance to be picked
-        if (above && (blocksHere[x][y].getY() == this.getStartYcor())){
+        if (above && (this.blocksHere[x][y].getY() == this.getStartYcor())){
           pThis.add(this.blocksHere[x][y]);
         }
         //If the block is on the right, all border blocks have a chance to be picked
-        if (right && (blocksHere[x][y].getX() == this.getEndXcor())){
+        if (right && (this.blocksHere[x][y].getX() == this.getEndXcor())){
           pThis.add(this.blocksHere[x][y]);
         }
-        System.out.println("Size:"+pThis.size());
+        //System.out.println("Size:"+pThis.size());
       }
     }
-    System.out.println("Size:"+pThis.size());
+    //System.out.println("Size:"+pThis.size());
     Block thisBlock = pThis.get(Math.abs(rnd.nextInt(pThis.size())));
     thisBlock.setType("Opening");
     //Changing the Block in floor to Opening
 
     floor.getBlocksHere()[thisBlock.getX()][thisBlock.getY()] = thisBlock;
     //Getting a random borderBlock of theChosenOne
-    //Note: sometimes its impossible to choose a certain Block
-    System.out.println("theChosenOne.startYcor: "+theChosenOne.getStartYcor());
+    /*System.out.println("theChosenOne.startYcor: "+theChosenOne.getStartYcor());
     System.out.println("theChosenOne.startXcor: "+theChosenOne.getStartXcor());
     System.out.println("theChosenOne.endYcor: "+theChosenOne.getEndYcor());
     System.out.println("theChosenOne.endXcor: "+theChosenOne.getEndXcor());
     System.out.println("theChosenOne.blocksHere.length: "+theChosenOne.blocksHere.length);
     System.out.println("theChosenOne.blocksHere[0].length: "+theChosenOne.blocksHere[0].length);
+    */
     for (int x = 0; x < theChosenOne.blocksHere.length; x++){
       for (int y = 0; y < theChosenOne.blocksHere[0].length; y++){
         //If is below, all border blocks on the bottom have a chance of being picked
-        System.out.println("X,Y: "+x+", "+y);
-        System.out.println("blocksHere[x][y]: "+theChosenOne.blocksHere[x][y].getX()+", "+theChosenOne.blocksHere[x][y].getY());
-        if (below && (theChosenOne.blocksHere[x][y].getY() == theChosenOne.getEndYcor())){
+        //System.out.println("X,Y: "+x+", "+y);
+        //System.out.println("blocksHere[x][y]: "+theChosenOne.blocksHere[x][y].getX()+", "+theChosenOne.blocksHere[x][y].getY());
+        if (below && (theChosenOne.blocksHere[x][y].getY() == theChosenOne.getStartYcor())){
           pTCO.add(theChosenOne.blocksHere[x][y]);
         }
         //If the block is left, all border blocks on the left have a chance of being picked
-        if (left && (theChosenOne.blocksHere[x][y].getX() == theChosenOne.getStartXcor())){
+        if (left && (theChosenOne.blocksHere[x][y].getX() == theChosenOne.getEndXcor())){
           pTCO.add(theChosenOne.blocksHere[x][y]);
         }
         //if the block is above, all border blocks on top have a chance to be picked
-        if (above && (theChosenOne.blocksHere[x][y].getY() == theChosenOne.getStartYcor())){
+        if (above && (theChosenOne.blocksHere[x][y].getY() == theChosenOne.getEndYcor())){
           pTCO.add(theChosenOne.blocksHere[x][y]);
         }
         //If the block is on the right, all border blocks have a chance to be picked
-        if (right && (theChosenOne.blocksHere[x][y].getX() == theChosenOne.getEndXcor())){
+        if (right && (theChosenOne.blocksHere[x][y].getX() == theChosenOne.getStartXcor())){
           pTCO.add(theChosenOne.blocksHere[x][y]);
         }
-        System.out.println("Size:"+pTCO.size());
+        //System.out.println("Size:"+pTCO.size());
       }
     }
-    System.out.println("Size:"+pTCO.size());
+    //System.out.println("Size:"+pTCO.size());
     Block TCO = pTCO.get(rnd.nextInt(pTCO.size()));
     TCO.setType("Opening");
     //Changing the Block in floor to Opening
@@ -303,9 +303,12 @@ public class Room implements Explorable{
       else{
         connector = new Tunnel(TCO, thisBlock, floor);
       }
-      for (int i = 0; i < connector.getLength(); i++){
-        for(Block b: connector.getBlocksHere()[0]){
-          floor.setBlock(b.getX(), b.getY(), b);
+      Block b;
+      for (int i = 0; i < connector.getBlocksHere().length; i++){
+        for(int j = 0; j < connector.getBlocksHere()[i].length;j++){
+          b = connector.getBlocksHere()[i][j];
+          System.out.println("b.getX(),b.getY(): "+ b.getX()+", "+b.getY());
+          floor.getBlocksHere()[b.getX()][b.getY()] = new Block(b.getX(), b.getY(), "Tunnel");
         }
       }
     }
@@ -317,9 +320,12 @@ public class Room implements Explorable{
       else{
         connector = new Tunnel(TCO, thisBlock, floor);
       }
-      for (int i = 0; i < connector.getLength(); i++){
-        for(Block b: connector.getBlocksHere()[i]){
-          floor.setBlock(b.getX(), b.getY(), b);
+      Block b;
+      for (int i = 0; i < connector.getBlocksHere().length; i++){
+        for(int j = 0; j < connector.getBlocksHere()[i].length;j++){
+          b = connector.getBlocksHere()[i][j];
+          System.out.println("b.getX(),b.getY(): "+ b.getX()+", "+b.getY());
+          floor.getBlocksHere()[b.getX()][b.getY()] = new Block(b.getX(), b.getY(), "Tunnel");
         }
       }
     }
@@ -329,8 +335,8 @@ public class Room implements Explorable{
       Block corner1, corner2, corner3;
       int dir=rnd.nextInt(2); //decide which direction to go First
       //Getting Xcors and Ycors of first 2 corners
-      int randomXcor = rnd.nextInt(Math.abs(deltaX)+1);
-      int randomYcor = rnd.nextInt(Math.abs(deltaY)+1);
+      int randomXcor = rnd.nextInt(Math.abs(deltaX)); //the first difference in xcor
+      int randomYcor = rnd.nextInt(Math.abs(deltaY)); //the first difference in ycor
       Tunnel section1, section2, section3, section4;
 
       //-----------------------------------Starting with horizontal Tunnel first---------------------------------//
@@ -352,7 +358,7 @@ public class Room implements Explorable{
             section2 = new Tunnel(corner2, corner1, floor);
             corner3 = new Block(TCO.getX(),randomYcor+TCO.getY(), "Tunnel");
             section3 = new Tunnel(corner2, corner3, floor);
-            section4 = new Tunnel(corner3, TCO, floor);
+            section4 = new Tunnel(TCO, corner3, floor);
           }
           //Case 2
           /*
@@ -411,24 +417,47 @@ public class Room implements Explorable{
             section4= new Tunnel(thisBlock,corner3, floor);
           }
         }
-        for (int i = 0; i < section1.getLength(); i++){ //Horizontal
-          for(Block b: section1.getBlocksHere()[0]){
-            floor.setBlock(b.getX(), b.getY(), b);
+        System.out.println("thisBlock: "+thisBlock.getX()+", "+thisBlock.getY());
+        System.out.println("TCO: "+TCO.getX()+", "+TCO.getY());
+        System.out.println("DeltaX: " +deltaX);
+        System.out.println("DeltaY: " +deltaY);
+        System.out.println("RandomXcor: "+randomXcor);
+        System.out.println("RandomYcor: "+randomYcor);
+        System.out.println("Section1 start: "+ section1.getStartBlock().getX()+", "+ section1.getStartBlock().getY());
+        System.out.println("Section1 end: "+ section1.getEndBlock().getX()+", "+ section1.getEndBlock().getY());
+        Block b;
+        for (int i = 0; i < section1.getBlocksHere().length; i++){ //Horizontal
+          for(int j = 0; j < section1.getBlocksHere()[i].length;j++){
+            b = section1.getBlocksHere()[i][j];
+            System.out.println("b.getX(),b.getY(): "+ b.getX()+", "+b.getY());
+            floor.getBlocksHere()[b.getX()][b.getY()] = new Block(b.getX(), b.getY(), "Tunnel");
           }
         }
-        for (int i = 0; i < section2.getLength(); i++){ //Vertical
-          for(Block b: section2.getBlocksHere()[i]){
-            floor.setBlock(b.getX(), b.getY(), b);
+        System.out.println("Section2 start: "+ section2.getStartBlock().getX()+", "+ section2.getStartBlock().getY());
+        System.out.println("Section2 end: "+ section2.getEndBlock().getX()+", "+ section2.getEndBlock().getY());
+        for (int i = 0; i < section2.getBlocksHere().length; i++){ //Vertical
+          for(int j = 0; j < section2.getBlocksHere()[i].length;j++){
+            b = section2.getBlocksHere()[i][j];
+            System.out.println("b.getX(),b.getY(): "+ b.getX()+", "+b.getY());
+            floor.getBlocksHere()[b.getX()][b.getY()] = new Block(b.getX(), b.getY(), "Tunnel");
           }
         }
-        for (int i = 0; i < section3.getLength(); i++){ //Horiztonal
-          for(Block b: section3.getBlocksHere()[0]){
-            floor.setBlock(b.getX(), b.getY(), b);
+        System.out.println("Section3 start: "+ section3.getStartBlock().getX()+", "+ section3.getStartBlock().getY());
+        System.out.println("Section3 end: "+ section3.getEndBlock().getX()+", "+ section3.getEndBlock().getY());
+        for (int i = 0; i < section3.getBlocksHere().length; i++){ //Horizontal
+          for(int j = 0; j < section3.getBlocksHere()[i].length;j++){
+            b = section3.getBlocksHere()[i][j];
+            System.out.println("b.getX(),b.getY(): "+ b.getX()+", "+b.getY());
+            floor.getBlocksHere()[b.getX()][b.getY()] = new Block(b.getX(), b.getY(), "Tunnel");
           }
         }
-        for (int i = 0; i < section4.getLength(); i++){ //Vertical
-          for(Block b: section4.getBlocksHere()[i]){
-            floor.setBlock(b.getX(), b.getY(), b);
+        System.out.println("Section4 start: "+ section4.getStartBlock().getX()+", "+ section4.getStartBlock().getY());
+        System.out.println("Section4 end: "+ section4.getEndBlock().getX()+", "+ section4.getEndBlock().getY());
+        for (int i = 0; i < section4.getBlocksHere().length; i++){ //Vertical
+          for(int j = 0; j < section4.getBlocksHere()[i].length;j++){
+            b = section4.getBlocksHere()[i][j];
+            System.out.println("b.getX(),b.getY(): "+ b.getX()+", "+b.getY());
+            floor.getBlocksHere()[b.getX()][b.getY()] = new Block(b.getX(), b.getY(), "Tunnel");
           }
         }
       }
@@ -510,24 +539,47 @@ public class Room implements Explorable{
             section4= new Tunnel(corner3, thisBlock, floor);
           }
         }
-        for (int i = 0; i < section1.getLength(); i++){ //Vertical
-          for(Block b: section1.getBlocksHere()[i]){
-            floor.setBlock(b.getX(), b.getY(), b);
+        System.out.println("thisBlock: "+thisBlock.getX()+", "+thisBlock.getY());
+        System.out.println("TCO: "+TCO.getX()+", "+TCO.getY());
+        System.out.println("DeltaX: " +deltaX);
+        System.out.println("DeltaY: " +deltaY);
+        System.out.println("RandomXcor: "+randomXcor);
+        System.out.println("RandomYcor: "+randomYcor);
+        System.out.println("Section1 start: "+ section1.getStartBlock().getX()+", "+ section1.getStartBlock().getY());
+        System.out.println("Section1 end: "+ section1.getEndBlock().getX()+", "+ section1.getEndBlock().getY());
+        Block b;
+        for (int i = 0; i < section1.getBlocksHere().length; i++){ //Horizontal
+          for(int j = 0; j < section1.getBlocksHere()[i].length;j++){
+            b = section1.getBlocksHere()[i][j];
+            System.out.println("b.getX(),b.getY(): "+ b.getX()+", "+b.getY());
+            floor.getBlocksHere()[b.getX()][b.getY()] = new Block(b.getX(), b.getY(), "Tunnel");
           }
         }
-        for (int i = 0; i < section2.getLength(); i++){ //Horizontal
-          for(Block b: section2.getBlocksHere()[0]){
-            floor.setBlock(b.getX(), b.getY(), b);
+        System.out.println("Section2 start: "+ section2.getStartBlock().getX()+", "+ section2.getStartBlock().getY());
+        System.out.println("Section2 end: "+ section2.getEndBlock().getX()+", "+ section2.getEndBlock().getY());
+        for (int i = 0; i < section2.getBlocksHere().length; i++){ //Vertical
+          for(int j = 0; j < section2.getBlocksHere()[i].length;j++){
+            b = section2.getBlocksHere()[i][j];
+            System.out.println("b.getX(),b.getY(): "+ b.getX()+", "+b.getY());
+            floor.getBlocksHere()[b.getX()][b.getY()] = new Block(b.getX(), b.getY(), "Tunnel");
           }
         }
-        for (int i = 0; i < section3.getLength(); i++){ //Vertical
-          for(Block b: section3.getBlocksHere()[i]){
-            floor.setBlock(b.getX(), b.getY(), b);
+        System.out.println("Section3 start: "+ section3.getStartBlock().getX()+", "+ section3.getStartBlock().getY());
+        System.out.println("Section3 end: "+ section3.getEndBlock().getX()+", "+ section3.getEndBlock().getY());
+        for (int i = 0; i < section3.getBlocksHere().length; i++){ //Horizontal
+          for(int j = 0; j < section3.getBlocksHere()[i].length;j++){
+            b = section3.getBlocksHere()[i][j];
+            System.out.println("b.getX(),b.getY(): "+ b.getX()+", "+b.getY());
+            floor.getBlocksHere()[b.getX()][b.getY()] = new Block(b.getX(), b.getY(), "Tunnel");
           }
         }
-        for (int i = 0; i < section4.getLength(); i++){ //Horiztonal
-          for(Block b: section4.getBlocksHere()[0]){
-            floor.setBlock(b.getX(), b.getY(), b);
+        System.out.println("Section4 start: "+ section4.getStartBlock().getX()+", "+ section4.getStartBlock().getY());
+        System.out.println("Section4 end: "+ section4.getEndBlock().getX()+", "+ section4.getEndBlock().getY());
+        for (int i = 0; i < section4.getBlocksHere().length; i++){ //Vertical
+          for(int j = 0; j < section4.getBlocksHere()[i].length;j++){
+            b = section4.getBlocksHere()[i][j];
+            System.out.println("b.getX(),b.getY(): "+ b.getX()+", "+b.getY());
+            floor.getBlocksHere()[b.getX()][b.getY()] = new Block(b.getX(), b.getY(), "Tunnel");
           }
         }
       }
