@@ -19,8 +19,8 @@ public class Room implements Explorable{
     int xcor = start.getX();
     int ycor = start.getY();
     //Storing length and width
-    width = xcor - end.getX();
-    length = ycor - end.getY();
+    width = xcor - end.getX() + 1;
+    length = ycor - end.getY() + 1;
     startXcor = xcor;
     startYcor = ycor;
     endXcor = end.getX();
@@ -54,16 +54,16 @@ public class Room implements Explorable{
     startYcor = newStartYcor;
     endXcor = newEndXcor;
     endYcor = newEndYcor;
-    width = endXcor - startXcor;
-    length = endYcor - startYcor;
-    blocksHere = new Block[width][length];
+    width = endXcor - startXcor + 1;
+    length = endYcor - startYcor + 1;
+    blocksHere = new Block[length][width];
     borderBlocks = new ArrayList<Block>(2*width + 2* length - 2);
     //int indexBorderBlocks = 0;
-    for (int x = 0; x < width; x++){
-      for (int y = 0; y < length; y++){
+    for (int x = 0; x < length; x++){
+      for (int y = 0; y < width; y++){
         blocksHere[x][y] = new Block(startXcor+x,startYcor+y,"Room");
         //If the xcors equal startXcor or endXcor or the ycors equal startYcor or endYcor, add it to borderBlocks list
-        if (x == 0 || y== 0 || x == width-1 || y==length-1){
+        if (x == 0 || y== 0 || x == width || y==length){
           borderBlocks.add(blocksHere[x][y]);
           //System.out.println("Block here: "+ blocksHere[x][y].toString());
         }
@@ -211,25 +211,29 @@ public class Room implements Explorable{
     System.out.println("This.startXcor: "+this.getStartXcor());
     System.out.println("This.endYcor: "+this.getEndYcor());
     System.out.println("This.endXcor: "+this.getEndXcor());
-    for (int y = this.startYcor; y < this.endYcor; y++){
-      for (int x = this.startXcor; x < this.endXcor; x++){
+    System.out.println("This.blocksHere.length: "+this.blocksHere.length);
+    System.out.println("This.blocksHere[0].length: "+this.blocksHere[0].length);
+    for (int x = 0; x < this.blocksHere.length; x++){
+      for (int y = 0; y < this.blocksHere[0].length; y++){
         //If is below, all border blocks on the bottom have a chance of being picked
-        System.out.println("Y,X: "+y+", "+x);
-        if (below && (y == this.getEndYcor())){
-          pThis.add(this.blocksHere[y-this.startYcor][x-this.startXcor]);
+        System.out.println("X,Y: "+x+", "+y);
+        System.out.println("blocksHere[x][y]: "+blocksHere[x][y].getX()+", "+blocksHere[x][y].getY());
+        if (below && (blocksHere[x][y].getY() == this.getEndYcor())){
+          pThis.add(this.blocksHere[x][y]);
         }
         //If the block is left, all border blocks on the left have a chance of being picked
-        if (left && (x == this.getStartXcor())){
-          pThis.add(this.blocksHere[y-this.startYcor][x-this.startXcor]);
+        if (left && (blocksHere[x][y].getX() == this.getStartXcor())){
+          pThis.add(this.blocksHere[x][y]);
         }
         //if the block is above, all border blocks on top have a chance to be picked
-        if (above && (y == this.getStartYcor())){
-          pThis.add(this.blocksHere[y-this.startYcor][x-this.startXcor]);
+        if (above && (blocksHere[x][y].getY() == this.getStartYcor())){
+          pThis.add(this.blocksHere[x][y]);
         }
         //If the block is on the right, all border blocks have a chance to be picked
-        if (right && (x == this.getEndXcor())){
-          pThis.add(this.blocksHere[y-this.startYcor][x-this.startXcor]);
+        if (right && (blocksHere[x][y].getX() == this.getEndXcor())){
+          pThis.add(this.blocksHere[x][y]);
         }
+        System.out.println("Size:"+pThis.size());
       }
     }
     System.out.println("Size:"+pThis.size());
@@ -240,31 +244,41 @@ public class Room implements Explorable{
     floor.getBlocksHere()[thisBlock.getX()][thisBlock.getY()] = thisBlock;
     //Getting a random borderBlock of theChosenOne
     //Note: sometimes its impossible to choose a certain Block
-    for (int y = theChosenOne.startYcor; y < theChosenOne.endYcor+ 1; y++){
-      for (int x = theChosenOne.startXcor; x < theChosenOne.endXcor+ 1; x++){
+    System.out.println("theChosenOne.startYcor: "+theChosenOne.getStartYcor());
+    System.out.println("theChosenOne.startXcor: "+theChosenOne.getStartXcor());
+    System.out.println("theChosenOne.endYcor: "+theChosenOne.getEndYcor());
+    System.out.println("theChosenOne.endXcor: "+theChosenOne.getEndXcor());
+    System.out.println("theChosenOne.blocksHere.length: "+theChosenOne.blocksHere.length);
+    System.out.println("theChosenOne.blocksHere[0].length: "+theChosenOne.blocksHere[0].length);
+    for (int x = 0; x < theChosenOne.blocksHere.length; x++){
+      for (int y = 0; y < theChosenOne.blocksHere[0].length; y++){
         //If is below, all border blocks on the bottom have a chance of being picked
-        if (below && (y == theChosenOne.getEndYcor())){
-          pTCO.add(theChosenOne.blocksHere[y-theChosenOne.startYcor][x-theChosenOne.startXcor]);
+        System.out.println("X,Y: "+x+", "+y);
+        System.out.println("blocksHere[x][y]: "+blocksHere[x][y].getX()+", "+blocksHere[x][y].getY());
+        if (below && (theChosenOne.blocksHere[x][y].getY() == theChosenOne.getEndYcor())){
+          pTCO.add(theChosenOne.blocksHere[x][y]);
         }
         //If the block is left, all border blocks on the left have a chance of being picked
-        if (left && (x == theChosenOne.getStartXcor())){
-          pTCO.add(theChosenOne.blocksHere[y-theChosenOne.startYcor][x-theChosenOne.startXcor]);
+        if (left && (theChosenOne.blocksHere[x][y].getX() == theChosenOne.getStartXcor())){
+          pTCO.add(theChosenOne.blocksHere[x][y]);
         }
         //if the block is above, all border blocks on top have a chance to be picked
-        if (above && (y == theChosenOne.getStartYcor())){
-          pTCO.add(theChosenOne.blocksHere[y-theChosenOne.startYcor][x-theChosenOne.startXcor]);
+        if (above && (theChosenOne.blocksHere[x][y].getY() == theChosenOne.getStartYcor())){
+          pTCO.add(theChosenOne.blocksHere[x][y]);
         }
         //If the block is on the right, all border blocks have a chance to be picked
-        if (right && (x == theChosenOne.getEndXcor())){
-          pTCO.add(theChosenOne.blocksHere[y-theChosenOne.startYcor][x-theChosenOne.startXcor]);
+        if (right && (theChosenOne.blocksHere[x][y].getX() == theChosenOne.getEndXcor())){
+          pTCO.add(theChosenOne.blocksHere[x][y]);
         }
+        System.out.println("Size:"+pTCO.size());
       }
     }
-    Block TCO = pThis.get(rnd.nextInt(pThis.size()));
+    System.out.println("Size:"+pTCO.size());
+    Block TCO = pTCO.get(rnd.nextInt(pTCO.size()));
     TCO.setType("Opening");
     //Changing the Block in floor to Opening
 
-    floor.getBlocksHere()[thisBlock.getX()][thisBlock.getY()] = TCO;
+    floor.getBlocksHere()[TCO.getX()][TCO.getY()] = TCO;
     //Now create a Tunnel from Block thisBlock to Block TCO
     //Finding distances between thisBlock and TCO
     int deltaX = thisBlock.getX()-TCO.getX();
@@ -541,8 +555,8 @@ public class Room implements Explorable{
   */
   public String toString(){
     String output = "";
-    for (int x = 0; x < width; x++){
-      for (int y = 0; y < length; y++){
+    for (int x = 0; x < length; x++){
+      for (int y = 0; y < width; y++){
         output+= blocksHere[x][y].getData();
       }
       output+= "\n";
