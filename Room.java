@@ -335,19 +335,19 @@ public class Room implements Explorable{
           if(deltaY > 0){//if deltaY is positive, thisBlock is below TCO
             //Case 1
             /*
-                                      corner3=====TCO
-                                         |        |
-                corner1===============corner2====corner3     ^Note to self, perhaps we should make a "Door" Block to show where the Tunnels are
-    vertical first |                     |
+                                                 TCO
+                                                  |
+                                      corner2====corner3     ^Note to self, perhaps we should make a "Door" Block to show where the Tunnels are
+                                         |
                 thisBlock=============corner1
                         path horizontal first
             */
             corner1 = new Block(randomXcor+thisBlock.getX(),thisBlock.getY(),"Tunnel");
             section1 = new Tunnel(thisBlock, corner1, floor);
             corner2 = new Block(randomXcor+thisBlock.getX(), randomYcor+TCO.getY(), "Tunnel");
-            section2 = new Tunnel(corner1, corner2, floor);
+            section2 = new Tunnel(corner2, corner1, floor);
             corner3 = new Block(TCO.getX(),randomYcor+TCO.getY(), "Tunnel");
-            section3 = new Tunnel(corner3, corner2, floor);
+            section3 = new Tunnel(corner2, corner3, floor);
             section4 = new Tunnel(corner3, TCO, floor);
           }
           //Case 2
@@ -407,23 +407,23 @@ public class Room implements Explorable{
             section4= new Tunnel(thisBlock,corner3, floor);
           }
         }
-        for (int i = 0; i < section1.getLength(); i++){
-          for(Block b: section1.getBlocksHere()[i]){
+        for (int i = 0; i < section1.getLength(); i++){ //Horizontal
+          for(Block b: section1.getBlocksHere()[0]){
             floor.setBlock(b.getX(), b.getY(), b);
           }
         }
-        for (int i = 0; i < section2.getLength(); i++){
-          for(Block b: section2.getBlocksHere()[0]){
+        for (int i = 0; i < section2.getLength(); i++){ //Vertical
+          for(Block b: section2.getBlocksHere()[i]){
             floor.setBlock(b.getX(), b.getY(), b);
           }
         }
-        for (int i = 0; i < section3.getLength(); i++){
-          for(Block b: section3.getBlocksHere()[i]){
+        for (int i = 0; i < section3.getLength(); i++){ //Horiztonal
+          for(Block b: section3.getBlocksHere()[0]){
             floor.setBlock(b.getX(), b.getY(), b);
           }
         }
-        for (int i = 0; i < section4.getLength(); i++){
-          for(Block b: section4.getBlocksHere()[0]){
+        for (int i = 0; i < section4.getLength(); i++){ //Vertical
+          for(Block b: section4.getBlocksHere()[i]){
             floor.setBlock(b.getX(), b.getY(), b);
           }
         }
@@ -503,26 +503,26 @@ public class Room implements Explorable{
             section2= new Tunnel(corner1, corner2, floor);
             corner3 = new Block(randomXcor+TCO.getX(),thisBlock.getY(), "Tunnel");
             section3= new Tunnel(corner3, corner2, floor);
-            section4= new Tunnel(corner3, TCO, floor);
+            section4= new Tunnel(corner3, thisBlock, floor);
           }
         }
-        for (int i = 0; i < section1.getLength(); i++){
-          for(Block b: section1.getBlocksHere()[0]){
+        for (int i = 0; i < section1.getLength(); i++){ //Vertical
+          for(Block b: section1.getBlocksHere()[i]){
             floor.setBlock(b.getX(), b.getY(), b);
           }
         }
-        for (int i = 0; i < section2.getLength(); i++){
-          for(Block b: section2.getBlocksHere()[i]){
+        for (int i = 0; i < section2.getLength(); i++){ //Horizontal
+          for(Block b: section2.getBlocksHere()[0]){
             floor.setBlock(b.getX(), b.getY(), b);
           }
         }
-        for (int i = 0; i < section3.getLength(); i++){
-          for(Block b: section3.getBlocksHere()[0]){
+        for (int i = 0; i < section3.getLength(); i++){ //Vertical
+          for(Block b: section3.getBlocksHere()[i]){
             floor.setBlock(b.getX(), b.getY(), b);
           }
         }
-        for (int i = 0; i < section4.getLength(); i++){
-          for(Block b: section4.getBlocksHere()[i]){
+        for (int i = 0; i < section4.getLength(); i++){ //Horiztonal
+          for(Block b: section4.getBlocksHere()[0]){
             floor.setBlock(b.getX(), b.getY(), b);
           }
         }
