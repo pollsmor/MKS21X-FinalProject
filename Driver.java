@@ -58,7 +58,7 @@ public class Driver {
     //Minimum terminal size requirement - prevents index exceptions and having too little space to work with
     if (length < 60 || width < 20) {
       terminal.exitPrivateMode();
-      System.out.println("This game can only be played on a terminal at least 55px in length, and 20px in width.");
+      System.out.println("This game can only be played on a terminal at least 60px in length, and 20px in width.");
       System.exit(0);
     }
 
