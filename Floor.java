@@ -97,14 +97,17 @@ public class Floor{
       }
       if (!wasOverlap){ //If there were no overlapping Rooms, create the Room
         r = createRoom(startXcor, startYcor, endXcor, endYcor);
-        roomsHere[successfulRooms]= r;
-        successfulRooms++;
+        if (successfulRooms != 0){
         chosenRoom = roomsHere[rnd.nextInt(successfulRooms)];
         System.out.println(successfulRooms);
         System.out.println(r.toString());
         System.out.println(chosenRoom.toString());
+
         r.connectRooms(chosenRoom, seed, this);
         System.out.println(seed);
+      }
+      roomsHere[successfulRooms]= r;
+      successfulRooms++;
         //Connect to a room
         //Create a tunnel
         //Allow tunnels to pass through each other
