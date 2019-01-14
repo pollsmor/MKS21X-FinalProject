@@ -19,13 +19,15 @@ public class Room implements Explorable{
     int xcor = start.getX();
     int ycor = start.getY();
     //Storing length and width
-    width = xcor - end.getX() + 1;
-    length = ycor - end.getY() + 1;
+    width = xcor - end.getX();
+    length = ycor - end.getY();
+    width ++;
+    length ++;
     startXcor = xcor;
     startYcor = ycor;
     endXcor = end.getX();
     endYcor = end.getY();
-    blocksHere = new Block[width][length];
+    blocksHere = new Block[length][width];
     borderBlocks = new ArrayList<Block>(2*width + 2* length - 2);
     //int indexBorderBlocks = 0;
     for (int x = 0; x < length; x++){
@@ -54,8 +56,10 @@ public class Room implements Explorable{
     startYcor = newStartYcor;
     endXcor = newEndXcor;
     endYcor = newEndYcor;
-    width = endXcor - startXcor + 1;
-    length = endYcor - startYcor + 1;
+    width = endXcor - startXcor;
+    length = endYcor - startYcor;
+    width++;
+    length++;
     blocksHere = new Block[length][width];
     borderBlocks = new ArrayList<Block>(2*width + 2* length - 2);
     //int indexBorderBlocks = 0;
