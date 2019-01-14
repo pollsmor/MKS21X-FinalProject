@@ -325,8 +325,8 @@ public class Room implements Explorable{
       Block corner1, corner2, corner3;
       int dir=rnd.nextInt(2); //decide which direction to go First
       //Getting Xcors and Ycors of first 2 corners
-      int randomXcor = rnd.nextInt(Math.abs(deltaX+1));
-      int randomYcor = rnd.nextInt(Math.abs(deltaY+1));
+      int randomXcor = rnd.nextInt(Math.abs(deltaX)+1);
+      int randomYcor = rnd.nextInt(Math.abs(deltaY)+1);
       Tunnel section1, section2, section3, section4;
 
       //-----------------------------------Starting with horizontal Tunnel first---------------------------------//
