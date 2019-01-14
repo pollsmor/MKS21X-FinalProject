@@ -254,7 +254,7 @@ public class Room implements Explorable{
       for (int y = 0; y < theChosenOne.blocksHere[0].length; y++){
         //If is below, all border blocks on the bottom have a chance of being picked
         System.out.println("X,Y: "+x+", "+y);
-        System.out.println("blocksHere[x][y]: "+blocksHere[x][y].getX()+", "+blocksHere[x][y].getY());
+        System.out.println("blocksHere[x][y]: "+theChosenOne.blocksHere[x][y].getX()+", "+theChosenOne.blocksHere[x][y].getY());
         if (below && (theChosenOne.blocksHere[x][y].getY() == theChosenOne.getEndYcor())){
           pTCO.add(theChosenOne.blocksHere[x][y]);
         }
