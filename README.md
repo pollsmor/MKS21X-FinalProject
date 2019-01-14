@@ -172,3 +172,14 @@ Rachel:
   - Room.java
   - Floor.java
   - FloorDriver.java
+  
+  **Sunday 1/13/19**
+  
+Kevin: 
+- Borders to keep players inside rooms didn't work but thanks to Rachel setting every block in the array that is empty to a Wall type, it was done in 2 minutes flat. Now players can't get out of the room. 
+- Different toString used to maintain the same coordinate system between what is being printed on screen and the blocksHere[][] array in Floor.java. Borders are drawn to the right and the bottom of the game window for visual flair - it does not affect the coordinate system. 
+- Fixed seeds not working properly. Previously if providing a second parameter the seed would always be set to 0, had something to do with how the constructors used this. Removed all uses of "this" from Game.java, Player.java, and Pokemon.java.
+- Added necessary getters for Player and Pokemon to help with: 
+- UI! Printing extra stuff on screen for visual flair. HP, level, XP, floor number, attack stat, defense stat, money, etc.
+- Colored the HP stat red and (how did I forget to mention this in the previous comment) colored the Pokemon's name green, with the help of ANSI codes. 
+- Added back the Delete key causing "death" to show off for the demo. 

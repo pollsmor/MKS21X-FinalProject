@@ -22,4 +22,16 @@ public class Player extends Pokemon {
   public void basicAttack(Enemy enemy, int damage) {
     enemy.setHP(-1 * damage);
   }
+
+  public int getXP() {
+    return xp;
+  }
+
+  public int getMoney() {
+    return money;
+  }
+
+  public int getScore() {
+    return score;
+  }
 }

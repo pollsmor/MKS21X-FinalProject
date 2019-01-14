@@ -14,13 +14,13 @@ public abstract class Pokemon {
   private Move move3;
   private Move move4;
 
-  public Pokemon(String name, int level, int maxHP, int attack, int defense) {
-    name = this.name;
-    level = this.level;
-    maxHP = this.maxHP;
+  public Pokemon(String inputName, int inputLevel, int inputMaxHP, int inputAttack, int inputDefense) {
+    name = inputName;
+    level = inputLevel;
+    maxHP = inputMaxHP;
     currentHP = maxHP;
-    attack = this.attack;
-    defense = this.defense;
+    attack = inputAttack;
+    defense = inputDefense;
     stepsTaken = 0;
   }
 
@@ -30,6 +30,22 @@ public abstract class Pokemon {
       if (currentHP < maxHP)
         ++currentHP;
     }
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public int getLevel() {
+    return level;
+  }
+
+  public int getAttack() {
+    return attack;
+  }
+
+  public int getDefense() {
+    return defense;
   }
 
   public int getHP() {
