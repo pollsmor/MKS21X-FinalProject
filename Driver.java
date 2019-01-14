@@ -55,7 +55,7 @@ public class Driver {
     TerminalSize terminalSize = terminal.getTerminalSize();
     int width = terminalSize.getRows();
     int length = terminalSize.getColumns();
-    //Minimum terminal size requirement - prevents index exceptions and having too small of a map
+    //Minimum terminal size requirement - prevents index exceptions and having too little space to work with
     if (length < 55 || width < 20) {
       terminal.exitPrivateMode();
       System.out.println("This game can only be played on a terminal at least 55px in length, and 20px in width.");
@@ -82,9 +82,10 @@ public class Driver {
       randgenRow = new Random(seed + 2);
     }
 
+    //Color text uses!
     String red = "\u001B[31m";
     String green = "\u001B[32m";
-    String resetColor = "\u001B[0m";
+    String resetColor = "\u001B[0m"; //need to add this or the whole program will be the selected color
 
     //Print the game's UI elements
     putString(0, 0, terminal, game.getFloor().toStringClean());
@@ -105,15 +106,14 @@ public class Driver {
 
     boolean running = true;
     boolean alive = true; //controls the inner while loop
-    String lastKey = "";
 
     //Random spawn generation
     int col = 0;
     int row = 0;
     boolean spawnFound = false;
     while (!spawnFound) {
-      col = Math.abs(randgenCol.nextInt() % (length * 3/4));
-      row = Math.abs(randgenRow.nextInt() % (width * 3/4));
+      col = Math.abs(randgenCol.nextInt() % (length * 3/4)); //3/4 is arbitary, I just need to have enough
+      row = Math.abs(randgenRow.nextInt() % (width * 3/4));  //space to the right for UI elements
       if (!game.isWall(col, row)) {
         spawnFound = true;
       }
@@ -121,9 +121,9 @@ public class Driver {
 
     while (running) {
       terminal.moveCursor(col, row);
-      terminal.applyForegroundColor(Terminal.Color.GREEN); //Green is nice, right?
+      terminal.applyForegroundColor(Terminal.Color.GREEN);
       terminal.applySGR(Terminal.SGR.ENTER_UNDERLINE);
-      terminal.putCharacter('\u04dd'); //was '\u00a4'
+      terminal.putCharacter('\u04dd');
       terminal.applyBackgroundColor(Terminal.Color.DEFAULT);
       terminal.applyForegroundColor(Terminal.Color.DEFAULT);
       terminal.applySGR(Terminal.SGR.RESET_ALL);
@@ -199,13 +199,14 @@ public class Driver {
     //----------------------------------------------------------------------------------------------------------------
 
       //Do even when no key is pressed:ßß
+      //Updates the UI elements that aren't static
       putString(length - 10, 0, terminal, "" + game.getLevel());
       putString(length - 10, 3, terminal, red + game.getPlayer().getHP() + resetColor);
       putString(length - 10, 4, terminal, "" + game.getPlayer().getLevel());
       putString(length - 10, 5, terminal, "" + game.getPlayer().getAttack());
       putString(length - 10, 6, terminal, "" + game.getPlayer().getDefense());
       putString(length - 10, 8, terminal, "" + game.getPlayer().getHunger());
-      putString(length - 10, 9, terminal, "" + game.getPlayer().getMoney() + '\u00a5');
+      putString(length - 10, 9, terminal, "" + game.getPlayer().getMoney() + '\u00a5'); //yen symbol
       putString(length - 10, 10, terminal, "" + game.getPlayer().getXP());
       putString(length - 10, 11, terminal, "" + game.getPlayer().getScore());
 

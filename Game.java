@@ -14,7 +14,6 @@ import com.googlecode.lanterna.input.Key;
 import com.googlecode.lanterna.input.KeyMappingProfile;
 
 import java.util.Random;
-import java.util.Arrays;
 
 public class Game {
   private Player player;
