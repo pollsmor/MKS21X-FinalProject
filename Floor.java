@@ -33,7 +33,10 @@ public class Floor{
   }
 
   public Block getBlock(int col, int row) {
-    return blocksHere[row][col];
+    return blocksHere[col][row];
+  }
+  public void setBlock(int col, int row, Block b){
+    blocksHere[col][row] = b;
   }
 
   //public int getFloorNumber()
@@ -75,6 +78,7 @@ public class Floor{
     int startXcor, startYcor, endXcor, endYcor;
     int successfulRooms = 0; //Keep track of how many Rooms were successfully made
     boolean wasOverlap; //Keep track of whether or Room to be created overlaps with any other Room
+    Room r, chosenRoom;
     while (successfulRooms < rooms && attempts > 0){
       startXcor = Math.abs(rnd.nextInt(width - 13)) + 1;
       endXcor = startXcor + rnd.nextInt(10) + 5;
@@ -92,8 +96,15 @@ public class Floor{
         }
       }
       if (!wasOverlap){ //If there were no overlapping Rooms, create the Room
-        roomsHere[successfulRooms]= createRoom(startXcor, startYcor, endXcor, endYcor);
+        r = createRoom(startXcor, startYcor, endXcor, endYcor);
+        roomsHere[successfulRooms]= r;
         successfulRooms++;
+        chosenRoom = roomsHere[rnd.nextInt(successfulRooms)];
+        System.out.println(successfulRooms);
+        System.out.println(r.toString());
+        System.out.println(chosenRoom.toString());
+        r.connectRooms(chosenRoom, seed, this);
+        System.out.println(seed);
         //Connect to a room
         //Create a tunnel
         //Allow tunnels to pass through each other
