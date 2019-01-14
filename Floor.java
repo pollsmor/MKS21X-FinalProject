@@ -21,8 +21,8 @@ public class Floor{
     width = terminalWidth;
     length = terminalLength;
     blocksHere = new Block[width][length];
-    for (int x = 0; x < width; x++) {
-      for (int y = 0; y < length; y++) {
+    for (int x = 0; x < length; x++) {
+      for (int y = 0; y < width; y++) {
         blocksHere[x][y] = new Block(x, y, "Wall");
       }
     }
@@ -32,11 +32,15 @@ public class Floor{
     return blocksHere;
   }
 
-  public Block getBlock(int col, int row) {
-    return blocksHere[col][row];
+  public Block getBlock(int row, int col) {
+    return blocksHere[row][col];
   }
-  public void setBlock(int col, int row, Block b){
-    blocksHere[col][row] = b;
+  public void setBlock(int row, int col, Block b){
+    System.out.println("Row: "+row);
+    System.out.println("Col:"+col);
+    System.out.println("blockHere.length: "+blocksHere.length);
+    System.out.println("blocksHere[0].length: "+blocksHere[0].length);
+    blocksHere[row - 1][col - 1] = b;
   }
 
   //public int getFloorNumber()
