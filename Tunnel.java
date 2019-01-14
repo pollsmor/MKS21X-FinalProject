@@ -23,23 +23,23 @@ public class Tunnel implements Explorable{
     Block start, end;
     if (isStart){ //Coordinates given are of the startBlock
       start = new Block(startXcor, startYcor, "Tunnel");
-      if (isHorizontal){ //same ycor
-        end = new Block(startXcor + length, startYcor, "Tunnel");
+      if (isHorizontal){ //same xcor
+        end = new Block(startXcor, startYcor+length, "Tunnel");
         direction = 0; //Setting orientation to left-right
       }
-      else{ //same xcor
-        end = new Block(startXcor, startYcor + length, "Tunnel");
+      else{ //same ycor
+        end = new Block(startXcor+length, startYcor, "Tunnel");
         direction = 1; //Setting orientation to top-bottom
       }
     }
     else{ //Coordinates given are of the endBlock
       end = new Block(startXcor,startYcor, "Tunnel");
-      if (isHorizontal){ //same ycor
-        start = new Block(startXcor - length, startYcor, "Tunnel");
+      if (isHorizontal){ //same xcor
+        start = new Block(startXcor, startYcor - length, "Tunnel");
         direction = 0; //Setting orientation to left-right
       }
       else{ //same xcor
-        start = new Block(startXcor, startYcor - length, "Tunnel");
+        start = new Block(startXcor - length, startYcor, "Tunnel");
         direction = 1; //Setting orientation to top-bottom
       }
     }
