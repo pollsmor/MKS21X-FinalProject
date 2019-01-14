@@ -106,7 +106,7 @@ public class Floor{
         System.out.println(successfulRooms);
         //System.out.println(r.toString());
         //System.out.println(chosenRoom.toString());
-        this.toString();
+        System.out.println(this.toString());
         r.connectRooms(chosenRoom, seed, this);
         //System.out.println(seed);
       }
@@ -221,5 +221,15 @@ public class Floor{
       output += '-';
 
     return output;
+  }
+  public void addTunnel(Tunnel t){
+    Block b;
+    for (int i = 0; i < t.getBlocksHere().length; i++){ //Horizontal
+      for(int j = 0; j < t.getBlocksHere()[i].length;j++){
+        b = t.getBlocksHere()[i][j];
+        System.out.println("b.getX(),b.getY(): "+ b.getX()+", "+b.getY());
+        blocksHere[b.getX()][b.getY()] = new Block(b.getX(), b.getY(), "Tunnel");
+      }
+    }
   }
 }
