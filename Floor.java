@@ -107,7 +107,7 @@ public class Floor{
         //System.out.println(r.toString());
         //System.out.println(chosenRoom.toString());
         System.out.println(this.toString());
-        r.connectRooms(chosenRoom, seed, this);
+        //r.connectRooms(chosenRoom, seed, this);
         //System.out.println(seed);
       }
       roomsHere[successfulRooms]= r;
@@ -131,9 +131,9 @@ public class Floor{
   public Room createRoom(int startXcor, int startYcor, int endXcor, int endYcor){
     Room a = new Room(startXcor, startYcor, endXcor, endYcor);
     //Must also update blocksHere
-    for (int x = startXcor; x < endXcor - 1; x++){ // - 1 to avoid index exceptions
-      for (int y = startYcor; y < endYcor - 1; y++){
-        blocksHere[x][y] = new Block(startXcor+x,startYcor+y,"Room");
+    for (int y = startYcor; y < endYcor - 1; y++){ // - 1 to avoid index exceptions
+      for (int x = startXcor; x < endXcor - 1; x++){
+        blocksHere[y][x] = new Block(startXcor+x,startYcor+y,"Room");
       }
     }
     return a;
@@ -178,7 +178,7 @@ public class Floor{
       }
       output+="|\n";
     }
-    output +="|";
+    output +=" |";
     for (int y = 0; y < width; y++){
       output += "-";
       //if (y != length - 1){
