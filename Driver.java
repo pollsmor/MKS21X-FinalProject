@@ -210,7 +210,7 @@ public class Driver {
 
       //Do even when no key is pressed:ßß
       //putString(6, width * 3/4 + 2, terminal, "" + game.getLevel());
-      //putString(length - 10, 3, terminal, red + game.getPlayer().getHP() + resetColor);
+      putString(5, width * 3/4 + 2, terminal, green + game.getPlayer().getHP() + resetColor);
       //putString(length - 10, 4, terminal, "" + game.getPlayer().getLevel());
       //putString(length - 10, 5, terminal, "" + game.getPlayer().getAttack());
       //putString(length - 10, 6, terminal, "" + game.getPlayer().getDefense());
