@@ -55,10 +55,10 @@ public class Driver {
     TerminalSize terminalSize = terminal.getTerminalSize();
     int width = terminalSize.getRows();
     int length = terminalSize.getColumns();
-    //Minimum terminal size requirement - prevents index exceptions and having too small of a map
-    if (length < 55 || width < 20) {
+    //Minimum terminal size requirement - prevents index exceptions and having too little space to work with
+    if (length < 60 || width < 20) {
       terminal.exitPrivateMode();
-      System.out.println("This game can only be played on a terminal at least 55px in length, and 20px in width.");
+      System.out.println("This game can only be played on a terminal at least 60px in length, and 20px in width.");
       System.exit(0);
     }
 
@@ -84,7 +84,7 @@ public class Driver {
 
     String red = "\u001B[31m";
     String green = "\u001B[32m";
-    String resetColor = "\u001B[0m";
+    String resetColor = "\u001B[0m"; //need to add this or the whole program will be the selected color
     String bgWhite = "\u001B[47m";
 
     //Print the game's UI elements
@@ -106,7 +106,6 @@ public class Driver {
 
     boolean running = true;
     boolean alive = true; //controls the inner while loop
-    String lastKey = "";
 
     //Random spawn generation
     int col = 0;
@@ -122,8 +121,8 @@ public class Driver {
 
     while (running) {
       terminal.moveCursor(col, row);
-      terminal.applyForegroundColor(Terminal.Color.GREEN); //Green is nice, right?
-      terminal.putCharacter('\u04dd'); //was '\u00a4'
+      terminal.applyForegroundColor(Terminal.Color.GREEN);
+      terminal.putCharacter('\u04dd');
       //terminal.applyBackgroundColor(Terminal.Color.DEFAULT);
       //terminal.applyForegroundColor(Terminal.Color.DEFAULT);
       terminal.applySGR(Terminal.SGR.RESET_ALL);
@@ -205,7 +204,7 @@ public class Driver {
       putString(length - 10, 5, terminal, "" + game.getPlayer().getAttack());
       putString(length - 10, 6, terminal, "" + game.getPlayer().getDefense());
       putString(length - 10, 8, terminal, "" + game.getPlayer().getHunger());
-      putString(length - 10, 9, terminal, "" + game.getPlayer().getMoney() + '\u00a5');
+      putString(length - 10, 9, terminal, "" + game.getPlayer().getMoney() + '\u00a5'); //yen symbol
       putString(length - 10, 10, terminal, "" + game.getPlayer().getXP());
       putString(length - 10, 11, terminal, "" + game.getPlayer().getScore());
 
