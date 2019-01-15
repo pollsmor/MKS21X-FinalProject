@@ -56,9 +56,9 @@ public class Driver {
     int width = terminalSize.getRows();
     int length = terminalSize.getColumns();
     //Minimum terminal size requirement - prevents index exceptions and having too little space to work with
-    if (length < 70 || width < 20) {
+    if (length < 70 || width < 21) {
       terminal.exitPrivateMode();
-      System.out.println("This game can only be played on a terminal at least 70px in length, and 20px in width.");
+      System.out.println("This game can only be played on a terminal at least 70px in length, and 21px in width.");
       System.exit(0);
     }
 
@@ -100,21 +100,18 @@ public class Driver {
 
     //Print the game's UI elements
     putString(0, 0, terminal, game.getFloor().toStringClean());
-    //putString(1, width * 3/4 + 2, terminal, "Area: ");
     putString(1, width * 3/4 + 1, terminal, bgWhite + black + game.getPlayer().getName() + resetColor);
-    //putString(1, width * 3/4 + 2, terminal, "Area: ");
-    putString(length - 17, 2, terminal, "----------");
-    putString(length - 17, 3, terminal, red + "HP: " + resetColor);
-    putString(length - 17, 4, terminal, "Level: ");
-    putString(length - 17, 5, terminal, "ATK: ");
-    putString(length - 17, 6, terminal, "DFNSE: ");
-    putString(length - 17, 7, terminal, "----------");
-    putString(length - 17, 8, terminal, "HNGR: ");
-    putString(length - 17, 9, terminal, "Money: ");
-    putString(length - 17, 10, terminal, "XP: ");
-    putString(length - 17, 11, terminal, "Score: ");
-    putString(length - 17, width - 1, terminal, "Time: ");
-    putString(length - 17, width - 2, terminal, "Seed: " + game.getSeed());
+    //Row 1 of stats, below the name
+    putString(1, width * 3/4 + 2, terminal, "HP: ");
+    putString(13, width * 3/4 + 2, terminal, "Level: ");
+    putString(28, width * 3/4 + 2, terminal, "Attack: ");
+    putString(43, width * 3/4 + 2, terminal, "Defense: ");
+    //Row 2 of stats
+    putString(1, width * 3/4 + 3, terminal, "Area: ");
+    putString(13, width * 3/4 + 3, terminal, "Hunger: ");
+    putString(28, width * 3/4 + 3, terminal, "Money: ");
+    putString(length - 17, width - 2, terminal, "Time: " );
+    putString(length - 17, width - 1, terminal, "Seed: " + game.getSeed());
 
     boolean running = true;
     boolean alive = true; //controls the inner while loop
@@ -224,7 +221,7 @@ public class Driver {
       long millis = tEnd - tStart;
       if (millis / 1000 > lastSecond) {
         lastSecond = millis / 1000; //One second has passed.
-        putString(length - 11, width, terminal, lastSecond + "s");
+        putString(length - 11, width - 2, terminal, lastSecond + "s");
       }
     }
 
