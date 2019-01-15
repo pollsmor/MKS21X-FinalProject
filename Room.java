@@ -30,13 +30,13 @@ public class Room implements Explorable{
     blocksHere = new Block[length][width];
     borderBlocks = new ArrayList<Block>(2*width + 2* length - 2);
     //int indexBorderBlocks = 0;
-    for (int x = 0; x < width; x++){
-      for (int y = 0; y < length; y++){
-        blocksHere[x][y] = new Block(xcor+x,ycor+y,"Room");
+    for (int y = 0; y < length; y++){
+      for (int x = 0; x < length; x++){
+        blocksHere[y][x] = new Block(xcor+x,ycor+y,"Room");
         //If the xcors equal startXcor or endXcor or the ycors equal startYcor or endYcor, add it to borderBlocks list
-        if(blocksHere[x][y].getX()==startXcor || blocksHere[x][y].getY()==startYcor
-        || blocksHere[x][y].getX()==endXcor || blocksHere[x][y].getY()==endYcor){
-          borderBlocks.add(blocksHere[x][y]);
+        if(blocksHere[y][x].getX()==startXcor || blocksHere[x][y].getY()==startYcor
+        || blocksHere[y][x].getX()==endXcor || blocksHere[x][y].getY()==endYcor){
+          borderBlocks.add(blocksHere[y][x]);
           //indexBorderBlocks++;
         }
       }
@@ -341,11 +341,11 @@ x   8        R R R R
                 thisBlock=============corner1
                         path horizontal first
             */
-            corner1 = new Block(randomYcor+thisBlock.getY(),thisBlock.getX(),"Tunnel");
+            corner1 = new Block(randomXcor+thisBlock.getX(),thisBlock.getY(),"Tunnel");
             section1 = new Tunnel(thisBlock, corner1, floor);
-            corner2 = new Block(randomYcor+thisBlock.getY(), randomXcor+TCO.getX(), "Tunnel");
+            corner2 = new Block(randomXcor+thisBlock.getX(), randomYcor+TCO.getY(), "Tunnel");
             section2 = new Tunnel(corner2, corner1, floor);
-            corner3 = new Block(TCO.getY(),randomXcor+TCO.getX(), "Tunnel");
+            corner3 = new Block(TCO.getX(),randomYcor+TCO.getY(), "Tunnel");
             section3 = new Tunnel(corner2, corner3, floor);
             section4 = new Tunnel(TCO, corner3, floor);
           }
@@ -358,11 +358,11 @@ x   8        R R R R
                                               TCO
           */
           else{//if deltaY is negative, thisBlock is above TCO
-            corner1 = new Block(randomYcor+thisBlock.getY(),thisBlock.getX(),"Tunnel");
+            corner1 = new Block(randomXcor+thisBlock.getX(),thisBlock.getY(),"Tunnel");
             section1= new Tunnel(thisBlock, corner1, floor);
-            corner2 = new Block(randomYcor+thisBlock.getY(), randomXcor+thisBlock.getX(), "Tunnel");
+            corner2 = new Block(randomXcor+thisBlock.getX(), randomYcor+thisBlock.getY(), "Tunnel");
             section2= new Tunnel(corner1, corner2, floor);
-            corner3 = new Block(TCO.getY(),randomXcor+thisBlock.getX(), "Tunnel");
+            corner3 = new Block(TCO.getX(),randomYcor+thisBlock.getY(), "Tunnel");
             section3= new Tunnel(corner2, corner3, floor);
             section4= new Tunnel(corner3, TCO, floor);
           }
@@ -380,11 +380,11 @@ x   8        R R R R
                                     thisBlock
                         path horizontal first
             */
-            corner1 = new Block(randomYcor+TCO.getY(),TCO.getX(),"Tunnel");
+            corner1 = new Block(randomXcor+TCO.getX(),TCO.getY(),"Tunnel");
             section1= new Tunnel(TCO, corner1, floor);
-            corner2 = new Block(randomYcor+TCO.getY(), randomXcor+TCO.getX(), "Tunnel");
+            corner2 = new Block(randomXcor+TCO.getX(), randomYcor+TCO.getY(), "Tunnel");
             section2= new Tunnel(corner1, corner2, floor);
-            corner3 = new Block(thisBlock.getY(),randomXcor+TCO.getX(), "Tunnel");
+            corner3 = new Block(thisBlock.getX(),randomYcor+TCO.getY(), "Tunnel");
             section3= new Tunnel(corner2, corner3, floor);
             section4= new Tunnel(corner3, thisBlock, floor);
           }
@@ -397,11 +397,11 @@ x   8        R R R R
           */
           else{//if deltaY is negative, thisBlock is above TCO
             //Case 4
-            corner1 = new Block(randomYcor+TCO.getY(),TCO.getX(),"Tunnel");
+            corner1 = new Block(randomXcor+TCO.getX(),TCO.getY(),"Tunnel");
             section1= new Tunnel(TCO, corner1, floor);
-            corner2 = new Block(randomYcor+TCO.getY(), randomXcor+thisBlock.getX(), "Tunnel");
+            corner2 = new Block(randomXcor+TCO.getX(), randomYcor+thisBlock.getY(), "Tunnel");
             section2= new Tunnel(corner2, corner1, floor);
-            corner3 = new Block(thisBlock.getY(),randomXcor+thisBlock.getX(), "Tunnel");
+            corner3 = new Block(thisBlock.getX(),randomYcor+thisBlock.getY(), "Tunnel");
             section3= new Tunnel(corner2, corner3, floor);
             section4= new Tunnel(thisBlock,corner3, floor);
           }
@@ -438,11 +438,11 @@ x   8        R R R R
                 thisBlock
 
             */
-            corner1 = new Block(thisBlock.getY(),randomXcor+TCO.getX(),"Tunnel");
+            corner1 = new Block(thisBlock.getX(),randomYcor+TCO.getY(),"Tunnel");
             section1 = new Tunnel(corner1, thisBlock, floor);
-            corner2 = new Block(randomYcor+thisBlock.getY(), randomXcor+TCO.getX(), "Tunnel");
+            corner2 = new Block(randomXcor+thisBlock.getX(), randomYcor+TCO.getY(), "Tunnel");
             section2 = new Tunnel(corner1, corner2, floor);
-            corner3 = new Block(randomYcor+thisBlock.getY(),TCO.getX(), "Tunnel");
+            corner3 = new Block(randomXcor+thisBlock.getX(),TCO.getY(), "Tunnel");
             section3 = new Tunnel(corner3, corner2, floor);
             section4 = new Tunnel(corner3, TCO, floor);
           }
@@ -455,11 +455,11 @@ x   8        R R R R
                             corner3====TCO
           */
           else{//if deltaY is negative, thisBlock is above TCO
-            corner1 = new Block(thisBlock.getY(),randomXcor+thisBlock.getX(),"Tunnel");
+            corner1 = new Block(thisBlock.getX(),randomYcor+thisBlock.getY(),"Tunnel");
             section1= new Tunnel(thisBlock, corner1, floor);
-            corner2 = new Block(randomYcor+thisBlock.getY(), randomXcor+thisBlock.getX(), "Tunnel");
+            corner2 = new Block(randomXcor+thisBlock.getX(), randomYcor+thisBlock.getY(), "Tunnel");
             section2= new Tunnel(corner1, corner2, floor);
-            corner3 = new Block(randomYcor+thisBlock.getY(),TCO.getX(), "Tunnel");
+            corner3 = new Block(randomXcor+thisBlock.getX(),TCO.getY(), "Tunnel");
             section3= new Tunnel(corner2, corner3, floor);
             section4= new Tunnel(corner3, TCO, floor);
           }
@@ -477,11 +477,11 @@ x   8        R R R R
                             corner3====thisBlock
                         path horizontal first
             */
-            corner1 = new Block(TCO.getY(),randomXcor+TCO.getX(),"Tunnel");
+            corner1 = new Block(TCO.getX(),randomYcor+TCO.getY(),"Tunnel");
             section1= new Tunnel(TCO, corner1, floor);
-            corner2 = new Block(randomYcor+TCO.getY(), randomYcor+TCO.getX(), "Tunnel");
+            corner2 = new Block(randomXcor+TCO.getX(), randomYcor+TCO.getY(), "Tunnel");
             section2= new Tunnel(corner1, corner2, floor);
-            corner3 = new Block(randomYcor+TCO.getY(),thisBlock.getX(), "Tunnel");
+            corner3 = new Block(randomXcor+TCO.getX(),thisBlock.getY(), "Tunnel");
             section3= new Tunnel(corner2, corner3, floor);
             section4= new Tunnel(corner3, thisBlock, floor);
           }
@@ -494,11 +494,11 @@ x   8        R R R R
           */
           else{//if deltaY is negative, thisBlock is above TCO
             //Case 4
-            corner1 = new Block(TCO.getY(),randomXcor+thisBlock.getX(),"Tunnel");
+            corner1 = new Block(TCO.getX(),randomYcor+thisBlock.getY(),"Tunnel");
             section1= new Tunnel(corner1, TCO, floor);
-            corner2 = new Block(randomYcor+TCO.getY(), randomXcor+thisBlock.getX(), "Tunnel");
+            corner2 = new Block(randomXcor+TCO.getX(), randomYcor+thisBlock.getY(), "Tunnel");
             section2= new Tunnel(corner1, corner2, floor);
-            corner3 = new Block(randomYcor+TCO.getY(),thisBlock.getX(), "Tunnel");
+            corner3 = new Block(randomXcor+TCO.getX(),thisBlock.getY(), "Tunnel");
             section3= new Tunnel(corner3, corner2, floor);
             section4= new Tunnel(corner3, thisBlock, floor);
           }
