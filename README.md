@@ -187,6 +187,7 @@ Kevin:
 
 **Monday 1/14/19**
 
+Kevin:
 After seeing the demo code, I've decided to: 
 - Utilize background colors
 - Move stat counters from the right of the screen to the bottom onto 2 lines, which in turn:
