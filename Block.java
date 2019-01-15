@@ -18,10 +18,10 @@ public class Block implements Explorable{
     //Default data ' ' is for Wall
     data = ' ';
     //For testing purposes
-    if (newType.equals("Room")){
-      data = 'R';
+    if (newType.equals("room")){
+      data = ' ';
     }
-    if (newType.equals("Tunnel")){
+    if (newType.equals("tunnel")){
       data = 'T';
     }
     type = newType;

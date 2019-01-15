@@ -195,11 +195,11 @@ public class Floor{
           output += "|";
 
         else {
-          if (blocksHere[i][j].getData() == ' ')
-            output += blocksHere[i][j].getData();
+          if (!blocksHere[i][j].getType().equals("room"))
+            output += (bgWhite + blocksHere[i][j].getData() + resetColor);
 
           else
-            output += (bgWhite + blocksHere[i][j].getData() + resetColor);
+            output += blocksHere[i][j].getData();
           }
       }
 

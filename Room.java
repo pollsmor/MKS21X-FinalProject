@@ -269,7 +269,7 @@ public class Room implements Explorable{
   /**Creates a String of the data of the Blocks in the Room
     *@return a String of the data of the Blocks in the Room
   */
-  public String toString(){
+  public String toString() {
     String output = "";
     for (int x = 0; x < width; x++){
       for (int y = 0; y < length; y++){
