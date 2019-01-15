@@ -102,6 +102,7 @@ public class Driver {
     putString(0, 0, terminal, game.getFloor().toStringClean());
     //putString(1, width * 3/4 + 2, terminal, "Area: ");
     putString(1, width * 3/4 + 1, terminal, bgWhite + black + game.getPlayer().getName() + resetColor);
+    //putString(1, width * 3/4 + 2, terminal, "Area: ");
     putString(length - 17, 2, terminal, "----------");
     putString(length - 17, 3, terminal, red + "HP: " + resetColor);
     putString(length - 17, 4, terminal, "Level: ");
@@ -210,14 +211,14 @@ public class Driver {
 
       //Do even when no key is pressed:ßß
       //putString(6, width * 3/4 + 2, terminal, "" + game.getLevel());
-      putString(length - 10, 3, terminal, red + game.getPlayer().getHP() + resetColor);
-      putString(length - 10, 4, terminal, "" + game.getPlayer().getLevel());
-      putString(length - 10, 5, terminal, "" + game.getPlayer().getAttack());
-      putString(length - 10, 6, terminal, "" + game.getPlayer().getDefense());
-      putString(length - 10, 8, terminal, "" + game.getPlayer().getHunger());
-      putString(length - 10, 9, terminal, "" + game.getPlayer().getMoney() + '\u00a5'); //yen symbol
-      putString(length - 10, 10, terminal, "" + game.getPlayer().getXP());
-      putString(length - 10, 11, terminal, "" + game.getPlayer().getScore());
+      //putString(length - 10, 3, terminal, red + game.getPlayer().getHP() + resetColor);
+      //putString(length - 10, 4, terminal, "" + game.getPlayer().getLevel());
+      //putString(length - 10, 5, terminal, "" + game.getPlayer().getAttack());
+      //putString(length - 10, 6, terminal, "" + game.getPlayer().getDefense());
+      //putString(length - 10, 8, terminal, "" + game.getPlayer().getHunger());
+      //putString(length - 10, 9, terminal, "" + game.getPlayer().getMoney() + '\u00a5'); //yen symbol
+      //putString(length - 10, 10, terminal, "" + game.getPlayer().getXP());
+      //putString(length - 10, 11, terminal, "" + game.getPlayer().getScore());
 
       long tEnd = System.currentTimeMillis();
       long millis = tEnd - tStart;
