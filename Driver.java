@@ -68,7 +68,7 @@ public class Driver {
     Random randgenCol;
     Random randgenRow;
 
-    if (name.length() > 50) {
+    if (name.length() > 25) {
       terminal.exitPrivateMode();
       System.out.println("There are no Pokemon that have this long of a name.");
       System.exit(0);
@@ -96,11 +96,13 @@ public class Driver {
     String bgWhite = "\u001B[47m";
     String bgBlack = "\u001B[40m";
     String underline = "\u001B[4m";
+    String blink = "\u001B[5m";
     String resetColor = "\u001B[0m"; //need to add this or the whole program will be the selected color
 
     //Print the game's UI elements
     putString(0, 0, terminal, game.getFloor().toStringClean());
     putString(1, width * 3/4 + 1, terminal, bgWhite + black + game.getPlayer().getName() + resetColor);
+    putString(length - 25, width * 3/4 + 1, terminal, underline + blink + "Pok" + '\u00e9' + "mon Terminal Dungeon" + resetColor);
     //Row 1 of stats, below the name
     putString(1, width * 3/4 + 2, terminal, "HP: ");
     putString(13, width * 3/4 + 2, terminal, "Level: ");
