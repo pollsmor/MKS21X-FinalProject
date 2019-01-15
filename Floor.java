@@ -185,6 +185,8 @@ public class Floor{
 
   //toString makes a coordinate system that is offset from the one the blocksHere array uses.
   public String toStringClean() {
+    String bgWhite = "\u001B[47m";
+    String resetColor = "\u001B[0m";
     String output = "";
 
     for (int i = 0; i < width; ++i) {
@@ -192,8 +194,13 @@ public class Floor{
         if (j == length - 1)
           output += "|";
 
-        else
-          output += blocksHere[i][j].getData();
+        else {
+          if (blocksHere[i][j].getData() == ' ')
+            output += blocksHere[i][j].getData();
+
+          else
+            output += (bgWhite + blocksHere[i][j].getData() + resetColor);
+          }
       }
 
       output += '\n';
