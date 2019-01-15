@@ -184,6 +184,10 @@ Kevin:
 - Colored the HP stat red and (how did I forget to mention this in the previous comment) colored the Pokemon's name green, with the help of ANSI codes. 
 - Added back the Delete key causing "death" to show off for the demo. 
 
+Rachel:
+  - Tested Tunnel(Block, Block, Floor) in FloorDriver.java with new test cases
+  - Continued working on constructing Tunnels
+
 
 **Monday 1/14/19**
 
@@ -194,3 +198,9 @@ After seeing the demo code, I've decided to:
 - Allows me to extend the map all the way across the screen. Width is still limited to 3/4 of the screen to accomodate for the UI. 
 - I felt really dumb after seeing everyone's demos showing their project's name. Well, now we have one too. And it blinks! 
 - Had to make the minimum dimensions of the Terminal larger for  everything to fit together, but the limit should still be smaller than the typical Terminal size. 
+
+Rachel:
+  - Working on fixing the dimensions of constructors to conceptually make more sense
+    - x: represents columns
+    - y: represents rows and is selected first when indexing
+    - Ex: blocksHere[y][x]
