@@ -56,9 +56,9 @@ public class Driver {
     int width = terminalSize.getRows();
     int length = terminalSize.getColumns();
     //Minimum terminal size requirement - prevents index exceptions and having too little space to work with
-    if (length < 70 || width < 25) {
+    if (length < 70 || width < 20) {
       terminal.exitPrivateMode();
-      System.out.println("This game can only be played on a terminal at least 70px in length, and 25px in width.");
+      System.out.println("This game can only be played on a terminal at least 70px in length, and 20px in width.");
       System.exit(0);
     }
 
@@ -68,7 +68,7 @@ public class Driver {
     Random randgenCol;
     Random randgenRow;
 
-    if (name.length() > 20) {
+    if (name.length() > 50) {
       terminal.exitPrivateMode();
       System.out.println("There are no Pokemon that have this long of a name.");
       System.exit(0);
@@ -91,13 +91,17 @@ public class Driver {
 
     String red = "\u001B[31m";
     String green = "\u001B[32m";
-    String resetColor = "\u001B[0m"; //need to add this or the whole program will be the selected color
+    String white = "\u001B[37m";
+    String black = "\u001B[30m";;
     String bgWhite = "\u001B[47m";
+    String bgBlack = "\u001B[40m";
+    String underline = "\u001B[4m";
+    String resetColor = "\u001B[0m"; //need to add this or the whole program will be the selected color
 
     //Print the game's UI elements
     putString(0, 0, terminal, game.getFloor().toStringClean());
-    putString(0, width * 3/4 + 2, terminal, "Area: ");
-    putString(length - 17, 1, terminal, green + game.getPlayer().getName() + resetColor);
+    //putString(1, width * 3/4 + 2, terminal, "Area: ");
+    putString(1, width * 3/4 + 1, terminal, bgWhite + black + game.getPlayer().getName() + resetColor);
     putString(length - 17, 2, terminal, "----------");
     putString(length - 17, 3, terminal, red + "HP: " + resetColor);
     putString(length - 17, 4, terminal, "Level: ");
@@ -130,8 +134,8 @@ public class Driver {
       terminal.moveCursor(col, row);
       terminal.applyForegroundColor(Terminal.Color.GREEN);
       terminal.putCharacter('\u04dd');
-      //terminal.applyBackgroundColor(Terminal.Color.DEFAULT);
-      //terminal.applyForegroundColor(Terminal.Color.DEFAULT);
+      terminal.applyBackgroundColor(Terminal.Color.DEFAULT);
+      terminal.applyForegroundColor(Terminal.Color.DEFAULT);
       terminal.applySGR(Terminal.SGR.RESET_ALL);
 
       Key key = terminal.readInput();
@@ -205,7 +209,7 @@ public class Driver {
     //----------------------------------------------------------------------------------------------------------------
 
       //Do even when no key is pressed:ßß
-      putString(6, width * 3/4 + 2, terminal, "" + game.getLevel());
+      //putString(6, width * 3/4 + 2, terminal, "" + game.getLevel());
       putString(length - 10, 3, terminal, red + game.getPlayer().getHP() + resetColor);
       putString(length - 10, 4, terminal, "" + game.getPlayer().getLevel());
       putString(length - 10, 5, terminal, "" + game.getPlayer().getAttack());
