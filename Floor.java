@@ -21,9 +21,9 @@ public class Floor{
     width = terminalWidth;
     length = terminalLength;
     blocksHere = new Block[length][width];
-    for (int x = 0; x < length; x++) {
-      for (int y = 0; y < width; y++) {
-        blocksHere[x][y] = new Block(x, y, "Wall");
+    for (int y = 0; y < length; y++) {
+      for (int x = 0; x < width; x++) {
+        blocksHere[y][x] = new Block(x, y, "Wall");
       }
     }
   }
@@ -107,7 +107,7 @@ public class Floor{
         //System.out.println(r.toString());
         //System.out.println(chosenRoom.toString());
         System.out.println(this.toString());
-        //r.connectRooms(chosenRoom, seed, this);
+        r.connectRooms(chosenRoom, seed, this);
         //System.out.println(seed);
       }
       roomsHere[successfulRooms]= r;
@@ -158,20 +158,20 @@ public class Floor{
       output += n%10;
       n++;
     }
-    output += "\n";
-    for (int y = 0; y < width; y++){
+    //output += "\n";
+    /*for (int y = 0; y < width; y++){
       output += "-";
       //if (y != length - 1){
         //output += " ";
       //}
-    }
+    }*/
     output += "|\n";
     n = 0;
-    for (int x = 0; x < length; x++){
+    for (int y = 0; y < length; y++){
       output+=n%10+"|";
       n++;
-      for (int y = 0; y < width; y++){
-        output+= blocksHere[x][y].getData();
+      for (int x = 0; x < width; x++){
+        output+= blocksHere[y][x].getData();
         //if (y != length - 1){
         //  output += " ";
         //}
