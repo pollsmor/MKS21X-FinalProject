@@ -89,6 +89,7 @@ public class Driver {
       randgenRow = new Random(seed + 2);
     }
 
+    //Colors/styles to use
     String red = "\u001B[31m";
     String green = "\u001B[32m";
     String white = "\u001B[37m";
@@ -103,7 +104,7 @@ public class Driver {
     putString(0, 0, terminal, game.getFloor().toStringClean());
     putString(1, width * 3/4 + 1, terminal, bgWhite + black + game.getPlayer().getName() + resetColor);
     putString(length - 25, width * 3/4 + 1, terminal, underline + blink + "Pok" + '\u00e9' + "mon Terminal Dungeon" + resetColor);
-    //Row 1 of stats, below the name
+    //Row 1 of stats, below the name                                             //accented e
     putString(1, width * 3/4 + 2, terminal, "HP: ");
     putString(13, width * 3/4 + 2, terminal, "Level: ");
     putString(28, width * 3/4 + 2, terminal, "Attack: ");
@@ -208,16 +209,16 @@ public class Driver {
 
     //----------------------------------------------------------------------------------------------------------------
 
-      //Do even when no key is pressed:ßß
-      //putString(6, width * 3/4 + 2, terminal, "" + game.getLevel());
-      putString(5, width * 3/4 + 2, terminal, green + game.getPlayer().getHP() + resetColor);
-      //putString(length - 10, 4, terminal, "" + game.getPlayer().getLevel());
-      //putString(length - 10, 5, terminal, "" + game.getPlayer().getAttack());
-      //putString(length - 10, 6, terminal, "" + game.getPlayer().getDefense());
-      //putString(length - 10, 8, terminal, "" + game.getPlayer().getHunger());
-      //putString(length - 10, 9, terminal, "" + game.getPlayer().getMoney() + '\u00a5'); //yen symbol
-      //putString(length - 10, 10, terminal, "" + game.getPlayer().getXP());
-      //putString(length - 10, 11, terminal, "" + game.getPlayer().getScore());
+      //Do even when no key is pressed
+      //First row of stats
+      putString(5, width * 3/4 + 2, terminal, green + game.getPlayer().getHP());
+      putString(20, width * 3/4 + 2, terminal, "" + game.getPlayer().getLevel());
+      putString(36, width * 3/4 + 2, terminal, "" + game.getPlayer().getAttack());
+      putString(52, width * 3/4 + 2, terminal, "" + game.getPlayer().getDefense());
+      //Second row of stats
+      putString(7, width * 3/4 + 3, terminal, "" + game.getLevel());
+      putString(21, width * 3/4 + 3, terminal, "" + game.getPlayer().getHunger());
+      putString(35, width * 3/4 + 3, terminal, "" + game.getPlayer().getMoney() + '\u00a5' + resetColor); //yen symbol
 
       long tEnd = System.currentTimeMillis();
       long millis = tEnd - tStart;
