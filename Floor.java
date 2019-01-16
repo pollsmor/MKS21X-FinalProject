@@ -195,7 +195,7 @@ public class Floor{
           output += "|";
 
         else {
-          if (!blocksHere[i][j].getType().equals("room"))
+          if (blocksHere[i][j].getType().equals("room"))
             output += (bgWhite + blocksHere[i][j].getData() + resetColor);
 
           else
