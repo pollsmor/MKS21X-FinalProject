@@ -80,6 +80,10 @@ public class Block implements Explorable{
     }
     return oldType;
   }
+
+  public String printPoint(){
+    return "("+xcor+", "+ ycor +")";
+  }
 /* Spawns
   public void spawnObjective() {
     objectiveHere = true;
