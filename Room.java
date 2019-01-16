@@ -309,7 +309,7 @@ x   8        R R R R
       floor.addTunnel(connector);
     }
     else if (deltaY == 0){
-      //mean this is a horizontal Tunnel
+      //means this is a horizontal Tunnel
       if (deltaX < 0){
         connector = new Tunnel(thisBlock, TCO, floor);
       }
