@@ -112,17 +112,23 @@ public class Tunnel implements Explorable{
     }
     //Creating blocksHere with a loop
     //If left-right, xcor changes
-    if (direction == 0){
+    if (direction == 0||length == 1){//length 1 Tunnel may have either direction
       blocksHere = new Block[1][length];
       for (int i = 0; i < length; i++){
         //Check if Block before was a Room Block, and if not then create a new Tunnel Block
         //System.out.println(floor.getBlocksHere().toString());
         if (floor.getBlocksHere()[ycor][xcor+i].getType()!="Room"&&floor.getBlocksHere()[ycor][xcor+i].getType()!="Opening"){
           blocksHere[0][i] = new Block(xcor+i, ycor, "Tunnel");
+          System.out.println("blocksHere[0]["+i+"]: ");
+          System.out.println("Line 124, Length "+length);
+          System.out.println(blocksHere[0][i].printPoint());
         }
         //Otherwise add the Block already there to blocksHere
         else{
-          blocksHere[0][i] = floor.getBlocksHere()[ycor][xcor+i];
+          blocksHere[0][i] = new Block(xcor+i, ycor,floor.getBlocksHere()[ycor][xcor+i].getType());
+          System.out.println("blocksHere[0]["+i+"]: ");
+          System.out.println("Line 131, Length "+length);
+          System.out.println(blocksHere[0][i].printPoint());//floor.getBlocksHere()[ycor][xcor+i].printPoint());
         }
       }
     }
@@ -133,10 +139,17 @@ public class Tunnel implements Explorable{
         //Check if Block before was a Room Block, and if not then create a new Tunnel Block
         if (floor.getBlocksHere()[ycor+j][xcor].getType()!="Room"&&floor.getBlocksHere()[ycor+j][xcor].getType()!="Opening"){
           blocksHere[j][0] = new Block(xcor, ycor+j, "Tunnel");
+          System.out.println("blocksHere["+j+"][0]: ");
+          System.out.println("Line 144, Length "+length);
+          System.out.println(blocksHere[j][0].printPoint());
         }
         //Otherwise add the Block already there to blocksHere
         else{
-          blocksHere[j][0] = floor.getBlocksHere()[ycor+j][xcor];
+          blocksHere[j][0] = new Block (xcor, ycor+j, floor.getBlocksHere()[ycor+j][xcor].getType());
+          System.out.println("blocksHere["+j+"][0]: ");
+          System.out.println("Line 151, Length "+length);
+          System.out.println(blocksHere[j][0].printPoint());//floor.getBlocksHere()[ycor+j][xcor].printPoint());
+
         }
       }
     }
