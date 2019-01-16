@@ -236,7 +236,7 @@ public class Floor{
       for(int j = 0; j < t.getBlocksHere()[i].length;j++){
         b = t.getBlocksHere()[i][j];
         System.out.println("b.getX(),b.getY(): "+ b.getX()+", "+b.getY());
-        blocksHere[b.getX()][b.getY()] = new Block(b.getX(), b.getY(), "Tunnel");
+        blocksHere[b.getY()][b.getX()] = new Block(b.getX(), b.getY(), "Tunnel");
       }
     }
   }
