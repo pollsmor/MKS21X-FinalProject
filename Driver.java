@@ -1,4 +1,4 @@
-﻿//API : http://mabe02.github.io/lanterna/apidocs/2.1/
+//API : http://mabe02.github.io/lanterna/apidocs/2.1/
 import com.googlecode.lanterna.terminal.Terminal.SGR;
 import com.googlecode.lanterna.TerminalFacade;
 import com.googlecode.lanterna.input.Key;
@@ -56,9 +56,9 @@ public class Driver {
     int width = terminalSize.getRows();
     int length = terminalSize.getColumns();
     //Minimum terminal size requirement - prevents index exceptions and having too little space to work with
-    if (length < 60 || width < 20) {
+    if (length < 70 || width < 21) {
       terminal.exitPrivateMode();
-      System.out.println("This game can only be played on a terminal at least 60px in length, and 20px in width.");
+      System.out.println("This game can only be played on a terminal at least 70px in length, and 21px in width.");
       System.exit(0);
     }
 
@@ -67,6 +67,13 @@ public class Driver {
     Game game;
     Random randgenCol;
     Random randgenRow;
+
+    if (name.length() > 25) {
+      terminal.exitPrivateMode();
+      System.out.println("There are no Pokemon that have this long of a name.");
+      System.exit(0);
+    }
+
 
     //Instantiate game outside of try since it wouldn't work inside it
     if (args.length == 1) {
@@ -82,27 +89,32 @@ public class Driver {
       randgenRow = new Random(seed + 2);
     }
 
-    //Color text uses!
+    //Colors/styles to use
     String red = "\u001B[31m";
     String green = "\u001B[32m";
+    String white = "\u001B[37m";
+    String black = "\u001B[30m";;
+    String bgWhite = "\u001B[47m";
+    String bgBlack = "\u001B[40m";
+    String underline = "\u001B[4m";
+    String blink = "\u001B[5m";
     String resetColor = "\u001B[0m"; //need to add this or the whole program will be the selected color
 
     //Print the game's UI elements
     putString(0, 0, terminal, game.getFloor().toStringClean());
-    putString(length - 17, 0, terminal, "Area: ");
-    putString(length - 17, 1, terminal, green + game.getPlayer().getName() + resetColor);
-    putString(length - 17, 2, terminal, "----------");
-    putString(length - 17, 3, terminal, red + "HP: " + resetColor);
-    putString(length - 17, 4, terminal, "Level: ");
-    putString(length - 17, 5, terminal, "ATK: ");
-    putString(length - 17, 6, terminal, "DFNSE: ");
-    putString(length - 17, 7, terminal, "----------");
-    putString(length - 17, 8, terminal, "HNGR: ");
-    putString(length - 17, 9, terminal, "Money: ");
-    putString(length - 17, 10, terminal, "XP: ");
-    putString(length - 17, 11, terminal, "Score: ");
-    putString(length - 17, width - 1, terminal, "Time: ");
-    putString(length - 17, width - 2, terminal, "Seed: " + game.getSeed());
+    putString(1, width * 3/4 + 1, terminal, bgWhite + black + game.getPlayer().getName() + resetColor);
+    putString(length - 25, width * 3/4 + 1, terminal, underline + blink + "Pok" + '\u00e9' + "mon Terminal Dungeon" + resetColor);
+    //Row 1 of stats, below the name                                             //accented e
+    putString(1, width * 3/4 + 2, terminal, "HP: ");
+    putString(13, width * 3/4 + 2, terminal, "Level: ");
+    putString(28, width * 3/4 + 2, terminal, "Attack: ");
+    putString(43, width * 3/4 + 2, terminal, "Defense: ");
+    //Row 2 of stats
+    putString(1, width * 3/4 + 3, terminal, "Area: ");
+    putString(13, width * 3/4 + 3, terminal, "Hunger: ");
+    putString(28, width * 3/4 + 3, terminal, "Money: ");
+    putString(length - 17, width - 2, terminal, "Time: " );
+    putString(length - 17, width - 1, terminal, "Seed: " + game.getSeed());
 
     boolean running = true;
     boolean alive = true; //controls the inner while loop
@@ -112,8 +124,8 @@ public class Driver {
     int row = 0;
     boolean spawnFound = false;
     while (!spawnFound) {
-      col = Math.abs(randgenCol.nextInt() % (length * 3/4)); //3/4 is arbitary, I just need to have enough
-      row = Math.abs(randgenRow.nextInt() % (width * 3/4));  //space to the right for UI elements
+      col = Math.abs(randgenCol.nextInt() % (length * 3/4));
+      row = Math.abs(randgenRow.nextInt() % (width * 3/4));
       if (!game.isWall(col, row)) {
         spawnFound = true;
       }
@@ -122,7 +134,6 @@ public class Driver {
     while (running) {
       terminal.moveCursor(col, row);
       terminal.applyForegroundColor(Terminal.Color.GREEN);
-      terminal.applySGR(Terminal.SGR.ENTER_UNDERLINE);
       terminal.putCharacter('\u04dd');
       terminal.applyBackgroundColor(Terminal.Color.DEFAULT);
       terminal.applyForegroundColor(Terminal.Color.DEFAULT);
@@ -198,23 +209,22 @@ public class Driver {
 
     //----------------------------------------------------------------------------------------------------------------
 
-      //Do even when no key is pressed:ßß
-      //Updates the UI elements that aren't static
-      putString(length - 10, 0, terminal, "" + game.getLevel());
-      putString(length - 10, 3, terminal, red + game.getPlayer().getHP() + resetColor);
-      putString(length - 10, 4, terminal, "" + game.getPlayer().getLevel());
-      putString(length - 10, 5, terminal, "" + game.getPlayer().getAttack());
-      putString(length - 10, 6, terminal, "" + game.getPlayer().getDefense());
-      putString(length - 10, 8, terminal, "" + game.getPlayer().getHunger());
-      putString(length - 10, 9, terminal, "" + game.getPlayer().getMoney() + '\u00a5'); //yen symbol
-      putString(length - 10, 10, terminal, "" + game.getPlayer().getXP());
-      putString(length - 10, 11, terminal, "" + game.getPlayer().getScore());
+      //Do even when no key is pressed
+      //First row of stats
+      putString(5, width * 3/4 + 2, terminal, green + game.getPlayer().getHP());
+      putString(20, width * 3/4 + 2, terminal, "" + game.getPlayer().getLevel());
+      putString(36, width * 3/4 + 2, terminal, "" + game.getPlayer().getAttack());
+      putString(52, width * 3/4 + 2, terminal, "" + game.getPlayer().getDefense());
+      //Second row of stats
+      putString(7, width * 3/4 + 3, terminal, "" + game.getLevel());
+      putString(21, width * 3/4 + 3, terminal, "" + game.getPlayer().getHunger());
+      putString(35, width * 3/4 + 3, terminal, "" + game.getPlayer().getMoney() + '\u00a5' + resetColor); //yen symbol
 
       long tEnd = System.currentTimeMillis();
       long millis = tEnd - tStart;
       if (millis / 1000 > lastSecond) {
         lastSecond = millis / 1000; //One second has passed.
-        putString(length - 11, width, terminal, lastSecond + "s");
+        putString(length - 11, width - 2, terminal, lastSecond + "s");
       }
     }
 
