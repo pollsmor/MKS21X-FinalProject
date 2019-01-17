@@ -167,13 +167,22 @@ Rachel:
 **Saturday 1/12/19**
 
 Rachel: 
-  - Block.java
   - Tunnel.java
+    - Added comments to constructors and fixed blockHeres
+    - Fixed constructor
   - Room.java
+    - Considered what to do with connectRooms in comments, fixed some visualization comments
+    - Added param seed to connectRooms
+    - Attempted to define borderBlocks
+    - Added random to generate random rooms to connect and algorithm to decide relative locations
+    - Added removeDupes() in order to make the probability of each borderBlock equal
   - Floor.java
+    - Added getBlocksHere()
+    - Moved connectRooms to Room.java
   - FloorDriver.java
-  
-  **Sunday 1/13/19**
+    - More test cases for constructors
+ 
+ **Sunday 1/13/19**
   
 Kevin: 
 - Borders to keep players inside rooms didn't work but thanks to Rachel setting every block in the array that is empty to a Wall type, it was done in 2 minutes flat. Now players can't get out of the room. 
@@ -204,3 +213,7 @@ Rachel:
     - x: represents columns
     - y: represents rows and is selected first when indexing
     - Ex: blocksHere[y][x]
+ 
+ **Tuesday 1/15/19**
+ 
+ **Wednesday 1/16/19**
