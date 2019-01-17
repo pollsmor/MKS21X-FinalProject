@@ -41,8 +41,8 @@ public class Room implements Explorable{
         }
       }
     }
-    System.out.println("Border blocks: "+toString(borderBlocks));
-    System.out.println("startXcor: "+startXcor+", startYcor: "+startYcor+", endXcor: "+endXcor+", endYcor: "+endYcor);
+    //System.out.println("Border blocks: "+toString(borderBlocks));
+    //System.out.println("startXcor: "+startXcor+", startYcor: "+startYcor+", endXcor: "+endXcor+", endYcor: "+endYcor);
   }
 
   //public Room(int startXcor, int startYcor, int endXcor, int endYcor
@@ -79,8 +79,8 @@ public class Room implements Explorable{
         }
       }
     }
-    System.out.println("Border blocks: "+toString(borderBlocks));
-    System.out.println("startXcor: "+startXcor+", startYcor: "+startYcor+", endXcor: "+endXcor+", endYcor: "+endYcor);
+    //System.out.println("Border blocks: "+toString(borderBlocks));
+    //System.out.println("startXcor: "+startXcor+", startYcor: "+startYcor+", endXcor: "+endXcor+", endYcor: "+endYcor);
   }
 
   //public boolean tooClose(int startXcor, int startYcor, int endXcor, int endYcor)
@@ -413,23 +413,23 @@ y   8        R R R R
             section4= new Tunnel(thisBlock,corner3, floor);
           }
         }
-        System.out.println("thisBlock: "+thisBlock.getX()+", "+thisBlock.getY());
-        System.out.println("TCO: "+TCO.getX()+", "+TCO.getY());
-        System.out.println("DeltaX: " +deltaX);
-        System.out.println("DeltaY: " +deltaY);
-        System.out.println("RandomXcor: "+randomXcor);
-        System.out.println("RandomYcor: "+randomYcor);
-        System.out.println("Section1 start: "+ section1.getStartBlock().getX()+", "+ section1.getStartBlock().getY());
-        System.out.println("Section1 end: "+ section1.getEndBlock().getX()+", "+ section1.getEndBlock().getY());
+        //System.out.println("thisBlock: "+thisBlock.getX()+", "+thisBlock.getY());
+        //System.out.println("TCO: "+TCO.getX()+", "+TCO.getY());
+        //System.out.println("DeltaX: " +deltaX);
+        //System.out.println("DeltaY: " +deltaY);
+        //System.out.println("RandomXcor: "+randomXcor);
+        //System.out.println("RandomYcor: "+randomYcor);
+        //System.out.println("Section1 start: "+ section1.getStartBlock().getX()+", "+ section1.getStartBlock().getY());
+        //System.out.println("Section1 end: "+ section1.getEndBlock().getX()+", "+ section1.getEndBlock().getY());
         floor.addTunnel(section1);
-        System.out.println("Section2 start: "+ section2.getStartBlock().getX()+", "+ section2.getStartBlock().getY());
-        System.out.println("Section2 end: "+ section2.getEndBlock().getX()+", "+ section2.getEndBlock().getY());
+        //System.out.println("Section2 start: "+ section2.getStartBlock().getX()+", "+ section2.getStartBlock().getY());
+        //System.out.println("Section2 end: "+ section2.getEndBlock().getX()+", "+ section2.getEndBlock().getY());
         floor.addTunnel(section2);
-        System.out.println("Section3 start: "+ section3.getStartBlock().getX()+", "+ section3.getStartBlock().getY());
-        System.out.println("Section3 end: "+ section3.getEndBlock().getX()+", "+ section3.getEndBlock().getY());
+        //System.out.println("Section3 start: "+ section3.getStartBlock().getX()+", "+ section3.getStartBlock().getY());
+        //System.out.println("Section3 end: "+ section3.getEndBlock().getX()+", "+ section3.getEndBlock().getY());
         floor.addTunnel(section3);
-        System.out.println("Section4 start: "+ section4.getStartBlock().getX()+", "+ section4.getStartBlock().getY());
-        System.out.println("Section4 end: "+ section4.getEndBlock().getX()+", "+ section4.getEndBlock().getY());
+        //System.out.println("Section4 start: "+ section4.getStartBlock().getX()+", "+ section4.getStartBlock().getY());
+        //System.out.println("Section4 end: "+ section4.getEndBlock().getX()+", "+ section4.getEndBlock().getY());
         floor.addTunnel(section4);
       }
       //--------------------Start with Vertical------------------//
@@ -510,23 +510,23 @@ y   8        R R R R
             section4= new Tunnel(corner3, thisBlock, floor);
           }
         }
-        System.out.println("thisBlock: "+thisBlock.getX()+", "+thisBlock.getY());
-        System.out.println("TCO: "+TCO.getX()+", "+TCO.getY());
-        System.out.println("DeltaX: " +deltaX);
-        System.out.println("DeltaY: " +deltaY);
-        System.out.println("RandomXcor: "+randomXcor);
-        System.out.println("RandomYcor: "+randomYcor);
-        System.out.println("Section1 start: "+ section1.getStartBlock().getX()+", "+ section1.getStartBlock().getY());
-        System.out.println("Section1 end: "+ section1.getEndBlock().getX()+", "+ section1.getEndBlock().getY());
+        //System.out.println("thisBlock: "+thisBlock.getX()+", "+thisBlock.getY());
+        //System.out.println("TCO: "+TCO.getX()+", "+TCO.getY());
+        //System.out.println("DeltaX: " +deltaX);
+        //System.out.println("DeltaY: " +deltaY);
+        //System.out.println("RandomXcor: "+randomXcor);
+        //System.out.println("RandomYcor: "+randomYcor);
+        //System.out.println("Section1 start: "+ section1.getStartBlock().getX()+", "+ section1.getStartBlock().getY());
+        //System.out.println("Section1 end: "+ section1.getEndBlock().getX()+", "+ section1.getEndBlock().getY());
         floor.addTunnel(section1);
-        System.out.println("Section2 start: "+ section2.getStartBlock().getX()+", "+ section2.getStartBlock().getY());
-        System.out.println("Section2 end: "+ section2.getEndBlock().getX()+", "+ section2.getEndBlock().getY());
+        //System.out.println("Section2 start: "+ section2.getStartBlock().getX()+", "+ section2.getStartBlock().getY());
+        //System.out.println("Section2 end: "+ section2.getEndBlock().getX()+", "+ section2.getEndBlock().getY());
         floor.addTunnel(section2);
-        System.out.println("Section3 start: "+ section3.getStartBlock().getX()+", "+ section3.getStartBlock().getY());
-        System.out.println("Section3 end: "+ section3.getEndBlock().getX()+", "+ section3.getEndBlock().getY());
+        //System.out.println("Section3 start: "+ section3.getStartBlock().getX()+", "+ section3.getStartBlock().getY());
+        //System.out.println("Section3 end: "+ section3.getEndBlock().getX()+", "+ section3.getEndBlock().getY());
         floor.addTunnel(section3);
-        System.out.println("Section4 start: "+ section4.getStartBlock().getX()+", "+ section4.getStartBlock().getY());
-        System.out.println("Section4 end: "+ section4.getEndBlock().getX()+", "+ section4.getEndBlock().getY());
+        //System.out.println("Section4 start: "+ section4.getStartBlock().getX()+", "+ section4.getStartBlock().getY());
+        //System.out.println("Section4 end: "+ section4.getEndBlock().getX()+", "+ section4.getEndBlock().getY());
         floor.addTunnel(section4);
       }
     }
