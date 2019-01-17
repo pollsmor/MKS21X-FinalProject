@@ -19,7 +19,7 @@ public class Block implements Explorable{
     data = ' ';
     //For testing purposes
     if (newType.equals("Room")){
-      data = 'R';
+      data = ' ';
     }
     if (newType.equals("Tunnel")){
       data = 'T';

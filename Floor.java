@@ -227,7 +227,7 @@ public class Floor{
           output += "|";
 
         else {
-          if (!blocksHere[i][j].getType().equals("Room") || !blocksHere[i][j].getType().equals("Tunnel"))
+          if (!blocksHere[i][j].getType().equals("Room") && !blocksHere[i][j].getType().equals("Tunnel"))
             output += (bgWhite + blocksHere[i][j].getData() + resetColor);
 
           else
@@ -243,6 +243,7 @@ public class Floor{
 
     return output;
   }
+
   public void addTunnel(Tunnel t){
     Block b;
     for (int i = 0; i < t.getBlocksHere().length; i++){ //Horizontal
