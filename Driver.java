@@ -223,7 +223,7 @@ public class Driver {
       long millis = tEnd - tStart;
       if (millis / 1000 > lastSecond) {
         lastSecond = millis / 1000; //One second has passed.
-        putString(cols - 2, rows - 11, terminal, lastSecond + "s");
+        putString(cols - 11, rows - 2, terminal, lastSecond + "s");
       }
     }
 
