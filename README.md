@@ -217,3 +217,7 @@ Rachel:
  **Tuesday 1/15/19**
  
  **Wednesday 1/16/19**
+
+Kevin: 
+- In the UIelements branch, I managed to get background colors working. Instead of having the array show "R"s to show that it is a traversable area, I just color everything that isn't a room char white so it's easy to distinguish walls from a room. 
+- Attempted merging with master but the map is completely broken. I realize that my coordinate system is the opposite of what Rachel uses. We haven't had any issues before this because we mostly just stuck to our own Java classes, but I'm tryng to look at Floor.java to figure out what's breaking the map now.
