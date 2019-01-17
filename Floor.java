@@ -115,7 +115,7 @@ public class Floor{
     //Must also update blocksHere
     for (int x = startXcor; x < endXcor - 1; x++){ // - 1 to avoid index exceptions
       for (int y = startYcor; y < endYcor - 1; y++){
-        this.blocksHere[x][y] = new Block(startXcor+x,startYcor+y,"Room");
+        this.blocksHere[x][y] = new Block(startXcor+x,startYcor+y,"room");
       }
     }
     return a;
@@ -186,6 +186,7 @@ public class Floor{
   //toString makes a coordinate system that is offset from the one the blocksHere array uses.
   public String toStringClean() {
     String bgWhite = "\u001B[47m";
+    String bgBlack = "\u001B[40m";
     String resetColor = "\u001B[0m";
     String output = "";
 
