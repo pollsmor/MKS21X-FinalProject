@@ -20,10 +20,10 @@ public class Floor{
     floorNumber = num;
     width = terminalWidth;
     length = terminalLength;
-    blocksHere = new Block[width][length];
-    for (int x = 0; x < width; x++) {
-      for (int y = 0; y < length; y++) {
-        blocksHere[x][y] = new Block(x, y, "Wall");
+    blocksHere = new Block[length][width];
+    for (int y = 0; y < length; y++) {
+      for (int x = 0; x < width; x++) {
+        blocksHere[y][x] = new Block(x, y, "Wall");
       }
     }
   }
@@ -32,8 +32,15 @@ public class Floor{
     return blocksHere;
   }
 
-  public Block getBlock(int col, int row) {
+  public Block getBlock(int row, int col) {
     return blocksHere[row][col];
+  }
+  public void setBlock(int row, int col, Block b){
+    //System.out.println("Row: "+row);
+    //System.out.println("Col: "+col);
+    //System.out.println("blockHere.length: "+blocksHere.length);
+    //System.out.println("blocksHere[0].length: "+blocksHere[0].length);
+    blocksHere[row][col] = new Block(row, col, "Tunnel");
   }
 
   //public int getFloorNumber()
@@ -70,16 +77,17 @@ public class Floor{
     //System.out.println("Rooms: "+rooms);
     int attempts = 5000; //In case it's impossible to create all the rooms, have a set number of failed attempts possible
     //Using random, generate the xcors and ycors of top right Blocks and bottom left Blocks of the Rooms
-    //Minimum width of room: 4 | Max: 13
+    //Minimum width of room: 4| Max: 13
     //Minimum length of room: 4 | Max: 13
     int startXcor, startYcor, endXcor, endYcor;
     int successfulRooms = 0; //Keep track of how many Rooms were successfully made
     boolean wasOverlap; //Keep track of whether or Room to be created overlaps with any other Room
+    Room r, chosenRoom;
     while (successfulRooms < rooms && attempts > 0){
-      startXcor = Math.abs(rnd.nextInt(width - 13)) + 1;
-      endXcor = startXcor + rnd.nextInt(11) + 4;
-      startYcor = Math.abs(rnd.nextInt(length - 13)) + 1;
-      endYcor = startYcor + rnd.nextInt(11) + 4;
+      startXcor = Math.abs(rnd.nextInt(width - 14)) + 1;
+      endXcor = startXcor + rnd.nextInt(7) + 5;
+      startYcor = Math.abs(rnd.nextInt(length - 14)) + 1;
+      endYcor = startYcor + rnd.nextInt(7) + 5;
       //System.out.println("startXcor: "+ startXcor +", startYcor: "+startYcor+", endXcor: "+endXcor+", endYcor: "+endYcor);
       wasOverlap = false;
       //Make sure that rooms don't overlap with each other
@@ -92,8 +100,18 @@ public class Floor{
         }
       }
       if (!wasOverlap){ //If there were no overlapping Rooms, create the Room
-        roomsHere[successfulRooms]= createRoom(startXcor, startYcor, endXcor, endYcor);
-        successfulRooms++;
+        r = createRoom(startXcor, startYcor, endXcor, endYcor);
+        if (successfulRooms != 0){
+        chosenRoom = roomsHere[rnd.nextInt(successfulRooms)];
+        //System.out.println(successfulRooms);
+        //System.out.println(r.toString());
+        //System.out.println(chosenRoom.toString());
+        //System.out.println(this.toString());
+        r.connectRooms(chosenRoom, seed, this);
+        //System.out.println(seed);
+      }
+      roomsHere[successfulRooms]= r;
+      successfulRooms++;
         //Connect to a room
         //Create a tunnel
         //Allow tunnels to pass through each other
@@ -112,10 +130,14 @@ public class Floor{
   */
   public Room createRoom(int startXcor, int startYcor, int endXcor, int endYcor){
     Room a = new Room(startXcor, startYcor, endXcor, endYcor);
+    //System.out.println("startXcor: "+startXcor+", startYcor: "+startYcor+", endXcor: "+endXcor+", endYcor: "+endYcor);
     //Must also update blocksHere
-    for (int x = startXcor; x < endXcor - 1; x++){ // - 1 to avoid index exceptions
-      for (int y = startYcor; y < endYcor - 1; y++){
-        this.blocksHere[x][y] = new Block(startXcor+x,startYcor+y,"room");
+    for (int y = startYcor; y < endYcor + 1; y++){ // - 1 to avoid index exceptions
+      for (int x = startXcor; x < endXcor + 1; x++){
+        blocksHere[y][x] = new Block(x,y,"Room");
+        //System.out.println("FloorBlock here"+this.blocksHere[y][x].printPoint());
+        //System.out.println("RoomBlock here: "+ a.getBlocksHere()[y-startYcor][x-startXcor].printPoint());
+        //System.out.println("Type: "+this.blocksHere[y][x].getType());
       }
     }
     return a;
@@ -134,33 +156,42 @@ public class Floor{
   //}
 
   public String toString(){
-    String output = "|";
-    for (int y = 0; y < length; y++){
+    String output = " |";
+    int n = 0;
+    for (int y = 0; y < width; y++){
+      output += n%10;
+      n++;
+    }
+    //output += "\n";
+    /*for (int y = 0; y < width; y++){
       output += "-";
       //if (y != length - 1){
         //output += " ";
       //}
-    }
+    }*/
     output += "|\n";
-    for (int x = 0; x < width; x++){
+    n = 0;
+    for (int y = 0; y < length; y++){
+      output+=n%10;
       output+="|";
-      for (int y = 0; y < length; y++){
-        output+= blocksHere[x][y].getData();
+      n++;
+      for (int x = 0; x < width; x++){
+        output+= blocksHere[y][x].getData();
         //if (y != length - 1){
         //  output += " ";
         //}
       }
       output+="|\n";
     }
-    output +="|";
-    for (int y = 0; y < length; y++){
+    output +=" |";
+    for (int y = 0; y < width; y++){
       output += "-";
       //if (y != length - 1){
       //  output += " ";
       //}
     }
 
-    return output;
+    return output+"|";
   }
 
   public Block[][] getBlocksHere(){
@@ -190,13 +221,13 @@ public class Floor{
     String resetColor = "\u001b[0m";
     String output = "";
 
-    for (int i = 0; i < width; ++i) {
-      for (int j = 0; j < length; ++j) {
-        if (j == length - 1)
+    for (int i = 0; i < length; ++i) {
+      for (int j = 0; j < width; ++j) {
+        if (j == width - 1)
           output += "|";
 
         else {
-          if (!blocksHere[i][j].getType().equals("room"))
+          if (!blocksHere[i][j].getType().equals("Room") || !blocksHere[i][j].getType().equals("Tunnel"))
             output += (bgWhite + blocksHere[i][j].getData() + resetColor);
 
           else
@@ -207,9 +238,19 @@ public class Floor{
       output += '\n';
     }
 
-    for (int i = 0; i < length; ++i)
+    for (int i = 0; i < width; ++i)
       output += '-';
 
     return output;
+  }
+  public void addTunnel(Tunnel t){
+    Block b;
+    for (int i = 0; i < t.getBlocksHere().length; i++){ //Horizontal
+      for(int j = 0; j < t.getBlocksHere()[i].length;j++){
+        b = t.getBlocksHere()[i][j];
+        //System.out.println("b.getX(),b.getY(): "+ b.getX()+", "+b.getY());
+        blocksHere[b.getY()][b.getX()] = new Block(b.getX(), b.getY(), "Tunnel");
+      }
+    }
   }
 }

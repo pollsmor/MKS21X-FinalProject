@@ -18,11 +18,14 @@ public class Block implements Explorable{
     //Default data ' ' is for Wall
     data = ' ';
     //For testing purposes
-    if (newType.equals("room")){
-      data = ' ';
+    if (newType.equals("Room")){
+      data = 'R';
     }
-    if (newType.equals("tunnel")){
+    if (newType.equals("Tunnel")){
       data = 'T';
+    }
+    if (newType.equals("Opening")){
+      data = '0';
     }
 
     type = newType;
@@ -68,6 +71,19 @@ public class Block implements Explorable{
 
   public char getData(){
     return data;
+  }
+
+  public String setType(String newType){
+    String oldType = type;
+    type = newType;
+    if (type == "Opening"){
+      data = '0';
+    }
+    return oldType;
+  }
+
+  public String printPoint(){
+    return "("+xcor+", "+ ycor +")";
   }
 /* Spawns
   public void spawnObjective() {
