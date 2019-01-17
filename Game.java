@@ -24,11 +24,11 @@ public class Game {
   private int seed;
 
   //Doesn't take a seed, so a random one is generated
-  public Game(String name, int terminalWidth, int terminalLength) {
+  public Game(String name, int rows, int cols) {
     player = new Player(name);
     enemies = new Enemy[12]; //random number
     level = 1;
-    floor = new Floor(1, terminalWidth * 3/4, terminalLength);
+    floor = new Floor(1, cols, rows * 3/4); //Floor constructor takes left to right before top to bottom
     //missions = new Mission(); //ArrayList to allow easy adding/removing
     Random randgen = new Random();
     seed = randgen.nextInt();
@@ -37,11 +37,11 @@ public class Game {
   }
 
   //Takes a seed
-  public Game(String name, int inputSeed, int terminalWidth, int terminalLength) {
+  public Game(String name, int inputSeed, int rows, int cols) {
     player = new Player(name);
     enemies = new Enemy[12];
     level = 1;
-    floor = new Floor(1, terminalWidth * 3/4, terminalLength);
+    floor = new Floor(1, cols, rows * 3/4);
     //missions = new Mission(); //ArrayList to allow easy adding/removing
     seed = inputSeed;
 
@@ -70,7 +70,7 @@ public class Game {
     return seed;
   }
 
-  public boolean isWall(int col, int row) {
-    return floor.getBlock(col, row).getType() == "Wall";
+  public boolean isWall(int row, int col) {
+    return floor.getBlock(row, col).getType() == "Wall";
   }
 }

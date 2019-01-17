@@ -53,20 +53,20 @@ public class Driver {
     terminal.enterPrivateMode();
     terminal.setCursorVisible(false);
     TerminalSize terminalSize = terminal.getTerminalSize();
-    int width = terminalSize.getRows();
-    int length = terminalSize.getColumns();
+    int rows = terminalSize.getRows();
+    int cols = terminalSize.getColumns();
     //Minimum terminal size requirement - prevents index exceptions and having too little space to work with
-    if (length < 70 || width < 21) {
+    if (rows < 21 || cols < 70) {
       terminal.exitPrivateMode();
-      System.out.println("This game can only be played on a terminal at least 70px in length, and 21px in width.");
+      System.out.println("This game can only be played on a terminal at least 21px top-to-bottom, and 70px left-to-right.");
       System.exit(0);
     }
 
     String name = args[0];
     int seed;
     Game game;
-    Random randgenCol;
     Random randgenRow;
+    Random randgenCol;
 
     if (name.length() > 25) {
       terminal.exitPrivateMode();
@@ -76,16 +76,16 @@ public class Driver {
 
     //Instantiate game outside of try since it wouldn't work inside it
     if (args.length == 1) {
-      game = new Game(name, width, length);
-      randgenCol = new Random();
+      game = new Game(name, rows, cols);
       randgenRow = new Random();
+      randgenCol = new Random();
     }
 
     else {
       seed = Integer.parseInt(args[1]);
-      game = new Game(name, seed, width, length);
+      game = new Game(name, seed, rows, cols);
+      randgenRow = new Random(seed + 2); //arbitrary, just need a different seed for the Random() constructor
       randgenCol = new Random(seed); //always spawn in the same spot
-      randgenRow = new Random(seed + 2);
     }
 
     //Colors/styles to use
@@ -101,19 +101,19 @@ public class Driver {
 
     //Print the game's UI elements
     putString(0, 0, terminal, game.getFloor().toStringClean());
-    putString(1, width * 3/4 + 1, terminal, bgWhite + black + game.getPlayer().getName() + resetColor);
-    putString(length - 25, width * 3/4 + 1, terminal, underline + blink + "Pok" + '\u00e9' + "mon Terminal Dungeon" + resetColor);
+    putString(1, rows * 3/4 + 1, terminal, bgWhite + black + game.getPlayer().getName() + resetColor);
+    putString(cols - 25, rows * 3/4 + 1, terminal, underline + blink + "Pok" + '\u00e9' + "mon Terminal Dungeon" + resetColor);
     //Row 1 of stats, below the name                                             //accented e
-    putString(1, width * 3/4 + 2, terminal, "HP: ");
-    putString(13, width * 3/4 + 2, terminal, "Level: ");
-    putString(28, width * 3/4 + 2, terminal, "Attack: ");
-    putString(43, width * 3/4 + 2, terminal, "Defense: ");
+    putString(1, rows * 3/4 + 2, terminal, "HP: ");
+    putString(13, rows * 3/4 + 2, terminal, "Level: ");
+    putString(28, rows * 3/4 + 2, terminal, "Attack: ");
+    putString(43, rows * 3/4 + 2, terminal, "Defense: ");
     //Row 2 of stats
-    putString(1, width * 3/4 + 3, terminal, "Area: ");
-    putString(13, width * 3/4 + 3, terminal, "Hunger: ");
-    putString(28, width * 3/4 + 3, terminal, "Money: ");
-    putString(length - 17, width - 2, terminal, "Time: " );
-    putString(length - 17, width - 1, terminal, "Seed: " + game.getSeed());
+    putString(1, rows * 3/4 + 3, terminal, "Area: ");
+    putString(13, rows * 3/4 + 3, terminal, "Hunger: ");
+    putString(28, rows * 3/4 + 3, terminal, "Money: ");
+    putString(cols - 17, rows - 2, terminal, "Time: " );
+    putString(cols - 17, rows - 1, terminal, "Seed: " + game.getSeed());
 
     boolean running = true;
     boolean alive = true; //controls the inner while loop
@@ -123,15 +123,15 @@ public class Driver {
     int row = 0;
     boolean spawnFound = false;
     while (!spawnFound) {
-      col = Math.abs(randgenCol.nextInt() % (length * 3/4));
-      row = Math.abs(randgenRow.nextInt() % (width * 3/4));
-      if (!game.isWall(col, row)) {
+      row = Math.abs(randgenRow.nextInt() % (rows * 3/4));
+      col = Math.abs(randgenCol.nextInt() % cols);
+      if (!game.isWall(row, col)) {
         spawnFound = true;
       }
     }
 
     while (running) {
-      terminal.moveCursor(col, row);
+      terminal.moveCursor(rows, cols);
       terminal.applyForegroundColor(Terminal.Color.GREEN);
       terminal.putCharacter('\u04dd');
       terminal.applyBackgroundColor(Terminal.Color.DEFAULT);
@@ -142,14 +142,14 @@ public class Driver {
 
     //----------------------------------------------------------------------------------------------------------------
       if (!alive) {
-        putString(0, width, terminal,"You died. Would you like to respawn? (y/n)");
+        putString(0, cols, terminal,"You died. Would you like to respawn? (y/n)");
         while (!alive) {
           Key key2 = terminal.readInput(); //if I'm in the if I can't read the first readInput, so I need a second one
           if (key2 != null) {
             //Do you want to respawn?
             if (key2.getCharacter() == 'y') {
               alive = true;                //Below is so I can replace the you died text:
-              putString(0, width, terminal, "                                          ");
+              putString(0, cols, terminal, "                                          ");
             }
 
             //No, I don't want to respawn.
@@ -169,16 +169,16 @@ public class Driver {
         }
 
         if (key.getKind() == Key.Kind.ArrowLeft) {
-          if (!game.isWall(col - 1, row)) {
-            terminal.moveCursor(col, row);
+          if (!game.isWall(row, col - 1)) {
+            terminal.moveCursor(row, col);
             terminal.putCharacter(' ');
             --col;
           }
         }
 
         if (key.getKind() == Key.Kind.ArrowRight) {
-          if (!game.isWall(col + 1, row)) {
-            terminal.moveCursor(col, row);
+          if (!game.isWall(row, col + 1)) {
+            terminal.moveCursor(row, col);
             terminal.putCharacter(' ');
             ++col;
           }
@@ -186,16 +186,16 @@ public class Driver {
 
         if (key.getKind() == Key.Kind.ArrowUp) {
           if (row != 0)
-            if (!game.isWall(col, row - 1)) {
-              terminal.moveCursor(col, row);
+            if (!game.isWall(row - 1, col)) {
+              terminal.moveCursor(row, col);
               terminal.putCharacter(' ');
               --row;
             }
         }
 
         if (key.getKind() == Key.Kind.ArrowDown) {
-          if (!game.isWall(col, row + 1)) {
-            terminal.moveCursor(col, row);
+          if (!game.isWall(row + 1, col)) {
+            terminal.moveCursor(row, col);
             terminal.putCharacter(' ');
             ++row;
           }
@@ -210,20 +210,20 @@ public class Driver {
 
       //Do even when no key is pressed
       //First row of stats
-      putString(5, width * 3/4 + 2, terminal, green + game.getPlayer().getHP());
-      putString(20, width * 3/4 + 2, terminal, "" + game.getPlayer().getLevel());
-      putString(36, width * 3/4 + 2, terminal, "" + game.getPlayer().getAttack());
-      putString(52, width * 3/4 + 2, terminal, "" + game.getPlayer().getDefense());
+      putString(5, rows * 3/4 + 2, terminal, green + game.getPlayer().getHP());
+      putString(20, rows * 3/4 + 2, terminal, "" + game.getPlayer().getLevel());
+      putString(36, rows * 3/4 + 2, terminal, "" + game.getPlayer().getAttack());
+      putString(52, rows * 3/4 + 2, terminal, "" + game.getPlayer().getDefense());
       //Second row of stats
-      putString(7, width * 3/4 + 3, terminal, "" + game.getLevel());
-      putString(21, width * 3/4 + 3, terminal, "" + game.getPlayer().getHunger());
-      putString(35, width * 3/4 + 3, terminal, "" + game.getPlayer().getMoney() + '\u00a5' + resetColor); //yen symbol
+      putString(7, rows * 3/4 + 3, terminal, "" + game.getLevel());
+      putString(21, rows * 3/4 + 3, terminal, "" + game.getPlayer().getHunger());
+      putString(35, rows * 3/4 + 3, terminal, "" + game.getPlayer().getMoney() + '\u00a5' + resetColor); //yen symbol
 
       long tEnd = System.currentTimeMillis();
       long millis = tEnd - tStart;
       if (millis / 1000 > lastSecond) {
         lastSecond = millis / 1000; //One second has passed.
-        putString(length - 11, width - 2, terminal, lastSecond + "s");
+        putString(cols - 2, rows - 11, terminal, lastSecond + "s");
       }
     }
 
