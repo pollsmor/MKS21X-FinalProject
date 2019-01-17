@@ -238,12 +238,12 @@ public class Floor{
       output += '\n';
     }
 
-    for (int i = 0; i < width; ++i)
+    for (int x = 0; x < width; ++x)
       output += '-';
 
     return output;
   }
-
+  
   public void addTunnel(Tunnel t){
     Block b;
     for (int i = 0; i < t.getBlocksHere().length; i++){ //Horizontal
