@@ -171,7 +171,7 @@ public class Driver {
         if (key.getKind() == Key.Kind.ArrowLeft) {
           if (!game.isWall(col - 1, row)) {
             terminal.moveCursor(col, row);
-            terminal.putCharacter('R');
+            terminal.putCharacter(' ');
             --col;
           }
         }
@@ -179,7 +179,7 @@ public class Driver {
         if (key.getKind() == Key.Kind.ArrowRight) {
           if (!game.isWall(col + 1, row)) {
             terminal.moveCursor(col, row);
-            terminal.putCharacter('R');
+            terminal.putCharacter(' ');
             ++col;
           }
         }
@@ -188,7 +188,7 @@ public class Driver {
           if (row != 0)
             if (!game.isWall(col, row - 1)) {
               terminal.moveCursor(col, row);
-              terminal.putCharacter('R');
+              terminal.putCharacter(' ');
               --row;
             }
         }
@@ -196,7 +196,7 @@ public class Driver {
         if (key.getKind() == Key.Kind.ArrowDown) {
           if (!game.isWall(col, row + 1)) {
             terminal.moveCursor(col, row);
-            terminal.putCharacter('R');
+            terminal.putCharacter(' ');
             ++row;
           }
         }
