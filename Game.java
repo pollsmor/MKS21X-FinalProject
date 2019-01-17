@@ -28,7 +28,7 @@ public class Game {
     player = new Player(name);
     enemies = new Enemy[12]; //random number
     level = 1;
-    floor = new Floor(1, terminalWidth * 3/4, terminalLength * 3/4);
+    floor = new Floor(1, terminalWidth * 3/4, terminalLength);
     //missions = new Mission(); //ArrayList to allow easy adding/removing
     Random randgen = new Random();
     seed = randgen.nextInt();
@@ -41,7 +41,7 @@ public class Game {
     player = new Player(name);
     enemies = new Enemy[12];
     level = 1;
-    floor = new Floor(1, terminalWidth * 3/4, terminalLength * 3/4);
+    floor = new Floor(1, terminalWidth * 3/4, terminalLength);
     //missions = new Mission(); //ArrayList to allow easy adding/removing
     seed = inputSeed;
 
