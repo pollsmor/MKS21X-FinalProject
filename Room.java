@@ -31,16 +31,18 @@ public class Room implements Explorable{
     borderBlocks = new ArrayList<Block>(2*width + 2* length - 2);
     //int indexBorderBlocks = 0;
     for (int y = 0; y < length; y++){
-      for (int x = 0; x < length; x++){
+      for (int x = 0; x < width; x++){
         blocksHere[y][x] = new Block(xcor+x,ycor+y,"Room");
         //If the xcors equal startXcor or endXcor or the ycors equal startYcor or endYcor, add it to borderBlocks list
-        if(blocksHere[y][x].getX()==startXcor || blocksHere[x][y].getY()==startYcor
-        || blocksHere[y][x].getX()==endXcor || blocksHere[x][y].getY()==endYcor){
+        if(blocksHere[y][x].getX()==startXcor || blocksHere[y][x].getY()==startYcor
+        || blocksHere[y][x].getX()==endXcor || blocksHere[y][x].getY()==endYcor){
           borderBlocks.add(blocksHere[y][x]);
           //indexBorderBlocks++;
         }
       }
     }
+    System.out.println("Border blocks: "+toString(borderBlocks));
+    System.out.println("startXcor: "+startXcor+", startYcor: "+startYcor+", endXcor: "+endXcor+", endYcor: "+endYcor);
   }
 
   //public Room(int startXcor, int startYcor, int endXcor, int endYcor
@@ -67,13 +69,18 @@ public class Room implements Explorable{
       for (int x = 0; x < width; x++){
         blocksHere[y][x] = new Block(startXcor+x,startYcor+y,"Room");
         //If the xcors equal startXcor or endXcor or the ycors equal startYcor or endYcor, add it to borderBlocks list
-        if (x == 0 || y== 0 || x == width - 1 || y==length - 1){
-          borderBlocks.add(blocksHere[y][x]);
-          //System.out.println("Block here: "+ blocksHere[x][y].toString());
+        if (blocksHere[y][x].getX()==startXcor || blocksHere[y][x].getY()==startYcor
+        || blocksHere[y][x].getX()==endXcor || blocksHere[y][x].getY()==endYcor){
+          borderBlocks.add(this.blocksHere[y][x]);
+          //System.out.println("FloorBlock here"+this.blocksHere[y][x].printPoint());
+          //System.out.println("Block here: "+ blocksHere[y][x].printPoint());
+          //System.out.println("Width (X): "+width);
+          //System.out.println("Length (Y): "+length);
         }
       }
     }
-    //System.out.println(toString(borderBlocks));
+    System.out.println("Border blocks: "+toString(borderBlocks));
+    System.out.println("startXcor: "+startXcor+", startYcor: "+startYcor+", endXcor: "+endXcor+", endYcor: "+endYcor);
   }
 
   //public boolean tooClose(int startXcor, int startYcor, int endXcor, int endYcor)
@@ -172,7 +179,7 @@ public class Room implements Explorable{
     boolean below = false;
     boolean right = false;
     //Note it's possible for a Room to be above, left, and right at the same time compared to another Room
-    //Ex: width y
+    //Ex: width x
     /* 0 1 2 3 4 5 6 7 8 9
 l   0
 e   1    theChosenOne
@@ -182,7 +189,7 @@ t   4    R R R R R R R R R R     <-- left, b/c theChosenOneStartXcor < thisStart
 h   5    R R R R R R R R R R     <-- right, b/c theChosenOneEndXcor > thisEndXcor
     6        this
     7        R R R R
-x   8        R R R R
+y   8        R R R R
     9        R R R R
     10       R R R R
     */
@@ -607,7 +614,7 @@ x   8        R R R R
     String output = "";
     for (int i = 0; i < b.size(); i++){
       //System.out.println(b.get(i).toString());
-      output+=b.get(i).toString();
+      output+=b.get(i).printPoint() + ", ";
     }
     return output;
   }
