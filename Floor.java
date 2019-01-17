@@ -103,10 +103,10 @@ public class Floor{
         r = createRoom(startXcor, startYcor, endXcor, endYcor);
         if (successfulRooms != 0){
         chosenRoom = roomsHere[rnd.nextInt(successfulRooms)];
-        System.out.println(successfulRooms);
+        //System.out.println(successfulRooms);
         //System.out.println(r.toString());
         //System.out.println(chosenRoom.toString());
-        System.out.println(this.toString());
+        //System.out.println(this.toString());
         r.connectRooms(chosenRoom, seed, this);
         //System.out.println(seed);
       }
@@ -130,14 +130,14 @@ public class Floor{
   */
   public Room createRoom(int startXcor, int startYcor, int endXcor, int endYcor){
     Room a = new Room(startXcor, startYcor, endXcor, endYcor);
-    System.out.println("startXcor: "+startXcor+", startYcor: "+startYcor+", endXcor: "+endXcor+", endYcor: "+endYcor);
+    //System.out.println("startXcor: "+startXcor+", startYcor: "+startYcor+", endXcor: "+endXcor+", endYcor: "+endYcor);
     //Must also update blocksHere
     for (int y = startYcor; y < endYcor + 1; y++){ // - 1 to avoid index exceptions
       for (int x = startXcor; x < endXcor + 1; x++){
         blocksHere[y][x] = new Block(x,y,"Room");
-        System.out.println("FloorBlock here"+this.blocksHere[y][x].printPoint());
-        System.out.println("RoomBlock here: "+ a.getBlocksHere()[y-startYcor][x-startXcor].printPoint());
-        System.out.println("Type: "+this.blocksHere[y][x].getType());
+        //System.out.println("FloorBlock here"+this.blocksHere[y][x].printPoint());
+        //System.out.println("RoomBlock here: "+ a.getBlocksHere()[y-startYcor][x-startXcor].printPoint());
+        //System.out.println("Type: "+this.blocksHere[y][x].getType());
       }
     }
     return a;
