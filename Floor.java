@@ -84,10 +84,10 @@ public class Floor{
     boolean wasOverlap; //Keep track of whether or Room to be created overlaps with any other Room
     Room r, chosenRoom;
     while (successfulRooms < rooms && attempts > 0){
-      startXcor = Math.abs(rnd.nextInt(width - 13)) + 1;
-      endXcor = startXcor + rnd.nextInt(8) + 5;
-      startYcor = Math.abs(rnd.nextInt(length - 13)) + 1;
-      endYcor = startYcor + rnd.nextInt(8) + 5;
+      startXcor = Math.abs(rnd.nextInt(width - 14)) + 1;
+      endXcor = startXcor + rnd.nextInt(7) + 5;
+      startYcor = Math.abs(rnd.nextInt(length - 14)) + 1;
+      endYcor = startYcor + rnd.nextInt(7) + 5;
       //System.out.println("startXcor: "+ startXcor +", startYcor: "+startYcor+", endXcor: "+endXcor+", endYcor: "+endYcor);
       wasOverlap = false;
       //Make sure that rooms don't overlap with each other
@@ -130,10 +130,14 @@ public class Floor{
   */
   public Room createRoom(int startXcor, int startYcor, int endXcor, int endYcor){
     Room a = new Room(startXcor, startYcor, endXcor, endYcor);
+    System.out.println("startXcor: "+startXcor+", startYcor: "+startYcor+", endXcor: "+endXcor+", endYcor: "+endYcor);
     //Must also update blocksHere
-    for (int y = startYcor; y < endYcor - 1; y++){ // - 1 to avoid index exceptions
-      for (int x = startXcor; x < endXcor - 1; x++){
-        blocksHere[y][x] = new Block(startXcor+x,startYcor+y,"Room");
+    for (int y = startYcor; y < endYcor + 1; y++){ // - 1 to avoid index exceptions
+      for (int x = startXcor; x < endXcor + 1; x++){
+        blocksHere[y][x] = new Block(x,y,"Room");
+        System.out.println("FloorBlock here"+this.blocksHere[y][x].printPoint());
+        System.out.println("RoomBlock here: "+ a.getBlocksHere()[y-startYcor][x-startXcor].printPoint());
+        System.out.println("Type: "+this.blocksHere[y][x].getType());
       }
     }
     return a;
@@ -168,7 +172,8 @@ public class Floor{
     output += "|\n";
     n = 0;
     for (int y = 0; y < length; y++){
-      output+=n%10+"|";
+      output+=n%10;
+      output+="|";
       n++;
       for (int x = 0; x < width; x++){
         output+= blocksHere[y][x].getData();
@@ -186,7 +191,7 @@ public class Floor{
       //}
     }
 
-    return output;
+    return output+"|";
   }
 
   public Block[][] getBlocksHere(){
@@ -235,7 +240,7 @@ public class Floor{
     for (int i = 0; i < t.getBlocksHere().length; i++){ //Horizontal
       for(int j = 0; j < t.getBlocksHere()[i].length;j++){
         b = t.getBlocksHere()[i][j];
-        System.out.println("b.getX(),b.getY(): "+ b.getX()+", "+b.getY());
+        //System.out.println("b.getX(),b.getY(): "+ b.getX()+", "+b.getY());
         blocksHere[b.getY()][b.getX()] = new Block(b.getX(), b.getY(), "Tunnel");
       }
     }
