@@ -106,19 +106,21 @@ public class Block implements Explorable{
     return "("+xcor+", "+ ycor +")";
   }
 
-  public void setCanMove(String dir,boolean b){
-    if (dir == "u"){
-      canMoveUp = b;
-    }
-    if (dir == "d"){
-      canMoveDown = b;
-    }
-    if (dir == "l"){
-      canMoveLeft = b;
-    }
-    if (dir == "r"){
-      canMoveRight = b;
-    }
+  public void setCanMove(char dir,boolean b){
+    //for (int s = 0; s < dir.length; s++){
+      if (dir == 'u'){
+        canMoveUp = b;
+      }
+      if (dir == 'd'){
+        canMoveDown = b;
+      }
+      if (dir == 'l'){
+        canMoveLeft = b;
+      }
+      if (dir == 'r'){
+        canMoveRight = b;
+      }
+    //}
   }
 
   public int getDirection(){
