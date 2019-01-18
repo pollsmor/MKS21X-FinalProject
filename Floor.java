@@ -28,10 +28,6 @@ public class Floor{
     }
   }
 
-  public Block[][] getMap() {
-    return blocksHere;
-  }
-
   public Block getBlock(int row, int col) {
     return blocksHere[row][col];
   }
@@ -243,16 +239,30 @@ public class Floor{
   //public void addTunnel(Tunnel t)
   /**Adds a Tunnel to blocksHere
     *@param t is a Tunnel which is to be added to the Floor
+    *@param direction is an int representing the direction the Tunnel is: 0 for left right, 1 for up down
   */
-  public void addTunnel(Tunnel t){
+  public void addTunnel(Tunnel t, int direction){
     Block b;
     for (int i = 0; i < t.getBlocksHere().length; i++){ //Horizontal
       for(int j = 0; j < t.getBlocksHere()[i].length;j++){
         b = t.getBlocksHere()[i][j];
         //System.out.println("b.getX(),b.getY(): "+ b.getX()+", "+b.getY());
-        if (blocksHere[b.getY()][b.getX()].getType() != "Room"){ //Don't make it a Tunnel Block if it was a Room
-           blocksHere[b.getY()][b.getX()] = new Block(b.getX(), b.getY(), "Tunnel");
-         }
+        if (blocksHere[b.getY()][b.getX()].getType() == "Tunnel" && direction != blocksHere[b.getY()][b.getX()].getDirection()){
+            blocksHere[b.getY()][b.getX()] = new Block(b.getX(), b.getY(), 2);
+        }
+        else{
+        //if (blocksHere[b.getY()][b.getX()].getType() != "Room"){ //Don't make it a Tunnel Block if it was a Room
+          //if ((i == 0 && j == 0)
+          //||(direction == 0 && j==t.getBlocksHere()[i].length - 1) //horizontal last Block
+          //||(direction == 1 && i == t.getBlocksHere().length - 1) //vertical last Block
+          //||(b.getType() == "Tunnel"&&b.getDirection()!=direction)
+          //)
+          //{ //theres a Tunnel Block already here with a different direction than the one to be made
+          //  blocksHere[b.getY()][b.getX()] = new Block(b.getX(), b.getY(), 2);   //Ends of tunnels get "#"
+          //}
+          //else{
+          blocksHere[b.getY()][b.getX()] = new Block(b.getX(), b.getY(), direction);
+        }
       }
     }
   }
