@@ -243,26 +243,31 @@ public class Floor{
   */
   public void addTunnel(Tunnel t, int direction){
     Block b;
+    int x, y;
+    String type;
     for (int i = 0; i < t.getBlocksHere().length; i++){ //Horizontal
       for(int j = 0; j < t.getBlocksHere()[i].length;j++){
         b = t.getBlocksHere()[i][j];
+        y = b.getY();
+        x = b.getX();
+        type = blocksHere[y][x].getType();
         //System.out.println("b.getX(),b.getY(): "+ b.getX()+", "+b.getY());
-        if (blocksHere[b.getY()][b.getX()].getType() == "Tunnel" && direction != blocksHere[b.getY()][b.getX()].getDirection()){
-            blocksHere[b.getY()][b.getX()] = new Block(b.getX(), b.getY(), 2);
+        if (type != "Room"){ //Don't make it a Tunnel Block if it was a Room
+          if (type == "Tunnel"){
+            if (direction == 0){
+              blocksHere[y][x].setCanMove('r', true);
+              blocksHere[y][x].setCanMove('l', true);
+            }
+            else{
+              blocksHere[y][x].setCanMove('u', true);
+              blocksHere[y][x].setCanMove('d', true);
+            }
+          }
+          else {
+            blocksHere[y][x] = new Block(x, y, direction);
+          }
         }
-        else{
-        //if (blocksHere[b.getY()][b.getX()].getType() != "Room"){ //Don't make it a Tunnel Block if it was a Room
-          //if ((i == 0 && j == 0)
-          //||(direction == 0 && j==t.getBlocksHere()[i].length - 1) //horizontal last Block
-          //||(direction == 1 && i == t.getBlocksHere().length - 1) //vertical last Block
-          //||(b.getType() == "Tunnel"&&b.getDirection()!=direction)
-          //)
-          //{ //theres a Tunnel Block already here with a different direction than the one to be made
-          //  blocksHere[b.getY()][b.getX()] = new Block(b.getX(), b.getY(), 2);   //Ends of tunnels get "#"
-          //}
-          //else{
-          blocksHere[b.getY()][b.getX()] = new Block(b.getX(), b.getY(), direction);
-        }
+        //blocksHere[b.getY()][b.getX()] = new Block(b.getX(),b.getY(), direction);
       }
     }
   }
