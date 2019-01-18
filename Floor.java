@@ -250,7 +250,9 @@ public class Floor{
       for(int j = 0; j < t.getBlocksHere()[i].length;j++){
         b = t.getBlocksHere()[i][j];
         //System.out.println("b.getX(),b.getY(): "+ b.getX()+", "+b.getY());
-        blocksHere[b.getY()][b.getX()] = new Block(b.getX(), b.getY(), "Tunnel");
+        if (blocksHere[b.getY()][b.getX()].getType() != "Room"){ //Don't make it a Tunnel Block if it was a Room
+           blocksHere[b.getY()][b.getX()] = new Block(b.getX(), b.getY(), "Tunnel");
+         }
       }
     }
   }
