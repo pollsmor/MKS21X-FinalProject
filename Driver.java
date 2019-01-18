@@ -18,8 +18,9 @@ import java.util.Random;
 //----------------------------------------------------------------------------------------------------------------
 
 public class Driver {
-  public static void putString(int r, int c, Terminal t, String s) {
-    t.moveCursor(r, c);
+  //Doesn't follow the (row, column) scheme of the rest of the program because moveCursor doesn't
+  public static void putString(int c, int r, Terminal t, String s) {
+    t.moveCursor(c, r);
     for (int i = 0; i < s.length(); ++i) {
       t.putCharacter(s.charAt(i));
     }
@@ -89,12 +90,9 @@ public class Driver {
     }
 
     //Colors/styles to use
-    String red = "\u001B[31m";
     String green = "\u001B[32m";
-    String white = "\u001B[37m";
     String black = "\u001B[30m";;
     String bgWhite = "\u001B[47m";
-    String bgBlack = "\u001B[40m";
     String underline = "\u001B[4m";
     String blink = "\u001B[5m";
     String resetColor = "\u001B[0m"; //need to add this or the whole program will be the selected color
@@ -119,19 +117,19 @@ public class Driver {
     boolean alive = true; //controls the inner while loop
 
     //Random spawn generation
-    int col = 0;
     int row = 0;
+    int col = 0;
     boolean spawnFound = false;
     while (!spawnFound) {
       row = Math.abs(randgenRow.nextInt() % (rows * 3/4));
       col = Math.abs(randgenCol.nextInt() % cols);
-      if (!game.isWall(row, col)) {
+      if (!game.isWall(row, col))
         spawnFound = true;
-      }
+
     }
 
     while (running) {
-      terminal.moveCursor(rows, cols);
+      terminal.moveCursor(col, row);
       terminal.applyForegroundColor(Terminal.Color.GREEN);
       terminal.putCharacter('\u04dd');
       terminal.applyBackgroundColor(Terminal.Color.DEFAULT);
@@ -170,7 +168,7 @@ public class Driver {
 
         if (key.getKind() == Key.Kind.ArrowLeft) {
           if (!game.isWall(row, col - 1)) {
-            terminal.moveCursor(row, col);
+            terminal.moveCursor(col, row); //again, different scheme
             terminal.putCharacter(' ');
             --col;
           }
@@ -178,7 +176,7 @@ public class Driver {
 
         if (key.getKind() == Key.Kind.ArrowRight) {
           if (!game.isWall(row, col + 1)) {
-            terminal.moveCursor(row, col);
+            terminal.moveCursor(col, row);
             terminal.putCharacter(' ');
             ++col;
           }
@@ -187,7 +185,7 @@ public class Driver {
         if (key.getKind() == Key.Kind.ArrowUp) {
           if (row != 0)
             if (!game.isWall(row - 1, col)) {
-              terminal.moveCursor(row, col);
+              terminal.moveCursor(col, row);
               terminal.putCharacter(' ');
               --row;
             }
@@ -195,7 +193,7 @@ public class Driver {
 
         if (key.getKind() == Key.Kind.ArrowDown) {
           if (!game.isWall(row + 1, col)) {
-            terminal.moveCursor(row, col);
+            terminal.moveCursor(col, row);
             terminal.putCharacter(' ');
             ++row;
           }

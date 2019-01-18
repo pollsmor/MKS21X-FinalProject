@@ -138,7 +138,7 @@ Kevin:
 - Grouped related code together in main   
 - Simplified the interface by removing the screen showing key presses, and the only timer on screen being a seconds timer.
 - get functions in various classes (especially Game) to interact with main (thanks for suggesting getFloor Mr. K).
-- Random spawning mechanism - spawns the character into a room, not blank space or anywhere inappropriate. 
+- Random spawning mechanism - spawns the character into a room, not blank space or anywhere inappropriate.
 - Spawning can be set as well, if a seed is provided via a command-line argument.
 - Changed the xy coordinate system to a col-row coordinate system to conform overall with the rest of the program.
 
@@ -158,7 +158,7 @@ Rachel:
   - Block.java
     - Added default data for a Wall Block and default data for a Tunnel Block
   - Tunnel.java
-    - Worked on constructors 
+    - Worked on constructors
     - Added toString
   - FloorDriver.java
     - Added test cases for constructors and toString()
@@ -166,7 +166,7 @@ Rachel:
 
 **Saturday 1/12/19**
 
-Rachel: 
+Rachel:
   - Tunnel.java
     - Added comments to constructors and fixed blockHeres
     - Fixed constructor
@@ -181,17 +181,17 @@ Rachel:
     - Moved connectRooms to Room.java
   - FloorDriver.java
     - More test cases for constructors
- 
+
  **Sunday 1/13/19**
-  
-Kevin: 
-- Borders to keep players inside rooms didn't work but thanks to Rachel setting every block in the array that is empty to a Wall type, it was done in 2 minutes flat. Now players can't get out of the room. 
-- Different toString used to maintain the same coordinate system between what is being printed on screen and the blocksHere[][] array in Floor.java. Borders are drawn to the right and the bottom of the game window for visual flair - it does not affect the coordinate system. 
+
+Kevin:
+- Borders to keep players inside rooms didn't work but thanks to Rachel setting every block in the array that is empty to a Wall type, it was done in 2 minutes flat. Now players can't get out of the room.
+- Different toString used to maintain the same coordinate system between what is being printed on screen and the blocksHere[][] array in Floor.java. Borders are drawn to the right and the bottom of the game window for visual flair - it does not affect the coordinate system.
 - Fixed seeds not working properly. Previously if providing a second parameter the seed would always be set to 0, had something to do with how the constructors used this. Removed all uses of "this" from Game.java, Player.java, and Pokemon.java.
-- Added necessary getters for Player and Pokemon to help with: 
+- Added necessary getters for Player and Pokemon to help with:
 - UI! Printing extra stuff on screen for visual flair. HP, level, XP, floor number, attack stat, defense stat, money, etc.
-- Colored the HP stat red and (how did I forget to mention this in the previous comment) colored the Pokemon's name green, with the help of ANSI codes. 
-- Added back the Delete key causing "death" to show off for the demo. 
+- Colored the HP stat red and (how did I forget to mention this in the previous comment) colored the Pokemon's name green, with the help of ANSI codes.
+- Added back the Delete key causing "death" to show off for the demo.
 
 Rachel:
   - Tested Tunnel(Block, Block, Floor) in FloorDriver.java with new test cases
@@ -201,26 +201,23 @@ Rachel:
 **Monday 1/14/19**
 
 Kevin:
-After seeing the demo code, I've decided to: 
+After seeing the demo code, I've decided to:
 - Utilize background colors
 - Move stat counters from the right of the screen to the bottom onto 2 lines, which in turn:
-- Allows me to extend the map all the way across the screen. Width is still limited to 3/4 of the screen to accomodate for the UI. 
-- I felt really dumb after seeing everyone's demos showing their project's name. Well, now we have one too. And it blinks! 
-- Had to make the minimum dimensions of the Terminal larger for  everything to fit together, but the limit should still be smaller than the typical Terminal size. 
+- Allows me to extend the map all the way across the screen. Width is still limited to 3/4 of the screen to accomodate for the UI.
+- I felt really dumb after seeing everyone's demos showing their project's name. Well, now we have one too. And it blinks!
+- Had to make the minimum dimensions of the Terminal larger for  everything to fit together, but the limit should still be smaller than the typical Terminal size.
 
 Rachel:
   - Working on fixing the dimensions of constructors to conceptually make more sense
     - x: represents columns
     - y: represents rows and is selected first when indexing
     - Ex: blocksHere[y][x]
-<<<<<<< HEAD
-=======
- 
+
  **Tuesday 1/15/19**
- 
+
  **Wednesday 1/16/19**
 
-Kevin: 
-- In the UIelements branch, I managed to get background colors working. Instead of having the array show "R"s to show that it is a traversable area, I just color everything that isn't a room char white so it's easy to distinguish walls from a room. 
+Kevin:
+- In the UIelements branch, I managed to get background colors working. Instead of having the array show "R"s to show that it is a traversable area, I just color everything that isn't a room char white so it's easy to distinguish walls from a room.
 - Attempted merging with master but the map is completely broken. I realize that my coordinate system is the opposite of what Rachel uses. We haven't had any issues before this because we mostly just stuck to our own Java classes, but I'm tryng to look at Floor.java to figure out what's breaking the map now.
->>>>>>> master

@@ -22,12 +22,12 @@ public class Block implements Explorable{
       data = ' ';
     }
     if (newType.equals("Tunnel")){
-      data = 'T';
+      data = ' ';
     }
     if (newType.equals("Opening")){
       data = '0';
     }
-    
+
     type = newType;
   }
 
