@@ -95,7 +95,7 @@ public class Room implements Explorable{
     //Make sure that rooms don't overlap with each other
     //Rooms overlap when...
     //Case 1: OVERLAP LEFT ORIGINAL
-    //    endtXcor of Room to be created >= startXcor - 1 of a Room that already exists
+    //    endtXcor of Room to be created >= startXcor - 4 of a Room that already exists
     //AND startXcor of Room to be created <= endXcor of a Room that already exists
     //AND endYcor of Room to be created >= startYcor of a Room that already exists
     //AND startYcor of Room to be created <= endYcor of a Room that already exists
@@ -113,7 +113,7 @@ public class Room implements Explorable{
     //    startXcor of Room to be created <= endXcor of a Room that already exists
     //AND endXcor of Room to be created >= startXcor of a Room that already exists
     //AND startYcor of Room to be created <= endYcor of a Room that already exists
-    //AND endYcor of Room to be created >= startYcor - 1 of a Room that already exists
+    //AND endYcor of Room to be created >= startYcor - 4 of a Room that already exists
     /*
       0 1 2 3 4 5 6 7 8 9 10
     0 + - - - - - - - - - - +
@@ -125,7 +125,7 @@ public class Room implements Explorable{
 
     //Case 3: OVERLAP RIGHT ORIGINAL
     //    endtXcor of Room to be created >= startXcor of a Room that already exists
-    //AND startXcor of Room to be created <= endXcor + 1 of a Room that already exists
+    //AND startXcor of Room to be created <= endXcor + 4 of a Room that already exists
     //AND endYcor of Room to be created >= startYcor of a Room that already exists
     //AND startYcor of Room to be created <= endYcor of a Room that already exists
     /*
@@ -139,7 +139,7 @@ public class Room implements Explorable{
     //Case 4: OVERLAP BOTTOM ORIGINAL
     //    startXcor of Room to be created <= endXcor of a Room that already exists
     //AND endXcor of Room to be created >= startXcor of a Room that already exists
-    //AND startYcor of Room to be created <= endYcor + 1 of a Room that already exists
+    //AND startYcor of Room to be created <= endYcor + 4 of a Room that already exists
     //AND endYcor of Room to be created >= startYcor of a Room that already exists
     /*
       0 1 2 3 4 5 6 7 8 9 10
@@ -150,13 +150,13 @@ public class Room implements Explorable{
     4               + - - - +
     */
 
-    boolean case1 = (endXcor >= this.startXcor - 1) && (startXcor<= this.endXcor) && (startYcor<=this.endYcor) && (endYcor >= this.startYcor);
+    boolean case1 = (endXcor >= this.startXcor - 4) && (startXcor<= this.endXcor) && (startYcor<=this.endYcor) && (endYcor >= this.startYcor);
     //tests to see if it crosses the left of original
-    boolean case2 = (endYcor >= this.startYcor - 1) && (startYcor<= this.endYcor) && (startXcor<=this.endXcor) && (endXcor >= this.startXcor);
+    boolean case2 = (endYcor >= this.startYcor - 4) && (startYcor<= this.endYcor) && (startXcor<=this.endXcor) && (endXcor >= this.startXcor);
     //tests to see if it crosses the top of original
-    boolean case3 = (startXcor <= this.endXcor + 1) && (endXcor>= this.startXcor) && (startYcor<=this.endYcor) && (endYcor >= this.startYcor);
+    boolean case3 = (startXcor <= this.endXcor + 4) && (endXcor>= this.startXcor) && (startYcor<=this.endYcor) && (endYcor >= this.startYcor);
     //tests to see if it crosses the right of original
-    boolean case4 = (startYcor <= this.endYcor + 1) && (endYcor>= this.startYcor) && (startXcor<=this.endXcor) && (endXcor >= this.startXcor);
+    boolean case4 = (startYcor <= this.endYcor + 4) && (endYcor>= this.startYcor) && (startXcor<=this.endXcor) && (endXcor >= this.startXcor);
     //tests to see if it crosses the bottom of original
     /*System.out.println("Case 1| Overlap left original: "+case1);
     System.out.println("Case 2| Overlap top original: "+case2);
@@ -248,8 +248,8 @@ y   8        R R R R
       }
     }
     //System.out.println("Size:"+pThis.size());
-    //Block thisBlock = pThis.get(Math.abs(rnd.nextInt(pThis.size())));
-    Block thisBlock = this.blocksHere[rnd.nextInt(this.blocksHere.length)][rnd.nextInt(this.blocksHere[0].length)];
+    Block thisBlock = pThis.get(Math.abs(rnd.nextInt(pThis.size())));
+    //Block thisBlock = this.blocksHere[rnd.nextInt(this.blocksHere.length)][rnd.nextInt(this.blocksHere[0].length)];
     //thisBlock.setType("Opening");
     //Changing the Block in floor to Opening
 
@@ -286,9 +286,9 @@ y   8        R R R R
       }
     }
     //System.out.println("Size:"+pTCO.size());
-    //Block TCO = pTCO.get(rnd.nextInt(pTCO.size()));
+    Block TCO = pTCO.get(rnd.nextInt(pTCO.size()));
 
-    Block TCO = theChosenOne.blocksHere[rnd.nextInt(theChosenOne.blocksHere.length)][rnd.nextInt(theChosenOne.blocksHere[0].length)];
+    //Block TCO = theChosenOne.blocksHere[rnd.nextInt(theChosenOne.blocksHere.length)][rnd.nextInt(theChosenOne.blocksHere[0].length)];
     //TCO.setType("Opening");
     //Changing the Block in floor to Opening
 
