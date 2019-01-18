@@ -248,8 +248,8 @@ y   8        R R R R
       }
     }
     //System.out.println("Size:"+pThis.size());
-    //Block thisBlock = pThis.get(Math.abs(rnd.nextInt(pThis.size())));
-    Block thisBlock = this.blocksHere[rnd.nextInt(this.blocksHere.length)][rnd.nextInt(this.blocksHere[0].length)];
+    Block thisBlock = pThis.get(Math.abs(rnd.nextInt(pThis.size())));
+    //Block thisBlock = this.blocksHere[rnd.nextInt(this.blocksHere.length)][rnd.nextInt(this.blocksHere[0].length)];
     //thisBlock.setType("Opening");
     //Changing the Block in floor to Opening
 
@@ -286,9 +286,9 @@ y   8        R R R R
       }
     }
     //System.out.println("Size:"+pTCO.size());
-    //Block TCO = pTCO.get(rnd.nextInt(pTCO.size()));
+    Block TCO = pTCO.get(rnd.nextInt(pTCO.size()));
 
-    Block TCO = theChosenOne.blocksHere[rnd.nextInt(theChosenOne.blocksHere.length)][rnd.nextInt(theChosenOne.blocksHere[0].length)];
+    //Block TCO = theChosenOne.blocksHere[rnd.nextInt(theChosenOne.blocksHere.length)][rnd.nextInt(theChosenOne.blocksHere[0].length)];
     //TCO.setType("Opening");
     //Changing the Block in floor to Opening
 
