@@ -226,11 +226,14 @@ public class Floor{
           output += "|";
 
         else {
-          if (!blocksHere[i][j].getType().equals("Room") && !blocksHere[i][j].getType().equals("Tunnel"))
-            output += (bgWhite + blocksHere[i][j].getData() + resetColor);
+          if (blocksHere[i][j].getType().equals("Room"))
+            output += blocksHere[i][j].getData();
+
+          else if (blocksHere[i][j].getType().equals("Tunnel"))
+            output += blocksHere[i][j].getData();
 
           else
-            output += blocksHere[i][j].getData();
+            output += (bgWhite + blocksHere[i][j].getData() + resetColor);
           }
       }
 
