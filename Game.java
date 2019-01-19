@@ -53,6 +53,14 @@ public class Game {
     return player;
   }
 
+  public Enemy[] getEnemies() {
+    return enemies;
+  }
+
+  public Enemy getEnemy(int num) {
+    return enemies[num];
+  }
+
   public int getLevel() {
     return level;
   }
