@@ -102,26 +102,23 @@ public class Block implements Explorable{
     }
   }
 
-/* Spawns
+  //Spawns
   public void spawnObjective() {
     objectiveHere = true;
     data = '%';
   }
+
+  /*
   public void spawnItem(){
     Item newItem = new Item();
     data = 'I';
     itemHere = newItem;
   }
+  */
 
   public void spawnEnemy() {
-    Enemy newEnemy = new Enemy();
+    Enemy newEnemy = new Enemy("Enemy", 5, 20, 10, 10);
     data = 'E';
     pokemonHere = newEnemy;
   }
-
-  public void spawnPlayer() {
-    Player newPlayer = new Player();
-    data = 'P';
-    pokemonHere = newPlayer;
-  }*/
 }
