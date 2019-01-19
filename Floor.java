@@ -251,9 +251,13 @@ public class Floor{
         //System.out.println("b.getX(),b.getY(): "+ b.getX()+", "+b.getY());
         if (blocksHere[b.getY()][b.getX()].getType() != "Room"){ //Don't make it a Tunnel Block if it was a Room
           // blocksHere[b.getY()][b.getX()] = new Block(b.getX(), b.getY(), "Tunnel");
-           blocksHere[b.getY()][b.getX()] = new Block(b.getX(),b.getY(), direction);
+          if (blocksHere[b.getY()][b.getX()].getType() == "Tunnel" && blocksHere[b.getY()][b.getX()].getDirection() != direction){
+            blocksHere[b.getY()][b.getX()] = new Block(b.getX(), b.getY(), 2);
+          }
+          else{
+            blocksHere[b.getY()][b.getX()] = new Block(b.getX(),b.getY(), direction);
+          }
          }
-
       }
     }
   }
