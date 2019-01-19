@@ -216,8 +216,34 @@ Rachel:
 
  **Tuesday 1/15/19**
 
+ Rachel:
+  - Dimensions! Fixed such that blocksHere reflects the 4th quadrant in a standard cartesian plane: x refers to width, y refers to length
+  - Fixed a Tunnel constructor error
+  - Block.java
+    - Added printPoint() for debugging
+  - Floor.java
+    - Fixed addTunnel
+  - Problems... :(
+    - Discovered issue with getting correct start/endBlocks
+
+
  **Wednesday 1/16/19**
+
+Rachel:
+  - Room.java
+    - Fixed createRoom and createRooms: Tunnels now generate!!!
+    - Fixed constructor and toSTring(ArrayList<Block>)
+    - Commented out some print statements
+  - Tunnel.java
+    - Commented out some print statements
+  - Floor.java
+    - Fixed toStringClean()
 
 Kevin:
 - In the UIelements branch, I managed to get background colors working. Instead of having the array show "R"s to show that it is a traversable area, I just color everything that isn't a room char white so it's easy to distinguish walls from a room.
 - Attempted merging with master but the map is completely broken. I realize that my coordinate system is the opposite of what Rachel uses. We haven't had any issues before this because we mostly just stuck to our own Java classes, but I'm tryng to look at Floor.java to figure out what's breaking the map now.
+
+**Thursday 1/17/19**
+
+Kevin:
+- Fixed most if not all of the issues caused by the merge. Now going to working on enemy spawns.
