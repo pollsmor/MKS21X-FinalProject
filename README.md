@@ -245,4 +245,5 @@ Kevin:
 
 **Thursday 1/17/19**
 
-
+Kevin: 
+- Fixed most if not all of the issues caused by the merge. Now going to working on enemy spawns. 
