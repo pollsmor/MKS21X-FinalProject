@@ -116,9 +116,8 @@ public class Block implements Explorable{
   }
   */
 
-  public void spawnEnemyHere() {
-    Enemy newEnemy = new Enemy("Enemy", 5, 20, 10, 10);
+  public void spawnEnemyHere(Enemy enemy) {
     data = 'E';
-    pokemonHere = newEnemy;
+    pokemonHere = enemy;
   }
 }

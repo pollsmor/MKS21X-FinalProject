@@ -131,7 +131,8 @@ public class Game {
       int[] enemySpawn = spawnEnemy();
       int row = enemySpawn[0];
       int col = enemySpawn[1];
-      floor.getBlock(row, col).spawnEnemyHere();
+      enemies[i] = new Enemy(row, col);
+      floor.getBlock(row, col).spawnEnemyHere(enemies[i]);
     }
   }
 }

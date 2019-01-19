@@ -57,4 +57,20 @@ public abstract class Pokemon {
     currentHP += change; //can be positive or negative depending on case
     return temp;
   }
+
+  public void moveUp() {
+
+  }
+
+  public void moveDown() {
+
+  }
+
+  public void moveLeft() {
+
+  }
+
+  public void moveRight() {
+
+  }
 }
