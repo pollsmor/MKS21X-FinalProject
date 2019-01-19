@@ -128,9 +128,6 @@ public class Driver {
     }
 
     while (running) {
-      putString(rows * 3/4 + 4, 0, terminal, "Row: " + row);
-      putString(rows * 3/4 + 5, 0, terminal, "Col: " + col);
-
       terminal.moveCursor(col, row);
       terminal.applyForegroundColor(Terminal.Color.GREEN);
       terminal.putCharacter('\u04dd');
