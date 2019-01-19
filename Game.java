@@ -14,7 +14,8 @@ public class Game {
   //Doesn't take a seed, so a random one is generated
   public Game(String name, int rows, int cols) {
     player = new Player(name);
-    enemies = new Enemy[12]; //random number
+    int amtEnemies = rows * cols / 450;
+    enemies = new Enemy[amtEnemies];
     level = 1;
     floor = new Floor(1, cols, rows * 3/4); //Floor constructor takes left to right before top to bottom
     //missions = new Mission(); //ArrayList to allow easy adding/removing
@@ -31,7 +32,8 @@ public class Game {
   //Takes a seed
   public Game(String name, int inputSeed, int rows, int cols) {
     player = new Player(name);
-    enemies = new Enemy[12];
+    int amtEnemies = rows * cols / 450;
+    enemies = new Enemy[amtEnemies];
     level = 1;
     floor = new Floor(1, cols, rows * 3/4);
     //missions = new Mission(); //ArrayList to allow easy adding/removing
