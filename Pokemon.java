@@ -58,19 +58,19 @@ public abstract class Pokemon {
     return temp;
   }
 
-  public void moveUp() {
+  public void moveUp(Floor floor) {
 
   }
 
-  public void moveDown() {
+  public void moveDown(Floor floor) {
 
   }
 
-  public void moveLeft() {
+  public void moveLeft(Floor floor) {
 
   }
 
-  public void moveRight() {
+  public void moveRight(Floor floor) {
 
   }
 }
