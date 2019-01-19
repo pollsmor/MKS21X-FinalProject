@@ -247,6 +247,7 @@ y   8        R R R R
         //System.out.println("Size:"+pThis.size());
       }
     }
+    System.out.println("Removing dupes in pThis");
     //System.out.println("Size:"+pThis.size());
     pThis = removeDupes(pThis);
     Block thisBlock = pThis.get(Math.abs(rnd.nextInt(pThis.size())));
@@ -286,6 +287,7 @@ y   8        R R R R
         //System.out.println("Size:"+pTCO.size());
       }
     }
+    System.out.println("Removing dupes in pTCO");
     //System.out.println("Size:"+pTCO.size());
     pTCO = removeDupes(pTCO);
     Block TCO = pTCO.get(rnd.nextInt(pTCO.size()));
@@ -308,6 +310,7 @@ y   8        R R R R
 
     Tunnel connector;
     if (deltaX == 0){
+      System.out.println("Making a connector");
       //means this is a vertical Tunnel
       if (deltaY < 0){
         connector = new Tunnel(thisBlock, TCO, floor);
@@ -330,19 +333,22 @@ y   8        R R R R
 
     //If thisBlock and TCO don't have the same xcor nor ycor...
     else{
+      System.out.println("Getting random corners");
       Block corner1, corner2, corner3;
       int dir=rnd.nextInt(2); //decide which direction to go First
       //Getting Xcors and Ycors of first 2 corners
       int randomXcor = 0;
       int randomYcor = 0;
-      while (randomXcor <= 2){
+      System.out.println("Getting Xcor");
+      //while (randomXcor <= 2){
         randomXcor = rnd.nextInt(Math.abs(deltaX)); //the first difference in xcor
-      }
-      while (randomYcor <= 2){
+      //}
+      System.out.println("Getting ycor");
+      //while (randomYcor <= 2){
         randomYcor = rnd.nextInt(Math.abs(deltaY)); //the first difference in ycor
-      }
+      //}
       Tunnel section1, section2, section3, section4;
-
+      System.out.println("Making the Tunnels");
       //-----------------------------------Starting with horizontal Tunnel first---------------------------------//
       if (dir == 0){//start with horizontal
         if(deltaX < 0){ //if deltaX is negative, thisBlock is to the left of TCO
