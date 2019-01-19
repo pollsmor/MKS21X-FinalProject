@@ -115,7 +115,6 @@ public class Driver {
     int col = game.getPlayer().getCol();
 
     while (running) {
-      putString(0, 0, terminal, game.getFloor().toStringClean());
       terminal.moveCursor(col, row);
       terminal.applyForegroundColor(Terminal.Color.YELLOW);
       terminal.putCharacter('\u04dd');
@@ -147,7 +146,9 @@ public class Driver {
       }
     //----------------------------------------------------------------------------------------------------------------
       long tEndForEnemies = System.currentTimeMillis();
-      if ((tEndForEnemies - tStart) % 1000 < 100) {
+      //Attempting to simulate 60fps
+      if ((tEndForEnemies - tStart) % 1000 < 16) {
+        putString(0, 0, terminal, game.getFloor().toStringClean());
         for (int i = 0; i < game.getEnemies().length; ++i) {
           int direction = Math.abs(enemyDirectionGen.nextInt() % 5);
           if (direction == 0) {

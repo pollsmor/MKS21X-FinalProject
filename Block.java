@@ -117,7 +117,7 @@ public class Block implements Explorable{
   */
 
   public void spawnEnemyHere(Enemy enemy) {
-    data = 'E';
+    data = '\u03e1';
     pokemonHere = enemy;
   }
 
@@ -127,7 +127,7 @@ public class Block implements Explorable{
       pokemonHere = null;
     }
     else {
-      data = 'E';
+      data = '\u03e1';
       pokemonHere = pokemon;
     }
   }
