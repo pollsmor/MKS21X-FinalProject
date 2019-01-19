@@ -110,6 +110,9 @@ public class Driver {
     boolean running = true;
     boolean alive = true; //controls the inner while loop
 
+    int row = game.getPlayer().getRow();
+    int col = game.getPlayer().getCol();
+
     while (running) {
       terminal.moveCursor(col, row);
       terminal.applyForegroundColor(Terminal.Color.YELLOW);

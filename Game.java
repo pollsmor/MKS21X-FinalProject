@@ -14,41 +14,38 @@ public class Game {
 
   //Doesn't take a seed, so a random one is generated
   public Game(String inputName, int rows, int cols) {
-    name = inputName;
-    spawnPlayer();
-    int amtEnemies = rows * cols / 450;
-    enemies = new Enemy[amtEnemies];
-
+    termRows = rows;
+    termCols = cols;
     level = 1;
     floor = new Floor(1, cols, rows * 3/4); //Floor constructor takes left to right before top to bottom
     //missions = new Mission(); //ArrayList to allow easy adding/removing
     Random randgen = new Random();
     seed = randgen.nextInt();
     isRandomSeed = true;
-    termRows = rows;
-    termCols = cols;
-
     floor.createRooms(seed);
+
+    name = inputName;
     spawnPlayer();
+    int amtEnemies = rows * cols / 450;
+    enemies = new Enemy[amtEnemies];
     spawnEnemies();
   }
 
   //Takes a seed
   public Game(String inputName, int inputSeed, int rows, int cols) {
-    name = inputName;
-    spawnPlayer();
-    int amtEnemies = rows * cols / 450;
-    enemies = new Enemy[amtEnemies];
-    
+    termRows = rows;
+    termCols = cols;
     level = 1;
     floor = new Floor(1, cols, rows * 3/4);
     //missions = new Mission(); //ArrayList to allow easy adding/removing
     seed = inputSeed;
     isRandomSeed = false;
-    termRows = rows;
-    termCols = cols;
-
     floor.createRooms(seed);
+
+    name = inputName;
+    spawnPlayer();
+    int amtEnemies = rows * cols / 450;
+    enemies = new Enemy[amtEnemies];
     spawnEnemies();
   }
 
