@@ -19,7 +19,7 @@ import java.util.Random;
 
 public class Driver {
   //Doesn't follow the (row, column) scheme of the rest of the program because moveCursor doesn't
-  public static void putString(int c, int r, Terminal t, String s) {
+  public static void putString(int r, int c, Terminal t, String s) {
     t.moveCursor(c, r);
     for (int i = 0; i < s.length(); ++i) {
       t.putCharacter(s.charAt(i));
@@ -99,19 +99,19 @@ public class Driver {
 
     //Print the game's UI elements
     putString(0, 0, terminal, game.getFloor().toStringClean());
-    putString(1, rows * 3/4 + 1, terminal, bgWhite + black + game.getPlayer().getName() + resetColor);
-    putString(cols - 25, rows * 3/4 + 1, terminal, underline + blink + "Pok" + '\u00e9' + "mon Terminal Dungeon" + resetColor);
+    putString(rows * 3/4 + 1, 1, terminal, bgWhite + black + game.getPlayer().getName() + resetColor);
+    putString(rows * 3/4 + 1, cols - 25, terminal, underline + blink + "Pok" + '\u00e9' + "mon Terminal Dungeon" + resetColor);
     //Row 1 of stats, below the name                                             //accented e
-    putString(1, rows * 3/4 + 2, terminal, "HP: ");
-    putString(13, rows * 3/4 + 2, terminal, "Level: ");
-    putString(28, rows * 3/4 + 2, terminal, "Attack: ");
-    putString(43, rows * 3/4 + 2, terminal, "Defense: ");
+    putString(rows * 3/4 + 2, 1, terminal, "HP: ");
+    putString(rows * 3/4 + 2, 13, terminal, "Level: ");
+    putString(rows * 3/4 + 2, 28, terminal, "Attack: ");
+    putString(rows * 3/4 + 2, 43, terminal, "Defense: ");
     //Row 2 of stats
-    putString(1, rows * 3/4 + 3, terminal, "Area: ");
-    putString(13, rows * 3/4 + 3, terminal, "Hunger: ");
-    putString(28, rows * 3/4 + 3, terminal, "Money: ");
-    putString(cols - 17, rows - 2, terminal, "Time: " );
-    putString(cols - 17, rows - 1, terminal, "Seed: " + game.getSeed());
+    putString(rows * 3/4 + 3, 1, terminal, "Area: ");
+    putString(rows * 3/4 + 3, 13, terminal, "Hunger: ");
+    putString(rows * 3/4 + 3, 28, terminal, "Money: ");
+    putString(rows - 2, cols - 17, terminal, "Time: " );
+    putString(rows - 1, cols - 17, terminal, "Seed: " + game.getSeed());
 
     boolean running = true;
     boolean alive = true; //controls the inner while loop
@@ -139,14 +139,14 @@ public class Driver {
 
     //----------------------------------------------------------------------------------------------------------------
       if (!alive) {
-        putString(0, cols, terminal,"You died. Would you like to respawn? (y/n)");
+        putString(rows, 0, terminal,"You died. Would you like to respawn? (y/n)");
         while (!alive) {
           Key key2 = terminal.readInput(); //if I'm in the if I can't read the first readInput, so I need a second one
           if (key2 != null) {
             //Do you want to respawn?
             if (key2.getCharacter() == 'y') {
               alive = true;                //Below is so I can replace the you died text:
-              putString(0, cols, terminal, "                                          ");
+              putString(rows, 0, terminal, "                                          ");
             }
 
             //No, I don't want to respawn.
@@ -207,20 +207,20 @@ public class Driver {
 
       //Do even when no key is pressed
       //First row of stats
-      putString(5, rows * 3/4 + 2, terminal, green + game.getPlayer().getHP());
-      putString(20, rows * 3/4 + 2, terminal, "" + game.getPlayer().getLevel());
-      putString(36, rows * 3/4 + 2, terminal, "" + game.getPlayer().getAttack());
-      putString(52, rows * 3/4 + 2, terminal, "" + game.getPlayer().getDefense());
+      putString(rows * 3/4 + 2, 5, terminal, green + game.getPlayer().getHP());
+      putString(rows * 3/4 + 2, 20, terminal, "" + game.getPlayer().getLevel());
+      putString(rows * 3/4 + 2, 36, terminal, "" + game.getPlayer().getAttack());
+      putString(rows * 3/4 + 2, 52, terminal, "" + game.getPlayer().getDefense());
       //Second row of stats
-      putString(7, rows * 3/4 + 3, terminal, "" + game.getLevel());
-      putString(21, rows * 3/4 + 3, terminal, "" + game.getPlayer().getHunger());
-      putString(35, rows * 3/4 + 3, terminal, "" + game.getPlayer().getMoney() + '\u00a5' + resetColor); //yen symbol
+      putString(rows * 3/4 + 3, 7, terminal, "" + game.getLevel());
+      putString(rows * 3/4 + 3, 21, terminal, "" + game.getPlayer().getHunger());
+      putString(rows * 3/4 + 3, 35, terminal, "" + game.getPlayer().getMoney() + '\u00a5' + resetColor); //yen symbol
 
       long tEnd = System.currentTimeMillis();
       long millis = tEnd - tStart;
       if (millis / 1000 > lastSecond) {
         lastSecond = millis / 1000; //One second has passed.
-        putString(cols - 11, rows - 2, terminal, lastSecond + "s");
+        putString(rows - 2, cols - 11, terminal, lastSecond + "s");
       }
     }
 
