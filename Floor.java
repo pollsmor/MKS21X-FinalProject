@@ -126,7 +126,7 @@ public class Floor{
   */
   public Room createRoom(int startXcor, int startYcor, int endXcor, int endYcor){
     Room a = new Room(startXcor, startYcor, endXcor, endYcor);
-    System.out.println("CreateRoom in progress");
+    //System.out.println("CreateRoom in progress");
     //System.out.println("startXcor: "+startXcor+", startYcor: "+startYcor+", endXcor: "+endXcor+", endYcor: "+endYcor);
     //Must also update blocksHere
     for (int y = startYcor; y < endYcor + 1; y++){ // - 1 to avoid index exceptions
@@ -244,7 +244,7 @@ public class Floor{
   */
   public void addTunnel(Tunnel t, int direction){
     Block b;
-    System.out.println("Add Tunnel in progress");
+    //System.out.println("Add Tunnel in progress");
     for (int i = 0; i < t.getBlocksHere().length; i++){ //Horizontal
       for(int j = 0; j < t.getBlocksHere()[i].length;j++){
         b = t.getBlocksHere()[i][j];
@@ -257,7 +257,7 @@ public class Floor{
           else{
             blocksHere[b.getY()][b.getX()] = new Block(b.getX(),b.getY(), direction);
           }
-         }
+        }
       }
     }
   }
