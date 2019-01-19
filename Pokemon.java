@@ -62,6 +62,14 @@ public abstract class Pokemon {
     return temp;
   }
 
+  public int getRow() {
+    return row;
+  }
+
+  public int getCol() {
+    return col;
+  }
+
   public void moveUp(Game game) {
 
   }
