@@ -219,13 +219,9 @@ public class Floor{
 
   */
   //toString makes a coordinate system that is offset from the one the blocksHere array uses.
-<<<<<<< HEAD
   public String toStringClean() {
     String bgWhite = "\u001b[47m";
     String resetColor = "\u001b[0m";
-=======
-  public String toStringClean(){
->>>>>>> master
     String output = "";
 
     for (int i = 0; i < length; ++i) {
@@ -254,13 +250,11 @@ public class Floor{
     return output;
   }
 
-<<<<<<< HEAD
-=======
   //public void addTunnel(Tunnel t)
   /**Adds a Tunnel to blocksHere
     *@param t is a Tunnel which is to be added to the Floor
   */
->>>>>>> master
+  
   public void addTunnel(Tunnel t){
     Block b;
     for (int i = 0; i < t.getBlocksHere().length; i++){ //Horizontal
