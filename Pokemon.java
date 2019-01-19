@@ -13,8 +13,10 @@ public abstract class Pokemon {
   private Move move2;
   private Move move3;
   private Move move4;
+  private int row;
+  private int col;
 
-  public Pokemon(String inputName, int inputLevel, int inputMaxHP, int inputAttack, int inputDefense) {
+  public Pokemon(String inputName, int inputLevel, int inputMaxHP, int inputAttack, int inputDefense, int inputRow, int inputCol) {
     name = inputName;
     level = inputLevel;
     maxHP = inputMaxHP;
@@ -22,6 +24,8 @@ public abstract class Pokemon {
     attack = inputAttack;
     defense = inputDefense;
     stepsTaken = 0;
+    row = inputRow;
+    col = inputCol;
   }
 
   public void healPassive() {
@@ -58,19 +62,19 @@ public abstract class Pokemon {
     return temp;
   }
 
-  public void moveUp(Floor floor) {
+  public void moveUp(Game game) {
 
   }
 
-  public void moveDown(Floor floor) {
+  public void moveDown(Game game) {
 
   }
 
-  public void moveLeft(Floor floor) {
+  public void moveLeft(Game game) {
 
   }
 
-  public void moveRight(Floor floor) {
+  public void moveRight(Game game) {
 
   }
 }

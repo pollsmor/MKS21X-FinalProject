@@ -13,7 +13,8 @@ public class Enemy extends Pokemon {
          (int) (Math.random() * 1000) % 10,
          (int) (Math.random() * 1000) % 40,
          (int) (Math.random() * 1000) % 10,
-         (int) (Math.random() * 1000) % 10);
+         (int) (Math.random() * 1000) % 10,
+         row, col);
   }
 
   //add this XP to the player when the monster is killed

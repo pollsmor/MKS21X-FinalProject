@@ -1,6 +1,7 @@
 import java.util.Random;
 
 public class Game {
+  private String name;
   private Player player;
   private Enemy[] enemies;
   private int level;
@@ -12,10 +13,12 @@ public class Game {
   private int termCols;
 
   //Doesn't take a seed, so a random one is generated
-  public Game(String name, int rows, int cols) {
-    player = new Player(name);
+  public Game(String inputName, int rows, int cols) {
+    name = inputName;
+    spawnPlayer();
     int amtEnemies = rows * cols / 450;
     enemies = new Enemy[amtEnemies];
+
     level = 1;
     floor = new Floor(1, cols, rows * 3/4); //Floor constructor takes left to right before top to bottom
     //missions = new Mission(); //ArrayList to allow easy adding/removing
@@ -26,14 +29,17 @@ public class Game {
     termCols = cols;
 
     floor.createRooms(seed);
+    spawnPlayer();
     spawnEnemies();
   }
 
   //Takes a seed
-  public Game(String name, int inputSeed, int rows, int cols) {
-    player = new Player(name);
+  public Game(String inputName, int inputSeed, int rows, int cols) {
+    name = inputName;
+    spawnPlayer();
     int amtEnemies = rows * cols / 450;
     enemies = new Enemy[amtEnemies];
+    
     level = 1;
     floor = new Floor(1, cols, rows * 3/4);
     //missions = new Mission(); //ArrayList to allow easy adding/removing
@@ -72,7 +78,7 @@ public class Game {
     return floor.getBlock(row, col).getType() == "Wall";
   }
 
-  public int[] spawnPlayer() {
+  public int[] createSpawnPlayer() {
     Random randgenRow = new Random();
     Random randgenCol = new Random();
 
@@ -99,7 +105,7 @@ public class Game {
     return output;
   }
 
-  public int[] spawnEnemy() {
+  public int[] createSpawnEnemy() {
     Random randgenRow = new Random();
     Random randgenCol = new Random();
 
@@ -126,9 +132,16 @@ public class Game {
     return output;
   }
 
+  private void spawnPlayer() {
+      int[] playerSpawn = createSpawnPlayer();
+      int row = playerSpawn[0];
+      int col = playerSpawn[1];
+      player = new Player(name, row, col);
+  }
+
   private void spawnEnemies() {
     for (int i = 0; i < enemies.length; ++i) {
-      int[] enemySpawn = spawnEnemy();
+      int[] enemySpawn = createSpawnEnemy();
       int row = enemySpawn[0];
       int col = enemySpawn[1];
       enemies[i] = new Enemy(row, col);

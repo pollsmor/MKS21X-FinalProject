@@ -110,11 +110,6 @@ public class Driver {
     boolean running = true;
     boolean alive = true; //controls the inner while loop
 
-    //Player spawn
-    int[] randomSpawn = game.spawnPlayer();
-    int row = randomSpawn[0];
-    int col = randomSpawn[1];
-
     while (running) {
       terminal.moveCursor(col, row);
       terminal.applyForegroundColor(Terminal.Color.YELLOW);
@@ -147,7 +142,7 @@ public class Driver {
       }
     //----------------------------------------------------------------------------------------------------------------
       if (tStart % 1000 == 0) {
-        
+
       }
     //----------------------------------------------------------------------------------------------------------------
       if (key != null) {

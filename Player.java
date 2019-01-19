@@ -6,8 +6,8 @@ public class Player extends Pokemon {
   private int score; //Kinda useless but whatever
 
   //In the core games the starter is typically lvl 5, 20 HP, and around 10 atk/def
-  public Player(String name) {
-    super(name, 5, 20, 10, 10);
+  public Player(String name, int row, int col) {
+    super(name, 5, 20, 10, 10, row, col);
     maxHunger = 10;
     currentHunger = maxHunger;
     xp = 0;
