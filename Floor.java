@@ -252,12 +252,6 @@ public class Floor{
     *@param t is a Tunnel which is to be added to the Floor
     *@param direction is an int representing the direction the Tunnel is: 0 for left right, 1 for up down
   */
-<<<<<<< HEAD
-  
-  public void addTunnel(Tunnel t){
-=======
-  public void addTunnel(Tunnel t, int direction){
->>>>>>> mapGen
     Block b;
     //System.out.println("Add Tunnel in progress");
     for (int i = 0; i < t.getBlocksHere().length; i++){ //Horizontal
