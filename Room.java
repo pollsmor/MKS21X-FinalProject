@@ -435,16 +435,24 @@ y   8        R R R R
         //System.out.println("RandomYcor: "+randomYcor);
         //System.out.println("Section1 start: "+ section1.getStartBlock().getX()+", "+ section1.getStartBlock().getY());
         //System.out.println("Section1 end: "+ section1.getEndBlock().getX()+", "+ section1.getEndBlock().getY());
-        floor.addTunnel(section1, 0);
+        if (section1.getLength()>1){
+          floor.addTunnel(section1, 0);
+        }
         //System.out.println("Section2 start: "+ section2.getStartBlock().getX()+", "+ section2.getStartBlock().getY());
         //System.out.println("Section2 end: "+ section2.getEndBlock().getX()+", "+ section2.getEndBlock().getY());
-        floor.addTunnel(section2, 1);
+        if (section2.getLength()>1){
+          floor.addTunnel(section2, 1);
+        }
         //System.out.println("Section3 start: "+ section3.getStartBlock().getX()+", "+ section3.getStartBlock().getY());
         //System.out.println("Section3 end: "+ section3.getEndBlock().getX()+", "+ section3.getEndBlock().getY());
-        floor.addTunnel(section3, 0);
+        if (section3.getLength()>1){
+          floor.addTunnel(section3, 0);
+        }
         //System.out.println("Section4 start: "+ section4.getStartBlock().getX()+", "+ section4.getStartBlock().getY());
         //System.out.println("Section4 end: "+ section4.getEndBlock().getX()+", "+ section4.getEndBlock().getY());
-        floor.addTunnel(section4, 1);
+        if (section4.getLength()>1){
+          floor.addTunnel(section4, 1);
+        }
       }
       //--------------------Start with Vertical------------------//
       else{
@@ -532,16 +540,24 @@ y   8        R R R R
         //System.out.println("RandomYcor: "+randomYcor);
         //System.out.println("Section1 start: "+ section1.getStartBlock().getX()+", "+ section1.getStartBlock().getY());
         //System.out.println("Section1 end: "+ section1.getEndBlock().getX()+", "+ section1.getEndBlock().getY());
-        floor.addTunnel(section1, 1);
+        if (section1.getLength()>1){
+          floor.addTunnel(section1, 1);
+        }
         //System.out.println("Section2 start: "+ section2.getStartBlock().getX()+", "+ section2.getStartBlock().getY());
         //System.out.println("Section2 end: "+ section2.getEndBlock().getX()+", "+ section2.getEndBlock().getY());
-        floor.addTunnel(section2, 0);
+        if (section2.getLength()>1){
+          floor.addTunnel(section2, 0);
+        }
         //System.out.println("Section3 start: "+ section3.getStartBlock().getX()+", "+ section3.getStartBlock().getY());
         //System.out.println("Section3 end: "+ section3.getEndBlock().getX()+", "+ section3.getEndBlock().getY());
-        floor.addTunnel(section3, 1);
+        if (section3.getLength()>1){
+          floor.addTunnel(section3, 1);
+        }
         //System.out.println("Section4 start: "+ section4.getStartBlock().getX()+", "+ section4.getStartBlock().getY());
         //System.out.println("Section4 end: "+ section4.getEndBlock().getX()+", "+ section4.getEndBlock().getY());
-        floor.addTunnel(section4, 0);
+        if (section4.getLength()>1){
+          floor.addTunnel(section4, 0);
+        }
       }
     }
     return true;
