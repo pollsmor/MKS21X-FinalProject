@@ -25,6 +25,7 @@ public class Game {
     termCols = cols;
 
     floor.createRooms(seed);
+    spawnEnemies();
   }
 
   //Takes a seed
@@ -40,6 +41,7 @@ public class Game {
     termCols = cols;
 
     floor.createRooms(seed);
+    spawnEnemies();
   }
 
   public Player getPlayer() {
@@ -68,7 +70,7 @@ public class Game {
     return floor.getBlock(row, col).getType() == "Wall";
   }
 
-  public int[] randomSpawn() {
+  public int[] spawnPlayer() {
     Random randgenRow = new Random();
     Random randgenCol = new Random();
 
@@ -93,5 +95,41 @@ public class Game {
     output[1] = col;
 
     return output;
+  }
+
+  public int[] spawnEnemy() {
+    Random randgenRow = new Random();
+    Random randgenCol = new Random();
+
+    if (!isRandomSeed) {
+      randgenRow = new Random(seed + 3);
+      randgenCol = new Random();
+    }
+
+    int row = 0;
+    int col = 0;
+
+    boolean spawnFound = false;
+    while (!spawnFound) {
+      row = Math.abs(randgenRow.nextInt() % (termRows * 3/4));
+      col = Math.abs(randgenCol.nextInt() % termCols);
+      if (!isWall(row, col))
+        spawnFound = true;
+    }
+
+    int[] output = new int[2];
+    output[0] = row;
+    output[1] = col;
+
+    return output;
+  }
+
+  private void spawnEnemies() {
+    for (int i = 0; i < enemies.length; ++i) {
+      int[] enemySpawn = spawnEnemy();
+      int row = enemySpawn[0];
+      int col = enemySpawn[1];
+      floor.getBlock(row, col).spawnEnemyHere();
+    }
   }
 }

@@ -110,8 +110,8 @@ public class Driver {
     boolean running = true;
     boolean alive = true; //controls the inner while loop
 
-    //Random spawn generation
-    int[] randomSpawn = game.randomSpawn();
+    //Player spawn
+    int[] randomSpawn = game.spawnPlayer();
     int row = randomSpawn[0];
     int col = randomSpawn[1];
 
