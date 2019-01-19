@@ -109,11 +109,13 @@ public class Driver {
 
     boolean running = true;
     boolean alive = true; //controls the inner while loop
+    Random enemyDirectionGen = new Random(game.getSeed() + 10); //I don't want this to keep getting rerun in the while loop
 
     int row = game.getPlayer().getRow();
     int col = game.getPlayer().getCol();
 
     while (running) {
+      putString(0, 0, terminal, game.getFloor().toStringClean());
       terminal.moveCursor(col, row);
       terminal.applyForegroundColor(Terminal.Color.YELLOW);
       terminal.putCharacter('\u04dd');
@@ -144,8 +146,32 @@ public class Driver {
         }
       }
     //----------------------------------------------------------------------------------------------------------------
-      if (tStart % 1000 == 0) {
+      long tEndForEnemies = System.currentTimeMillis();
+      if ((tEndForEnemies - tStart) % 1000 < 100) {
+        for (int i = 0; i < game.getEnemies().length; ++i) {
+          int direction = Math.abs(enemyDirectionGen.nextInt() % 5);
+          if (direction == 0) {
+            game.getEnemy(i).moveUp(game);
+            game.getFloor().getBlock(game.getEnemy(i).getRow(), game.getEnemy(i).getCol()).setPokemonHere(game.getEnemy(i));
+          }
 
+          else if (direction == 1) {
+            game.getEnemy(i).moveDown(game);
+            game.getFloor().getBlock(game.getEnemy(i).getRow(), game.getEnemy(i).getCol()).setPokemonHere(game.getEnemy(i));
+          }
+
+          else if (direction == 2) {
+            game.getEnemy(i).moveLeft(game);
+            game.getFloor().getBlock(game.getEnemy(i).getRow(), game.getEnemy(i).getCol()).setPokemonHere(game.getEnemy(i));
+          }
+
+          else if (direction == 3) {
+            game.getEnemy(i).moveRight(game);
+            game.getFloor().getBlock(game.getEnemy(i).getRow(), game.getEnemy(i).getCol()).setPokemonHere(game.getEnemy(i));
+          }
+
+          //If it equals 4 just don't move
+        }
       }
     //----------------------------------------------------------------------------------------------------------------
       if (key != null) {

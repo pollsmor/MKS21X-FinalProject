@@ -120,4 +120,15 @@ public class Block implements Explorable{
     data = 'E';
     pokemonHere = enemy;
   }
+
+  public void setPokemonHere(Pokemon pokemon) {
+    if (pokemon == null) {
+      data = ' ';
+      pokemonHere = null;
+    }
+    else {
+      data = 'E';
+      pokemonHere = pokemon;
+    }
+  }
 }
