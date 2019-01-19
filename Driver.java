@@ -66,8 +66,6 @@ public class Driver {
     String name = args[0];
     int seed;
     Game game;
-    Random randgenRow;
-    Random randgenCol;
 
     if (name.length() > 25) {
       terminal.exitPrivateMode();
@@ -78,15 +76,11 @@ public class Driver {
     //Instantiate game outside of try since it wouldn't work inside it
     if (args.length == 1) {
       game = new Game(name, rows, cols);
-      randgenRow = new Random();
-      randgenCol = new Random();
     }
 
     else {
       seed = Integer.parseInt(args[1]);
       game = new Game(name, seed, rows, cols);
-      randgenRow = new Random(seed + 2);
-      randgenCol = new Random(seed);
     }
 
     //Colors/styles to use
@@ -117,15 +111,9 @@ public class Driver {
     boolean alive = true; //controls the inner while loop
 
     //Random spawn generation
-    int row = 0;
-    int col = 0;
-    boolean spawnFound = false;
-    while (!spawnFound) {
-        row = Math.abs(randgenRow.nextInt() % (rows * 3/4));
-        col = Math.abs(randgenCol.nextInt() % cols);
-        if (!game.isWall(row, col))
-          spawnFound = true;
-    }
+    String randomSpawn = game.randomSpawn();
+    int row = Integer.parseInt(randomSpawn.substring(0, 1));
+    int col = Integer.parseInt(randomSpawn.substring(1, 2));
 
     while (running) {
       terminal.moveCursor(col, row);
