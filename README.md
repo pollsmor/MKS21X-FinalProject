@@ -247,3 +247,11 @@ Kevin:
 
 Kevin:
 - Fixed most if not all of the issues caused by the merge. Now going to working on enemy spawns.
+
+***--------------------Stage 2--------------------***
+
+**Friday 1/18/19**
+
+Kevin: 
+- Copy pasting the *working* random spawn generation code from Driver and attempting to transplant it into a function still doesn't work
+- Switched putString's coordinate system to match the rest of Driver: row, col
