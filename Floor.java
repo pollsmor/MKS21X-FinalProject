@@ -126,6 +126,7 @@ public class Floor{
   */
   public Room createRoom(int startXcor, int startYcor, int endXcor, int endYcor){
     Room a = new Room(startXcor, startYcor, endXcor, endYcor);
+    System.out.println("CreateRoom in progress");
     //System.out.println("startXcor: "+startXcor+", startYcor: "+startYcor+", endXcor: "+endXcor+", endYcor: "+endYcor);
     //Must also update blocksHere
     for (int y = startYcor; y < endYcor + 1; y++){ // - 1 to avoid index exceptions
@@ -243,31 +244,16 @@ public class Floor{
   */
   public void addTunnel(Tunnel t, int direction){
     Block b;
-    int x, y;
-    String type;
+    System.out.println("Add Tunnel in progress");
     for (int i = 0; i < t.getBlocksHere().length; i++){ //Horizontal
       for(int j = 0; j < t.getBlocksHere()[i].length;j++){
         b = t.getBlocksHere()[i][j];
-        y = b.getY();
-        x = b.getX();
-        type = blocksHere[y][x].getType();
         //System.out.println("b.getX(),b.getY(): "+ b.getX()+", "+b.getY());
-        if (type != "Room"){ //Don't make it a Tunnel Block if it was a Room
-          if (type == "Tunnel"){
-            if (direction == 0){
-              blocksHere[y][x].setCanMove('r', true);
-              blocksHere[y][x].setCanMove('l', true);
-            }
-            else{
-              blocksHere[y][x].setCanMove('u', true);
-              blocksHere[y][x].setCanMove('d', true);
-            }
-          }
-          else {
-            blocksHere[y][x] = new Block(x, y, direction);
-          }
-        }
-        //blocksHere[b.getY()][b.getX()] = new Block(b.getX(),b.getY(), direction);
+        if (blocksHere[b.getY()][b.getX()].getType() != "Room"){ //Don't make it a Tunnel Block if it was a Room
+          // blocksHere[b.getY()][b.getX()] = new Block(b.getX(), b.getY(), "Tunnel");
+           blocksHere[b.getY()][b.getX()] = new Block(b.getX(),b.getY(), direction);
+         }
+
       }
     }
   }
