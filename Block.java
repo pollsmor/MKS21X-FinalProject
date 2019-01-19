@@ -8,7 +8,7 @@ public class Block implements Explorable{
   private int ycor;
   private String color;
   private char data; //what's printed in the block
-  //private boolean canMoveLeft, canMoveRight, canMoveUp, canMoveDown; //To handle adjacent Tunnels
+  private boolean canMoveLeft, canMoveRight, canMoveUp, canMoveDown; //To handle adjacent Tunnels
   private int direction; //For intersection Tunnels
 
   public Block(int x, int y, String newType) { //Constructor given coordinates
@@ -108,6 +108,21 @@ public class Block implements Explorable{
 
   public int getDirection(){
     return direction;
+  }
+
+  public void setCanMove(char d, boolean t){
+    if (d == 'u'){
+      canMoveUp = t;
+    }
+    if (d == 'd'){
+      canMoveDown = t;
+    }
+    if (d == 'r'){
+      canMoveRight = t;
+    }
+    if (d == 'l'){
+      canMoveLeft = t;
+    }
   }
 
 /* Spawns
