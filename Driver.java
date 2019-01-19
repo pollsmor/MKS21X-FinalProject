@@ -111,13 +111,13 @@ public class Driver {
     boolean alive = true; //controls the inner while loop
 
     //Random spawn generation
-    String randomSpawn = game.randomSpawn();
-    int row = Integer.parseInt(randomSpawn.substring(0, 1));
-    int col = Integer.parseInt(randomSpawn.substring(1, 2));
+    int[] randomSpawn = game.randomSpawn();
+    int row = randomSpawn[0];
+    int col = randomSpawn[1];
 
     while (running) {
       terminal.moveCursor(col, row);
-      terminal.applyForegroundColor(Terminal.Color.GREEN);
+      terminal.applyForegroundColor(Terminal.Color.YELLOW);
       terminal.putCharacter('\u04dd');
       terminal.applyBackgroundColor(Terminal.Color.DEFAULT);
       terminal.applyForegroundColor(Terminal.Color.DEFAULT);

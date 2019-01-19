@@ -68,7 +68,7 @@ public class Game {
     return floor.getBlock(row, col).getType() == "Wall";
   }
 
-  public String randomSpawn() {
+  public int[] randomSpawn() {
     Random randgenRow = new Random();
     Random randgenCol = new Random();
 
@@ -88,6 +88,10 @@ public class Game {
         spawnFound = true;
     }
 
-    return row + col + "";
+    int[] output = new int[2];
+    output[0] = row;
+    output[1] = col;
+
+    return output;
   }
 }
