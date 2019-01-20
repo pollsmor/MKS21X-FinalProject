@@ -116,6 +116,7 @@ public class Floor{
       }
     }
     numRooms = successfulRooms;
+    spawnObjective(seed);
   }
 
   //public Room createRoom(int startXcor, int startYcor, int endXcor, int endYcor)
