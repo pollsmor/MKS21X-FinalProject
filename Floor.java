@@ -274,6 +274,22 @@ public class Floor{
           else{
             blocksHere[b.getY()][b.getX()] = new Block(b.getX(),b.getY(), direction);
           }
+          if (direction == 0){ //Horizontal
+            if (j != 0){ //if not the left most, pokemon can move left
+              blocksHere[b.getY()][b.getX()].setCanMove('l', true);
+            }
+            if (j != t.getBlocksHere()[i].length - 1){ //if not right most, pokemon can move right
+              blocksHere[b.getY()][b.getX()].setCanMove('r', true);
+            }
+          }
+          else{ //Vertical
+            if (i != 0){ //if not the top most, pokemon can move up
+              blocksHere[b.getY()][b.getX()].setCanMove('u', true);
+            }
+            if (i != t.getBlocksHere().length - 1){ //if not bottom most, pokemon can move down
+              blocksHere[b.getY()][b.getX()].setCanMove('d', true);
+            }
+          }
         }
       }
     }
