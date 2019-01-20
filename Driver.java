@@ -218,7 +218,7 @@ public class Driver {
         }
 
         //Check if the current Block after moving is an objective Block
-        if (game.isObjective(row, col)){
+        if (game.isObjective(row, col)){ //If true, make a new Game with a new Floor
           game = new Game(name, seed, rows, cols, ++level);
         }
 
