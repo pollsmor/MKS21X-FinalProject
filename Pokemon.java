@@ -74,10 +74,10 @@ public abstract class Pokemon {
   public void moveUp(Game game) {
     if (!game.isWall(row - 1, col)) {
       if (game.isTunnel(row, col)) {
-        if (game.getBlock(row, col).canMove('u')) {
+        //if (game.getBlock(row, col).canMove('u')) {
           game.getFloor().getBlock(row, col).setPokemonHere(null);
           --row;
-        }
+        //}
       }
 
       else {
@@ -90,10 +90,10 @@ public abstract class Pokemon {
   public void moveDown(Game game) {
     if (!game.isWall(row + 1, col)) {
       if (game.isTunnel(row, col)){
-        if (game.getBlock(row, col).canMove('d')) {
+        //if (game.getBlock(row, col).canMove('d')) {
           game.getFloor().getBlock(row, col).setPokemonHere(null);
           ++row;
-        }
+        //}
       }
 
       else {
@@ -106,10 +106,10 @@ public abstract class Pokemon {
   public void moveLeft(Game game) {
     if (!game.isWall(row, col - 1)) {
       if (game.isTunnel(row, col)) {
-        if (game.getBlock(row, col).canMove('l')){
+        //if (game.getBlock(row, col).canMove('l')){
           game.getFloor().getBlock(row, col).setPokemonHere(null);
           --col;
-        }
+        //}
       }
 
       else {
@@ -122,10 +122,10 @@ public abstract class Pokemon {
   public void moveRight(Game game) {
     if (!game.isWall(row, col + 1)) {
       if (game.isTunnel(row, col)) {
-        if (game.getBlock(row, col).canMove('r')){
+        //if (game.getBlock(row, col).canMove('r')){
           game.getFloor().getBlock(row, col).setPokemonHere(null);
           ++col;
-        }
+        //}
       }
 
       else {
