@@ -65,7 +65,9 @@ public class Driver {
 
     String name = args[0];
     int seed;
+    Random rnd = new Random(); //In case no seed is given
     Game game;
+    int level = 1; //Starting level is always 1 and will be increased when reaching the Objective Block
 
     if (name.length() > 25) {
       terminal.exitPrivateMode();
@@ -75,12 +77,13 @@ public class Driver {
 
     //Instantiate game outside of try since it wouldn't work inside it
     if (args.length == 1) {
-      game = new Game(name, rows, cols);
+      seed = rnd.nextInt(10000);
+      game = new Game(name, seed, rows, cols, level);
     }
 
     else {
       seed = Integer.parseInt(args[1]);
-      game = new Game(name, seed, rows, cols);
+      game = new Game(name, seed, rows, cols, level);
     }
 
     //Colors/styles to use
@@ -212,6 +215,11 @@ public class Driver {
             terminal.putCharacter(' ');
             ++row;
           }
+        }
+
+        //Check if the current Block after moving is an objective Block
+        if (game.isObjective(row, col)){
+          game = new Game(name, seed, rows, cols, ++level);
         }
 
         //Just to demo the death function in class
