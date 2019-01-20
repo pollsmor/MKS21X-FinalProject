@@ -115,6 +115,7 @@ public class Driver {
     long tStart = System.currentTimeMillis();
     long lastSecond = 0;
     int limitMovement = 0;
+    int invincibility = 0;
 
     int row = game.getPlayer().getRow();
     int col = game.getPlayer().getCol();
@@ -142,6 +143,11 @@ public class Driver {
         while (!alive) {
           Key key2 = terminal.readInput(); //if I'm in the if I can't read the first readInput, so I need a second one
           if (key2 != null) {
+            if (key2.getKind() == Key.Kind.Escape) {
+              terminal.exitPrivateMode();
+              System.exit(0);
+            }
+
             //Do you want to respawn?
             if (key2.getCharacter() == 'y') {
               alive = true;                //Below is so I can replace the you died text:
@@ -155,6 +161,22 @@ public class Driver {
             }
           }
         }
+      }
+    //----------------------------------------------------------------------------------------------------------------
+      if (game.enemyNearby() && invincibility < 0) {
+        putString(0, 0, terminal, game.getFloor().toStringClean());
+        putString(rows * 3/4 + 5, 1, terminal, "An enemy is nearby. What is your move?");
+        while (game.enemyNearby() && invincibility < 0) {
+          Key key3 = terminal.readInput();
+          if (key3 != null) {
+            if (key3.getKind() == Key.Kind.Escape) {
+              terminal.exitPrivateMode();
+              System.exit(0);
+            }
+          }
+        }
+
+        invincibility = 2000;
       }
     //----------------------------------------------------------------------------------------------------------------
       if (moved) {
@@ -262,6 +284,7 @@ public class Driver {
       long tEnd = System.currentTimeMillis();
       long millis = tEnd - tStart;
       ++limitMovement;
+      --invincibility;
       if (millis / 1000 > lastSecond) {
         lastSecond = millis / 1000; //One second has passed.
         putString(rows - 2, cols - 11, terminal, lastSecond + "s");
