@@ -125,6 +125,22 @@ public class Block implements Explorable{
     }
   }
 
+  public boolean canMove(char d){
+    if (d == 'u'){
+      return canMoveUp;
+    }
+    if (d == 'd'){
+      return canMoveDown;
+    }
+    if (d == 'r'){
+      return canMoveRight;
+    }
+    if (d == 'l'){
+      return canMoveLeft;
+    }
+    return true; //Will never happen but needs to compile ://///
+  }
+
   //Spawns
   public void spawnObjective() {
     objectiveHere = true;
