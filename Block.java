@@ -39,13 +39,13 @@ public class Block implements Explorable{
     ycor = y;
     color = "gray";
     if (dir == 0){ //LR
-      data = ' ';
+      data = '=';
     }
     if (dir == 1){ //UD
-      data = ' ';
+      data = '|';
     }
     if (dir == 2){ //EndBlock of tunnel or intersection of Tunnels
-      data = ' ';
+      data = '#';
     }
     direction = dir;
     type = "Tunnel";
@@ -167,8 +167,10 @@ public class Block implements Explorable{
       pokemonHere = null;
     }
 
-    else if (pokemon instanceof Player)
+    else if (pokemon instanceof Player) {
+      data = '\u04dd';
       pokemonHere = pokemon;
+    }
 
     else {
       data = '\u03e1';

@@ -122,7 +122,7 @@ public class Driver {
 
     while (running) {
       terminal.moveCursor(col, row);
-      terminal.applyForegroundColor(Terminal.Color.YELLOW);
+      terminal.applyForegroundColor(Terminal.Color.WHITE);
       terminal.putCharacter('\u04dd');
       terminal.applyBackgroundColor(Terminal.Color.DEFAULT);
       terminal.applyForegroundColor(Terminal.Color.DEFAULT);
