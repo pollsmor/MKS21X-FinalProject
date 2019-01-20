@@ -24,6 +24,8 @@ public class FloorDriver{
     System.out.println("Seed: "+seed);
     a.createRooms(seed);
     System.out.println(a.toString());
+    //a.spawnObjective(seed);
+    //System.out.println(a.toString());
     //a.createRoom(0, 0, 2, 2);
     //System.out.println(a.toString());
     //a.createRoom(3, 4, 10, 10);
