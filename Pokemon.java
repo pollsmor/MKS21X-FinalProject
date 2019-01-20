@@ -15,6 +15,7 @@ public abstract class Pokemon {
   private Move move4;
   private int row;
   private int col;
+  private String direction;
 
   public Pokemon(String inputName, int inputLevel, int inputMaxHP, int inputAttack, int inputDefense, int inputRow, int inputCol) {
     name = inputName;

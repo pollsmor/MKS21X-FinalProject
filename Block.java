@@ -26,13 +26,8 @@ public class Block implements Explorable{
     if (newType.equals("Tunnel")){
       data = ' ';
     }
-<<<<<<< HEAD
     if (newType.equals("Opening")){
       data = ' ';
-=======
-    if (newType.equals("Objective")){
-      data = '0';
->>>>>>> master
     }
     type = newType;
   }

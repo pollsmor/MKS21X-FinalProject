@@ -165,4 +165,16 @@ public class Game {
       floor.getBlock(row, col).spawnEnemyHere(enemies[i]);
     }
   }
+
+  public boolean enemyNearby() {
+    return
+    (floor.getBlock(player.getRow() -1, player.getCol() - 1).getPokemonHere() != null) ||  //top left
+    (floor.getBlock(player.getRow() -1, player.getCol()).getPokemonHere() != null) ||      //top
+    (floor.getBlock(player.getRow() -1, player.getCol() + 1).getPokemonHere() != null) ||  //top right
+    (floor.getBlock(player.getRow(), player.getCol() + 1).getPokemonHere() != null) ||     //right
+    (floor.getBlock(player.getRow() + 1, player.getCol() + 1).getPokemonHere() != null) || //bottom right
+    (floor.getBlock(player.getRow() + 1, player.getCol()).getPokemonHere() != null) ||     //bottom
+    (floor.getBlock(player.getRow() + 1, player.getCol() - 1).getPokemonHere() != null) || //bottom left
+    (floor.getBlock(player.getRow(), player.getCol() - 1).getPokemonHere() != null);        //left
+  }
 }
