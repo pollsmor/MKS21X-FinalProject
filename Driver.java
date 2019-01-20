@@ -211,7 +211,7 @@ public class Driver {
     //----------------------------------------------------------------------------------------------------------------
       if (key != null && limitMovement > 500) {
         if (key.getKind() == Key.Kind.ArrowLeft) {
-          if (!game.isWall(row, col - 1)) {
+          if (game.getPlayer().moveLeft(game)) { //If the player can move left, cursor moves left too
             terminal.moveCursor(col, row); //again, different scheme
             terminal.putCharacter(' ');
             game.getPlayer().moveLeft(game);
@@ -223,7 +223,7 @@ public class Driver {
         }
 
         if (key.getKind() == Key.Kind.ArrowRight) {
-          if (!game.isWall(row, col + 1)) {
+          if (game.getPlayer().moveRight(game)) { //If the player can move right, cursor moves right too
             terminal.moveCursor(col, row);
             terminal.putCharacter(' ');
             game.getPlayer().moveRight(game);
@@ -236,7 +236,7 @@ public class Driver {
 
         if (key.getKind() == Key.Kind.ArrowUp) {
           if (row != 0)
-            if (!game.isWall(row - 1, col)) {
+            if (game.getPlayer().moveUp(game)) {//If the player can move up, cursor moves up too
               terminal.moveCursor(col, row);
               terminal.putCharacter(' ');
               game.getPlayer().moveUp(game);
@@ -248,7 +248,7 @@ public class Driver {
         }
 
         if (key.getKind() == Key.Kind.ArrowDown) {
-          if (!game.isWall(row + 1, col)) {
+          if (game.getPlayer().moveDown(game)) { //If the player can move down, cursor moves down too
             terminal.moveCursor(col, row);
             terminal.putCharacter(' ');
             game.getPlayer().moveDown(game);

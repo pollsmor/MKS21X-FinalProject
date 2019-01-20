@@ -73,8 +73,8 @@ public abstract class Pokemon {
 
   public void moveUp(Game game) {
     if (!game.isWall(row - 1, col)) {
-      if (game.isTunnel(row, col)){
-        if (game.getBlock(row,col).canMove('u')){
+      if (game.isTunnel(row - 1, col)){
+        if (game.getBlock(row, col).canMove('u')){
           game.getFloor().getBlock(row, col).setPokemonHere(null);
           --row;
         }

@@ -273,4 +273,12 @@ Rachel:
   - Starting to implement the canMoves for adjacent Tunnels issues
   - After Kevin added the check for minimum size of terminal, Driver.java no longer runs, saying my terminal is always too small even though it clearly isnt... we'll figure it out soon :P
   
+ Kevin: 
+ - Tightened terminal size requirements to give myself breathing room
+ - Enemies now spawn
+ - Enemies only move when you do
+ - Reprint the map whenever you move since it wouldn't make sense for it to keep refreshing when nothing on screen has changed
+ - Limited the movement of the character to ~once per 0.5 seconds to prevent easily dodging enemies + for performance reasons
+ - Further tied the rest of the program's coordinate system to Driver/Lanterna's
+  
 **Sunday 1/20/19**
