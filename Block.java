@@ -26,10 +26,9 @@ public class Block implements Explorable{
     if (newType.equals("Tunnel")){
       data = 'T';
     }
-    if (newType.equals("Opening")){
+    if (newType.equals("Objective")){
       data = '0';
     }
-
     type = newType;
   }
 
@@ -129,7 +128,8 @@ public class Block implements Explorable{
   //Spawns
   public void spawnObjective() {
     objectiveHere = true;
-    data = '%';
+    data = 'O';
+    type = "Objective";
   }
 
   /*
