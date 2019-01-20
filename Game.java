@@ -83,6 +83,10 @@ public class Game {
     return floor.getBlock(row, col).getType() == "Wall";
   }
 
+  public boolean pokemonAlreadyHere(int row, int col) {
+    return floor.getBlock(row, col).getPokemonHere() != null;
+  }
+
   public int[] createSpawnPlayer() {
     Random randgenRow = new Random();
     Random randgenCol = new Random();
