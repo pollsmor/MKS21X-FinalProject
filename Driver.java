@@ -166,6 +166,8 @@ public class Driver {
       if (game.enemyNearby() && invincibility < 0) {
         putString(0, 0, terminal, game.getFloor().toStringClean());
         putString(rows * 3/4 + 5, 1, terminal, "An enemy is nearby. What is your move?");
+        putString(rows * 3/4 + 6, 1, terminal, "[j] Attack");
+        putString(rows * 3/4 + 7, 1, terminal, "[k] Items");
         while (game.enemyNearby() && invincibility < 0) {
           Key key3 = terminal.readInput();
           if (key3 != null) {
