@@ -71,19 +71,22 @@ public abstract class Pokemon {
     return col;
   }
 
-  public void moveUp(Game game) {
+  public boolean moveUp(Game game) {
     if (!game.isWall(row - 1, col)) {
-      if (game.isTunnel(row - 1, col)){
+      if (game.isTunnel(row - 1, col)) {
         if (game.getBlock(row, col).canMove('u')){
           game.getFloor().getBlock(row, col).setPokemonHere(null);
           --row;
         }
       }
 
+      return true;
     }
+
+    return false;
   }
 
-  public void moveDown(Game game) {
+  public boolean moveDown(Game game) {
     if (!game.isWall(row + 1, col)) {
       if (game.isTunnel(row, col)){
         if (game.getBlock(row,col).canMove('d')){
@@ -92,10 +95,13 @@ public abstract class Pokemon {
         }
       }
 
+      return true;
     }
+
+    return false;
   }
 
-  public void moveLeft(Game game) {
+  public boolean moveLeft(Game game) {
     if (!game.isWall(row, col - 1)) {
       if (game.isTunnel(row, col)){
         if (game.getBlock(row,col).canMove('l')){
@@ -104,10 +110,13 @@ public abstract class Pokemon {
         }
       }
 
+      return true;
     }
+
+    return false;
   }
 
-  public void moveRight(Game game) {
+  public boolean moveRight(Game game) {
     if (!game.isWall(row, col + 1)) {
       if (game.isTunnel(row, col)){
         if (game.getBlock(row,col).canMove('r')){
@@ -116,6 +125,9 @@ public abstract class Pokemon {
         }
       }
 
+      return true;
     }
+
+    return false;
   }
 }
