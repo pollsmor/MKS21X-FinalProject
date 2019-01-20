@@ -72,29 +72,61 @@ public abstract class Pokemon {
 
   public void moveUp(Game game) {
     if (!game.isWall(row - 1, col)) {
-      game.getFloor().getBlock(row, col).setPokemonHere(null);
-      --row;
+      if (game.isTunnel(row, col)){
+        if (game.getBlock(row,col).canMove('u')){
+          game.getFloor().getBlock(row, col).setPokemonHere(null);
+          --row;
+        }
+      }
+      else{
+        game.getFloor().getBlock(row, col).setPokemonHere(null);
+        --row;
+      }
     }
   }
 
   public void moveDown(Game game) {
     if (!game.isWall(row + 1, col)) {
-      game.getFloor().getBlock(row, col).setPokemonHere(null);
-      ++row;
+      if (game.isTunnel(row, col)){
+        if (game.getBlock(row,col).canMove('d')){
+          game.getFloor().getBlock(row, col).setPokemonHere(null);
+          ++row;
+        }
+      }
+      else{
+        game.getFloor().getBlock(row, col).setPokemonHere(null);
+        ++row;
+      }
     }
   }
 
   public void moveLeft(Game game) {
     if (!game.isWall(row, col - 1)) {
-      game.getFloor().getBlock(row, col).setPokemonHere(null);
-      --col;
+      if (game.isTunnel(row, col)){
+        if (game.getBlock(row,col).canMove('l')){
+          game.getFloor().getBlock(row, col).setPokemonHere(null);
+          --col;
+        }
+      }
+      else{
+        game.getFloor().getBlock(row, col).setPokemonHere(null);
+        --col;
+      }
     }
   }
 
   public void moveRight(Game game) {
     if (!game.isWall(row, col + 1)) {
-      game.getFloor().getBlock(row, col).setPokemonHere(null);
-      ++col;
+      if (game.isTunnel(row, col)){
+        if (game.getBlock(row,col).canMove('r')){
+          game.getFloor().getBlock(row, col).setPokemonHere(null);
+          ++col;
+        }
+      }
+      else{
+        game.getFloor().getBlock(row, col).setPokemonHere(null);
+        ++col;
+      }
     }
   }
 }
