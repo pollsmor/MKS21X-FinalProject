@@ -79,10 +79,7 @@ public abstract class Pokemon {
           --row;
         }
       }
-      else{
-        game.getFloor().getBlock(row, col).setPokemonHere(null);
-        --row;
-      }
+
     }
   }
 
@@ -94,10 +91,7 @@ public abstract class Pokemon {
           ++row;
         }
       }
-      else{
-        game.getFloor().getBlock(row, col).setPokemonHere(null);
-        ++row;
-      }
+
     }
   }
 
@@ -109,10 +103,7 @@ public abstract class Pokemon {
           --col;
         }
       }
-      else{
-        game.getFloor().getBlock(row, col).setPokemonHere(null);
-        --col;
-      }
+
     }
   }
 
@@ -124,10 +115,7 @@ public abstract class Pokemon {
           ++col;
         }
       }
-      else{
-        game.getFloor().getBlock(row, col).setPokemonHere(null);
-        ++col;
-      }
+
     }
   }
 }
