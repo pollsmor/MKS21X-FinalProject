@@ -240,18 +240,34 @@ Rachel:
     - Fixed toStringClean()
 
 Kevin:
-- In the UIelements branch, I managed to get background colors working. Instead of having the array show "R"s to show that it is a traversable area, I just color everything that isn't a room char white so it's easy to distinguish walls from a room.
-- Attempted merging with master but the map is completely broken. I realize that my coordinate system is the opposite of what Rachel uses. We haven't had any issues before this because we mostly just stuck to our own Java classes, but I'm tryng to look at Floor.java to figure out what's breaking the map now.
+  - In the UIelements branch, I managed to get background colors working. Instead of having the array show "R"s to show that it is a traversable area, I just color everything that isn't a room char white so it's easy to distinguish walls from a room.
+  - Attempted merging with master but the map is completely broken. I realize that my coordinate system is the opposite of what Rachel uses. We haven't had any issues before this because we mostly just stuck to our own Java classes, but I'm tryng to look at Floor.java to figure out what's breaking the map now.
 
 **Thursday 1/17/19**
 
 Kevin:
-- Fixed most if not all of the issues caused by the merge. Now going to working on enemy spawns.
+  - Fixed most if not all of the issues caused by the merge. Now going to working on enemy spawns.
+
+Rachel:
+  - Got Tunnels to print in FloorDriver.java such that if the original Block was a Room Block, it would not alter the Block
+  - Spaced out the Rooms more so it isn't as crammed
+  - Changed the min and max dimensions of Rooms
 
 ***--------------------Stage 2--------------------***
 
 **Friday 1/18/19**
 
 Kevin: 
-- Copy pasting the *working* random spawn generation code from Driver and attempting to transplant it into a function still doesn't work
-- Switched putString's coordinate system to match the rest of Driver: row, col
+  - Copy pasting the *working* random spawn generation code from Driver and attempting to transplant it into a function still doesn't work
+  - Switched putString's coordinate system to match the rest of Driver: row, col
+
+Rachel: 
+  - Added new constructor specifically for Tunnel Blocks
+  - Attempting to style Tunnels: horizontal means '=' and vertical '|' while change in direction or intersection of Tunnels gets '#'
+
+**Saturday 1/19/19**
+
+Rachel:
+  - Added spawnObjective
+  - Successfully finished differentiating between horizontal, vertical, and intersecting Tunnel Blocks!
+  - Starting to implement the canMoves
