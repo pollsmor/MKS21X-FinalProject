@@ -110,6 +110,7 @@ public class Driver {
     boolean running = true;
     boolean alive = true; //controls the inner while loop
     Random enemyDirectionGen = new Random(game.getSeed() + 10); //I don't want this to keep getting rerun in the while loop
+    boolean moved = false;
 
     int row = game.getPlayer().getRow();
     int col = game.getPlayer().getCol();
@@ -145,10 +146,12 @@ public class Driver {
         }
       }
     //----------------------------------------------------------------------------------------------------------------
-      long tEndForEnemies = System.currentTimeMillis();
       //Attempting to simulate 60fps
-      if ((tEndForEnemies - tStart) % 1000 < 16) {
+      long refresh = System.currentTimeMillis();
+      if ((refresh - tStart) % 1000 < 16)
         putString(0, 0, terminal, game.getFloor().toStringClean());
+
+      if (moved) {
         for (int i = 0; i < game.getEnemies().length; ++i) {
           int direction = Math.abs(enemyDirectionGen.nextInt() % 5);
           if (direction == 0) {
@@ -172,6 +175,8 @@ public class Driver {
           }
 
           //If it equals 4 just don't move
+
+          moved = false;
         }
       }
     //----------------------------------------------------------------------------------------------------------------
@@ -186,6 +191,7 @@ public class Driver {
             terminal.moveCursor(col, row); //again, different scheme
             terminal.putCharacter(' ');
             --col;
+            moved = true;
           }
         }
 
@@ -194,6 +200,7 @@ public class Driver {
             terminal.moveCursor(col, row);
             terminal.putCharacter(' ');
             ++col;
+            moved = true;
           }
         }
 
@@ -203,6 +210,7 @@ public class Driver {
               terminal.moveCursor(col, row);
               terminal.putCharacter(' ');
               --row;
+              moved = true;
             }
         }
 
@@ -211,6 +219,7 @@ public class Driver {
             terminal.moveCursor(col, row);
             terminal.putCharacter(' ');
             ++row;
+            moved = true;
           }
         }
 

@@ -21,13 +21,13 @@ public class Block implements Explorable{
     data = ' ';
     //For testing purposes
     if (newType.equals("Room")){
-      data = 'R';
+      data = ' ';
     }
     if (newType.equals("Tunnel")){
-      data = 'T';
+      data = ' ';
     }
     if (newType.equals("Opening")){
-      data = '0';
+      data = ' ';
     }
 
     type = newType;
@@ -40,13 +40,13 @@ public class Block implements Explorable{
     ycor = y;
     color = "gray";
     if (dir == 0){ //LR
-      data = '=';
+      data = ' ';
     }
     if (dir == 1){ //UD
-      data = '|';
+      data = ' ';
     }
     if (dir == 2){ //EndBlock of tunnel or intersection of Tunnels
-      data = '#';
+      data = ' ';
     }
     direction = dir;
     type = "Tunnel";
