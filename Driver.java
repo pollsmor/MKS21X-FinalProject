@@ -45,10 +45,6 @@ public class Driver {
       }
     }
 
-    //Timer commands
-    long tStart = System.currentTimeMillis();
-    long lastSecond = 0;
-
     //Terminal creation commands
     Terminal terminal = TerminalFacade.createTextTerminal();
     terminal.enterPrivateMode();
@@ -57,9 +53,9 @@ public class Driver {
     int rows = terminalSize.getRows();
     int cols = terminalSize.getColumns();
     //Minimum terminal size requirement - prevents index exceptions and having too little space to work with
-    if (rows < 21 || cols < 70) {
+    if (rows < 45 || cols < 100) {
       terminal.exitPrivateMode();
-      System.out.println("This game can only be played on a terminal at least 21px top-to-bottom, and 70px left-to-right.");
+      System.out.println("This game can only be played on a terminal at least 45px top-to-bottom, and 100px left-to-right.");
       System.exit(0);
     }
 
@@ -112,6 +108,11 @@ public class Driver {
     Random enemyDirectionGen = new Random(game.getSeed() + 10); //I don't want this to keep getting rerun in the while loop
     boolean moved = false;
 
+    //Timer commands
+    long tStart = System.currentTimeMillis();
+    long lastSecond = 0;
+    int limitMovement = 0;
+
     int row = game.getPlayer().getRow();
     int col = game.getPlayer().getCol();
 
@@ -124,6 +125,13 @@ public class Driver {
       terminal.applySGR(Terminal.SGR.RESET_ALL);
 
       Key key = terminal.readInput();
+
+      if (key != null) {
+        if (key.getKind() == Key.Kind.Escape) {
+          terminal.exitPrivateMode();
+          System.exit(0);
+        }
+      }
 
     //----------------------------------------------------------------------------------------------------------------
       if (!alive) {
@@ -146,12 +154,9 @@ public class Driver {
         }
       }
     //----------------------------------------------------------------------------------------------------------------
-      //Attempting to simulate 60fps
-      long refresh = System.currentTimeMillis();
-      if ((refresh - tStart) % 1000 < 16)
+      if (moved) {
         putString(0, 0, terminal, game.getFloor().toStringClean());
 
-      if (moved) {
         for (int i = 0; i < game.getEnemies().length; ++i) {
           int direction = Math.abs(enemyDirectionGen.nextInt() % 5);
           if (direction == 0) {
@@ -180,18 +185,15 @@ public class Driver {
         }
       }
     //----------------------------------------------------------------------------------------------------------------
-      if (key != null) {
-        if (key.getKind() == Key.Kind.Escape) {
-          terminal.exitPrivateMode();
-          System.exit(0);
-        }
-
+      if (key != null && limitMovement > 500) {
         if (key.getKind() == Key.Kind.ArrowLeft) {
           if (!game.isWall(row, col - 1)) {
             terminal.moveCursor(col, row); //again, different scheme
             terminal.putCharacter(' ');
+            game.getPlayer().moveLeft(game);
             --col;
             moved = true;
+            limitMovement = 0;
           }
         }
 
@@ -199,8 +201,10 @@ public class Driver {
           if (!game.isWall(row, col + 1)) {
             terminal.moveCursor(col, row);
             terminal.putCharacter(' ');
+            game.getPlayer().moveRight(game);
             ++col;
             moved = true;
+            limitMovement = 0;
           }
         }
 
@@ -209,8 +213,10 @@ public class Driver {
             if (!game.isWall(row - 1, col)) {
               terminal.moveCursor(col, row);
               terminal.putCharacter(' ');
+              game.getPlayer().moveUp(game);
               --row;
               moved = true;
+              limitMovement = 0;
             }
         }
 
@@ -218,8 +224,10 @@ public class Driver {
           if (!game.isWall(row + 1, col)) {
             terminal.moveCursor(col, row);
             terminal.putCharacter(' ');
+            game.getPlayer().moveDown(game);
             ++row;
             moved = true;
+            limitMovement = 0;
           }
         }
 
@@ -243,6 +251,7 @@ public class Driver {
 
       long tEnd = System.currentTimeMillis();
       long millis = tEnd - tStart;
+      ++limitMovement;
       if (millis / 1000 > lastSecond) {
         lastSecond = millis / 1000; //One second has passed.
         putString(rows - 2, cols - 11, terminal, lastSecond + "s");
