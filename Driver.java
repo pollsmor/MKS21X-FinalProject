@@ -158,7 +158,7 @@ public class Driver {
         putString(0, 0, terminal, game.getFloor().toStringClean());
 
         for (int i = 0; i < game.getEnemies().length; ++i) {
-          int direction = Math.abs(enemyDirectionGen.nextInt() % 5);
+          int direction = Math.abs(enemyDirectionGen.nextInt() % 4);
           if (direction == 0) {
             game.getEnemy(i).moveUp(game);
             game.getFloor().getBlock(game.getEnemy(i).getRow(), game.getEnemy(i).getCol()).setPokemonHere(game.getEnemy(i));
@@ -179,8 +179,6 @@ public class Driver {
             game.getFloor().getBlock(game.getEnemy(i).getRow(), game.getEnemy(i).getCol()).setPokemonHere(game.getEnemy(i));
           }
 
-          //If it equals 4 just don't move
-
           moved = false;
         }
       }
@@ -191,6 +189,7 @@ public class Driver {
             terminal.moveCursor(col, row); //again, different scheme
             terminal.putCharacter(' ');
             game.getPlayer().moveLeft(game);
+            game.getFloor().getBlock(game.getPlayer().getRow(), game.getPlayer().getCol()).setPokemonHere(game.getPlayer());
             --col;
             moved = true;
             limitMovement = 0;
@@ -202,6 +201,7 @@ public class Driver {
             terminal.moveCursor(col, row);
             terminal.putCharacter(' ');
             game.getPlayer().moveRight(game);
+            game.getFloor().getBlock(game.getPlayer().getRow(), game.getPlayer().getCol()).setPokemonHere(game.getPlayer());
             ++col;
             moved = true;
             limitMovement = 0;
@@ -214,6 +214,7 @@ public class Driver {
               terminal.moveCursor(col, row);
               terminal.putCharacter(' ');
               game.getPlayer().moveUp(game);
+              game.getFloor().getBlock(game.getPlayer().getRow(), game.getPlayer().getCol()).setPokemonHere(game.getPlayer());
               --row;
               moved = true;
               limitMovement = 0;
@@ -225,6 +226,7 @@ public class Driver {
             terminal.moveCursor(col, row);
             terminal.putCharacter(' ');
             game.getPlayer().moveDown(game);
+            game.getFloor().getBlock(game.getPlayer().getRow(), game.getPlayer().getCol()).setPokemonHere(game.getPlayer());
             ++row;
             moved = true;
             limitMovement = 0;

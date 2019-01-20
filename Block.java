@@ -150,7 +150,11 @@ public class Block implements Explorable{
       data = ' ';
       pokemonHere = null;
     }
-    
+
+    else if (pokemon instanceof Player) {
+
+    }
+
     else {
       data = '\u03e1';
       pokemonHere = pokemon;
