@@ -270,4 +270,7 @@ Rachel:
 Rachel:
   - Added spawnObjective
   - Successfully finished differentiating between horizontal, vertical, and intersecting Tunnel Blocks!
-  - Starting to implement the canMoves
+  - Starting to implement the canMoves for adjacent Tunnels issues
+  - After Kevin added the check for minimum size of terminal, Driver.java no longer runs, saying my terminal is always too small even though it clearly isnt... we'll figure it out soon :P
+  
+**Sunday 1/20/19**
