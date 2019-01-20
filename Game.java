@@ -13,11 +13,11 @@ public class Game {
   private int termCols;
 
   //Doesn't take a seed, so a random one is generated
-  public Game(String inputName, int rows, int cols) {
+  public Game(String inputName, int rows, int cols, int newLevel) {
     termRows = rows;
     termCols = cols;
-    level = 1;
-    floor = new Floor(1, cols, rows * 3/4); //Floor constructor takes left to right before top to bottom
+    level = newLevel;
+    floor = new Floor(level, cols, rows * 3/4); //Floor constructor takes left to right before top to bottom
     //missions = new Mission(); //ArrayList to allow easy adding/removing
     Random randgen = new Random();
     seed = randgen.nextInt();
@@ -32,11 +32,11 @@ public class Game {
   }
 
   //Takes a seed
-  public Game(String inputName, int inputSeed, int rows, int cols) {
+  public Game(String inputName, int inputSeed, int rows, int cols, int newLevel) {
     termRows = rows;
     termCols = cols;
-    level = 1;
-    floor = new Floor(1, cols, rows * 3/4);
+    level = newLevel;
+    floor = new Floor(level, cols, rows * 3/4);
     //missions = new Mission(); //ArrayList to allow easy adding/removing
     seed = inputSeed;
     isRandomSeed = false;
@@ -84,7 +84,11 @@ public class Game {
   }
 
   public boolean isTunnel(int row, int col){
-    return floor.getBlock(row,col).getType() == "Tunnel";
+    return floor.getBlock(row, col).getType() == "Tunnel";
+  }
+
+  public boolean isObjective(int row, int col){
+    return floor.getBlock(row, col).getType() == "Objective";
   }
 
   public Block getBlock(int row, int col){
