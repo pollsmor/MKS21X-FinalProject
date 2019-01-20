@@ -83,6 +83,14 @@ public class Game {
     return floor.getBlock(row, col).getType() == "Wall";
   }
 
+  public boolean isTunnel(int row, int col){
+    return floor.getBlock(row,col).getType() == "Tunnel";
+  }
+
+  public Block getBlock(int row, int col){
+    return floor.getBlock(row, col);
+  }
+
   public int[] createSpawnPlayer() {
     Random randgenRow = new Random();
     Random randgenCol = new Random();
