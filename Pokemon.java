@@ -15,11 +15,11 @@ public abstract class Pokemon {
   private Move move2;
   private Move move3;
   private Move move4;
-  private int row;
+  private int row; //location in map
   private int col;
 
   public Pokemon(String inputName, int inputLevel, int inputMaxHP, int inputAttack, int inputDefense, int inputRow, int inputCol) {
-    name = inputName;
+    name = inputName; //why not the this command? Because this is totally broken for whatever reason
     level = inputLevel;
     maxHP = inputMaxHP;
     currentHP = maxHP;

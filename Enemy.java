@@ -6,7 +6,7 @@ public class Enemy extends Pokemon {
     //name = "genericEnemy";
     //level = (int) (Math.random() * 1000) % 10;
     //maxHP = (int) (Math.random() * 1000) % 40;
-    //attack = (int) (Math.random() * 1000) % 10;
+    //attack = (int) (Math.random() * 1000) % 55; //weaker enemies so the player doesn't just die
     //defense = (int) (Math.random() * 1000) % 10;
 
     super("genericEnemy",
