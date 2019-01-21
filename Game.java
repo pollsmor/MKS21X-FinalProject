@@ -26,7 +26,7 @@ public class Game {
 
     name = inputName;
     spawnPlayer();
-    int amtEnemies = rows * cols / 450;
+    int amtEnemies = rows * cols / 450; //decent algorithm for calculating the amount of enemies on screen, based on Terminal size
     enemies = new Enemy[amtEnemies];
     spawnEnemies();
   }
