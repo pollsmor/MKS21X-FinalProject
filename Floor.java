@@ -116,7 +116,7 @@ public class Floor{
       }
     }
     numRooms = successfulRooms;
-    spawnObjective(seed);
+    spawnObjective(rnd.nextInt(10000));
   }
 
   //public Room createRoom(int startXcor, int startYcor, int endXcor, int endYcor)
@@ -297,6 +297,11 @@ public class Floor{
   }
 
   public void spawnObjective(int seed){
+    for (int y = 0; y < blocksHere.length; y++){
+      for (int x = 0; x < blocksHere[y].length;x++){
+        blocksHere[y][x].setObjectiveHere(false);
+      }
+    }
     Random rnd = new Random(seed);
     int n = rnd.nextInt(roomsHere.size()); //Selecting a random Room to spawn the objective Block
     Room spawnRoom = roomsHere.get(n);
