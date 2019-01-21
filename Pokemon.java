@@ -142,8 +142,8 @@ public abstract class Pokemon {
         }
       }
       else{ //Current Block is a Room Block and next Block is not a Wall
-        if (game.isTunnel(row + 1, col)){ //If the next Block is a Tunnel
-          if (game.getBlock(row + 1, col).canMove('r')){ //Check that that Tunnel Block allows you to move right
+        if (game.isTunnel(row, col - 1)){ //If the next Block is a Tunnel
+          if (game.getBlock(row, col - 1).canMove('r')){ //Check that that Tunnel Block allows you to move right
             game.getFloor().getBlock(row, col).setPokemonHere(null);
             --col;
           }
@@ -172,8 +172,8 @@ public abstract class Pokemon {
         }
       }
       else{ //Current Block is a Room Block and next Block is not a Wall
-        if (game.isTunnel(row + 1, col)){ //If the next Block is a Tunnel
-          if (game.getBlock(row + 1, col).canMove('l')){ //Check that that Tunnel Block allows you to move left
+        if (game.isTunnel(row, col + 1)){ //If the next Block is a Tunnel
+          if (game.getBlock(row, col + 1).canMove('l')){ //Check that that Tunnel Block allows you to move left
             game.getFloor().getBlock(row, col).setPokemonHere(null);
             ++col;
           }
