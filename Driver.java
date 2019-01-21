@@ -18,9 +18,8 @@ import java.util.Random;
 //----------------------------------------------------------------------------------------------------------------
 
 public class Driver {
-  //Doesn't follow the (row, column) scheme of the rest of the program because moveCursor doesn't
   public static void putString(int r, int c, Terminal t, String s) {
-    t.moveCursor(c, r);
+    t.moveCursor(c, r); //Lanterna follows the column, row format
     for (int i = 0; i < s.length(); ++i) {
       t.putCharacter(s.charAt(i));
     }
@@ -61,9 +60,9 @@ public class Driver {
 
     String name = args[0];
     int seed;
-    Random rnd = new Random(); //In case no seed is given
+    Random rnd = new Random(); //in case no seed is given
     Game game;
-    int level = 1; //Starting level is always 1 and will be increased when reaching the Objective Block
+    int level = 1; //starting level is always 1 and will be increased upon reaching the Objective Block
 
     if (name.length() > 25) {
       terminal.exitPrivateMode();
@@ -91,10 +90,10 @@ public class Driver {
     String resetColor = "\u001B[0m"; //need to add this or the whole program will be the selected color
 
     //Print the game's UI elements
-    putString(0, 0, terminal, game.getFloor().toStringClean());
-    putString(rows * 3/4 + 1, 1, terminal, bgWhite + black + game.getPlayer().getName() + resetColor);
-    putString(rows * 3/4 + 1, cols - 25, terminal, underline + blink + "Pok" + '\u00e9' + "mon Terminal Dungeon" + resetColor);
-    //Row 1 of stats, below the name                                             //accented e
+    putString(0, 0, terminal, game.getFloor().toStringClean()); //the map
+    putString(rows * 3/4 + 1, 1, terminal, bgWhite + black + game.getPlayer().getName() + resetColor); //your name
+    putString(rows * 3/4 + 1, cols - 25, terminal, underline + blink + "Pok" + '\u00e9' + "mon Terminal Dungeon" + resetColor); //name of game
+    //Row 1 of stats, below the name                                         //accented e
     putString(rows * 3/4 + 2, 1, terminal, "HP: ");
     putString(rows * 3/4 + 2, 13, terminal, "Level: ");
     putString(rows * 3/4 + 2, 28, terminal, "Attack: ");
@@ -104,32 +103,33 @@ public class Driver {
     putString(rows * 3/4 + 3, 13, terminal, "Hunger: ");
     putString(rows * 3/4 + 3, 28, terminal, "Money: ");
     putString(rows * 3/4 + 2, cols - 17, terminal, "Time: " );
-    putString(rows * 3/4 + 3, cols - 17, terminal, "Seed: " + game.getSeed());
+    putString(rows * 3/4 + 3, cols - 17, terminal, "Seed: " + game.getSeed()); //the final seed, just in case the one in Driver somehow changes
 
-    boolean running = true;
-    boolean alive = true; //controls the inner while loop
+    boolean running = true; //controls the outer while loop
+    boolean alive = true; //controls the inner while loop, allows for respawning or quitting the game
     Random enemyDirectionGen = new Random(game.getSeed() + 10); //I don't want this to keep getting rerun in the while loop
-    boolean moved = false;
+    boolean moved = false; //set to true when moving, only refresh if this is the case, otherwise just unncessarily lagging the program
 
     //Timer commands
     long tStart = System.currentTimeMillis();
     long lastSecond = 0;
-    int limitMovement = 0;
-    int invincibility = 0;
+    int limitMovement = 0; //count this down to prevent the player from moving too fast
+    int invincibility = 0; //count this down to allow the player to get away after getting into a fight
 
-    int row = game.getPlayer().getRow();
+    int row = game.getPlayer().getRow(); //player's position, not the terminal dimension
     int col = game.getPlayer().getCol();
 
     while (running) {
-      terminal.moveCursor(col, row);
+      terminal.moveCursor(col, row); //again, Lanterna follows a c, r coordinate system
       terminal.applyForegroundColor(Terminal.Color.WHITE);
-      terminal.putCharacter('\u04dd');
+      terminal.putCharacter('\u04dd'); //player icon, just randomly got this off the web
       terminal.applyBackgroundColor(Terminal.Color.DEFAULT);
       terminal.applyForegroundColor(Terminal.Color.DEFAULT);
       terminal.applySGR(Terminal.SGR.RESET_ALL);
 
       Key key = terminal.readInput();
 
+      //Want the user to be allowed to leave the program no matter what
       if (key != null) {
         if (key.getKind() == Key.Kind.Escape) {
           terminal.exitPrivateMode();
@@ -137,10 +137,9 @@ public class Driver {
         }
       }
 
-    //----------------------------------------------------------------------------------------------------------------
-      if (game.getPlayer().getHP() <= 0) {
+    //Controls death mechanism------------------------------------------------------------------------------------------
+      if (game.getPlayer().getHP() <= 0)
         alive = false;
-      }
 
       if (!alive) {
         putString(rows, 0, terminal,"You died. Would you like to respawn? (y/n)");
@@ -154,8 +153,8 @@ public class Driver {
 
             //Do you want to respawn?
             if (key2.getCharacter() == 'y') {
-              alive = true;                //Below is so I can replace the you died text:
-              game.getPlayer().maxRegen();
+              alive = true;
+              game.getPlayer().maxRegen(); ////Below is so I can replace the you died text, this is gonna be used throughout the program:
               putString(rows, 0, terminal, "                                          ");
             }
 
@@ -167,13 +166,13 @@ public class Driver {
           }
         }
       }
-    //----------------------------------------------------------------------------------------------------------------
+    // Combat system-----------------------------------------------------------------------------------------------------
       if (game.enemyNearby() && invincibility < 0) {
-        putString(0, 0, terminal, game.getFloor().toStringClean());
+        putString(0, 0, terminal, game.getFloor().toStringClean()); //refresh the map since this happens before the typical refresh later on
         putString(rows * 3/4 + 5, 1, terminal, "An enemy is nearby. What is your move?                                   ");
         putString(rows * 3/4 + 6, 1, terminal, "[j] Attack                        ");
         putString(rows * 3/4 + 7, 1, terminal, "[k] Items                         ");
-        while (game.enemyNearby() && invincibility < 0) {
+        while (game.enemyNearby() && invincibility < 0) { //
           Key key3 = terminal.readInput();
           if (key3 != null) {
             if (key3.getKind() == Key.Kind.Escape) {
@@ -260,10 +259,10 @@ public class Driver {
       }
     //----------------------------------------------------------------------------------------------------------------
       if (moved) {
-        putString(0, 0, terminal, game.getFloor().toStringClean());
+        putString(0, 0, terminal, game.getFloor().toStringClean()); //refreshs the map
 
         for (int i = 0; i < game.getEnemies().length; ++i) {
-          int direction = Math.abs(enemyDirectionGen.nextInt() % 4);
+          int direction = Math.abs(enemyDirectionGen.nextInt() % 4); //random movement for enemies
           if (direction == 0) {
             game.getEnemy(i).moveUp(game);
             game.getFloor().getBlock(game.getEnemy(i).getRow(), game.getEnemy(i).getCol()).setPokemonHere(game.getEnemy(i));
@@ -297,7 +296,7 @@ public class Driver {
             game.getFloor().getBlock(game.getPlayer().getRow(), game.getPlayer().getCol()).setPokemonHere(game.getPlayer());
             --col;
             moved = true;
-            limitMovement = 0;
+            limitMovement = 0; //this counts up
           }
         }
 
@@ -339,16 +338,14 @@ public class Driver {
         }
 
         //Check if the current Block after moving is an objective Block
-        if (game.isObjective(row, col)){ //If true, make a new Game with a new Floor
+        if (game.isObjective(row, col)) { //if true, make a new Game with a new Floor
           game = new Game(name, seed, rows, cols, ++level);
         }
       }
 
-    //----------------------------------------------------------------------------------------------------------------
-
-      //Do even when no key is pressed
-      //First row of stats
-      putString(rows * 3/4 + 2, 5, terminal, "     ");
+    //Do even when no key is pressed------------------------------------------------------------------------------------
+      //First row of stats, refresh
+      putString(rows * 3/4 + 2, 5, terminal, "     "); //HP can count down and break putString if not for this
       putString(rows * 3/4 + 2, 5, terminal, green + game.getPlayer().getHP());
 
       putString(rows * 3/4 + 2, 20, terminal, "" + game.getPlayer().getLevel());
@@ -357,14 +354,14 @@ public class Driver {
 
       putString(rows * 3/4 + 2, 52, terminal, "" + game.getPlayer().getDefense());
 
-      //Second row of stats
-      putString(rows * 3/4 + 3, 7, terminal, "     ");
+      //Second row of stats, refresh
+      putString(rows * 3/4 + 3, 7, terminal, "     "); //The area number can count down (not implemented) and break putString if not for this
       putString(rows * 3/4 + 3, 7, terminal, "" + game.getLevel());
 
-      putString(rows * 3/4 + 3, 21, terminal, "     ");
+      putString(rows * 3/4 + 3, 21, terminal, "     "); //Hunger can count down and break putString if not for this
       putString(rows * 3/4 + 3, 21, terminal, "" + game.getPlayer().getHunger());
 
-      putString(rows * 3/4 + 3, 35, terminal, "     ");
+      putString(rows * 3/4 + 3, 35, terminal, "     "); //Money can count down and break putString if not for this
       putString(rows * 3/4 + 3, 35, terminal, "" + game.getPlayer().getMoney() + '\u00a5' + resetColor); //yen symbol
 
       long tEnd = System.currentTimeMillis();
