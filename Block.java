@@ -138,7 +138,7 @@ public class Block implements Explorable{
     if (d == 'l'){
       return canMoveLeft;
     }
-    return true; //Will never happen but needs to compile ://///
+    return false; //Should never happen but needs to compile ://///
   }
 
   //Spawns
