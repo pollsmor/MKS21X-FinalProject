@@ -103,8 +103,8 @@ public class Driver {
     putString(rows * 3/4 + 3, 1, terminal, "Area: ");
     putString(rows * 3/4 + 3, 13, terminal, "Hunger: ");
     putString(rows * 3/4 + 3, 28, terminal, "Money: ");
-    putString(rows - 2, cols - 17, terminal, "Time: " );
-    putString(rows - 1, cols - 17, terminal, "Seed: " + game.getSeed());
+    putString(rows * 3/4 + 2, cols - 17, terminal, "Time: " );
+    putString(rows * 3/4 + 3, cols - 17, terminal, "Seed: " + game.getSeed());
 
     boolean running = true;
     boolean alive = true; //controls the inner while loop
@@ -138,6 +138,10 @@ public class Driver {
       }
 
     //----------------------------------------------------------------------------------------------------------------
+      if (game.getPlayer().getHP() <= 0) {
+        alive = false;
+      }
+
       if (!alive) {
         putString(rows, 0, terminal,"You died. Would you like to respawn? (y/n)");
         while (!alive) {
@@ -151,6 +155,7 @@ public class Driver {
             //Do you want to respawn?
             if (key2.getCharacter() == 'y') {
               alive = true;                //Below is so I can replace the you died text:
+              game.getPlayer().maxRegen();
               putString(rows, 0, terminal, "                                          ");
             }
 
@@ -165,7 +170,9 @@ public class Driver {
     //----------------------------------------------------------------------------------------------------------------
       if (game.enemyNearby() && invincibility < 0) {
         putString(0, 0, terminal, game.getFloor().toStringClean());
-        putString(rows * 3/4 + 5, 1, terminal, "An enemy is nearby. What is your move?");
+        putString(rows * 3/4 + 5, 1, terminal, "An enemy is nearby. What is your move?                                   ");
+        putString(rows * 3/4 + 6, 1, terminal, "[j] Attack                        ");
+        putString(rows * 3/4 + 7, 1, terminal, "[k] Items                         ");
         while (game.enemyNearby() && invincibility < 0) {
           Key key3 = terminal.readInput();
           if (key3 != null) {
@@ -173,11 +180,83 @@ public class Driver {
               terminal.exitPrivateMode();
               System.exit(0);
             }
+
+            boolean attackMode = false;
+            if (key3.getCharacter() == 'j') {
+              putString(rows * 3/4 + 5, 1, terminal, "Choose an enemy to attack with the arrow keys.");
+              putString(rows * 3/4 + 6, 1, terminal, "                        ");
+              putString(rows * 3/4 + 7, 1, terminal, "                        ");
+              attackMode = true;
+              while (attackMode) {
+                Key key4 = terminal.readInput();
+                if (key4 != null) {
+                  if (key4.getKind() == Key.Kind.Escape) {
+                    terminal.exitPrivateMode();
+                    System.exit(0);
+                  }
+
+                  if (key4.getKind() == Key.Kind.ArrowUp) {
+                    if (game.getBlock(row - 1, col).getPokemonHere() != null) {
+                      game.getPlayer().basicAttack(game.getBlock(row - 1, col).getPokemonHere(), game.getPlayer().getAttack());
+                      game.getBlock(row - 1, col).getPokemonHere().basicAttack(game.getPlayer(), game.getBlock(row - 1, col).getPokemonHere().getAttack());
+                      putString(rows * 3/4 + 6, 1, terminal, "You dealt " + game.getPlayer().getAttack() + " damage!");
+                      putString(rows * 3/4 + 7, 1, terminal, "The enemy dealt " + game.getBlock(row - 1, col).getPokemonHere().getAttack() + " damage! ");
+                      attackMode = false;
+                      invincibility = 10000;
+                    }
+
+                    else
+                      putString(rows * 3/4 + 5, 1, terminal, "There is no enemy here to attack!                                   ");
+                  }
+
+                  if (key4.getKind() == Key.Kind.ArrowDown) {
+                    if (game.getBlock(row + 1, col).getPokemonHere() != null) {
+                      game.getPlayer().basicAttack(game.getBlock(row + 1, col).getPokemonHere(), game.getPlayer().getAttack());
+                      game.getBlock(row + 1, col).getPokemonHere().basicAttack(game.getPlayer(), game.getBlock(row + 1, col).getPokemonHere().getAttack());
+                      putString(rows * 3/4 + 6, 1, terminal, "You dealt " + game.getPlayer().getAttack() + " damage!");
+                      putString(rows * 3/4 + 7, 1, terminal, "The enemy dealt " + game.getBlock(row + 1, col).getPokemonHere().getAttack() + " damage! ");
+                      attackMode = false;
+                      invincibility = 10000;
+                    }
+
+                    else
+                      putString(rows * 3/4 + 5, 1, terminal, "There is no enemy here to attack!                                   ");
+                  }
+
+                  if (key4.getKind() == Key.Kind.ArrowLeft) {
+                    if (game.getBlock(row, col - 1).getPokemonHere() != null) {
+                      game.getPlayer().basicAttack(game.getBlock(row, col - 1).getPokemonHere(), game.getPlayer().getAttack());
+                      game.getBlock(row, col - 1).getPokemonHere().basicAttack(game.getPlayer(), game.getBlock(row, col - 1).getPokemonHere().getAttack());
+                      putString(rows * 3/4 + 6, 1, terminal, "You dealt " + game.getPlayer().getAttack() + " damage!");
+                      putString(rows * 3/4 + 7, 1, terminal, "The enemy dealt " + game.getBlock(row, col - 1).getPokemonHere().getAttack() + " damage! ");
+                      attackMode = false;
+                      invincibility = 10000;
+                    }
+
+                    else
+                      putString(rows * 3/4 + 5, 1, terminal, "There is no enemy here to attack!                                   ");
+                  }
+
+                  if (key4.getKind() == Key.Kind.ArrowRight) {
+                    if (game.getBlock(row, col + 1).getPokemonHere() != null) {
+                      game.getPlayer().basicAttack(game.getBlock(row, col + 1).getPokemonHere(), game.getPlayer().getAttack());
+                      game.getBlock(row, col + 1).getPokemonHere().basicAttack(game.getPlayer(), game.getBlock(row, col + 1).getPokemonHere().getAttack());
+                      putString(rows * 3/4 + 6, 1, terminal, "You dealt " + game.getPlayer().getAttack() + " damage!");
+                      putString(rows * 3/4 + 7, 1, terminal, "The enemy dealt " + game.getBlock(row, col + 1).getPokemonHere().getAttack() + " damage! ");
+                      attackMode = false;
+                      invincibility = 10000;
+                    }
+
+                    else
+                      putString(rows * 3/4 + 5, 1, terminal, "There is no enemy here to attack!                                                                      ");
+                  }
+                }
+              }
+
+              putString(rows * 3/4 + 5, 1, terminal, "                                                ");
+            }
           }
         }
-
-        invincibility = 2000;
-        System.out.println("lol");
       }
     //----------------------------------------------------------------------------------------------------------------
       if (moved) {
@@ -211,7 +290,7 @@ public class Driver {
     //----------------------------------------------------------------------------------------------------------------
       if (key != null && limitMovement > 500) {
         if (key.getKind() == Key.Kind.ArrowLeft) {
-          if (game.getPlayer().moveLeft(game)) { //If the player can move left, cursor moves left too
+          if (!game.isWall(row, col - 1)) {
             terminal.moveCursor(col, row); //again, different scheme
             terminal.putCharacter(' ');
             game.getPlayer().moveLeft(game);
@@ -223,7 +302,7 @@ public class Driver {
         }
 
         if (key.getKind() == Key.Kind.ArrowRight) {
-          if (game.getPlayer().moveRight(game)) { //If the player can move right, cursor moves right too
+          if (!game.isWall(row, col + 1)) {
             terminal.moveCursor(col, row);
             terminal.putCharacter(' ');
             game.getPlayer().moveRight(game);
@@ -236,7 +315,7 @@ public class Driver {
 
         if (key.getKind() == Key.Kind.ArrowUp) {
           if (row != 0)
-            if (game.getPlayer().moveUp(game)) {//If the player can move up, cursor moves up too
+            if (!game.isWall(row - 1, col)) {
               terminal.moveCursor(col, row);
               terminal.putCharacter(' ');
               game.getPlayer().moveUp(game);
@@ -248,7 +327,7 @@ public class Driver {
         }
 
         if (key.getKind() == Key.Kind.ArrowDown) {
-          if (game.getPlayer().moveDown(game)) { //If the player can move down, cursor moves down too
+          if (!game.isWall(row + 1, col)) {
             terminal.moveCursor(col, row);
             terminal.putCharacter(' ');
             game.getPlayer().moveDown(game);
@@ -263,23 +342,29 @@ public class Driver {
         if (game.isObjective(row, col)){ //If true, make a new Game with a new Floor
           game = new Game(name, seed, rows, cols, ++level);
         }
-
-        //Just to demo the death function in class
-        if (key.getKind() == Key.Kind.Delete)
-          alive = false;
       }
 
     //----------------------------------------------------------------------------------------------------------------
 
       //Do even when no key is pressed
       //First row of stats
+      putString(rows * 3/4 + 2, 5, terminal, "     ");
       putString(rows * 3/4 + 2, 5, terminal, green + game.getPlayer().getHP());
+
       putString(rows * 3/4 + 2, 20, terminal, "" + game.getPlayer().getLevel());
+
       putString(rows * 3/4 + 2, 36, terminal, "" + game.getPlayer().getAttack());
+
       putString(rows * 3/4 + 2, 52, terminal, "" + game.getPlayer().getDefense());
+
       //Second row of stats
+      putString(rows * 3/4 + 3, 7, terminal, "     ");
       putString(rows * 3/4 + 3, 7, terminal, "" + game.getLevel());
+
+      putString(rows * 3/4 + 3, 21, terminal, "     ");
       putString(rows * 3/4 + 3, 21, terminal, "" + game.getPlayer().getHunger());
+
+      putString(rows * 3/4 + 3, 35, terminal, "     ");
       putString(rows * 3/4 + 3, 35, terminal, "" + game.getPlayer().getMoney() + '\u00a5' + resetColor); //yen symbol
 
       long tEnd = System.currentTimeMillis();
@@ -288,7 +373,7 @@ public class Driver {
       --invincibility;
       if (millis / 1000 > lastSecond) {
         lastSecond = millis / 1000; //One second has passed.
-        putString(rows - 2, cols - 11, terminal, lastSecond + "s");
+        putString(rows * 3/4 + 2, cols - 11, terminal, lastSecond + "s");
       }
     }
 

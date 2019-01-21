@@ -1,3 +1,5 @@
+import java.util.Random;
+
 public abstract class Pokemon {
   private String name;
   private int level;
@@ -15,7 +17,6 @@ public abstract class Pokemon {
   private Move move4;
   private int row;
   private int col;
-  private String direction;
 
   public Pokemon(String inputName, int inputLevel, int inputMaxHP, int inputAttack, int inputDefense, int inputRow, int inputCol) {
     name = inputName;
@@ -57,10 +58,18 @@ public abstract class Pokemon {
     return currentHP;
   }
 
+  public int getMaxHP() {
+    return maxHP;
+  }
+
   public int setHP(int change) {
     int temp = currentHP; //return this for other purposes
     currentHP += change; //can be positive or negative depending on case
     return temp;
+  }
+
+  public void maxRegen() {
+    currentHP = maxHP;
   }
 
   public int getRow() {
@@ -71,63 +80,71 @@ public abstract class Pokemon {
     return col;
   }
 
-  public boolean moveUp(Game game) {
+  public void moveUp(Game game) {
     if (!game.isWall(row - 1, col)) {
-      if (game.isTunnel(row - 1, col)) {
-        if (game.getBlock(row, col).canMove('u')){
+      if (game.isTunnel(row, col)) {
+        //if (game.getBlock(row, col).canMove('u')) {
           game.getFloor().getBlock(row, col).setPokemonHere(null);
           --row;
-        }
+        //}
       }
 
-      return true;
+      else {
+        game.getFloor().getBlock(row, col).setPokemonHere(null);
+        --row;
+      }
     }
-
-    return false;
   }
 
-  public boolean moveDown(Game game) {
+  public void moveDown(Game game) {
     if (!game.isWall(row + 1, col)) {
-      if (game.isTunnel(row, col)){
-        if (game.getBlock(row,col).canMove('d')){
+      if (game.isTunnel(row, col)) {
+        //if (game.getBlock(row, col).canMove('d')) {
           game.getFloor().getBlock(row, col).setPokemonHere(null);
           ++row;
-        }
+        //}
       }
 
-      return true;
+      else {
+        game.getFloor().getBlock(row, col).setPokemonHere(null);
+        ++row;
+      }
     }
-
-    return false;
   }
 
-  public boolean moveLeft(Game game) {
+  public void moveLeft(Game game) {
     if (!game.isWall(row, col - 1)) {
-      if (game.isTunnel(row, col)){
-        if (game.getBlock(row,col).canMove('l')){
+      if (game.isTunnel(row, col)) {
+        //if (game.getBlock(row, col).canMove('l')) {
           game.getFloor().getBlock(row, col).setPokemonHere(null);
           --col;
-        }
+        //}
       }
 
-      return true;
+      else {
+        game.getFloor().getBlock(row, col).setPokemonHere(null);
+        --col;
+      }
     }
-
-    return false;
   }
 
-  public boolean moveRight(Game game) {
+  public void moveRight(Game game) {
     if (!game.isWall(row, col + 1)) {
-      if (game.isTunnel(row, col)){
-        if (game.getBlock(row,col).canMove('r')){
+      if (game.isTunnel(row, col)) {
+        //if (game.getBlock(row, col).canMove('r')) {
           game.getFloor().getBlock(row, col).setPokemonHere(null);
           ++col;
-        }
+        //}
       }
 
-      return true;
+      else {
+        game.getFloor().getBlock(row, col).setPokemonHere(null);
+        ++col;
+      }
     }
+  }
 
-    return false;
+  public void basicAttack(Pokemon pokemon, int damage) {
+    pokemon.setHP(-1 * damage);
   }
 }
