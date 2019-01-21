@@ -187,7 +187,7 @@ public class Driver {
                     if (game.getBlock(row - 1, col).getPokemonHere() != null) {
                       game.getPlayer().basicAttack(game.getBlock(row - 1, col).getPokemonHere(), game.getPlayer().getAttack());
                       attackMode = false;
-                      invincibility = 2000;
+                      invincibility = 10000;
                     }
 
                     else
@@ -198,7 +198,7 @@ public class Driver {
                     if (game.getBlock(row + 1, col).getPokemonHere() != null) {
                       game.getPlayer().basicAttack(game.getBlock(row + 1, col).getPokemonHere(), game.getPlayer().getAttack());
                       attackMode = false;
-                      invincibility = 2000;
+                      invincibility = 10000;
                     }
 
                     else
@@ -209,7 +209,7 @@ public class Driver {
                     if (game.getBlock(row, col - 1).getPokemonHere() != null) {
                       game.getPlayer().basicAttack(game.getBlock(row, col - 1).getPokemonHere(), game.getPlayer().getAttack());
                       attackMode = false;
-                      invincibility = 2000;
+                      invincibility = 10000;
                     }
 
                     else
@@ -220,7 +220,7 @@ public class Driver {
                     if (game.getBlock(row, col + 1).getPokemonHere() != null) {
                       game.getPlayer().basicAttack(game.getBlock(row, col + 1).getPokemonHere(), game.getPlayer().getAttack());
                       attackMode = false;
-                      invincibility = 2000;
+                      invincibility = 10000;
                     }
 
                     else
