@@ -103,8 +103,8 @@ public class Driver {
     putString(rows * 3/4 + 3, 1, terminal, "Area: ");
     putString(rows * 3/4 + 3, 13, terminal, "Hunger: ");
     putString(rows * 3/4 + 3, 28, terminal, "Money: ");
-    putString(rows - 2, cols - 17, terminal, "Time: " );
-    putString(rows - 1, cols - 17, terminal, "Seed: " + game.getSeed());
+    putString(rows * 3/4 + 2, cols - 17, terminal, "Time: " );
+    putString(rows * 3/4 + 3, cols - 17, terminal, "Seed: " + game.getSeed());
 
     boolean running = true;
     boolean alive = true; //controls the inner while loop
@@ -174,6 +174,32 @@ public class Driver {
             if (key3.getKind() == Key.Kind.Escape) {
               terminal.exitPrivateMode();
               System.exit(0);
+            }
+
+            boolean attackMode = false;
+            if (key3.getCharacter() == 'j') {
+              putString(rows * 3/4 + 5, 1, terminal, "Choose an enemy to attack with the arrow keys. ");
+              attackMode = true;
+              while (attackMode) {
+                Key key4 = terminal.readInput();
+                if (key4 != null) {
+                  if (key4.getKind() == Key.Kind.ArrowUp) {
+
+                  }
+
+                  if (key4.getKind() == Key.Kind.ArrowDown) {
+
+                  }
+
+                  if (key4.getKind() == Key.Kind.ArrowLeft) {
+
+                  }
+
+                  if (key4.getKind() == Key.Kind.ArrowRight) {
+
+                  }
+                }
+              }
             }
           }
         }
@@ -289,7 +315,7 @@ public class Driver {
       --invincibility;
       if (millis / 1000 > lastSecond) {
         lastSecond = millis / 1000; //One second has passed.
-        putString(rows - 2, cols - 11, terminal, lastSecond + "s");
+        putString(rows * 3/4 + 3, cols - 11, terminal, lastSecond + "s");
       }
     }
 
