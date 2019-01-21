@@ -184,7 +184,9 @@ public class Driver {
                 Key key4 = terminal.readInput();
                 if (key4 != null) {
                   if (key4.getKind() == Key.Kind.ArrowUp) {
-
+                    if (game.getBlock(row - 1, col).getPokemonHere() != null) {
+                      game.getPlayer().basicAttack(game.getBlock(row - 1, col).getPokemonHere(), game.getPlayer().getAttack());
+                    }
                   }
 
                   if (key4.getKind() == Key.Kind.ArrowDown) {

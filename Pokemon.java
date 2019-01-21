@@ -134,4 +134,8 @@ public abstract class Pokemon {
       }
     }
   }
+
+  public void basicAttack(Pokemon pokemon, int damage) {
+    pokemon.setHP(-1 * damage);
+  }
 }
