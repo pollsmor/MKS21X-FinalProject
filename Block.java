@@ -75,6 +75,12 @@ public class Block implements Explorable{
     return objectiveHere;
   }
 
+  public boolean setObjectiveHere(boolean b){
+    boolean x = objectiveHere;
+    objectiveHere = b;
+    return x;
+  }
+
   //----------Type of Block----------//
   public String getType(){
     return type;
