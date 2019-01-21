@@ -71,14 +71,17 @@ public abstract class Pokemon {
   }
 
   public boolean moveUp(Game game) {
-    if (!game.isWall(row - 1, col)) {
-      if (game.isTunnel(row, col)){
-        if (game.getBlock(row,col).canMove('u')){
+    if (!game.isWall(row - 1, col)) { //if next Block is not a Wall
+      if (game.isTunnel(row, col)){ //If current Block is a Tunnel
+        if (game.getBlock(row,col).canMove('u')){ //Check if Block allows you to move Up
           game.getFloor().getBlock(row, col).setPokemonHere(null);
           --row;
         }
+        else{
+          return false;
+        }
       }
-      else{
+      else{ //Current Block is a Room Block and next Block is not a Wall
         game.getFloor().getBlock(row, col).setPokemonHere(null);
         --row;
       }
@@ -93,6 +96,9 @@ public abstract class Pokemon {
         if (game.getBlock(row,col).canMove('d')){
           game.getFloor().getBlock(row, col).setPokemonHere(null);
           ++row;
+        }
+        else{
+          return false;
         }
       }
       else{
@@ -111,6 +117,9 @@ public abstract class Pokemon {
           game.getFloor().getBlock(row, col).setPokemonHere(null);
           --col;
         }
+        else{
+          return false;
+        }
       }
       else{
         game.getFloor().getBlock(row, col).setPokemonHere(null);
@@ -127,6 +136,9 @@ public abstract class Pokemon {
         if (game.getBlock(row,col).canMove('r')){
           game.getFloor().getBlock(row, col).setPokemonHere(null);
           ++col;
+        }
+        else{
+          return false;
         }
       }
       else{
