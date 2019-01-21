@@ -12,7 +12,7 @@ public class Enemy extends Pokemon {
     super("genericEnemy",
          (int) (Math.random() * 1000) % 10,
          (int) (Math.random() * 1000) % 40,
-         (int) (Math.random() * 1000) % 10,
+         (int) (Math.random() * 1000) % 5,
          (int) (Math.random() * 1000) % 10,
          row, col);
   }
@@ -20,9 +20,5 @@ public class Enemy extends Pokemon {
   //add this XP to the player when the monster is killed
   public int getKillXP() {
     return killXP;
-  }
-
-  public void atkPlayer(Player player, int damage) {
-    player.setHP(-1 * damage);
   }
 }

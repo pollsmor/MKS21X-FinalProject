@@ -1,3 +1,5 @@
+import java.util.Random;
+
 public abstract class Pokemon {
   private String name;
   private int level;
@@ -56,10 +58,18 @@ public abstract class Pokemon {
     return currentHP;
   }
 
+  public int getMaxHP() {
+    return maxHP;
+  }
+
   public int setHP(int change) {
     int temp = currentHP; //return this for other purposes
     currentHP += change; //can be positive or negative depending on case
     return temp;
+  }
+
+  public void maxRegen() {
+    currentHP = maxHP;
   }
 
   public int getRow() {
@@ -72,13 +82,14 @@ public abstract class Pokemon {
 
   public boolean moveUp(Game game) {
     if (!game.isWall(row - 1, col)) {
-      if (game.isTunnel(row, col)){
-        if (game.getBlock(row,col).canMove('u')){
+      if (game.isTunnel(row, col)) {
+        //if (game.getBlock(row, col).canMove('u')) {
           game.getFloor().getBlock(row, col).setPokemonHere(null);
           --row;
-        }
+        //}
       }
-      else{
+
+      else {
         game.getFloor().getBlock(row, col).setPokemonHere(null);
         --row;
       }
@@ -90,12 +101,13 @@ public abstract class Pokemon {
   public boolean moveDown(Game game) {
     if (!game.isWall(row + 1, col)) {
       if (game.isTunnel(row, col)){
-        if (game.getBlock(row,col).canMove('d')){
+        //if (game.getBlock(row, col).canMove('d')) {
           game.getFloor().getBlock(row, col).setPokemonHere(null);
           ++row;
-        }
+        //}
       }
-      else{
+
+      else {
         game.getFloor().getBlock(row, col).setPokemonHere(null);
         ++row;
       }
@@ -106,13 +118,14 @@ public abstract class Pokemon {
 
   public boolean moveLeft(Game game) {
     if (!game.isWall(row, col - 1)) {
-      if (game.isTunnel(row, col)){
-        if (game.getBlock(row,col).canMove('l')){
+      if (game.isTunnel(row, col)) {
+        //if (game.getBlock(row, col).canMove('l')){
           game.getFloor().getBlock(row, col).setPokemonHere(null);
           --col;
-        }
+        //}
       }
-      else{
+
+      else {
         game.getFloor().getBlock(row, col).setPokemonHere(null);
         --col;
       }
@@ -123,18 +136,23 @@ public abstract class Pokemon {
 
   public boolean moveRight(Game game) {
     if (!game.isWall(row, col + 1)) {
-      if (game.isTunnel(row, col)){
-        if (game.getBlock(row,col).canMove('r')){
+      if (game.isTunnel(row, col)) {
+        //if (game.getBlock(row, col).canMove('r')){
           game.getFloor().getBlock(row, col).setPokemonHere(null);
           ++col;
-        }
+        //}
       }
-      else{
+
+      else {
         game.getFloor().getBlock(row, col).setPokemonHere(null);
         ++col;
       }
       return true;
     }
     return false;
+  }
+
+  public void basicAttack(Pokemon pokemon, int damage) {
+    pokemon.setHP(-1 * damage);
   }
 }
