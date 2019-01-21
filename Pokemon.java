@@ -69,6 +69,10 @@ public abstract class Pokemon {
     return temp;
   }
 
+  public void maxRegen() {
+    currentHP = maxHP;
+  }
+
   public int getRow() {
     return row;
   }

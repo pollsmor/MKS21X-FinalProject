@@ -138,8 +138,9 @@ public class Driver {
       }
 
     //----------------------------------------------------------------------------------------------------------------
-      if (game.getPlayer().getHP() <= 0)
+      if (game.getPlayer().getHP() <= 0) {
         alive = false;
+      }
 
       if (!alive) {
         putString(rows, 0, terminal,"You died. Would you like to respawn? (y/n)");
@@ -154,6 +155,7 @@ public class Driver {
             //Do you want to respawn?
             if (key2.getCharacter() == 'y') {
               alive = true;                //Below is so I can replace the you died text:
+              game.getPlayer().setHP(game.getPlayer().getMaxHP());
               putString(rows, 0, terminal, "                                          ");
             }
 
