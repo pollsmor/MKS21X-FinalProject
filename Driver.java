@@ -348,13 +348,23 @@ public class Driver {
 
       //Do even when no key is pressed
       //First row of stats
+      putString(rows * 3/4 + 2, 5, terminal, "     ");
       putString(rows * 3/4 + 2, 5, terminal, green + game.getPlayer().getHP());
+
       putString(rows * 3/4 + 2, 20, terminal, "" + game.getPlayer().getLevel());
+
       putString(rows * 3/4 + 2, 36, terminal, "" + game.getPlayer().getAttack());
+
       putString(rows * 3/4 + 2, 52, terminal, "" + game.getPlayer().getDefense());
+
       //Second row of stats
+      putString(rows * 3/4 + 3, 7, terminal, "     ");
       putString(rows * 3/4 + 3, 7, terminal, "" + game.getLevel());
+
+      putString(rows * 3/4 + 3, 21, terminal, "     ");
       putString(rows * 3/4 + 3, 21, terminal, "" + game.getPlayer().getHunger());
+
+      putString(rows * 3/4 + 3, 35, terminal, "     ");
       putString(rows * 3/4 + 3, 35, terminal, "" + game.getPlayer().getMoney() + '\u00a5' + resetColor); //yen symbol
 
       long tEnd = System.currentTimeMillis();
