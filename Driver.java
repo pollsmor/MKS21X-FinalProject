@@ -155,7 +155,7 @@ public class Driver {
             //Do you want to respawn?
             if (key2.getCharacter() == 'y') {
               alive = true;                //Below is so I can replace the you died text:
-              game.getPlayer().setHP(game.getPlayer().getMaxHP());
+              game.getPlayer().maxRegen();
               putString(rows, 0, terminal, "                                          ");
             }
 
