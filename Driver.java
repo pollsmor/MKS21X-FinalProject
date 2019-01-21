@@ -166,8 +166,8 @@ public class Driver {
       if (game.enemyNearby() && invincibility < 0) {
         putString(0, 0, terminal, game.getFloor().toStringClean());
         putString(rows * 3/4 + 5, 1, terminal, "An enemy is nearby. What is your move?");
-        putString(rows * 3/4 + 6, 1, terminal, "[j] Attack");
-        putString(rows * 3/4 + 7, 1, terminal, "[k] Items");
+        putString(rows * 3/4 + 8, 1, terminal, "[j] Attack");
+        putString(rows * 3/4 + 9, 1, terminal, "[k] Items");
         while (game.enemyNearby() && invincibility < 0) {
           Key key3 = terminal.readInput();
           if (key3 != null) {
@@ -178,7 +178,7 @@ public class Driver {
 
             boolean attackMode = false;
             if (key3.getCharacter() == 'j') {
-              putString(rows * 3/4 + 5, 1, terminal, "Choose an enemy to attack with the arrow keys. ");
+              putString(rows * 3/4 + 5, 1, terminal, "Choose an enemy to attack with the arrow keys.                         ");
               attackMode = true;
               while (attackMode) {
                 Key key4 = terminal.readInput();
@@ -187,47 +187,49 @@ public class Driver {
                     if (game.getBlock(row - 1, col).getPokemonHere() != null) {
                       game.getPlayer().basicAttack(game.getBlock(row - 1, col).getPokemonHere(), game.getPlayer().getAttack());
                       attackMode = false;
+                      invincibility = 2000;
                     }
 
                     else
-                      putString(rows * 3/4 + 5, 1, terminal, "There is no enemy here to attack!");
+                      putString(rows * 3/4 + 5, 1, terminal, "There is no enemy here to attack!                         ");
                   }
 
                   if (key4.getKind() == Key.Kind.ArrowDown) {
                     if (game.getBlock(row + 1, col).getPokemonHere() != null) {
                       game.getPlayer().basicAttack(game.getBlock(row + 1, col).getPokemonHere(), game.getPlayer().getAttack());
                       attackMode = false;
+                      invincibility = 2000;
                     }
 
                     else
-                      putString(rows * 3/4 + 5, 1, terminal, "There is no enemy here to attack!");
+                      putString(rows * 3/4 + 5, 1, terminal, "There is no enemy here to attack!                         ");
                   }
 
                   if (key4.getKind() == Key.Kind.ArrowLeft) {
                     if (game.getBlock(row, col - 1).getPokemonHere() != null) {
                       game.getPlayer().basicAttack(game.getBlock(row, col - 1).getPokemonHere(), game.getPlayer().getAttack());
                       attackMode = false;
+                      invincibility = 2000;
                     }
 
                     else
-                      putString(rows * 3/4 + 5, 1, terminal, "There is no enemy here to attack!");
+                      putString(rows * 3/4 + 5, 1, terminal, "There is no enemy here to attack!                         ");
                   }
 
                   if (key4.getKind() == Key.Kind.ArrowRight) {
                     if (game.getBlock(row, col + 1).getPokemonHere() != null) {
                       game.getPlayer().basicAttack(game.getBlock(row, col + 1).getPokemonHere(), game.getPlayer().getAttack());
                       attackMode = false;
+                      invincibility = 2000;
                     }
 
                     else
-                      putString(rows * 3/4 + 5, 1, terminal, "There is no enemy here to attack!");
+                      putString(rows * 3/4 + 5, 1, terminal, "There is no enemy here to attack!                         ");
                   }
                 }
               }
             }
           }
-
-          invincibility = 2000;
         }
       }
     //----------------------------------------------------------------------------------------------------------------

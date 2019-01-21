@@ -101,7 +101,7 @@ public class Game {
 
     if (!isRandomSeed) {
       randgenRow = new Random(seed + 2);
-      randgenCol = new Random();
+      randgenCol = new Random(seed + 3);
     }
 
     int row = 0;
