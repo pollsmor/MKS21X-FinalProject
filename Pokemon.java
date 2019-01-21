@@ -73,7 +73,7 @@ public abstract class Pokemon {
   public boolean moveUp(Game game) {
     if (!game.isWall(row - 1, col)) { //if next Block is not a Wall
       if (game.isTunnel(row, col)){ //If current Block is a Tunnel
-        if (game.getBlock(row,col).canMove('u')){ //Check if Block allows you to move Up
+        if (game.getBlock(row,col).canMove('u')){ //Check if Block allows you to move up
           game.getFloor().getBlock(row, col).setPokemonHere(null);
           --row;
         }
@@ -82,6 +82,16 @@ public abstract class Pokemon {
         }
       }
       else{ //Current Block is a Room Block and next Block is not a Wall
+        if (game.isTunnel(row - 1, col)){ //If the next Block is a Tunnel
+          if (game.getBlock(row - 1, col).canMove('d')){ //Check that that Tunnel Block allows you to move down
+            game.getFloor().getBlock(row, col).setPokemonHere(null);
+            --row;
+          }
+          else{ //If not return false
+            return false;
+          }
+        }
+        //Next Block is Room Block
         game.getFloor().getBlock(row, col).setPokemonHere(null);
         --row;
       }
@@ -91,9 +101,9 @@ public abstract class Pokemon {
   }
 
   public boolean moveDown(Game game) {
-    if (!game.isWall(row + 1, col)) {
-      if (game.isTunnel(row, col)){
-        if (game.getBlock(row,col).canMove('d')){
+    if (!game.isWall(row + 1, col)) {//if next Block is not a Wall
+      if (game.isTunnel(row, col)){//If current Block is a Tunnel
+        if (game.getBlock(row,col).canMove('d')){//Check if Block allows you to move down
           game.getFloor().getBlock(row, col).setPokemonHere(null);
           ++row;
         }
@@ -101,7 +111,17 @@ public abstract class Pokemon {
           return false;
         }
       }
-      else{
+      else{ //Current Block is a Room Block and next Block is not a Wall
+        if (game.isTunnel(row + 1, col)){ //If the next Block is a Tunnel
+          if (game.getBlock(row + 1, col).canMove('u')){ //Check that that Tunnel Block allows you to move up
+            game.getFloor().getBlock(row, col).setPokemonHere(null);
+            ++row;
+          }
+          else{ //If not return false
+            return false;
+          }
+        }
+        //Next Block is Room Block
         game.getFloor().getBlock(row, col).setPokemonHere(null);
         ++row;
       }
@@ -111,17 +131,27 @@ public abstract class Pokemon {
   }
 
   public boolean moveLeft(Game game) {
-    if (!game.isWall(row, col - 1)) {
-      if (game.isTunnel(row, col)){
-        if (game.getBlock(row,col).canMove('l')){
+    if (!game.isWall(row, col - 1)) {//if next Block is not a Wall
+      if (game.isTunnel(row, col)){//If current Block is a Tunnel
+        if (game.getBlock(row,col).canMove('l')){//Check if Block allows you to move left
           game.getFloor().getBlock(row, col).setPokemonHere(null);
           --col;
         }
-        else{
+        else{//If not return false
           return false;
         }
       }
-      else{
+      else{ //Current Block is a Room Block and next Block is not a Wall
+        if (game.isTunnel(row + 1, col)){ //If the next Block is a Tunnel
+          if (game.getBlock(row + 1, col).canMove('r')){ //Check that that Tunnel Block allows you to move right
+            game.getFloor().getBlock(row, col).setPokemonHere(null);
+            --col;
+          }
+          else{ //If not return false
+            return false;
+          }
+        }
+        //Next Block is Room Block
         game.getFloor().getBlock(row, col).setPokemonHere(null);
         --col;
       }
@@ -131,17 +161,27 @@ public abstract class Pokemon {
   }
 
   public boolean moveRight(Game game) {
-    if (!game.isWall(row, col + 1)) {
-      if (game.isTunnel(row, col)){
-        if (game.getBlock(row,col).canMove('r')){
+    if (!game.isWall(row, col + 1)) {//if next Block is not a Wall
+      if (game.isTunnel(row, col)){//If current Block is a Tunnel
+        if (game.getBlock(row,col).canMove('r')){//Check if Block allows you to move right
           game.getFloor().getBlock(row, col).setPokemonHere(null);
           ++col;
         }
-        else{
+        else{//If not return false
           return false;
         }
       }
-      else{
+      else{ //Current Block is a Room Block and next Block is not a Wall
+        if (game.isTunnel(row + 1, col)){ //If the next Block is a Tunnel
+          if (game.getBlock(row + 1, col).canMove('l')){ //Check that that Tunnel Block allows you to move left
+            game.getFloor().getBlock(row, col).setPokemonHere(null);
+            ++col;
+          }
+          else{ //If not return false
+            return false;
+          }
+        }
+        //Next Block is Room Block
         game.getFloor().getBlock(row, col).setPokemonHere(null);
         ++col;
       }
