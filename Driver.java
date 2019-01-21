@@ -183,7 +183,9 @@ public class Driver {
 
             boolean attackMode = false;
             if (key3.getCharacter() == 'j') {
-              putString(rows * 3/4 + 5, 1, terminal, "Choose an enemy to attack with the arrow keys.                                   ");
+              putString(rows * 3/4 + 5, 1, terminal, "Choose an enemy to attack with the arrow keys.");
+              putString(rows * 3/4 + 8, 1, terminal, "                        ");
+              putString(rows * 3/4 + 9, 1, terminal, "                        ");
               attackMode = true;
               while (attackMode) {
                 Key key4 = terminal.readInput();
@@ -238,10 +240,12 @@ public class Driver {
                     }
 
                     else
-                      putString(rows * 3/4 + 5, 1, terminal, "There is no enemy here to attack!                                   ");
+                      putString(rows * 3/4 + 5, 1, terminal, "There is no enemy here to attack!                                                                      ");
                   }
                 }
               }
+
+              putString(rows * 3/4 + 5, 1, terminal, "                                   ");
             }
           }
         }
