@@ -138,6 +138,9 @@ public class Driver {
       }
 
     //----------------------------------------------------------------------------------------------------------------
+      if (game.getPlayer().getHP() <= 0)
+        alive = false;
+
       if (!alive) {
         putString(rows, 0, terminal,"You died. Would you like to respawn? (y/n)");
         while (!alive) {
@@ -325,10 +328,6 @@ public class Driver {
         if (game.isObjective(row, col)){ //If true, make a new Game with a new Floor
           game = new Game(name, seed, rows, cols, ++level);
         }
-
-        //Just to demo the death function in class
-        if (key.getKind() == Key.Kind.Delete)
-          alive = false;
       }
 
     //----------------------------------------------------------------------------------------------------------------

@@ -59,6 +59,10 @@ public abstract class Pokemon {
     return currentHP;
   }
 
+  public int getMaxHP() {
+    return maxHP;
+  }
+
   public int setHP(int change) {
     int temp = currentHP; //return this for other purposes
     currentHP += change; //can be positive or negative depending on case
