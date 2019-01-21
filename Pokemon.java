@@ -1,3 +1,5 @@
+import java.util.Random;
+
 public abstract class Pokemon {
   private String name;
   private int level;
@@ -136,6 +138,13 @@ public abstract class Pokemon {
   }
 
   public void basicAttack(Pokemon pokemon, int damage) {
-    pokemon.setHP(-1 * damage);
+    if (pokemon instanceof Enemy) {
+      Random randgen = new Random();
+      if (Math.abs(randgen.nextInt()) % 2 == 0)
+        pokemon.setHP(-1 * damage);
+    }
+
+    else
+      pokemon.setHP(-1 * damage);
   }
 }
