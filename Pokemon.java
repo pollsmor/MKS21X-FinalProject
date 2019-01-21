@@ -95,6 +95,7 @@ public abstract class Pokemon {
       }
       return true;
     }
+
     return false;
   }
 
@@ -113,6 +114,7 @@ public abstract class Pokemon {
       }
       return true;
     }
+
     return false;
   }
 
@@ -131,6 +133,7 @@ public abstract class Pokemon {
       }
       return true;
     }
+
     return false;
   }
 
@@ -149,6 +152,7 @@ public abstract class Pokemon {
       }
       return true;
     }
+
     return false;
   }
 
