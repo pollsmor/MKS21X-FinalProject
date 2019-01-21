@@ -17,7 +17,6 @@ public abstract class Pokemon {
   private Move move4;
   private int row;
   private int col;
-  private Random damageCalculator = new Random();
 
   public Pokemon(String inputName, int inputLevel, int inputMaxHP, int inputAttack, int inputDefense, int inputRow, int inputCol) {
     name = inputName;
@@ -146,12 +145,6 @@ public abstract class Pokemon {
   }
 
   public void basicAttack(Pokemon pokemon, int damage) {
-    if (pokemon instanceof Enemy) {
-      if (Math.abs(damageCalculator.nextInt()) % 2 == 0)
-        pokemon.setHP(-1 * damage);
-    }
-
-    else
-      pokemon.setHP(-1 * damage);
+    pokemon.setHP(-1 * damage);
   }
 }
