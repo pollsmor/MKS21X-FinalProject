@@ -102,7 +102,7 @@ public class Block implements Explorable{
   public String setType(String newType){
     String oldType = type;
     type = newType;
-    if (type == "Opening"){
+    if (type == "Objective"){
       data = '0';
     }
     return oldType;
