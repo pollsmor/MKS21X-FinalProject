@@ -192,8 +192,4 @@ public class Block implements Explorable{
       pokemonHere = pokemon;
     }
   }
-
-  public Pokemon getPokemonHere() {
-    return pokemonHere;
-  }
 }
