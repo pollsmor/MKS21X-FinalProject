@@ -38,4 +38,20 @@ public class Player extends Pokemon {
   public int getScore() {
     return score;
   }
+
+  public Item getItem(String item) {
+    if (item.equals("potion"))
+      return bag[0];
+
+    if (item.equals("superpotion"))
+      return bag[1];
+
+    if (item.equals("hyperpotion"))
+      return bag[2];
+
+    if (item.equals("maxpotion"))
+      return bag[3];
+
+    return bag[0]; //just need this to compile, this never runs
+  }
 }

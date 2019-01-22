@@ -270,7 +270,7 @@ public class Driver {
                       if (game.getBlock(row, col + 1).getPokemonHere()!= null){
                         putString(rows * 3/4 + 8, 1, terminal, "The enemy has " + game.getBlock(row, col + 1).getPokemonHere().getHP() + "/" + game.getBlock(row, col + 1).getPokemonHere().getMaxHP() + "HP!");
                       }
-                      
+
                       else
                         putString(rows * 3/4 + 8, 1, terminal, "Enemy killed!");
 
@@ -285,6 +285,22 @@ public class Driver {
               }
 
               putString(rows * 3/4 + 5, 1, terminal, "                                                ");
+            }
+
+            if (key3.getCharacter() == 'k') {
+              putString(rows * 3/4 + 5, 1, terminal, "Choose an enemy to attack with the arrow keys.");
+              putString(rows * 3/4 + 6, 1, terminal, "                        ");
+              putString(rows * 3/4 + 7, 1, terminal, "                        ");
+              attackMode = true;
+              while (attackMode) {
+                Key key4 = terminal.readInput();
+                if (key4 != null) {
+                  if (key4.getKind() == Key.Kind.Escape) {
+                    terminal.exitPrivateMode();
+                    System.exit(0);
+                  }
+                }
+              }
             }
           }
         }
