@@ -161,10 +161,19 @@ public class Block implements Explorable{
     itemHere = newItem;
   }
   */
+  public void spawnPlayerHere(Player player){
+    data = '\u04dd';
+    pokemonHere = player;
+    setPokemonHere(player);
+  }
 
   public void spawnEnemyHere(Enemy enemy) {
     data = '\u03e1';
     pokemonHere = enemy;
+  }
+
+  public Pokemon getPokemonHere(){ //Can return an Player, Enemy, or null
+    return pokemonHere;
   }
 
   public void setPokemonHere(Pokemon pokemon) {
