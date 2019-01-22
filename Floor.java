@@ -9,7 +9,6 @@ public class Floor{
   private ArrayList<Room> roomsHere; //ArrayList of Rooms
   private int numRooms; //Number of successful Rooms
   private ArrayList<Tunnel> tunnelsHere; //ArrayList of total Tunnels created
-  //private Mission[] missions; to be added later if we get to it
 
   //public Floor(int num, int terminal Width, int terminalLength)
   /** Constructs a Floor based on the terminal width and length and assigns the floor a number
@@ -33,10 +32,6 @@ public class Floor{
     return blocksHere[row][col];
   }
   public void setBlock(int row, int col, Block b){
-    //System.out.println("Row: "+row);
-    //System.out.println("Col: "+col);
-    //System.out.println("blockHere.length: "+blocksHere.length);
-    //System.out.println("blocksHere[0].length: "+blocksHere[0].length);
     blocksHere[row][col] = new Block(row, col, "Tunnel");
   }
 
@@ -91,14 +86,13 @@ public class Floor{
     boolean wasOverlap; //Keep track of whether or Room to be created overlaps with any other Room
     Room r, chosenRoom;
     while (successfulRooms < rooms && attempts > 0){
+      //Getting possible coordinates of a new Room
       startXcor = Math.abs(rnd.nextInt(width - 13)) + 1;
       endXcor = startXcor + rnd.nextInt(7) + 5;
       startYcor = Math.abs(rnd.nextInt(length - 13)) + 1;
       endYcor = startYcor + rnd.nextInt(7) + 5;
-      //System.out.println("startXcor: "+ startXcor +", startYcor: "+startYcor+", endXcor: "+endXcor+", endYcor: "+endYcor);
-      wasOverlap = false;
+      wasOverlap = false; //boolean to check if the Rooms are tooClose to each other
       //Make sure that rooms don't overlap with each other
-      //System.out.println("startXcor: "+ startXcor +", startYcor: "+startYcor+", endXcor: "+endXcor+", endYcor: "+endYcor);
       for (int i = 0; i < successfulRooms; i++){
         if (roomsHere.get(i).tooClose(startXcor, startYcor, endXcor, endYcor)){
           wasOverlap = true;
@@ -110,12 +104,7 @@ public class Floor{
         r = createRoom(startXcor, startYcor, endXcor, endYcor);
         if (successfulRooms != 0){
         chosenRoom = roomsHere.get(rnd.nextInt(successfulRooms));
-        //System.out.println(successfulRooms);
-        //System.out.println(r.toString());
-        //System.out.println(chosenRoom.toString());
-        //System.out.println(this.toString());
         r.connectRooms(chosenRoom, seed, this);
-        //System.out.println(seed);
       }
       roomsHere.add(r);
       successfulRooms++;
@@ -138,31 +127,14 @@ public class Floor{
   */
   public Room createRoom(int startXcor, int startYcor, int endXcor, int endYcor){
     Room a = new Room(startXcor, startYcor, endXcor, endYcor);
-    //System.out.println("CreateRoom in progress");
-    //System.out.println("startXcor: "+startXcor+", startYcor: "+startYcor+", endXcor: "+endXcor+", endYcor: "+endYcor);
     //Must also update blocksHere
-    for (int y = startYcor; y < endYcor + 1; y++){ // - 1 to avoid index exceptions
+    for (int y = startYcor; y < endYcor + 1; y++){
       for (int x = startXcor; x < endXcor + 1; x++){
         blocksHere[y][x] = new Block(x,y,"Room");
-        //System.out.println("FloorBlock here"+this.blocksHere[y][x].printPoint());
-        //System.out.println("RoomBlock here: "+ a.getBlocksHere()[y-startYcor][x-startXcor].printPoint());
-        //System.out.println("Type: "+this.blocksHere[y][x].getType());
       }
     }
     return a;
   }
-
-  //public Tunnel createTunnel(Room r1, Room r2){
-  /*
-  *Each tunnel is only in one direction and as such is assigned one direction: 0 is left-right, 1 is up-down
-  *Tunnels may intersect with other Tunnels
-  */
-    //Some function to get a border block from room 1 and room 2
-    //Tunnel a = new Tunnel(Block, Block);
-    //Construct the Tunnel
-    //return a;
-    //return Tunnel made
-  //}
 
   public String toString(){
     String output = " |";
@@ -171,13 +143,6 @@ public class Floor{
       output += n%10;
       n++;
     }
-    //output += "\n";
-    /*for (int y = 0; y < width; y++){
-      output += "-";
-      //if (y != length - 1){
-        //output += " ";
-      //}
-    }*/
     output += "|\n";
     n = 0;
     for (int y = 0; y < length; y++){
@@ -186,18 +151,12 @@ public class Floor{
       n++;
       for (int x = 0; x < width; x++){
         output+= blocksHere[y][x].getData();
-        //if (y != length - 1){
-        //  output += " ";
-        //}
       }
       output+="|\n";
     }
     output +=" |";
     for (int y = 0; y < width; y++){
       output += "-";
-      //if (y != length - 1){
-      //  output += " ";
-      //}
     }
 
     return output+"|";
@@ -227,10 +186,6 @@ public class Floor{
     return output;
   }
 
-  //public String toStringClean()
-  /**
-
-  */
   //toString makes a coordinate system that is offset from the one the blocksHere array uses.
   public String toStringClean() {
     String cyan = "\u001B[36m";
@@ -280,22 +235,25 @@ public class Floor{
     for(int i = 0; i < t.getBlocksHere().length; i++){ //Horizontal
       for(int j = 0; j < t.getBlocksHere()[i].length;j++){
         b = t.getBlocksHere()[i][j];
-        //System.out.println("b.getX(),b.getY(): "+ b.getX()+", "+b.getY());
+
         if (blocksHere[b.getY()][b.getX()].getType() != "Room"){ //Don't make it a Tunnel Block if it was a Room
-          // blocksHere[b.getY()][b.getX()] = new Block(b.getX(), b.getY(), "Tunnel");
           if (blocksHere[b.getY()][b.getX()].getType() == "Tunnel" && blocksHere[b.getY()][b.getX()].getDirection() != direction){
             //Save the old canMoves
             up = blocksHere[b.getY()][b.getX()].canMove('u');
             down = blocksHere[b.getY()][b.getX()].canMove('d');
             left = blocksHere[b.getY()][b.getX()].canMove('l');
             right = blocksHere[b.getY()][b.getX()].canMove('r');
+
+            //Making the new Block
             blocksHere[b.getY()][b.getX()] = new Block(b.getX(), b.getY(), 2);
+
+            //Put the canMoves back
             blocksHere[b.getY()][b.getX()].setCanMove('u', up);
             blocksHere[b.getY()][b.getX()].setCanMove('d', down);
             blocksHere[b.getY()][b.getX()].setCanMove('l', left);
             blocksHere[b.getY()][b.getX()].setCanMove('r', right);
           }
-          else{
+          else{ //If they don't intersect just make a regular new Tunnel Block
             blocksHere[b.getY()][b.getX()] = new Block(b.getX(), b.getY(), direction);
           }
           if (direction == 0){ //Horizontal
