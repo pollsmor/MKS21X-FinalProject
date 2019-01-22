@@ -38,8 +38,7 @@ public class Game {
     termRows = rows;
     termCols = cols;
     level = newLevel;
-    floor = new Floor(level, cols, rows * 3/4);
-    //missions = new Mission(); //ArrayList to allow easy adding/removing
+    floor = new Floor(level, cols, rows * 3/4)
     seed = inputSeed;
     isRandomSeed = false;
     floor.createRooms(seed);
@@ -57,7 +56,6 @@ public class Game {
     termCols = cols;
     level = newLevel;
     floor = new Floor(level, cols, rows * 3/4);
-    //missions = new Mission(); //ArrayList to allow easy adding/removing
     seed = inputSeed;
     isRandomSeed = false;
     floor.createRooms(seed);
@@ -69,6 +67,7 @@ public class Game {
     spawnEnemies();
   }
 
+  //-------------------------"Get" with the getters of the program below------------------------//
   public Player getPlayer() {
     return player;
   }
@@ -91,7 +90,7 @@ public class Game {
 
   //Allows getting a single mission from the array
   public Mission getMission(int number) {
-    return missions[number];
+    return missions[number]; //Didn't really get implemented but oh wells
   }
 
   //Why a getSeed? Because the one provided for main isn't the final seed - it gets run through the constructor.
@@ -115,6 +114,7 @@ public class Game {
     return floor.getBlock(row, col);
   }
 
+  //Gets a spawning location for a Player
   public int[] createSpawnPlayer() {
     Random randgenRow = new Random();
     Random randgenCol = new Random();
@@ -143,6 +143,7 @@ public class Game {
     return output;
   }
 
+  //Gets a spawning location for an Enemy
   public int[] createSpawnEnemy() {
     Random randgenRow = new Random();
     Random randgenCol = new Random();
@@ -170,6 +171,7 @@ public class Game {
     return output;
   }
 
+  //Starting off fresh :)
   private Player spawnPlayer() {
       int[] playerSpawn = createSpawnPlayer();
       int row = playerSpawn[0];
@@ -178,7 +180,7 @@ public class Game {
       return player;
   }
 
-  //Already have a player with stats
+  //Already have a Player with stats
   private Player spawnPlayer(Player player) {
     int[] playerSpawn = createSpawnPlayer();
     int row = playerSpawn[0];
@@ -190,6 +192,7 @@ public class Game {
     return player;
   }
 
+  //Spawns enemies
   private void spawnEnemies() {
     for (int i = 0; i < amtEnemies; ++i) {
       int[] enemySpawn = createSpawnEnemy();
@@ -197,10 +200,11 @@ public class Game {
       int col = enemySpawn[1];
       Enemy e = new Enemy(row, col);
       enemies.add(e);
-      floor.getBlock(row, col).spawnEnemyHere(enemies.get(i));
+      floor.getBlock(row, col).spawnEnemyHere(enemies.get(i)); //Place the Enemy
     }
   }
 
+  //Returns whether or not there is an Enemy nearby (can go over Tunnels too)
   public boolean enemyNearby() {
     return
     (floor.getBlock(player.getRow() -1, player.getCol()).getPokemonHere() != null) ||      //top
@@ -209,6 +213,7 @@ public class Game {
     (floor.getBlock(player.getRow(), player.getCol() - 1).getPokemonHere() != null);        //left
   }
 
+  //Kill off the enemies that have nonpositive HP
   public void killTheDead() {
     for (int i = 0; i < enemies.size(); ++i) {
       if (enemies.get(i).getHP() <= 0){
