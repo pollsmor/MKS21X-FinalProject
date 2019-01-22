@@ -4,9 +4,26 @@
 
 **Period 5**
 
+
+**Instructions on how to use**
+0. Open up terminal and clone this repo
+1. Run "bash run.sh"
+2. Resize your terminal such that it has a length of at least 45 px (top bottom) and width of at least 100px (left right)
+3. In the terminal, type "java -cp "lanterna.jar:." Driver " followed by a name that is no longer than 25 characters long which can be optionally followed by a seed
+4. Using the arrow keys to move around, control the green Player to find the blinking blue 'O', your objective while traversing a map full of Rooms and Tunnels with Enemies that you must survive through.
+5. Upon coming into a 1-Block radius of an Enemy, you are given the option to attack (j) or use an Item (k)
+  - By selecting j, use the arrow keys to select an enemy to target 
+  - By selecting k, select a number from 1-4 to select an Item to use 
+7. Upon stepping on the Objective, you ascend to the next level and continue your adventure in the Pokemon Terminal Dungeon
+8. If you have been injured, walk it off before your next battle! You have magical healing powers and exercise if good for you anyways!
+9. If you die, you can respawn! Upon being prompted if you would like to respawn after you die, press "y" to respawn and "n" to quit the game.
+10. If you want to quit early, press "Esc" to leave the game.
+
+**Enjoy Pokemon Terminal Dungeon!!!**
+
+
 **Development Log**
 
-***--------------------Stage 1--------------------***
 
 **Thursday 1/3/19**
 
@@ -62,9 +79,6 @@ Rachel:
     - Added constructor given current floors, terminal width, and terminal length
   - Game.java
     - Began floor counting code
-
-
-***--------------------Stage 2--------------------***
 
 **Monday 1/7/19**
 
@@ -253,8 +267,6 @@ Rachel:
   - Spaced out the Rooms more so it isn't as crammed
   - Changed the min and max dimensions of Rooms
 
-***--------------------Stage 2--------------------***
-
 **Friday 1/18/19**
 
 Kevin: 
@@ -274,29 +286,49 @@ Rachel:
   - After Kevin added the check for minimum size of terminal, Driver.java no longer runs, saying my terminal is always too small even though it clearly isnt... we'll figure it out soon :P
   
  Kevin: 
- - Tightened terminal size requirements to give myself breathing room
- - Enemies now spawn
- - Enemies only move when you do
- - Reprint the map whenever you move since it wouldn't make sense for it to keep refreshing when nothing on screen has changed
- - Limited the movement of the character to ~once per 0.5 seconds to prevent easily dodging enemies + for performance reasons
- - Further tied the rest of the program's coordinate system to Driver/Lanterna's
+  - Tightened terminal size requirements to give myself breathing room
+  - Enemies now spawn
+  - Enemies only move when you do
+  - Reprint the map whenever you move since it wouldn't make sense for it to keep refreshing when nothing on screen has changed
+  - Limited the movement of the character to ~once per 0.5 seconds to prevent easily dodging enemies + for performance reasons
+  - Further tied the rest of the program's coordinate system to Driver/Lanterna's
   
 **Sunday 1/20/19**
 
 Kevin: 
-- Undoed merge to continue working on the program
-- Attack mechanism, freezes you and forces you to make a choice (between attack and using an item, except item isn't implemented yet)
-- Allow enemies to attack the player as well
-- Invincibility frames, tied HP with respawn/death mechanism
-- Print directions and messages on screen telling the player about the above things
+  - Undoed merge to continue working on the program
+  - Attack mechanism, freezes you and forces you to make a choice (between attack and using an item, except item isn't implemented yet)
+  - Allow enemies to attack the player as well
+  - Invincibility frames, tied HP with respawn/death mechanism
+  - Print directions and messages on screen telling the player about the above things
+
+Rachel:
+  - Worked on the move commands by making them return booleans
+  - Added canMove to Blocks
+  - Worked on creating a new Floor when Objective is reached
+    - For now it only reloads the same Floor
+  - Running into errors with adjacent Tunnels
+  - Couldn't test much... lanterna doesn't work on Windows :/
 
 
 **Monday 1/21/19**
 
 Kevin: 
-- Remove old messages to not clog the screen and look weird
-- Refreshing counters that can decrease in value and thus take up less digits (putString leaves the digit on screen, so I get rid of it)
-- Final comments
-- Kill enemies that have reached 0 HP or less
-- Polished up the map
-- Let the player use potions, which heal for various amounts, count down their amount when used. However, there is no status message to say if they've been sucessfully used or not. Will just have to look at the HP counter.
+  - Remove old messages to not clog the screen and look weird
+  - Refreshing counters that can decrease in value and thus take up less digits (putString leaves the digit on screen, so I get rid of it)
+  - Final comments
+  - Kill enemies that have reached 0 HP or less
+  - Polished up the map
+  - Let the player use potions, which heal for various amounts, count down their amount when used. However, there is no status message to say if they've been sucessfully used or not. Will just have to look at the HP counter.
+
+Rachel: 
+  - Successfully fixed adjacent Tunnels issue and utilizing canMove and the Move commands
+  - Successfully fixed issue of reloading the same Floor: now creates a new Game with a new Floor and relocates the Player
+  - Successfully fixed issue of Pokemon deleting the data of the Blocks it steps on
+  - Successfully made dead Enemies disappear: no more walking dead corpses :D
+  - Made the run.sh file: less typing
+  - Successfully incorporated passive healing
+  - Got rid of a bunch of old comments and added some new ones to remove clutter and improve ability to read
+  - FINALLY DONE!!! Goodnight :D
+  
+**Thank you for playing Pokemon Terminal Dungeon, not your typical Pokemon Game. :)**
