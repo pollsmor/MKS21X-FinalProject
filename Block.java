@@ -26,7 +26,7 @@ public class Block implements Explorable{
     if (newType.equals("Tunnel")){
       data = ' ';
     }
-    if (newType.equals("Opening")){
+    if (newType.equals("Objective")){
       data = ' ';
     }
     type = newType;
@@ -39,13 +39,13 @@ public class Block implements Explorable{
     ycor = y;
     color = "gray";
     if (dir == 0){ //LR
-      data = '=';
+      data = ' ';
     }
     if (dir == 1){ //UD
-      data = '|';
+      data = ' ';
     }
     if (dir == 2){ //EndBlock of tunnel or intersection of Tunnels
-      data = '#';
+      data = ' ';
     }
     direction = dir;
     type = "Tunnel";
@@ -102,7 +102,7 @@ public class Block implements Explorable{
   public String setType(String newType){
     String oldType = type;
     type = newType;
-    if (type == "Opening"){
+    if (type == "Objective"){
       data = '0';
     }
     return oldType;

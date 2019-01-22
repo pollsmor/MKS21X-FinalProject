@@ -233,8 +233,10 @@ public class Floor{
   */
   //toString makes a coordinate system that is offset from the one the blocksHere array uses.
   public String toStringClean() {
+    String cyan = "\u001B[36m";
     String bgWhite = "\u001b[47m";
     String resetColor = "\u001b[0m";
+    String blink = "\u001B[5m";
     String output = "";
 
     for (int i = 0; i < length; ++i) {
@@ -248,6 +250,9 @@ public class Floor{
 
           else if (blocksHere[i][j].getType().equals("Tunnel"))
             output += blocksHere[i][j].getData();
+
+          else if (blocksHere[i][j].getType().equals("Objective"))
+            output += (cyan + blink + blocksHere[i][j].getData() + resetColor);
 
           else
             output += (bgWhite + blocksHere[i][j].getData() + resetColor);
