@@ -25,7 +25,7 @@ public class Game {
     floor.createRooms(seed);
 
     name = inputName;
-    spawnPlayer();
+    player = spawnPlayer();
     int amtEnemies = rows * cols / 450;
     enemies = new Enemy[amtEnemies];
     spawnEnemies();
@@ -43,7 +43,25 @@ public class Game {
     floor.createRooms(seed);
 
     name = inputName;
-    spawnPlayer();
+    player = spawnPlayer();
+    int amtEnemies = rows * cols / 450;
+    enemies = new Enemy[amtEnemies];
+    spawnEnemies();
+  }
+
+  //Takes a Player: useful if the player has leveled up or has specific stats that aren't to be lost
+  public Game(String inputName, int inputSeed, int rows, int cols, int newLevel, Player player) {
+    termRows = rows;
+    termCols = cols;
+    level = newLevel;
+    floor = new Floor(level, cols, rows * 3/4);
+    //missions = new Mission(); //ArrayList to allow easy adding/removing
+    seed = inputSeed;
+    isRandomSeed = false;
+    floor.createRooms(seed);
+
+    name = inputName;
+    player = spawnPlayer(player);
     int amtEnemies = rows * cols / 450;
     enemies = new Enemy[amtEnemies];
     spawnEnemies();
@@ -111,8 +129,9 @@ public class Game {
     while (!spawnFound) {
       row = Math.abs(randgenRow.nextInt() % (termRows * 3/4));
       col = Math.abs(randgenCol.nextInt() % termCols);
-      if (!isWall(row, col))
+      if (!isWall(row, col) && getFloor().getBlocksHere()[row][col].getPokemonHere() == null){
         spawnFound = true;
+      }
     }
 
     int[] output = new int[2];
@@ -149,11 +168,21 @@ public class Game {
     return output;
   }
 
-  private void spawnPlayer() {
+  private Player spawnPlayer() {
       int[] playerSpawn = createSpawnPlayer();
       int row = playerSpawn[0];
       int col = playerSpawn[1];
       player = new Player(name, row, col);
+      return player;
+  }
+
+  //Already have a player with stats
+  private Player spawnPlayer(Player player) {
+    int[] playerSpawn = createSpawnPlayer();
+    int row = playerSpawn[0];
+    int col = playerSpawn[1];
+    player.teleport(row, col, this);
+    return player;
   }
 
   private void spawnEnemies() {
