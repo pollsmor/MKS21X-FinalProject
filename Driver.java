@@ -141,6 +141,10 @@ public class Driver {
       if (game.getPlayer().getHP() <= 0)
         alive = false;
 
+      //If I heal I don't want to go above the HP cap
+      if (game.getPlayer().getHP() > game.getPlayer().getMaxHP())
+        game.getPlayer().maxRegen();
+
       if (!alive) {
         putString(rows, 0, terminal,"You died. Would you like to respawn? (y/n)");
         while (!alive) {
@@ -288,16 +292,36 @@ public class Driver {
             }
 
             if (key3.getCharacter() == 'k') {
-              putString(rows * 3/4 + 5, 1, terminal, "Choose an enemy to attack with the arrow keys.");
-              putString(rows * 3/4 + 6, 1, terminal, "                        ");
-              putString(rows * 3/4 + 7, 1, terminal, "                        ");
-              attackMode = true;
-              while (attackMode) {
-                Key key4 = terminal.readInput();
-                if (key4 != null) {
-                  if (key4.getKind() == Key.Kind.Escape) {
+              putString(rows * 3/4 + 5, 1, terminal, "Pick an item.");
+              putString(rows * 3/4 + 6, 1, terminal, "[" + game.getPlayer().getItem("potion").getAmount() + "]" + "Potion (20HP): press 1");
+              putString(rows * 3/4 + 7, 1, terminal, "[" + game.getPlayer().getItem("superpotion").getAmount() + "]" + "Super Potion (60HP): press 2");
+              putString(rows * 3/4 + 8, 1, terminal, "[" + game.getPlayer().getItem("hyperpotion").getAmount() + "]" + "Hyper Potion (120HP): press 3");
+              putString(rows * 3/4 + 9, 1, terminal, "[" + game.getPlayer().getItem("maxpotion").getAmount() + "]" + "Max Potion (MAX HP): press 4");
+              itemMode = true;
+              while (itemMode) {
+                Key key5 = terminal.readInput();
+                if (key5 != null) {
+                  if (key5.getKind() == Key.Kind.Escape) {
                     terminal.exitPrivateMode();
                     System.exit(0);
+                  }
+
+                  if (key5.getCharacter() == '1') {
+                    if (game.getPlayer().getItem("potion").getAmount() > 0) {
+
+                    }
+                  }
+
+                  if (key5.getCharacter() == '2') {
+
+                  }
+
+                  if (key5.getCharacter() == '3') {
+
+                  }
+
+                  if (key5.getCharacter() == '4') {
+
                   }
                 }
               }
