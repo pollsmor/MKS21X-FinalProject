@@ -53,14 +53,7 @@ public class Tunnel implements Explorable{
     if (direction == 0){
       blocksHere = new Block[1][length];
       for (int i = 0; i < length; i++){
-        //Check if Block before was a Room Block, and if not then create a new Tunnel Block
-        //if (floor.getBlocksHere()[startXcor+i][startYcor].getType()!="Room"){
-          blocksHere[0][i] = new Block(startXcor+i, startYcor, "Tunnel");
-        //}
-        //Otherwise add the Block already there to blocksHere
-        //else{
-          //blocksHere[0][i] = floor.getBlocksHere()[startYcor][startXcor+i];
-        //}
+        blocksHere[0][i] = new Block(startXcor+i, startYcor, "Tunnel");
       }
     }
     //If top-bottom, ycor changes
@@ -68,14 +61,7 @@ public class Tunnel implements Explorable{
     if (direction == 1){
       blocksHere = new Block[length][1];
       for (int i = 0; i < length; i++){
-        //Check if Block before was a Room Block, and if not then create a new Tunnel Block
-        //if (floor.getBlocksHere()[startYcor][startXcor+i].getType()!="Room"){
-          blocksHere[i][0] = new Block(startXcor+i, startYcor, "Tunnel");
-        //}
-        //Otherwise add the Block already there to blocksHere
-        //else{
-        //  blocksHere[i][0] = floor.getBlocksHere()[startYcor+i][startXcor];
-        //}
+        blocksHere[i][0] = new Block(startXcor, startYcor+i, "Tunnel");
       }
     }
   }
@@ -115,41 +101,14 @@ public class Tunnel implements Explorable{
     if (direction == 0||length == 1){//length 1 Tunnel may have either direction
       blocksHere = new Block[1][length];
       for (int i = 0; i < length; i++){
-        //Check if Block before was a Room Block, and if not then create a new Tunnel Block
-        //System.out.println(floor.getBlocksHere().toString());
-        //if (floor.getBlocksHere()[ycor][xcor+i].getType()!="Room"&&floor.getBlocksHere()[ycor][xcor+i].getType()!="Opening"){
-          blocksHere[0][i] = new Block(xcor+i, ycor, "Tunnel");
-          //System.out.println("blocksHere[0]["+i+"]: ");
-          //System.out.println("Line 124, Length "+length);
-          //System.out.println(blocksHere[0][i].printPoint());
-        //}
-        //Otherwise add the Block already there to blocksHere
-        //else{
-        //  blocksHere[0][i] = new Block(xcor+i, ycor,floor.getBlocksHere()[ycor][xcor+i].getType());
-          //System.out.println("blocksHere[0]["+i+"]: ");
-          //System.out.println("Line 131, Length "+length);
-          //System.out.println(blocksHere[0][i].printPoint());//floor.getBlocksHere()[ycor][xcor+i].printPoint());
-        //}
+        blocksHere[0][i] = new Block(xcor+i, ycor, "Tunnel");
       }
     }
     //If top-bottom, ycor changes
     else{
       blocksHere = new Block[length][1];
       for (int j = 0; j < length; j++){
-        //Check if Block before was a Room Block, and if not then create a new Tunnel Block
-        //if (floor.getBlocksHere()[ycor+j][xcor].getType()!="Room"&&floor.getBlocksHere()[ycor+j][xcor].getType()!="Opening"){
-          blocksHere[j][0] = new Block(xcor, ycor+j, "Tunnel");
-          //System.out.println("blocksHere["+j+"][0]: ");
-          //System.out.println("Line 144, Length "+length);
-          //System.out.println(blocksHere[j][0].printPoint());
-        //}
-        //Otherwise add the Block already there to blocksHere
-        //else{
-          //blocksHere[j][0] = new Block (xcor, ycor+j, floor.getBlocksHere()[ycor+j][xcor].getType());
-          //System.out.println("blocksHere["+j+"][0]: ");
-          //System.out.println("Line 151, Length "+length);
-          //System.out.println(blocksHere[j][0].printPoint());//floor.getBlocksHere()[ycor+j][xcor].printPoint());
-        //}
+        blocksHere[j][0] = new Block(xcor, ycor+j, "Tunnel");
       }
     }
   }
