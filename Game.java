@@ -1,9 +1,11 @@
 import java.util.Random;
+import java.util.ArrayList;
 
 public class Game {
   private String name;
   private Player player;
-  private Enemy[] enemies;
+  private ArrayList<Enemy> enemies;
+  private int amtEnemies;
   private int level;
   private Floor floor;
   private Mission[] missions;
@@ -26,8 +28,8 @@ public class Game {
 
     name = inputName;
     spawnPlayer();
-    int amtEnemies = rows * cols / 450; //decent algorithm for calculating the amount of enemies on screen, based on Terminal size
-    enemies = new Enemy[amtEnemies];
+    amtEnemies = rows * cols / 450; //decent algorithm for calculating the amount of enemies on screen, based on Terminal size
+    enemies = new ArrayList<Enemy>(amtEnemies);
     spawnEnemies();
   }
 
@@ -44,8 +46,8 @@ public class Game {
 
     name = inputName;
     player = spawnPlayer();
-    int amtEnemies = rows * cols / 450;
-    enemies = new Enemy[amtEnemies];
+    amtEnemies = rows * cols / 450;
+    enemies = new ArrayList<Enemy>(amtEnemies);
     spawnEnemies();
   }
 
@@ -62,8 +64,8 @@ public class Game {
 
     name = inputName;
     player = spawnPlayer(oldPlayer);
-    int amtEnemies = rows * cols / 450;
-    enemies = new Enemy[amtEnemies];
+    amtEnemies = rows * cols / 450;
+    enemies = new ArrayList<Enemy>(amtEnemies);
     spawnEnemies();
   }
 
@@ -71,12 +73,12 @@ public class Game {
     return player;
   }
 
-  public Enemy[] getEnemies() {
+  public ArrayList<Enemy> getEnemies() {
     return enemies;
   }
 
   public Enemy getEnemy(int num) {
-    return enemies[num];
+    return enemies.get(num);
   }
 
   public int getLevel() {
@@ -189,12 +191,13 @@ public class Game {
   }
 
   private void spawnEnemies() {
-    for (int i = 0; i < enemies.length; ++i) {
+    for (int i = 0; i < amtEnemies; ++i) {
       int[] enemySpawn = createSpawnEnemy();
       int row = enemySpawn[0];
       int col = enemySpawn[1];
-      enemies[i] = new Enemy(row, col);
-      floor.getBlock(row, col).spawnEnemyHere(enemies[i]);
+      Enemy e = new Enemy(row, col);
+      enemies.add(e);
+      floor.getBlock(row, col).spawnEnemyHere(enemies.get(i));
     }
   }
 
@@ -207,9 +210,12 @@ public class Game {
   }
 
   public void killTheDead() {
-    for (int i = 0; i < enemies.length; ++i) {
-      if (enemies[i].getHP() <= 0)
-        floor.getBlock(enemies[i].getRow(), enemies[i].getCol()).setPokemonHere(null);
+    for (int i = 0; i < enemies.size(); ++i) {
+      if (enemies.get(i).getHP() <= 0){
+        floor.getBlock(enemies.get(i).getRow(), enemies.get(i).getCol()).setPokemonHere(null);
+        enemies.remove(i); //Remove the dead enemy from ArrayList
+        i--;//Reduce the index b/c we lost an enemy
+      }
     }
   }
 }
