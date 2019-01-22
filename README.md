@@ -282,3 +282,21 @@ Rachel:
  - Further tied the rest of the program's coordinate system to Driver/Lanterna's
   
 **Sunday 1/20/19**
+
+Kevin: 
+- Undoed merge to continue working on the program
+- Attack mechanism, freezes you and forces you to make a choice (between attack and using an item, except item isn't implemented yet)
+- Allow enemies to attack the player as well
+- Invincibility frames, tied HP with respawn/death mechanism
+- Print directions and messages on screen telling the player about the above things
+
+
+**Monday 1/21/19**
+
+Kevin: 
+- Remove old messages to not clog the screen and look weird
+- Refreshing counters that can decrease in value and thus take up less digits (putString leaves the digit on screen, so I get rid of it)
+- Final comments
+- Kill enemies that have reached 0 HP or less
+- Polished up the map
+- Let the player use potions, which heal for various amounts, count down their amount when used. However, there is no status message to say if they've been sucessfully used or not. Will just have to look at the HP counter.
