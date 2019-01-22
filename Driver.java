@@ -120,6 +120,7 @@ public class Driver {
     int col = game.getPlayer().getCol();
 
     while (running) {
+      //Player code
       terminal.moveCursor(col, row); //again, Lanterna follows a c, r coordinate system
       terminal.applyForegroundColor(Terminal.Color.GREEN);
       terminal.putCharacter('\u04dd'); //player icon, just randomly got this off the web
@@ -141,9 +142,9 @@ public class Driver {
       if (game.getPlayer().getHP() <= 0)
         alive = false;
 
-      //If I heal I don't want to go above the HP cap
-      if (game.getPlayer().getHP() > game.getPlayer().getMaxHP())
-        game.getPlayer().maxRegen();
+      //Below heals the player completely
+      //if (game.getPlayer().getHP() < game.getPlayer().getMaxHP())
+      //  game.getPlayer().maxRegen();
 
       if (!alive) {
         putString(rows, 0, terminal,"You died. Would you like to respawn? (y/n)");
@@ -176,7 +177,7 @@ public class Driver {
         putString(0, 0, terminal, game.getFloor().toStringClean()); //refresh the map since this happens before the typical refresh later on
         putString(rows * 3/4 + 5, 1, terminal, "An enemy is nearby. What is your move?                                   ");
         putString(rows * 3/4 + 6, 1, terminal, "[j] Attack                        ");
-        putString(rows * 3/4 + 7, 1, terminal, "[k] Items                         ");
+        putString(rows * 3/4 + 7, 1, terminal, "[k] Items(unavailable)            ");
         putString(rows * 3/4 + 8, 1, terminal, "                                  ");
         putString(rows * 3/4 + 9, 1, terminal, "                                  ");
         while (game.enemyNearby() && invincibility < 0) { //
@@ -198,7 +199,7 @@ public class Driver {
               while (attackMode) {
                 Key key4 = terminal.readInput();
                 if (key4 != null) {
-                  if (key4.getKind() == Key.Kind.Escape) {
+                  if (key4.getKind() == Key.Kind.Escape) { //Allows the user to quit
                     terminal.exitPrivateMode();
                     System.exit(0);
                   }
@@ -210,10 +211,10 @@ public class Driver {
                       putString(rows * 3/4 + 6, 1, terminal, "You dealt " + game.getPlayer().getAttack() + " damage!");
                       putString(rows * 3/4 + 7, 1, terminal, "The enemy dealt " + game.getBlock(row - 1, col).getPokemonHere().getAttack() + " damage! ");
                       if (game.getBlock(row - 1, col).getPokemonHere()!= null){
-                        if (game.getBlock(row - 1, col).getPokemonHere().getHP()> 0){
+                        if (game.getBlock(row - 1, col).getPokemonHere().getHP()> 0){ //If Enemy not dead
                           putString(rows * 3/4 + 8, 1, terminal, "The enemy has " + game.getBlock(row - 1, col).getPokemonHere().getHP() + "/" + game.getBlock(row - 1, col).getPokemonHere().getMaxHP() + "HP!");
                         }
-                        else{
+                        else{ //If Enemy dead
                           putString(rows * 3/4 + 8, 1, terminal, "Enemy killed!");
                           putString(row - 1, col, terminal, game.getBlock(row - 1, col).getOldData()+"");
                         }
@@ -447,6 +448,7 @@ public class Driver {
             --col;
             moved = true;
             limitMovement = 0; //this counts up
+            p.increaseStepsTaken(); //Builds up for healPassive()
           }
         }
 
@@ -459,6 +461,7 @@ public class Driver {
             ++col;
             moved = true;
             limitMovement = 0;
+            p.increaseStepsTaken(); //Builds up for healPassive()
           }
         }
 
@@ -472,6 +475,7 @@ public class Driver {
               --row;
               moved = true;
               limitMovement = 0;
+              p.increaseStepsTaken(); //Builds up for healPassive()
             }
         }
 
@@ -484,12 +488,9 @@ public class Driver {
             ++row;
             moved = true;
             limitMovement = 0;
+            p.increaseStepsTaken(); //Builds up for healPassive()
           }
         }
-        //System.out.println("X: "+col+" Y: "+row);
-        //System.out.println("Block type: "+game.getFloor().getBlocksHere()[row][col].getType());
-        //System.out.println("Can move up, down, left, moveRight: "+ game.getFloor().getBlocksHere()[row][col].canMove('u')+ game.getFloor().getBlocksHere()[row][col].canMove('d')+ game.getFloor().getBlocksHere()[row][col].canMove('l')+ game.getFloor().getBlocksHere()[row][col].canMove('r'));
-
         //Check if the current Block after moving is an objective Block
         if (game.isObjective(row, col)) { //if true, make a new Game with a new Floor
           game = new Game(name, rnd.nextInt(), rows, cols, ++level,p);
@@ -498,6 +499,7 @@ public class Driver {
           col = p.getCol();
           terminal.moveCursor(col, row);
         }
+        p.healPassive(); //Runs everytime you take a step, increases health by 1 after 15 steps and then resets
       }
 
     //Do even when no key is pressed------------------------------------------------------------------------------------
