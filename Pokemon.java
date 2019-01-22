@@ -37,10 +37,11 @@ public abstract class Pokemon {
     }
   }
 
-  public void increaseStepsTaken(){
+  public void increaseStepsTaken(){ //For healPassive purposes
     stepsTaken++;
   }
 
+  //Get with the getters... yay :P
   public String getName() {
     return name;
   }
@@ -83,6 +84,8 @@ public abstract class Pokemon {
     return col;
   }
 
+
+//------------------------------------------Time to get a Move on----------------------------------------//
   public boolean moveUp(Game game) {
     if (!game.isWall(row - 1, col)) { //If the next Block isn't a Wall
       if (game.isTunnel(row, col)) { //If the current Block is a Tunnel
