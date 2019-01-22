@@ -50,7 +50,7 @@ public class Game {
   }
 
   //Takes a Player: useful if the player has leveled up or has specific stats that aren't to be lost
-  public Game(String inputName, int inputSeed, int rows, int cols, int newLevel, Player player) {
+  public Game(String inputName, int inputSeed, int rows, int cols, int newLevel, Player oldPlayer) {
     termRows = rows;
     termCols = cols;
     level = newLevel;
@@ -61,7 +61,7 @@ public class Game {
     floor.createRooms(seed);
 
     name = inputName;
-    player = spawnPlayer(player);
+    player = spawnPlayer(oldPlayer);
     int amtEnemies = rows * cols / 450;
     enemies = new Enemy[amtEnemies];
     spawnEnemies();
@@ -181,7 +181,10 @@ public class Game {
     int[] playerSpawn = createSpawnPlayer();
     int row = playerSpawn[0];
     int col = playerSpawn[1];
-    player.teleport(row, col, this);
+    getFloor().getBlocksHere()[player.getRow()][player.getCol()].setPokemonHere(null);
+    player.setRow(row);
+    player.setCol(col);
+    getFloor().getBlocksHere()[player.getRow()][player.getCol()].setPokemonHere(player);
     return player;
   }
 
