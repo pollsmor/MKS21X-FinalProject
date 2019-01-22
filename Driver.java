@@ -313,6 +313,7 @@ public class Driver {
                       game.getPlayer().setHP(20);
                       itemMode = false;
                       invincibility = 10000;
+                      game.getPlayer().getItem("potion").lowerQuantity();
                     }
                   }
 
@@ -321,6 +322,7 @@ public class Driver {
                       game.getPlayer().setHP(60);
                       itemMode = false;
                       invincibility = 10000;
+                      game.getPlayer().getItem("superpotion").lowerQuantity();
                     }
                   }
 
@@ -329,6 +331,7 @@ public class Driver {
                       game.getPlayer().setHP(120);
                       itemMode = false;
                       invincibility = 10000;
+                      game.getPlayer().getItem("hyperpotion").lowerQuantity();
                     }
                   }
 
@@ -338,6 +341,7 @@ public class Driver {
                       game.getPlayer().maxRegen();
                       itemMode = false;
                       invincibility = 10000;
+                      game.getPlayer().getItem("maxpotion").lowerQuantity();
                     }
                   }
 
