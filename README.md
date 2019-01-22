@@ -10,16 +10,16 @@
 0. Open up terminal and clone this repo
 1. Run "bash run.sh"
 2. Resize your terminal such that it has a length of at least 45 px (top bottom) and width of at least 100px (left right).
-  - Note: Do NOT resize your terminal while the program is running
+    - Note: Do NOT resize your terminal while the program is running
 3. In the terminal, type "java -cp "lanterna.jar:." Driver " followed by a name that is no longer than 25 characters long which can be optionally followed by a seed
 4. Using the arrow keys to move around, control the green Player to find the blinking blue 'O', your objective while traversing a map full of Rooms and Tunnels with Enemies that you must survive through.
 5. Upon coming into a 1-Block radius of an Enemy, you are given the option to attack (j) or use an Item (k)
-  - By selecting j, use the arrow keys to select an enemy to target 
-  - By selecting k, select a number from 1-4 to select an Item to use 
-7. Upon stepping on the Objective, you ascend to the next level and continue your adventure in the Pokemon Terminal Dungeon
-8. If you have been injured, walk it off before your next battle! You have magical healing powers and exercise if good for you anyways!
-9. If you die, you can respawn! Upon being prompted if you would like to respawn after you die, press "y" to respawn and "n" to quit the game.
-10. If you want to quit early, press "Esc" to leave the game.
+    - By selecting j, use the arrow keys to select an enemy to target 
+   - By selecting k, select a number from 1-4 to select an Item to use 
+6. Upon stepping on the Objective, you ascend to the next level and continue your adventure in the Pokemon Terminal Dungeon
+7. If you have been injured, walk it off before your next battle! You have magical healing powers and exercise if good for you anyways!
+8. If you die, you can respawn! Upon being prompted if you would like to respawn after you die, press "y" to respawn and "n" to quit the game.
+9. If you want to quit early, press "Esc" to leave the game.
 
 **Enjoy Pokemon Terminal Dungeon!!!**
 
