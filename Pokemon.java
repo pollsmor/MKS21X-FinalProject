@@ -144,6 +144,18 @@ public abstract class Pokemon {
     }
   }
 
+  public int setRow(int newRow){
+    int x = row;
+    row = newRow;
+    return x;
+  }
+
+  public int setCol(int newCol){
+    int x = col;
+    col = newCol;
+    return x;
+  }
+
   public void basicAttack(Pokemon pokemon, int damage) {
     pokemon.setHP(-1 * damage);
   }
