@@ -166,6 +166,8 @@ public class Driver {
           }
         }
       }
+
+      game.killTheDead();
     // Combat system-----------------------------------------------------------------------------------------------------
       if (game.enemyNearby() && invincibility < 0) {
         putString(0, 0, terminal, game.getFloor().toStringClean()); //refresh the map since this happens before the typical refresh later on
