@@ -166,13 +166,13 @@ public class Block implements Explorable{
     type = "Objective";
   }
 
-  /*
-  public void spawnItem(){
-    Item newItem = new Item();
+
+  public void spawnItem(String name){
+    Item newItem = new Item(name);
     data = 'I';
     itemHere = newItem;
   }
-  */
+
   public void spawnPlayerHere(Player player){
     data = '\u04dd';
     pokemonHere = player;
