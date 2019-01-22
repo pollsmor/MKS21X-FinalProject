@@ -270,6 +270,7 @@ public class Floor{
   */
   public void addTunnel(Tunnel t, int direction){
     Block b;
+    boolean up, down, left, right;
     //System.out.println("Add Tunnel in progress");
     for(int i = 0; i < t.getBlocksHere().length; i++){ //Horizontal
       for(int j = 0; j < t.getBlocksHere()[i].length;j++){
@@ -278,7 +279,16 @@ public class Floor{
         if (blocksHere[b.getY()][b.getX()].getType() != "Room"){ //Don't make it a Tunnel Block if it was a Room
           // blocksHere[b.getY()][b.getX()] = new Block(b.getX(), b.getY(), "Tunnel");
           if (blocksHere[b.getY()][b.getX()].getType() == "Tunnel" && blocksHere[b.getY()][b.getX()].getDirection() != direction){
+            //Save the old canMoves
+            up = blocksHere[b.getY()][b.getX()].canMove('u');
+            down = blocksHere[b.getY()][b.getX()].canMove('d');
+            left = blocksHere[b.getY()][b.getX()].canMove('l');
+            right = blocksHere[b.getY()][b.getX()].canMove('r');
             blocksHere[b.getY()][b.getX()] = new Block(b.getX(), b.getY(), 2);
+            blocksHere[b.getY()][b.getX()].setCanMove('u', up);
+            blocksHere[b.getY()][b.getX()].setCanMove('d', down);
+            blocksHere[b.getY()][b.getX()].setCanMove('l', left);
+            blocksHere[b.getY()][b.getX()].setCanMove('r', right);
           }
           else{
             blocksHere[b.getY()][b.getX()] = new Block(b.getX(), b.getY(), direction);
