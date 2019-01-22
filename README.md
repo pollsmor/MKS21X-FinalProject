@@ -8,7 +8,8 @@
 **Instructions on how to use**
 0. Open up terminal and clone this repo
 1. Run "bash run.sh"
-2. Resize your terminal such that it has a length of at least 45 px (top bottom) and width of at least 100px (left right)
+2. Resize your terminal such that it has a length of at least 45 px (top bottom) and width of at least 100px (left right).
+  - Note: Do NOT resize your terminal while the program is running
 3. In the terminal, type "java -cp "lanterna.jar:." Driver " followed by a name that is no longer than 25 characters long which can be optionally followed by a seed
 4. Using the arrow keys to move around, control the green Player to find the blinking blue 'O', your objective while traversing a map full of Rooms and Tunnels with Enemies that you must survive through.
 5. Upon coming into a 1-Block radius of an Enemy, you are given the option to attack (j) or use an Item (k)
