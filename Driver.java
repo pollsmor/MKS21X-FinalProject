@@ -143,8 +143,8 @@ public class Driver {
         alive = false;
 
       //Below heals the player completely
-      //if (game.getPlayer().getHP() < game.getPlayer().getMaxHP())
-      //  game.getPlayer().maxRegen();
+      if (game.getPlayer().getHP() > game.getPlayer().getMaxHP())
+        game.getPlayer().maxRegen();
 
       if (!alive) {
         putString(rows, 0, terminal,"You died. Would you like to respawn? (y/n)");
