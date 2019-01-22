@@ -37,12 +37,9 @@ public class Room implements Explorable{
         if(blocksHere[y][x].getX()==startXcor || blocksHere[y][x].getY()==startYcor
         || blocksHere[y][x].getX()==endXcor || blocksHere[y][x].getY()==endYcor){
           borderBlocks.add(blocksHere[y][x]);
-          //indexBorderBlocks++;
         }
       }
     }
-    //System.out.println("Border blocks: "+toString(borderBlocks));
-    //System.out.println("startXcor: "+startXcor+", startYcor: "+startYcor+", endXcor: "+endXcor+", endYcor: "+endYcor);
   }
 
   //public Room(int startXcor, int startYcor, int endXcor, int endYcor
@@ -72,15 +69,9 @@ public class Room implements Explorable{
         if (blocksHere[y][x].getX()==startXcor || blocksHere[y][x].getY()==startYcor
         || blocksHere[y][x].getX()==endXcor || blocksHere[y][x].getY()==endYcor){
           borderBlocks.add(this.blocksHere[y][x]);
-          //System.out.println("FloorBlock here"+this.blocksHere[y][x].printPoint());
-          //System.out.println("Block here: "+ blocksHere[y][x].printPoint());
-          //System.out.println("Width (X): "+width);
-          //System.out.println("Length (Y): "+length);
         }
       }
     }
-    //System.out.println("Border blocks: "+toString(borderBlocks));
-    //System.out.println("startXcor: "+startXcor+", startYcor: "+startYcor+", endXcor: "+endXcor+", endYcor: "+endYcor);
   }
 
   //public boolean tooClose(int startXcor, int startYcor, int endXcor, int endYcor)
@@ -158,10 +149,6 @@ public class Room implements Explorable{
     //tests to see if it crosses the right of original
     boolean case4 = (startYcor <= this.endYcor + 4) && (endYcor>= this.startYcor) && (startXcor<=this.endXcor) && (endXcor >= this.startXcor);
     //tests to see if it crosses the bottom of original
-    /*System.out.println("Case 1| Overlap left original: "+case1);
-    System.out.println("Case 2| Overlap top original: "+case2);
-    System.out.println("Case 3| Overlap right original: "+case3);
-    System.out.println("Case 4| Overlap bottom original: "+case4);*/
 
     return (case1||case2||case3||case4);
   }
@@ -216,19 +203,11 @@ y   8        R R R R
     Random rnd = new Random(seed);
     ArrayList<Block> pThis = new ArrayList<Block>(this.getBlocksHere().length); //ArrayList of possible borderBlocks to choose one end of the Tunnel
     ArrayList<Block> pTCO = new ArrayList<Block>(theChosenOne.getBlocksHere().length); //ArrayList of possible borderBlocks to choose the other end of the Tunnel
+
     //Getting a random borderBlock of this
-    /*System.out.println("Above, left, below, right"+above+left+below+right);
-    System.out.println("This.startYcor: "+this.getStartYcor());
-    System.out.println("This.startXcor: "+this.getStartXcor());
-    System.out.println("This.endYcor: "+this.getEndYcor());
-    System.out.println("This.endXcor: "+this.getEndXcor());
-    System.out.println("This.blocksHere.length: "+this.blocksHere.length);
-    System.out.println("This.blocksHere[0].length: "+this.blocksHere[0].length);*/
     for (int y = 0; y < this.blocksHere.length; y++){
       for (int x = 0; x < this.blocksHere[0].length; x++){
         //If is below, all border blocks on the bottom have a chance of being picked
-        //System.out.println("X,Y: "+x+", "+y);
-        //System.out.println("blocksHere[x][y]: "+blocksHere[x][y].getX()+", "+blocksHere[x][y].getY());
         if (below && (this.blocksHere[y][x].getY() == this.getEndYcor())){
           pThis.add(this.blocksHere[y][x]);
         }
@@ -244,31 +223,20 @@ y   8        R R R R
         if (right && (this.blocksHere[y][x].getX() == this.getEndXcor())){
           pThis.add(this.blocksHere[y][x]);
         }
-        //System.out.println("Size:"+pThis.size());
       }
     }
-    //System.out.println("Removing dupes in pThis");
-    //System.out.println("Size:"+pThis.size());
-    pThis = removeDupes(pThis);
+
+
+    pThis = removeDupes(pThis); //Removing duplicates so that every Block has an equal chance of being picked
     Block thisBlock = pThis.get(Math.abs(rnd.nextInt(pThis.size())));
-    //Block thisBlock = this.blocksHere[rnd.nextInt(this.blocksHere.length)][rnd.nextInt(this.blocksHere[0].length)];
-    //thisBlock.setType("Opening");
-    //Changing the Block in floor to Opening
 
     floor.getBlocksHere()[thisBlock.getY()][thisBlock.getX()] = thisBlock;
+
     //Getting a random borderBlock of theChosenOne
-    /*System.out.println("theChosenOne.startYcor: "+theChosenOne.getStartYcor());
-    System.out.println("theChosenOne.startXcor: "+theChosenOne.getStartXcor());
-    System.out.println("theChosenOne.endYcor: "+theChosenOne.getEndYcor());
-    System.out.println("theChosenOne.endXcor: "+theChosenOne.getEndXcor());
-    System.out.println("theChosenOne.blocksHere.length: "+theChosenOne.blocksHere.length);
-    System.out.println("theChosenOne.blocksHere[0].length: "+theChosenOne.blocksHere[0].length);
-    */
     for (int y = 0; y < theChosenOne.blocksHere.length; y++){
       for (int x = 0; x < theChosenOne.blocksHere[0].length; x++){
-        //If is below, all border blocks on the bottom have a chance of being picked
-        //System.out.println("X,Y: "+x+", "+y);
-        //System.out.println("blocksHere[y][x]: "+theChosenOne.blocksHere[x][y].getX()+", "+theChosenOne.blocksHere[x][y].getY());
+        //If it is below, all border blocks on the bottom have a chance of being picked
+
         if (below && (theChosenOne.blocksHere[y][x].getY() == theChosenOne.getStartYcor())){
           pTCO.add(theChosenOne.blocksHere[y][x]);
         }
@@ -284,17 +252,11 @@ y   8        R R R R
         if (right && (theChosenOne.blocksHere[y][x].getX() == theChosenOne.getStartXcor())){
           pTCO.add(theChosenOne.blocksHere[y][x]);
         }
-        //System.out.println("Size:"+pTCO.size());
       }
     }
-    //System.out.println("Removing dupes in pTCO");
-    //System.out.println("Size:"+pTCO.size());
-    pTCO = removeDupes(pTCO);
-    Block TCO = pTCO.get(rnd.nextInt(pTCO.size()));
 
-    //Block TCO = theChosenOne.blocksHere[rnd.nextInt(theChosenOne.blocksHere.length)][rnd.nextInt(theChosenOne.blocksHere[0].length)];
-    //TCO.setType("Opening");
-    //Changing the Block in floor to Opening
+    pTCO = removeDupes(pTCO); //Removing duplicates so that every Block has an equal chance of being picked
+    Block TCO = pTCO.get(rnd.nextInt(pTCO.size()));
 
     floor.getBlocksHere()[TCO.getY()][TCO.getX()] = TCO;
     //Now create a Tunnel from Block thisBlock to Block TCO
@@ -308,9 +270,8 @@ y   8        R R R R
     //if deltaY is positive, thisBlock is below TCO
     //if deltaY is 0, simply create a Tunnel directly between them
 
-    Tunnel connector;
+    Tunnel connector; //Only for simple Tunnels with same xcor or ycor
     if (deltaX == 0){
-      //System.out.println("Making a connector");
       //means this is a vertical Tunnel
       if (deltaY < 0){
         connector = new Tunnel(thisBlock, TCO, floor);
@@ -333,22 +294,19 @@ y   8        R R R R
 
     //If thisBlock and TCO don't have the same xcor nor ycor...
     else{
-      //System.out.println("Getting random corners");
+      //Getting random corners
       Block corner1, corner2, corner3;
       int dir=rnd.nextInt(2); //decide which direction to go First
       //Getting Xcors and Ycors of first 2 corners
       int randomXcor = 0;
       int randomYcor = 0;
-      //System.out.println("Getting Xcor");
-      //while (randomXcor <= 2){
+      //Getting Xcor
         randomXcor = rnd.nextInt(Math.abs(deltaX)); //the first difference in xcor
-      //}
-      //System.out.println("Getting ycor");
-      //while (randomYcor <= 2){
+      //Getting Ycor
         randomYcor = rnd.nextInt(Math.abs(deltaY)); //the first difference in ycor
-      //}
       Tunnel section1, section2, section3, section4;
-      //System.out.println("Making the Tunnels");
+
+
       //-----------------------------------Starting with horizontal Tunnel first---------------------------------//
       if (dir == 0){//start with horizontal
         if(deltaX < 0){ //if deltaX is negative, thisBlock is to the left of TCO
@@ -427,29 +385,19 @@ y   8        R R R R
             section4= new Tunnel(thisBlock,corner3, floor);
           }
         }
-        //System.out.println("thisBlock: "+thisBlock.getX()+", "+thisBlock.getY());
-        //System.out.println("TCO: "+TCO.getX()+", "+TCO.getY());
-        //System.out.println("DeltaX: " +deltaX);
-        //System.out.println("DeltaY: " +deltaY);
-        //System.out.println("RandomXcor: "+randomXcor);
-        //System.out.println("RandomYcor: "+randomYcor);
-        //System.out.println("Section1 start: "+ section1.getStartBlock().getX()+", "+ section1.getStartBlock().getY());
-        //System.out.println("Section1 end: "+ section1.getEndBlock().getX()+", "+ section1.getEndBlock().getY());
+
         if (section1.getLength()>1){
           floor.addTunnel(section1, 0);
         }
-        //System.out.println("Section2 start: "+ section2.getStartBlock().getX()+", "+ section2.getStartBlock().getY());
-        //System.out.println("Section2 end: "+ section2.getEndBlock().getX()+", "+ section2.getEndBlock().getY());
+
         if (section2.getLength()>1){
           floor.addTunnel(section2, 1);
         }
-        //System.out.println("Section3 start: "+ section3.getStartBlock().getX()+", "+ section3.getStartBlock().getY());
-        //System.out.println("Section3 end: "+ section3.getEndBlock().getX()+", "+ section3.getEndBlock().getY());
+
         if (section3.getLength()>1){
           floor.addTunnel(section3, 0);
         }
-        //System.out.println("Section4 start: "+ section4.getStartBlock().getX()+", "+ section4.getStartBlock().getY());
-        //System.out.println("Section4 end: "+ section4.getEndBlock().getX()+", "+ section4.getEndBlock().getY());
+
         if (section4.getLength()>1){
           floor.addTunnel(section4, 1);
         }
@@ -532,29 +480,15 @@ y   8        R R R R
             section4= new Tunnel(corner3, thisBlock, floor);
           }
         }
-        //System.out.println("thisBlock: "+thisBlock.getX()+", "+thisBlock.getY());
-        //System.out.println("TCO: "+TCO.getX()+", "+TCO.getY());
-        //System.out.println("DeltaX: " +deltaX);
-        //System.out.println("DeltaY: " +deltaY);
-        //System.out.println("RandomXcor: "+randomXcor);
-        //System.out.println("RandomYcor: "+randomYcor);
-        //System.out.println("Section1 start: "+ section1.getStartBlock().getX()+", "+ section1.getStartBlock().getY());
-        //System.out.println("Section1 end: "+ section1.getEndBlock().getX()+", "+ section1.getEndBlock().getY());
         if (section1.getLength()>1){
           floor.addTunnel(section1, 1);
         }
-        //System.out.println("Section2 start: "+ section2.getStartBlock().getX()+", "+ section2.getStartBlock().getY());
-        //System.out.println("Section2 end: "+ section2.getEndBlock().getX()+", "+ section2.getEndBlock().getY());
         if (section2.getLength()>1){
           floor.addTunnel(section2, 0);
         }
-        //System.out.println("Section3 start: "+ section3.getStartBlock().getX()+", "+ section3.getStartBlock().getY());
-        //System.out.println("Section3 end: "+ section3.getEndBlock().getX()+", "+ section3.getEndBlock().getY());
         if (section3.getLength()>1){
           floor.addTunnel(section3, 1);
         }
-        //System.out.println("Section4 start: "+ section4.getStartBlock().getX()+", "+ section4.getStartBlock().getY());
-        //System.out.println("Section4 end: "+ section4.getEndBlock().getX()+", "+ section4.getEndBlock().getY());
         if (section4.getLength()>1){
           floor.addTunnel(section4, 0);
         }
@@ -643,7 +577,6 @@ y   8        R R R R
   public static String toString(ArrayList<Block> b){
     String output = "";
     for (int i = 0; i < b.size(); i++){
-      //System.out.println(b.get(i).toString());
       output+=b.get(i).printPoint() + ", ";
     }
     return output;
