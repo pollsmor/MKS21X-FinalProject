@@ -205,4 +205,11 @@ public class Game {
     (floor.getBlock(player.getRow() + 1, player.getCol()).getPokemonHere() != null) ||     //bottom
     (floor.getBlock(player.getRow(), player.getCol() - 1).getPokemonHere() != null);        //left
   }
+
+  public void killTheDead() {
+    for (int i = 0; i < enemies.length; ++i) {
+      if (enemies[i].getHP() == 0)
+        floor.getBlock(enemies[i].getRow(), enemies[i].getCol()).setPokemonHere(null);
+    }
+  }
 }
