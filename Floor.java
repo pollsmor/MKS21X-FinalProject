@@ -104,13 +104,13 @@ public class Floor{
         r = createRoom(startXcor, startYcor, endXcor, endYcor);
         if (successfulRooms != 0){
         chosenRoom = roomsHere.get(rnd.nextInt(successfulRooms));
-        r.connectRooms(chosenRoom, seed, this);
-      }
-      roomsHere.add(r);
-      successfulRooms++;
         //Connect to a room
         //Create a tunnel
         //Allow tunnels to pass through each other
+        r.connectRooms(chosenRoom, seed, this);
+      }
+      roomsHere.add(r);
+      successfulRooms++;      
       }
     }
     numRooms = successfulRooms;
