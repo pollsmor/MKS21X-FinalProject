@@ -313,12 +313,14 @@ public class Driver {
         }
       }
     //----------------------------------------------------------------------------------------------------------------
+    //Player movement code
+    p = game.getPlayer();
       if (key != null && limitMovement > 500) {
         if (key.getKind() == Key.Kind.ArrowLeft) {
-          if (!game.isWall(row, col - 1)) {
+          if (p.moveLeft(game)) {
             terminal.moveCursor(col, row); //again, different scheme
             terminal.putCharacter(' ');
-            game.getPlayer().moveLeft(game);
+            //game.getPlayer().moveLeft(game);
             game.getFloor().getBlock(game.getPlayer().getRow(), game.getPlayer().getCol()).setPokemonHere(game.getPlayer());
             --col;
             moved = true;
@@ -327,10 +329,10 @@ public class Driver {
         }
 
         if (key.getKind() == Key.Kind.ArrowRight) {
-          if (!game.isWall(row, col + 1)) {
+          if (p.moveRight(game)) {
             terminal.moveCursor(col, row);
             terminal.putCharacter(' ');
-            game.getPlayer().moveRight(game);
+            //game.getPlayer().moveRight(game);
             game.getFloor().getBlock(game.getPlayer().getRow(), game.getPlayer().getCol()).setPokemonHere(game.getPlayer());
             ++col;
             moved = true;
@@ -340,10 +342,10 @@ public class Driver {
 
         if (key.getKind() == Key.Kind.ArrowUp) {
           if (row != 0)
-            if (!game.isWall(row - 1, col)) {
+            if (p.moveUp(game)) {
               terminal.moveCursor(col, row);
               terminal.putCharacter(' ');
-              game.getPlayer().moveUp(game);
+              //game.getPlayer().moveUp(game);
               game.getFloor().getBlock(game.getPlayer().getRow(), game.getPlayer().getCol()).setPokemonHere(game.getPlayer());
               --row;
               moved = true;
@@ -352,10 +354,10 @@ public class Driver {
         }
 
         if (key.getKind() == Key.Kind.ArrowDown) {
-          if (!game.isWall(row + 1, col)) {
+          if (p.moveDown(game)) {
             terminal.moveCursor(col, row);
             terminal.putCharacter(' ');
-            game.getPlayer().moveDown(game);
+            //game.getPlayer().moveDown(game);
             game.getFloor().getBlock(game.getPlayer().getRow(), game.getPlayer().getCol()).setPokemonHere(game.getPlayer());
             ++row;
             moved = true;
@@ -366,7 +368,6 @@ public class Driver {
         //System.out.println("Block type: "+game.getFloor().getBlocksHere()[row][col].getType());
         //System.out.println("Can move up, down, left, moveRight: "+ game.getFloor().getBlocksHere()[row][col].canMove('u')+ game.getFloor().getBlocksHere()[row][col].canMove('d')+ game.getFloor().getBlocksHere()[row][col].canMove('l')+ game.getFloor().getBlocksHere()[row][col].canMove('r'));
 
-        p = game.getPlayer();
         //Check if the current Block after moving is an objective Block
         if (game.isObjective(row, col)) { //if true, make a new Game with a new Floor
           game = new Game(name, rnd.nextInt(), rows, cols, ++level,p);
