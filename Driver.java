@@ -214,9 +214,10 @@ public class Driver {
                         putString(rows * 3/4 + 8, 1, terminal, "The enemy has " + game.getBlock(row - 1, col).getPokemonHere().getHP() + "/" + game.getBlock(row - 1, col).getPokemonHere().getMaxHP() + "HP!");
                       }
 
-                      else
+                      else{
                         putString(rows * 3/4 + 8, 1, terminal, "Enemy killed!");
-
+                        putString(row - 1, col, terminal, game.getBlock(row - 1, col).getOldData()+"");
+                      }
                       attackMode = false;
                       invincibility = 10000;
                     }
@@ -235,9 +236,10 @@ public class Driver {
                         putString(rows * 3/4 + 8, 1, terminal, "The enemy has " + game.getBlock(row + 1, col).getPokemonHere().getHP() + "/" + game.getBlock(row + 1, col).getPokemonHere().getMaxHP() + "HP!");
                       }
 
-                      else
+                      else{
                         putString(rows * 3/4 + 8, 1, terminal, "Enemy killed!");
-
+                        putString(row + 1, col, terminal, game.getBlock(row + 1, col).getOldData()+"");
+                      }
                       attackMode = false;
                       invincibility = 10000;
                     }
@@ -256,9 +258,10 @@ public class Driver {
                         putString(rows * 3/4 + 8, 1, terminal, "The enemy has " + game.getBlock(row, col - 1).getPokemonHere().getHP() + "/" + game.getBlock(row, col - 1).getPokemonHere().getMaxHP() + "HP!");
                       }
 
-                      else
+                      else{
                         putString(rows * 3/4 + 8, 1, terminal, "Enemy killed!");
-
+                        putString(row, col - 1, terminal, game.getBlock(row, col - 1).getOldData()+"");
+                      }
                       attackMode = false;
                       invincibility = 10000;
                     }
@@ -277,9 +280,10 @@ public class Driver {
                         putString(rows * 3/4 + 8, 1, terminal, "The enemy has " + game.getBlock(row, col + 1).getPokemonHere().getHP() + "/" + game.getBlock(row, col + 1).getPokemonHere().getMaxHP() + "HP!");
                       }
 
-                      else
+                      else{
                         putString(rows * 3/4 + 8, 1, terminal, "Enemy killed!");
-
+                        putString(row, col + 1, terminal, game.getBlock(row, col + 1).getOldData()+"");
+                      }
                       attackMode = false;
                       invincibility = 10000;
                     }
@@ -359,29 +363,61 @@ public class Driver {
         }
       }
     //----------------------------------------------------------------------------------------------------------------
+    //Enemy movement
+    int r, c; //Rows and cols of pokemon
+    char data; //Data of block where pokemon is
       if (moved) {
         putString(0, 0, terminal, game.getFloor().toStringClean()); //refreshs the map
 
         for (int i = 0; i < game.getEnemies().length; ++i) {
+          //Setting up values
+          r = game.getEnemy(i).getRow();
+          c = game.getEnemy(i).getCol();
+          data = game.getFloor().getBlocksHere()[r][c].getOldData();
+
           int direction = Math.abs(enemyDirectionGen.nextInt() % 4); //random movement for enemies
           if (direction == 0) {
-            game.getEnemy(i).moveUp(game);
-            game.getFloor().getBlock(game.getEnemy(i).getRow(), game.getEnemy(i).getCol()).setPokemonHere(game.getEnemy(i));
+            if(game.getEnemy(i).moveUp(game)){
+              putString(r, c, terminal, data+"");
+              game.getFloor().getBlock(r, c).setData(data);
+              game.getFloor().getBlock(game.getEnemy(i).getRow(), game.getEnemy(i).getCol()).setPokemonHere(game.getEnemy(i));
+              r = game.getEnemy(i).getRow();
+              c = game.getEnemy(i).getCol();
+              putString(r, c, terminal, '\u03e1' +"");
+            }
           }
 
           else if (direction == 1) {
-            game.getEnemy(i).moveDown(game);
-            game.getFloor().getBlock(game.getEnemy(i).getRow(), game.getEnemy(i).getCol()).setPokemonHere(game.getEnemy(i));
+            if (game.getEnemy(i).moveDown(game)){
+              putString(r, c, terminal, data+"");
+              game.getFloor().getBlock(r, c).setData(data);
+              game.getFloor().getBlock(game.getEnemy(i).getRow(), game.getEnemy(i).getCol()).setPokemonHere(game.getEnemy(i));
+              r = game.getEnemy(i).getRow();
+              c = game.getEnemy(i).getCol();
+              putString(r, c, terminal, '\u03e1' +"");
+            }
           }
 
           else if (direction == 2) {
-            game.getEnemy(i).moveLeft(game);
-            game.getFloor().getBlock(game.getEnemy(i).getRow(), game.getEnemy(i).getCol()).setPokemonHere(game.getEnemy(i));
+            if (game.getEnemy(i).moveLeft(game)){
+              putString(r, c, terminal, data+"");
+              game.getFloor().getBlock(r, c).setData(data);
+              game.getFloor().getBlock(game.getEnemy(i).getRow(), game.getEnemy(i).getCol()).setPokemonHere(game.getEnemy(i));
+              r = game.getEnemy(i).getRow();
+              c = game.getEnemy(i).getCol();
+              putString(r, c, terminal, '\u03e1' +"");
+            }
           }
 
           else if (direction == 3) {
-            game.getEnemy(i).moveRight(game);
-            game.getFloor().getBlock(game.getEnemy(i).getRow(), game.getEnemy(i).getCol()).setPokemonHere(game.getEnemy(i));
+            if(game.getEnemy(i).moveRight(game)){
+              putString(r, c, terminal, data+"");
+              game.getFloor().getBlock(r, c).setData(data);
+              game.getFloor().getBlock(game.getEnemy(i).getRow(), game.getEnemy(i).getCol()).setPokemonHere(game.getEnemy(i));
+              r = game.getEnemy(i).getRow();
+              c = game.getEnemy(i).getCol();
+              putString(r, c, terminal, '\u03e1' +"");
+            }
           }
 
           moved = false;
@@ -389,13 +425,17 @@ public class Driver {
       }
     //----------------------------------------------------------------------------------------------------------------
     //Player movement code
+    //Setting up values
     p = game.getPlayer();
+    r = game.getPlayer().getRow();
+    c = game.getPlayer().getCol();
+    data = game.getFloor().getBlocksHere()[r][c].getOldData();
       if (key != null && limitMovement > 500) {
         if (key.getKind() == Key.Kind.ArrowLeft) {
           if (p.moveLeft(game)) {
+            //terminal.putCharacter(data);
+            game.getFloor().getBlock(r, c).setData(data);
             terminal.moveCursor(col, row); //again, different scheme
-            terminal.putCharacter(' ');
-            //game.getPlayer().moveLeft(game);
             game.getFloor().getBlock(game.getPlayer().getRow(), game.getPlayer().getCol()).setPokemonHere(game.getPlayer());
             --col;
             moved = true;
@@ -405,9 +445,9 @@ public class Driver {
 
         if (key.getKind() == Key.Kind.ArrowRight) {
           if (p.moveRight(game)) {
+            //terminal.putCharacter(data);
+            game.getFloor().getBlock(r, c).setData(data);
             terminal.moveCursor(col, row);
-            terminal.putCharacter(' ');
-            //game.getPlayer().moveRight(game);
             game.getFloor().getBlock(game.getPlayer().getRow(), game.getPlayer().getCol()).setPokemonHere(game.getPlayer());
             ++col;
             moved = true;
@@ -418,9 +458,9 @@ public class Driver {
         if (key.getKind() == Key.Kind.ArrowUp) {
           if (row != 0)
             if (p.moveUp(game)) {
+              //terminal.putCharacter(data);
+              game.getFloor().getBlock(r, c).setData(data);
               terminal.moveCursor(col, row);
-              terminal.putCharacter(' ');
-              //game.getPlayer().moveUp(game);
               game.getFloor().getBlock(game.getPlayer().getRow(), game.getPlayer().getCol()).setPokemonHere(game.getPlayer());
               --row;
               moved = true;
@@ -430,9 +470,9 @@ public class Driver {
 
         if (key.getKind() == Key.Kind.ArrowDown) {
           if (p.moveDown(game)) {
+            //terminal.putCharacter(data);
+            game.getFloor().getBlock(r, c).setData(data);
             terminal.moveCursor(col, row);
-            terminal.putCharacter(' ');
-            //game.getPlayer().moveDown(game);
             game.getFloor().getBlock(game.getPlayer().getRow(), game.getPlayer().getCol()).setPokemonHere(game.getPlayer());
             ++row;
             moved = true;
