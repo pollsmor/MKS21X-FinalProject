@@ -171,7 +171,6 @@ public class Driver {
         }
       }
 
-      game.killTheDead();
     // Combat system-----------------------------------------------------------------------------------------------------
       if (game.enemyNearby() && invincibility < 0) {
         putString(0, 0, terminal, game.getFloor().toStringClean()); //refresh the map since this happens before the typical refresh later on
@@ -211,12 +210,13 @@ public class Driver {
                       putString(rows * 3/4 + 6, 1, terminal, "You dealt " + game.getPlayer().getAttack() + " damage!");
                       putString(rows * 3/4 + 7, 1, terminal, "The enemy dealt " + game.getBlock(row - 1, col).getPokemonHere().getAttack() + " damage! ");
                       if (game.getBlock(row - 1, col).getPokemonHere()!= null){
-                        putString(rows * 3/4 + 8, 1, terminal, "The enemy has " + game.getBlock(row - 1, col).getPokemonHere().getHP() + "/" + game.getBlock(row - 1, col).getPokemonHere().getMaxHP() + "HP!");
-                      }
-
-                      else{
-                        putString(rows * 3/4 + 8, 1, terminal, "Enemy killed!");
-                        putString(row - 1, col, terminal, game.getBlock(row - 1, col).getOldData()+"");
+                        if (game.getBlock(row - 1, col).getPokemonHere().getHP()> 0){
+                          putString(rows * 3/4 + 8, 1, terminal, "The enemy has " + game.getBlock(row - 1, col).getPokemonHere().getHP() + "/" + game.getBlock(row - 1, col).getPokemonHere().getMaxHP() + "HP!");
+                        }
+                        else{
+                          putString(rows * 3/4 + 8, 1, terminal, "Enemy killed!");
+                          putString(row - 1, col, terminal, game.getBlock(row - 1, col).getOldData()+"");
+                        }
                       }
                       attackMode = false;
                       invincibility = 10000;
@@ -233,12 +233,13 @@ public class Driver {
                       putString(rows * 3/4 + 6, 1, terminal, "You dealt " + game.getPlayer().getAttack() + " damage!");
                       putString(rows * 3/4 + 7, 1, terminal, "The enemy dealt " + game.getBlock(row + 1, col).getPokemonHere().getAttack() + " damage! ");
                       if (game.getBlock(row + 1, col).getPokemonHere()!= null){
-                        putString(rows * 3/4 + 8, 1, terminal, "The enemy has " + game.getBlock(row + 1, col).getPokemonHere().getHP() + "/" + game.getBlock(row + 1, col).getPokemonHere().getMaxHP() + "HP!");
-                      }
-
-                      else{
-                        putString(rows * 3/4 + 8, 1, terminal, "Enemy killed!");
-                        putString(row + 1, col, terminal, game.getBlock(row + 1, col).getOldData()+"");
+                        if (game.getBlock(row + 1, col).getPokemonHere().getHP()> 0){
+                          putString(rows * 3/4 + 8, 1, terminal, "The enemy has " + game.getBlock(row + 1, col).getPokemonHere().getHP() + "/" + game.getBlock(row + 1, col).getPokemonHere().getMaxHP() + "HP!");
+                        }
+                        else{
+                          putString(rows * 3/4 + 8, 1, terminal, "Enemy killed!");
+                          putString(row + 1, col, terminal, game.getBlock(row + 1, col).getOldData()+"");
+                        }
                       }
                       attackMode = false;
                       invincibility = 10000;
@@ -255,13 +256,15 @@ public class Driver {
                       putString(rows * 3/4 + 6, 1, terminal, "You dealt " + game.getPlayer().getAttack() + " damage!");
                       putString(rows * 3/4 + 7, 1, terminal, "The enemy dealt " + game.getBlock(row, col - 1).getPokemonHere().getAttack() + " damage! ");
                       if (game.getBlock(row, col - 1).getPokemonHere()!= null){
-                        putString(rows * 3/4 + 8, 1, terminal, "The enemy has " + game.getBlock(row, col - 1).getPokemonHere().getHP() + "/" + game.getBlock(row, col - 1).getPokemonHere().getMaxHP() + "HP!");
+                        if (game.getBlock(row, col - 1).getPokemonHere().getHP()> 0){
+                          putString(rows * 3/4 + 8, 1, terminal, "The enemy has " + game.getBlock(row, col - 1).getPokemonHere().getHP() + "/" + game.getBlock(row, col - 1).getPokemonHere().getMaxHP() + "HP!");
+                        }
+                        else{
+                          putString(rows * 3/4 + 8, 1, terminal, "Enemy killed!");
+                          putString(row, col - 1, terminal, game.getBlock(row, col - 1).getOldData()+"");
+                        }
                       }
 
-                      else{
-                        putString(rows * 3/4 + 8, 1, terminal, "Enemy killed!");
-                        putString(row, col - 1, terminal, game.getBlock(row, col - 1).getOldData()+"");
-                      }
                       attackMode = false;
                       invincibility = 10000;
                     }
@@ -277,15 +280,16 @@ public class Driver {
                       putString(rows * 3/4 + 6, 1, terminal, "You dealt " + game.getPlayer().getAttack() + " damage!");
                       putString(rows * 3/4 + 7, 1, terminal, "The enemy dealt " + game.getBlock(row, col + 1).getPokemonHere().getAttack() + " damage! ");
                       if (game.getBlock(row, col + 1).getPokemonHere()!= null){
-                        putString(rows * 3/4 + 8, 1, terminal, "The enemy has " + game.getBlock(row, col + 1).getPokemonHere().getHP() + "/" + game.getBlock(row, col + 1).getPokemonHere().getMaxHP() + "HP!");
-                      }
-
-                      else{
-                        putString(rows * 3/4 + 8, 1, terminal, "Enemy killed!");
-                        putString(row, col + 1, terminal, game.getBlock(row, col + 1).getOldData()+"");
-                      }
+                        if (game.getBlock(row, col + 1).getPokemonHere().getHP()> 0){
+                          putString(rows * 3/4 + 8, 1, terminal, "The enemy has " + game.getBlock(row, col + 1).getPokemonHere().getHP() + "/" + game.getBlock(row, col + 1).getPokemonHere().getMaxHP() + "HP!");
+                        }
+                        else{
+                          putString(rows * 3/4 + 8, 1, terminal, "Enemy killed!");
+                          putString(row, col + 1, terminal, game.getBlock(row, col + 1).getOldData()+"");
+                        }
                       attackMode = false;
                       invincibility = 10000;
+                      }
                     }
 
                     else
@@ -296,7 +300,10 @@ public class Driver {
 
               putString(rows * 3/4 + 5, 1, terminal, "                                                ");
             }
+            game.killTheDead(); //Kills off dead Enemies
 
+
+//--------------------------------------------------Items-----------------------------------------------------
             if (key3.getCharacter() == 'k') {
               putString(rows * 3/4 + 5, 1, terminal, "Pick an item.                              ");
               putString(rows * 3/4 + 6, 1, terminal, "[" + game.getPlayer().getItem("potion").getAmount() + "] " + "Potion (20HP): press 1");
@@ -369,7 +376,7 @@ public class Driver {
       if (moved) {
         putString(0, 0, terminal, game.getFloor().toStringClean()); //refreshs the map
 
-        for (int i = 0; i < game.getEnemies().length; ++i) {
+        for (int i = 0; i < game.getEnemies().size(); ++i) {
           //Setting up values
           r = game.getEnemy(i).getRow();
           c = game.getEnemy(i).getCol();
