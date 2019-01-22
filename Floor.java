@@ -281,7 +281,7 @@ public class Floor{
             blocksHere[b.getY()][b.getX()] = new Block(b.getX(), b.getY(), 2);
           }
           else{
-            blocksHere[b.getY()][b.getX()] = new Block(b.getX(),b.getY(), direction);
+            blocksHere[b.getY()][b.getX()] = new Block(b.getX(), b.getY(), direction);
           }
           if (direction == 0){ //Horizontal
             if (j != 0){ //if not the left most, pokemon can move left
@@ -319,6 +319,23 @@ public class Floor{
     int c = rnd.nextInt(spawnRow.length); //Selecting a random Block in the spawnRow in the Room to spawn the objective Block
     Block spawnBlock = spawnRow[c];
     spawnBlock.spawnObjective();
+    blocksHere[spawnBlock.getY()][spawnBlock.getX()] = spawnBlock;
+  }
+
+  public void spawnPlayer(int seed, Player player){
+    for (int y = 0; y < blocksHere.length; y++){
+      for (int x = 0; x < blocksHere[y].length;x++){
+        blocksHere[y][x].setPokemonHere(null);
+      }
+    }
+    Random rnd = new Random(seed);
+    int n = rnd.nextInt(roomsHere.size()); //Selecting a random Room to spawn the objective Block
+    Room spawnRoom = roomsHere.get(n);
+    int r = rnd.nextInt(spawnRoom.getBlocksHere().length); //Selecting a random row of Blocks in the Room to spawn the objective Block
+    Block[] spawnRow = spawnRoom.getBlocksHere()[r];
+    int c = rnd.nextInt(spawnRow.length); //Selecting a random Block in the spawnRow in the Room to spawn the objective Block
+    Block spawnBlock = spawnRow[c];
+    spawnBlock.spawnPlayerHere(player);
     blocksHere[spawnBlock.getY()][spawnBlock.getX()] = spawnBlock;
   }
 }
