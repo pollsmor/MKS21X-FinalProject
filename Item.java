@@ -5,29 +5,29 @@ public class Item {
   private int value;
   private int amount;
 
-  public Item(String name) {
-    if (this.name == "potion") {
+  public Item(String inputName) {
+    if (inputName == "potion") {
       name = "Potion"; //description: taken from Bulbapedia
       description = "A spray-type medicine for treating wounds. It can be used to restore 20 HP to an injured Pokémon.";
       value = 20;
       amount = 10;
     }
 
-    if (this.name == "superpotion") {
+    if (inputName == "superpotion") {
       name = "Super Potion"; //description: taken from Bulbapedia
       description = "A spray-type medicine for treating wounds. It can be used to restore 60 HP to an injured Pokémon.";
       value = 60;
       amount = 5;
     }
 
-    if (this.name == "hyperpotion") {
+    if (inputName == "hyperpotion") {
       name = "Hyper Potion"; //description: taken from Bulbapedia
       description = "A spray-type medicine for treating wounds. It can be used to restore 120 HP to an injured Pokémon.";
       value = 120;
       amount = 2;
     }
 
-    if (this.name == "maxpotion") {
+    if (inputName == "maxpotion") {
       name = "Hyper Potion"; //description: taken from Bulbapedia
       description = "A spray-type medicine for treating wounds. It can be used to restore 120 HP to an injured Pokémon.";
       value = 9999; //since it heals you fully and chances are no Pokemon will reach above 1000 HP let alone 9999

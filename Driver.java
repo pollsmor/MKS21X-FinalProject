@@ -178,6 +178,8 @@ public class Driver {
         putString(rows * 3/4 + 5, 1, terminal, "An enemy is nearby. What is your move?                                   ");
         putString(rows * 3/4 + 6, 1, terminal, "[j] Attack                        ");
         putString(rows * 3/4 + 7, 1, terminal, "[k] Items                         ");
+        putString(rows * 3/4 + 8, 1, terminal, "                                  ");
+        putString(rows * 3/4 + 9, 1, terminal, "                                  ");
         while (game.enemyNearby() && invincibility < 0) { //
           Key key3 = terminal.readInput();
           if (key3 != null) {
@@ -292,11 +294,11 @@ public class Driver {
             }
 
             if (key3.getCharacter() == 'k') {
-              putString(rows * 3/4 + 5, 1, terminal, "Pick an item.");
-              putString(rows * 3/4 + 6, 1, terminal, "[" + game.getPlayer().getItem("potion").getAmount() + "]" + "Potion (20HP): press 1");
-              putString(rows * 3/4 + 7, 1, terminal, "[" + game.getPlayer().getItem("superpotion").getAmount() + "]" + "Super Potion (60HP): press 2");
-              putString(rows * 3/4 + 8, 1, terminal, "[" + game.getPlayer().getItem("hyperpotion").getAmount() + "]" + "Hyper Potion (120HP): press 3");
-              putString(rows * 3/4 + 9, 1, terminal, "[" + game.getPlayer().getItem("maxpotion").getAmount() + "]" + "Max Potion (MAX HP): press 4");
+              putString(rows * 3/4 + 5, 1, terminal, "Pick an item.                              ");
+              putString(rows * 3/4 + 6, 1, terminal, "[" + game.getPlayer().getItem("potion").getAmount() + "] " + "Potion (20HP): press 1");
+              putString(rows * 3/4 + 7, 1, terminal, "[" + game.getPlayer().getItem("superpotion").getAmount() + "] " + "Super Potion (60HP): press 2");
+              putString(rows * 3/4 + 8, 1, terminal, "[" + game.getPlayer().getItem("hyperpotion").getAmount() + "] " + "Hyper Potion (120HP): press 3");
+              putString(rows * 3/4 + 9, 1, terminal, "[" + game.getPlayer().getItem("maxpotion").getAmount() + "] " + "Max Potion (MAX HP): press 4");
               itemMode = true;
               while (itemMode) {
                 Key key5 = terminal.readInput();
@@ -308,23 +310,46 @@ public class Driver {
 
                   if (key5.getCharacter() == '1') {
                     if (game.getPlayer().getItem("potion").getAmount() > 0) {
-
+                      game.getPlayer().setHP(20);
+                      itemMode = false;
+                      invincibility = 10000;
                     }
                   }
 
                   if (key5.getCharacter() == '2') {
-
+                    if (game.getPlayer().getItem("superpotion").getAmount() > 0) {
+                      game.getPlayer().setHP(60);
+                      itemMode = false;
+                      invincibility = 10000;
+                    }
                   }
 
                   if (key5.getCharacter() == '3') {
-
+                    if (game.getPlayer().getItem("Hyperpotion").getAmount() > 0) {
+                      game.getPlayer().setHP(120);
+                      itemMode = false;
+                      invincibility = 10000;
+                    }
                   }
 
+                  //Unfortunately we're not gonna be able to code in picking up items in time.
                   if (key5.getCharacter() == '4') {
-
+                    if (game.getPlayer().getItem("maxpotion").getAmount() > 0) {
+                      game.getPlayer().maxRegen();
+                      itemMode = false;
+                      invincibility = 10000;
+                    }
                   }
+
+
                 }
               }
+
+              putString(rows * 3/4 + 5, 1, terminal, "                                          ");
+              putString(rows * 3/4 + 6, 1, terminal, "                                          ");
+              putString(rows * 3/4 + 7, 1, terminal, "                                          ");
+              putString(rows * 3/4 + 8, 1, terminal, "                                          ");
+              putString(rows * 3/4 + 9, 1, terminal, "                                          ");
             }
           }
         }
