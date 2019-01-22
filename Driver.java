@@ -141,6 +141,10 @@ public class Driver {
       if (game.getPlayer().getHP() <= 0)
         alive = false;
 
+      //If I heal I don't want to go above the HP cap
+      if (game.getPlayer().getHP() > game.getPlayer().getMaxHP())
+        game.getPlayer().maxRegen();
+
       if (!alive) {
         putString(rows, 0, terminal,"You died. Would you like to respawn? (y/n)");
         while (!alive) {
@@ -174,6 +178,8 @@ public class Driver {
         putString(rows * 3/4 + 5, 1, terminal, "An enemy is nearby. What is your move?                                   ");
         putString(rows * 3/4 + 6, 1, terminal, "[j] Attack                        ");
         putString(rows * 3/4 + 7, 1, terminal, "[k] Items                         ");
+        putString(rows * 3/4 + 8, 1, terminal, "                                  ");
+        putString(rows * 3/4 + 9, 1, terminal, "                                  ");
         while (game.enemyNearby() && invincibility < 0) { //
           Key key3 = terminal.readInput();
           if (key3 != null) {
@@ -183,6 +189,8 @@ public class Driver {
             }
 
             boolean attackMode = false;
+            boolean itemMode = false;
+
             if (key3.getCharacter() == 'j') {
               putString(rows * 3/4 + 5, 1, terminal, "Choose an enemy to attack with the arrow keys.");
               putString(rows * 3/4 + 6, 1, terminal, "                        ");
@@ -205,9 +213,10 @@ public class Driver {
                       if (game.getBlock(row - 1, col).getPokemonHere()!= null){
                         putString(rows * 3/4 + 8, 1, terminal, "The enemy has " + game.getBlock(row - 1, col).getPokemonHere().getHP() + "/" + game.getBlock(row - 1, col).getPokemonHere().getMaxHP() + "HP!");
                       }
-                      else{
+
+                      else
                         putString(rows * 3/4 + 8, 1, terminal, "Enemy killed!");
-                      }
+
                       attackMode = false;
                       invincibility = 10000;
                     }
@@ -225,9 +234,10 @@ public class Driver {
                       if (game.getBlock(row + 1, col).getPokemonHere()!= null){
                         putString(rows * 3/4 + 8, 1, terminal, "The enemy has " + game.getBlock(row + 1, col).getPokemonHere().getHP() + "/" + game.getBlock(row + 1, col).getPokemonHere().getMaxHP() + "HP!");
                       }
-                      else{
+
+                      else
                         putString(rows * 3/4 + 8, 1, terminal, "Enemy killed!");
-                      }
+
                       attackMode = false;
                       invincibility = 10000;
                     }
@@ -245,9 +255,10 @@ public class Driver {
                       if (game.getBlock(row, col - 1).getPokemonHere()!= null){
                         putString(rows * 3/4 + 8, 1, terminal, "The enemy has " + game.getBlock(row, col - 1).getPokemonHere().getHP() + "/" + game.getBlock(row, col - 1).getPokemonHere().getMaxHP() + "HP!");
                       }
-                      else{
+
+                      else
                         putString(rows * 3/4 + 8, 1, terminal, "Enemy killed!");
-                      }
+
                       attackMode = false;
                       invincibility = 10000;
                     }
@@ -265,9 +276,10 @@ public class Driver {
                       if (game.getBlock(row, col + 1).getPokemonHere()!= null){
                         putString(rows * 3/4 + 8, 1, terminal, "The enemy has " + game.getBlock(row, col + 1).getPokemonHere().getHP() + "/" + game.getBlock(row, col + 1).getPokemonHere().getMaxHP() + "HP!");
                       }
-                      else{
+
+                      else
                         putString(rows * 3/4 + 8, 1, terminal, "Enemy killed!");
-                      }
+
                       attackMode = false;
                       invincibility = 10000;
                     }
@@ -279,6 +291,69 @@ public class Driver {
               }
 
               putString(rows * 3/4 + 5, 1, terminal, "                                                ");
+            }
+
+            if (key3.getCharacter() == 'k') {
+              putString(rows * 3/4 + 5, 1, terminal, "Pick an item.                              ");
+              putString(rows * 3/4 + 6, 1, terminal, "[" + game.getPlayer().getItem("potion").getAmount() + "] " + "Potion (20HP): press 1");
+              putString(rows * 3/4 + 7, 1, terminal, "[" + game.getPlayer().getItem("superpotion").getAmount() + "] " + "Super Potion (60HP): press 2");
+              putString(rows * 3/4 + 8, 1, terminal, "[" + game.getPlayer().getItem("hyperpotion").getAmount() + "] " + "Hyper Potion (120HP): press 3");
+              putString(rows * 3/4 + 9, 1, terminal, "[" + game.getPlayer().getItem("maxpotion").getAmount() + "] " + "Max Potion (MAX HP): press 4");
+              itemMode = true;
+              while (itemMode) {
+                Key key5 = terminal.readInput();
+                if (key5 != null) {
+                  if (key5.getKind() == Key.Kind.Escape) {
+                    terminal.exitPrivateMode();
+                    System.exit(0);
+                  }
+
+                  if (key5.getCharacter() == '1') {
+                    if (game.getPlayer().getItem("potion").getAmount() > 0) {
+                      game.getPlayer().setHP(20);
+                      itemMode = false;
+                      invincibility = 10000;
+                      game.getPlayer().getItem("potion").lowerQuantity();
+                    }
+                  }
+
+                  if (key5.getCharacter() == '2') {
+                    if (game.getPlayer().getItem("superpotion").getAmount() > 0) {
+                      game.getPlayer().setHP(60);
+                      itemMode = false;
+                      invincibility = 10000;
+                      game.getPlayer().getItem("superpotion").lowerQuantity();
+                    }
+                  }
+
+                  if (key5.getCharacter() == '3') {
+                    if (game.getPlayer().getItem("Hyperpotion").getAmount() > 0) {
+                      game.getPlayer().setHP(120);
+                      itemMode = false;
+                      invincibility = 10000;
+                      game.getPlayer().getItem("hyperpotion").lowerQuantity();
+                    }
+                  }
+
+                  //Unfortunately we're not gonna be able to code in picking up items in time.
+                  if (key5.getCharacter() == '4') {
+                    if (game.getPlayer().getItem("maxpotion").getAmount() > 0) {
+                      game.getPlayer().maxRegen();
+                      itemMode = false;
+                      invincibility = 10000;
+                      game.getPlayer().getItem("maxpotion").lowerQuantity();
+                    }
+                  }
+
+
+                }
+              }
+
+              putString(rows * 3/4 + 5, 1, terminal, "                                          ");
+              putString(rows * 3/4 + 6, 1, terminal, "                                          ");
+              putString(rows * 3/4 + 7, 1, terminal, "                                          ");
+              putString(rows * 3/4 + 8, 1, terminal, "                                          ");
+              putString(rows * 3/4 + 9, 1, terminal, "                                          ");
             }
           }
         }
