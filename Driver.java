@@ -216,10 +216,14 @@ public class Driver {
             ++row;
           }
         }
+        System.out.println("X: "+col+" Y: "+row);
+        System.out.println("Block type: "+game.getFloor().getBlocksHere()[row][col].getType());
+        System.out.println("Can move up, down, left, moveRight: "+ game.getFloor().getBlocksHere()[row][col].canMove('u')+ game.getFloor().getBlocksHere()[row][col].canMove('d')+ game.getFloor().getBlocksHere()[row][col].canMove('l')+ game.getFloor().getBlocksHere()[row][col].canMove('r'));
 
         //Check if the current Block after moving is an objective Block
         if (game.isObjective(row, col)){ //If true, make a new Game with a new Floor
-          game = new Game(name, rnd.nextInt(10000), rows, cols, ++level);
+          Player p = game.getPlayer();
+          game = new Game(name, rnd.nextInt(10000), rows, cols, ++level, p);
         }
 
         //Just to demo the death function in class
@@ -231,6 +235,7 @@ public class Driver {
 
       //Do even when no key is pressed
       //First row of stats
+      System.out.println(game.getPlayer());
       putString(rows * 3/4 + 2, 5, terminal, green + game.getPlayer().getHP());
       putString(rows * 3/4 + 2, 20, terminal, "" + game.getPlayer().getLevel());
       putString(rows * 3/4 + 2, 36, terminal, "" + game.getPlayer().getAttack());
