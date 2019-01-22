@@ -80,7 +80,7 @@ public abstract class Pokemon {
   }
 
   public boolean moveUp(Game game) {
-    if (!game.isWall(row - 1, col)) { //If the next Block isn't a Wall
+    if (!game.isWall(row - 1, col)) { //If the next Block isn't a Wall 
       if (game.isTunnel(row, col)) { //If the current Block is a Tunnel
         if (game.getBlock(row, col).canMove('u')) { //Test if this Block allows you to move up
           game.getFloor().getBlock(row, col).setPokemonHere(null);
