@@ -27,11 +27,7 @@ public class Block implements Explorable{
       data = ' ';
     }
     if (newType.equals("Objective")){
-<<<<<<< HEAD
       data = ' ';
-=======
-      data = 'O';
->>>>>>> ab0677c8673053ed1865ac15abfec6b3c934ecc6
     }
     type = newType;
   }
