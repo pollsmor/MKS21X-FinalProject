@@ -7,7 +7,8 @@ public class Block implements Explorable{
   private int xcor;
   private int ycor;
   private String color;
-  private char data; //what's printed in the block
+  private char data; //what's printed in the Block
+  private char oldData; //default of Block
   private boolean canMoveLeft, canMoveRight, canMoveUp, canMoveDown; //To handle adjacent Tunnels
   private int direction; //For intersection Tunnels
 
@@ -19,12 +20,15 @@ public class Block implements Explorable{
     color = "black";
     //Default data ' ' is for Wall
     data = ' ';
+    oldData = ' ';
     //For testing purposes
     if (newType.equals("Room")){
       data = ' ';
+      oldData = ' ';
     }
     if (newType.equals("Objective")){
       data = 'O';
+      oldData = ' ';
     }
     type = newType;
   }
@@ -37,12 +41,15 @@ public class Block implements Explorable{
     color = "gray";
     if (dir == 0){ //LR
       data = '=';
+      oldData = '=';
     }
     if (dir == 1){ //UD
       data = '|';
+      oldData = '|';
     }
     if (dir == 2){ //EndBlock of tunnel or intersection of Tunnels
       data = '#';
+      oldData = '#';
     }
     direction = dir;
     type = "Tunnel";
@@ -94,6 +101,14 @@ public class Block implements Explorable{
 
   public char getData(){
     return data;
+  }
+
+  public char getOldData(){
+    return oldData;
+  }
+
+  public void setData(char c){
+    data = c;
   }
 
   public String setType(String newType){
