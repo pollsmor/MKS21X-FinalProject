@@ -121,7 +121,7 @@ public class Driver {
 
     while (running) {
       terminal.moveCursor(col, row); //again, Lanterna follows a c, r coordinate system
-      terminal.applyForegroundColor(Terminal.Color.WHITE);
+      terminal.applyForegroundColor(Terminal.Color.GREEN);
       terminal.putCharacter('\u04dd'); //player icon, just randomly got this off the web
       terminal.applyBackgroundColor(Terminal.Color.DEFAULT);
       terminal.applyForegroundColor(Terminal.Color.DEFAULT);
@@ -201,7 +201,7 @@ public class Driver {
                       putString(rows * 3/4 + 6, 1, terminal, "You dealt " + game.getPlayer().getAttack() + " damage!");
                       putString(rows * 3/4 + 7, 1, terminal, "The enemy dealt " + game.getBlock(row - 1, col).getPokemonHere().getAttack() + " damage! ");
                       if (game.getBlock(row - 1, col).getPokemonHere()!= null){
-                        putString(rows * 3/4 + 8, 1, terminal, "The enemy has "+game.getBlock(row - 1, col).getPokemonHere().getHP()+"HP out of "+game.getBlock(row - 1, col).getPokemonHere().getMaxHP()+"HP!");
+                        putString(rows * 3/4 + 8, 1, terminal, "The enemy has " + game.getBlock(row - 1, col).getPokemonHere().getHP() + "/" + game.getBlock(row - 1, col).getPokemonHere().getMaxHP() + "HP!");
                       }
                       else{
                         putString(rows * 3/4 + 8, 1, terminal, "Enemy killed!");
@@ -221,7 +221,7 @@ public class Driver {
                       putString(rows * 3/4 + 6, 1, terminal, "You dealt " + game.getPlayer().getAttack() + " damage!");
                       putString(rows * 3/4 + 7, 1, terminal, "The enemy dealt " + game.getBlock(row + 1, col).getPokemonHere().getAttack() + " damage! ");
                       if (game.getBlock(row + 1, col).getPokemonHere()!= null){
-                        putString(rows * 3/4 + 8, 1, terminal, "The enemy has "+game.getBlock(row + 1, col).getPokemonHere().getHP()+"HP out of "+game.getBlock(row + 1, col).getPokemonHere().getMaxHP()+"HP!");
+                        putString(rows * 3/4 + 8, 1, terminal, "The enemy has " + game.getBlock(row + 1, col).getPokemonHere().getHP() + "/" + game.getBlock(row + 1, col).getPokemonHere().getMaxHP() + "HP!");
                       }
                       else{
                         putString(rows * 3/4 + 8, 1, terminal, "Enemy killed!");
@@ -241,7 +241,7 @@ public class Driver {
                       putString(rows * 3/4 + 6, 1, terminal, "You dealt " + game.getPlayer().getAttack() + " damage!");
                       putString(rows * 3/4 + 7, 1, terminal, "The enemy dealt " + game.getBlock(row, col - 1).getPokemonHere().getAttack() + " damage! ");
                       if (game.getBlock(row, col - 1).getPokemonHere()!= null){
-                        putString(rows * 3/4 + 8, 1, terminal, "The enemy has "+game.getBlock(row, col - 1).getPokemonHere().getHP()+"HP out of "+game.getBlock(row, col - 1).getPokemonHere().getMaxHP()+"HP!");
+                        putString(rows * 3/4 + 8, 1, terminal, "The enemy has " + game.getBlock(row, col - 1).getPokemonHere().getHP() + "/" + game.getBlock(row, col - 1).getPokemonHere().getMaxHP() + "HP!");
                       }
                       else{
                         putString(rows * 3/4 + 8, 1, terminal, "Enemy killed!");
@@ -261,7 +261,7 @@ public class Driver {
                       putString(rows * 3/4 + 6, 1, terminal, "You dealt " + game.getPlayer().getAttack() + " damage!");
                       putString(rows * 3/4 + 7, 1, terminal, "The enemy dealt " + game.getBlock(row, col + 1).getPokemonHere().getAttack() + " damage! ");
                       if (game.getBlock(row, col + 1).getPokemonHere()!= null){
-                        putString(rows * 3/4 + 8, 1, terminal, "The enemy has "+game.getBlock(row, col + 1).getPokemonHere().getHP()+"HP out of "+game.getBlock(row, col + 1).getPokemonHere().getMaxHP()+"HP!");
+                        putString(rows * 3/4 + 8, 1, terminal, "The enemy has " + game.getBlock(row, col + 1).getPokemonHere().getHP() + "/" + game.getBlock(row, col + 1).getPokemonHere().getMaxHP() + "HP!");
                       }
                       else{
                         putString(rows * 3/4 + 8, 1, terminal, "Enemy killed!");
