@@ -19,10 +19,6 @@ public class Player extends Pokemon {
     return currentHunger;
   }
 
-  public void basicAttack(Enemy enemy, int damage) {
-    enemy.setHP(-1 * damage);
-  }
-
   public int getXP() {
     return xp;
   }

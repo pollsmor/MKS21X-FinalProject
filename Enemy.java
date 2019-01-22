@@ -6,13 +6,13 @@ public class Enemy extends Pokemon {
     //name = "genericEnemy";
     //level = (int) (Math.random() * 1000) % 10;
     //maxHP = (int) (Math.random() * 1000) % 40;
-    //attack = (int) (Math.random() * 1000) % 10;
+    //attack = (int) (Math.random() * 1000) % 55; //weaker enemies so the player doesn't just die
     //defense = (int) (Math.random() * 1000) % 10;
 
     super("genericEnemy",
          (int) (Math.random() * 1000) % 10,
          (int) (Math.random() * 1000) % 40,
-         (int) (Math.random() * 1000) % 10,
+         (int) (Math.random() * 1000) % 5,
          (int) (Math.random() * 1000) % 10,
          row, col);
   }
@@ -20,9 +20,5 @@ public class Enemy extends Pokemon {
   //add this XP to the player when the monster is killed
   public int getKillXP() {
     return killXP;
-  }
-
-  public void atkPlayer(Player player, int damage) {
-    player.setHP(-1 * damage);
   }
 }

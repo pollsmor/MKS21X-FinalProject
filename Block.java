@@ -21,13 +21,13 @@ public class Block implements Explorable{
     data = ' ';
     //For testing purposes
     if (newType.equals("Room")){
-      data = 'R';
+      data = ' ';
     }
     if (newType.equals("Tunnel")){
-      data = 'T';
+      data = ' ';
     }
-    if (newType.equals("Objective")){
-      data = '0';
+    if (newType.equals("Opening")){
+      data = ' ';
     }
     type = newType;
   }
@@ -181,9 +181,19 @@ public class Block implements Explorable{
       data = ' ';
       pokemonHere = null;
     }
+
+    else if (pokemon instanceof Player) {
+      data = '\u04dd';
+      pokemonHere = pokemon;
+    }
+
     else {
       data = '\u03e1';
       pokemonHere = pokemon;
     }
+  }
+
+  public Pokemon getPokemonHere() {
+    return pokemonHere;
   }
 }

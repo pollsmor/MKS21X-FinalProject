@@ -25,8 +25,8 @@ public class Game {
     floor.createRooms(seed);
 
     name = inputName;
-    player = spawnPlayer();
-    int amtEnemies = rows * cols / 450;
+    spawnPlayer();
+    int amtEnemies = rows * cols / 450; //decent algorithm for calculating the amount of enemies on screen, based on Terminal size
     enemies = new Enemy[amtEnemies];
     spawnEnemies();
   }
@@ -119,7 +119,7 @@ public class Game {
 
     if (!isRandomSeed) {
       randgenRow = new Random(seed + 2);
-      randgenCol = new Random();
+      randgenCol = new Random(seed + 3);
     }
 
     int row = 0;
@@ -193,5 +193,13 @@ public class Game {
       enemies[i] = new Enemy(row, col);
       floor.getBlock(row, col).spawnEnemyHere(enemies[i]);
     }
+  }
+
+  public boolean enemyNearby() {
+    return
+    (floor.getBlock(player.getRow() -1, player.getCol()).getPokemonHere() != null) ||      //top
+    (floor.getBlock(player.getRow(), player.getCol() + 1).getPokemonHere() != null) ||     //right
+    (floor.getBlock(player.getRow() + 1, player.getCol()).getPokemonHere() != null) ||     //bottom
+    (floor.getBlock(player.getRow(), player.getCol() - 1).getPokemonHere() != null);        //left
   }
 }
