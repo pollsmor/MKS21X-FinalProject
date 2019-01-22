@@ -88,7 +88,7 @@ public class Driver {
     String underline = "\u001B[4m";
     String blink = "\u001B[5m";
     String resetColor = "\u001B[0m"; //need to add this or the whole program will be the selected color
-
+    Player p; //The player for the Game
     //Print the game's UI elements
     putString(0, 0, terminal, game.getFloor().toStringClean()); //the map
     putString(rows * 3/4 + 1, 1, terminal, bgWhite + black + game.getPlayer().getName() + resetColor); //your name
@@ -200,6 +200,12 @@ public class Driver {
                       game.getBlock(row - 1, col).getPokemonHere().basicAttack(game.getPlayer(), game.getBlock(row - 1, col).getPokemonHere().getAttack());
                       putString(rows * 3/4 + 6, 1, terminal, "You dealt " + game.getPlayer().getAttack() + " damage!");
                       putString(rows * 3/4 + 7, 1, terminal, "The enemy dealt " + game.getBlock(row - 1, col).getPokemonHere().getAttack() + " damage! ");
+                      if (game.getBlock(row - 1, col).getPokemonHere()!= null){
+                        putString(rows * 3/4 + 8, 1, terminal, "The enemy has "+game.getBlock(row - 1, col).getPokemonHere().getHP()+"HP out of "+game.getBlock(row - 1, col).getPokemonHere().getMaxHP()+"HP!");
+                      }
+                      else{
+                        putString(rows * 3/4 + 8, 1, terminal, "Enemy killed!");
+                      }
                       attackMode = false;
                       invincibility = 10000;
                     }
@@ -214,6 +220,12 @@ public class Driver {
                       game.getBlock(row + 1, col).getPokemonHere().basicAttack(game.getPlayer(), game.getBlock(row + 1, col).getPokemonHere().getAttack());
                       putString(rows * 3/4 + 6, 1, terminal, "You dealt " + game.getPlayer().getAttack() + " damage!");
                       putString(rows * 3/4 + 7, 1, terminal, "The enemy dealt " + game.getBlock(row + 1, col).getPokemonHere().getAttack() + " damage! ");
+                      if (game.getBlock(row + 1, col).getPokemonHere()!= null){
+                        putString(rows * 3/4 + 8, 1, terminal, "The enemy has "+game.getBlock(row + 1, col).getPokemonHere().getHP()+"HP out of "+game.getBlock(row + 1, col).getPokemonHere().getMaxHP()+"HP!");
+                      }
+                      else{
+                        putString(rows * 3/4 + 8, 1, terminal, "Enemy killed!");
+                      }
                       attackMode = false;
                       invincibility = 10000;
                     }
@@ -228,6 +240,12 @@ public class Driver {
                       game.getBlock(row, col - 1).getPokemonHere().basicAttack(game.getPlayer(), game.getBlock(row, col - 1).getPokemonHere().getAttack());
                       putString(rows * 3/4 + 6, 1, terminal, "You dealt " + game.getPlayer().getAttack() + " damage!");
                       putString(rows * 3/4 + 7, 1, terminal, "The enemy dealt " + game.getBlock(row, col - 1).getPokemonHere().getAttack() + " damage! ");
+                      if (game.getBlock(row, col - 1).getPokemonHere()!= null){
+                        putString(rows * 3/4 + 8, 1, terminal, "The enemy has "+game.getBlock(row, col - 1).getPokemonHere().getHP()+"HP out of "+game.getBlock(row, col - 1).getPokemonHere().getMaxHP()+"HP!");
+                      }
+                      else{
+                        putString(rows * 3/4 + 8, 1, terminal, "Enemy killed!");
+                      }
                       attackMode = false;
                       invincibility = 10000;
                     }
@@ -242,6 +260,12 @@ public class Driver {
                       game.getBlock(row, col + 1).getPokemonHere().basicAttack(game.getPlayer(), game.getBlock(row, col + 1).getPokemonHere().getAttack());
                       putString(rows * 3/4 + 6, 1, terminal, "You dealt " + game.getPlayer().getAttack() + " damage!");
                       putString(rows * 3/4 + 7, 1, terminal, "The enemy dealt " + game.getBlock(row, col + 1).getPokemonHere().getAttack() + " damage! ");
+                      if (game.getBlock(row, col + 1).getPokemonHere()!= null){
+                        putString(rows * 3/4 + 8, 1, terminal, "The enemy has "+game.getBlock(row, col + 1).getPokemonHere().getHP()+"HP out of "+game.getBlock(row, col + 1).getPokemonHere().getMaxHP()+"HP!");
+                      }
+                      else{
+                        putString(rows * 3/4 + 8, 1, terminal, "Enemy killed!");
+                      }
                       attackMode = false;
                       invincibility = 10000;
                     }
@@ -336,14 +360,18 @@ public class Driver {
             limitMovement = 0;
           }
         }
-        System.out.println("X: "+col+" Y: "+row);
-        System.out.println("Block type: "+game.getFloor().getBlocksHere()[row][col].getType());
-        System.out.println("Can move up, down, left, moveRight: "+ game.getFloor().getBlocksHere()[row][col].canMove('u')+ game.getFloor().getBlocksHere()[row][col].canMove('d')+ game.getFloor().getBlocksHere()[row][col].canMove('l')+ game.getFloor().getBlocksHere()[row][col].canMove('r'));
+        //System.out.println("X: "+col+" Y: "+row);
+        //System.out.println("Block type: "+game.getFloor().getBlocksHere()[row][col].getType());
+        //System.out.println("Can move up, down, left, moveRight: "+ game.getFloor().getBlocksHere()[row][col].canMove('u')+ game.getFloor().getBlocksHere()[row][col].canMove('d')+ game.getFloor().getBlocksHere()[row][col].canMove('l')+ game.getFloor().getBlocksHere()[row][col].canMove('r'));
 
-        Player p = game.getPlayer();
+        p = game.getPlayer();
         //Check if the current Block after moving is an objective Block
         if (game.isObjective(row, col)) { //if true, make a new Game with a new Floor
-          game = new Game(name, rnd.nextInt(), rows, cols, ++level,p)
+          game = new Game(name, rnd.nextInt(), rows, cols, ++level,p);
+          p = game.getPlayer();
+          row = p.getRow();
+          col = p.getCol();
+          terminal.moveCursor(col, row);
         }
       }
 
