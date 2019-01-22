@@ -38,7 +38,7 @@ public class Game {
     termRows = rows;
     termCols = cols;
     level = newLevel;
-    floor = new Floor(level, cols, rows * 3/4)
+    floor = new Floor(level, cols, rows * 3/4);
     seed = inputSeed;
     isRandomSeed = false;
     floor.createRooms(seed);
