@@ -340,9 +340,10 @@ public class Driver {
         System.out.println("Block type: "+game.getFloor().getBlocksHere()[row][col].getType());
         System.out.println("Can move up, down, left, moveRight: "+ game.getFloor().getBlocksHere()[row][col].canMove('u')+ game.getFloor().getBlocksHere()[row][col].canMove('d')+ game.getFloor().getBlocksHere()[row][col].canMove('l')+ game.getFloor().getBlocksHere()[row][col].canMove('r'));
 
+        Player p = game.getPlayer();
         //Check if the current Block after moving is an objective Block
         if (game.isObjective(row, col)) { //if true, make a new Game with a new Floor
-          game = new Game(name, seed, rows, cols, ++level);
+          game = new Game(name, rnd.nextInt(), rows, cols, ++level,p)
         }
       }
 
