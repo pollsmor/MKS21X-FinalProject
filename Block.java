@@ -27,7 +27,11 @@ public class Block implements Explorable{
       data = ' ';
     }
     if (newType.equals("Objective")){
+<<<<<<< HEAD
+      data = ' ';
+=======
       data = 'O';
+>>>>>>> ab0677c8673053ed1865ac15abfec6b3c934ecc6
     }
     type = newType;
   }
@@ -39,13 +43,13 @@ public class Block implements Explorable{
     ycor = y;
     color = "gray";
     if (dir == 0){ //LR
-      data = '=';
+      data = ' ';
     }
     if (dir == 1){ //UD
-      data = '|';
+      data = ' ';
     }
     if (dir == 2){ //EndBlock of tunnel or intersection of Tunnels
-      data = '#';
+      data = ' ';
     }
     direction = dir;
     type = "Tunnel";
